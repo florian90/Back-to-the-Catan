@@ -1,14 +1,13 @@
 package application;
 
-import java.nio.channels.SelectionKey;
 import java.util.Random;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
@@ -34,11 +33,18 @@ public class Hexagon extends Canvas
 				paint(getGraphicsContext2D(),x,y);
 			}
 		});*/
-		setOnMouseClicked(new EventHandler<Event>() {
+		setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
-			public void handle(Event event) {
-				highlight(getGraphicsContext2D());
+			public void handle(MouseEvent event) {
+				
+				if(event.getX()>20 && event.getX()<Constants.hexWidth-20 )
+				{
+					highlight(getGraphicsContext2D());
+					//setFocused(true);
+				}
+				
+				
 
 				
 			}
@@ -101,7 +107,7 @@ public class Hexagon extends Canvas
 	
 	private void highlight(GraphicsContext gc)
 	{
-		gc.setGlobalBlendMode(BlendMode.OVERLAY);
+		//gc.setGlobalBlendMode(BlendMode.OVERLAY);
 		gc.drawImage(new Image("Textures/hexagon1.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
 	}
 

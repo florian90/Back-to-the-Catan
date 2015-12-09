@@ -98,11 +98,11 @@ public class Plateau extends AnchorPane
 	
 	private void addRoutes(int x,int y)
 	{
-		routes.getChildren().add(new Route(x,y,"/h"));
+		//routes.getChildren().add(new Route(x,y,"/h"));
 		//routes.getChildren().add(new Route(x,y,"/b"));
-		routes.getChildren().add(new Route(x,y,"\\h"));
+		//routes.getChildren().add(new Route(x,y,"\\h"));
 		//routes.getChildren().add(new Route(x,y,"\\b"));
-		routes.getChildren().add(new Route(x,y,"|g"));
+		//routes.getChildren().add(new Route(x,y,"|g"));
 		//routes.getChildren().add(new Route(x,y,"|d"));*/
 	}
 	

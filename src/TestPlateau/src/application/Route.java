@@ -17,14 +17,14 @@ public class Route extends Canvas
 		setTranslateY(y);
 		this.type =type;
 		paint(getGraphicsContext2D(),type);
-		setOnMouseClicked(new EventHandler<Event>() {
+		/*setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event event) {
 				change(getGraphicsContext2D(), type);
 				
 			}
-		});
+		});*/
 	}
 
 	private void paint(GraphicsContext gc,String type)
