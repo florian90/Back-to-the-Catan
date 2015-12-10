@@ -1,4 +1,4 @@
-package application;
+package test.plateau.application;
 	
 import javafx.application.Application;
 import javafx.scene.Group;

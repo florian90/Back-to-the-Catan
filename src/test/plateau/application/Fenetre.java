@@ -1,4 +1,4 @@
-package application;
+package test.plateau.application;
 
 
 import java.util.ArrayList;

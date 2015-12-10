@@ -1,4 +1,4 @@
-package application;
+package test.plateau.application;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;

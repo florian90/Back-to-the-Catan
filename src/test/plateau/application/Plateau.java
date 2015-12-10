@@ -1,4 +1,4 @@
-package application;
+package test.plateau.application;
 
 import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;

@@ -1,4 +1,4 @@
-package application;
+package test.plateau.application;
 
 public interface Constants 
 {
