@@ -22,7 +22,7 @@ public class Fenetre extends BorderPane
 	public Fenetre()
 	{
 		plateauActuel =1;
-		numPlateau = new Label("Plateau n° :"+plateauActuel);
+		numPlateau = new Label("Plateau nÂ° :"+plateauActuel);
 		plateaux = new ArrayList<Plateau>();
 		plateaux.add(new Plateau(0, 0));
 		plateaux.add(new Plateau(0, 0));
@@ -30,7 +30,7 @@ public class Fenetre extends BorderPane
 		plateaux.add(new Plateau(0, 0));
 		stack = new StackPane(plateaux.get(0));
 		suiv = new Button("Suivant");
-		prec = new Button("Précédent");
+		prec = new Button("PrÃ©cÃ©dent");
 		setCenter(stack);
 		setBottom(new HBox(prec,suiv,numPlateau));
 
@@ -42,7 +42,7 @@ public class Fenetre extends BorderPane
 				System.out.println("pa :"+plateauActuel);
 				stack.getChildren().removeAll(stack.getChildren());
 				stack.getChildren().add(plateaux.get(plateauActuel));
-				numPlateau.setText("Plateau n° :"+(plateauActuel+1));
+				numPlateau.setText("Plateau nÂ° :"+(plateauActuel+1));
 
 			}
 		});
@@ -55,7 +55,7 @@ public class Fenetre extends BorderPane
 				System.out.println(plateauActuel);
 				stack.getChildren().removeAll(stack.getChildren());
 				stack.getChildren().add(plateaux.get(plateauActuel));
-				numPlateau.setText("Plateau n° :"+(plateauActuel+1));
+				numPlateau.setText("Plateau nÂ° :"+(plateauActuel+1));
 
 			}
 		});

@@ -1,7 +1,6 @@
 package test.plateau.application;
 
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -11,16 +10,13 @@ import javafx.scene.text.Text;
 import java.util.Random;
 
 public class ViewCase extends ImageView{
-    private int type, number;
-    private Circle cercle;
-    private Text textNumber;
+
 	public ViewCase(int p_x, int p_y/*, Case case*/, int p_number)
 	{
 		super();
         setType();
 		setX(p_x);
 		setY(p_y);
-        number = p_number;
 		setFitHeight(Constants.hexHeight);
 		setFitWidth(Constants.hexWidth);
         setOnMouseMoved(new EventHandler<MouseEvent>() {
@@ -34,7 +30,7 @@ public class ViewCase extends ImageView{
 
 	private void setType()
 	{
-		type=new Random().nextInt(10);
+		int type=new Random().nextInt(10);
 		switch(type)
 		{
 			case 0:
