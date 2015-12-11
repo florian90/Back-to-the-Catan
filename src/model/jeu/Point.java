@@ -6,5 +6,5 @@ import model.joueur.Joueur;
 public class Point {
     private CoordPoint coord;
     private TypePoint type;
-    private Joueur propriétaire;
+    private Joueur proprietaire;
 }

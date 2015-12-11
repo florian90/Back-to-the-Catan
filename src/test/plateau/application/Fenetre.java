@@ -1,4 +1,4 @@
-package application;
+package test.plateau.application;
 
 
 import java.util.ArrayList;
@@ -11,11 +11,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class Fenetre extends AnchorPane
 {
