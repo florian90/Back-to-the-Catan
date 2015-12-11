@@ -5,17 +5,17 @@ import javafx.scene.layout.AnchorPane;
 
 public class Plateau extends AnchorPane
 {
-	Group hexagons;
+	Group viewCases;
 	Group routes;
 	
 	public Plateau(int x, int y)
 	{
 		super();
-		hexagons = new Group();
+		viewCases = new Group();
 		routes = new Group();
-		drawHexagons();
+		drawViewCases();
 		
-		getChildren().add(hexagons);
+		getChildren().add(viewCases);
 		getChildren().add(routes);
 		setTranslateX(x);
 		setTranslateY(y);
@@ -23,7 +23,7 @@ public class Plateau extends AnchorPane
 	
 
 	
-	private void drawHexagons()
+	private void drawViewCases()
 	{
 		for(int i=0; i<7;++i)
 		{
@@ -33,12 +33,12 @@ public class Plateau extends AnchorPane
 				{
 					if(i==0)
 					{
-						hexagons.getChildren().add(new Hexagon(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
+						viewCases.getChildren().add(new ViewCase(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
 						addRoutes(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4);
 					}
 					else
 					{
-						hexagons.getChildren().add(new Hexagon(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
+						viewCases.getChildren().add(new ViewCase(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
 						addRoutes(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4);
 					}
 					
@@ -53,12 +53,12 @@ public class Plateau extends AnchorPane
 					int y =  i*Constants.hexWidth*3/4;
 					if(i==1)
 					{
-						hexagons.getChildren().add(new Hexagon(x,y,6));
+						viewCases.getChildren().add(new ViewCase(x,y,6));
 						addRoutes(x,y);
 					}
 					else
 					{
-						hexagons.getChildren().add(new Hexagon(x,y,6));
+						viewCases.getChildren().add(new ViewCase(x,y,6));
 						addRoutes(x, y);
 					}
 					
@@ -70,7 +70,7 @@ public class Plateau extends AnchorPane
 				{
 					int x = j*Constants.hexWidth;
 					int y = i*Constants.hexWidth*3/4;
-					hexagons.getChildren().add(new Hexagon(x,y ,6));
+					viewCases.getChildren().add(new ViewCase(x,y ,6));
 					addRoutes(x,y);
 				}
 			}
@@ -83,12 +83,12 @@ public class Plateau extends AnchorPane
 					
 					if(i==2)
 					{
-						hexagons.getChildren().add(new Hexagon(x, y,6));
+						viewCases.getChildren().add(new ViewCase(x, y,6));
 						addRoutes(x,y);
 					}
 					else
 					{
-						hexagons.getChildren().add(new Hexagon(x,y,6));
+						viewCases.getChildren().add(new ViewCase(x,y,6));
 						addRoutes(x,y);
 					}
 				}
