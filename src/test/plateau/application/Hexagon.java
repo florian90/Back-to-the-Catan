@@ -66,31 +66,31 @@ public class Hexagon extends Canvas
 		switch(type)
 		{
 		case 0:
-			gc.drawImage(new Image("textures/hexhexAutoroute.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
+			gc.drawImage(new Image("textures/hexBois.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
 			break;
 		case 1:
-			gc.drawImage(new Image("textures/hexhexAutoroute.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
+			gc.drawImage(new Image("textures/hexMetal.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
 			break;
 		case 2:
-			gc.drawImage(new Image("textures/hexhexAutoroute.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
+			gc.drawImage(new Image("textures/hexRoue.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
 			break;
 		case 3:
-			gc.drawImage(new Image("textures/hexhexAutoroute.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
+			gc.drawImage(new Image("textures/hexHautParleur.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
 			break;
 		case 4:
-			gc.drawImage(new Image("textures/hexhexAutoroute.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
+			gc.drawImage(new Image("textures/hexAntenne.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
 			break;
 		case 5:
-			gc.drawImage(new Image("textures/hexhexAutoroute.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
+			gc.drawImage(new Image("textures/hexVentilateur.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
 			break;
 		case 6:
-			gc.drawImage(new Image("textures/hexhexAutoroute.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
+			gc.drawImage(new Image("textures/hexSchema.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
 			break;
 		case 7:
-			gc.drawImage(new Image("textures/hexAutoroute.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
+			gc.drawImage(new Image("textures/hexAimant.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
 			break;
 		case 8:
-			gc.drawImage(new Image("textures/hexAutoroute.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
+			gc.drawImage(new Image("textures/hexPlutonium.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
 			break;
 		case 9:
 			gc.drawImage(new Image("textures/hexAutoroute.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);

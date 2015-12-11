@@ -30,7 +30,7 @@ public class ViewCase extends ImageView{
 
 	private void setType()
 	{
-		int type=new Random().nextInt(10);
+		int type=9;//new Random().nextInt(10);
 		switch(type)
 		{
 			case 0:
