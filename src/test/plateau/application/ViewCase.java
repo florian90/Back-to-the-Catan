@@ -19,7 +19,7 @@ public class ViewCase extends ImageView{
 		setY(p_y);
 		setFitHeight(Constants.hexHeight);
 		setFitWidth(Constants.hexWidth);
-        setOnMouseMoved(new EventHandler<MouseEvent>() {
+        setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {

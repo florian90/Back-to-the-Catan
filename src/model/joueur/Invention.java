@@ -1,8 +1,9 @@
 package model.joueur;
 
 public enum Invention {
-    Train,
     TrainKiVol,
+    Train,
     HoverBoard,
-    ConvecteurTemporel
+    ConvecteurTemporel,
+    Radio
 }
