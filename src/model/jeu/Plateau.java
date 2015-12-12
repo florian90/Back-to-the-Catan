@@ -78,7 +78,7 @@ public class Plateau {
             r2 = Ressource.Ventilateur;
         }
 
-        switch(list.get(i+7*j))
+        switch(list.get(i+m_size*j))
         {
             case 0:
                 return null;
