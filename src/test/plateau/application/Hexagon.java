@@ -84,7 +84,7 @@ public class Hexagon extends Canvas
 			gc.drawImage(new Image("textures/hexVentilateur.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
 			break;
 		case 6:
-			gc.drawImage(new Image("textures/hexSchema.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
+			gc.drawImage(new Image("textures/hexMorceauSchema.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);
 			break;
 		case 7:
 			gc.drawImage(new Image("textures/hexAimant.png"), 0, 0,Constants.hexWidth,Constants.hexHeight);

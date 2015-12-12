@@ -6,63 +6,35 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import model.jeu.Case;
+import model.joueur.Ressource;
 
 import java.util.Random;
 
 public class ViewCase extends ImageView{
 
-	public ViewCase(int p_x, int p_y/*, Case case*/, int p_number)
+	private Case m_case;
+
+	public ViewCase(float p_x, float p_y/*, Case case*/, int p_number)
+	{
+		this(p_x, p_y, null);
+	}
+
+	public ViewCase(float p_x, float p_y, Case p_case)
 	{
 		super();
-        setType();
 		setX(p_x);
 		setY(p_y);
+		m_case = p_case;
+		setImage(new Image("textures/hex"+m_case.getRessource()+".png"));
 		setFitHeight(Constants.hexHeight);
 		setFitWidth(Constants.hexWidth);
-        setOnMouseClicked(new EventHandler<MouseEvent>() {
+		/*(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
-                setType();
+				setImage();
 			}
-		});
-	}
-
-	private void setType()
-	{
-		int type=9;//new Random().nextInt(10);
-		switch(type)
-		{
-			case 0:
-				setImage(new Image("textures/hexBois.png"));
-				break;
-			case 1:
-				setImage(new Image("textures/hexMetal.png"));
-				break;
-			case 2:
-				setImage(new Image("textures/hexRoue.png"));
-				break;
-			case 3:
-				setImage(new Image("textures/hexHautParleur.png"));
-				break;
-			case 4:
-				setImage(new Image("textures/hexAntenne.png"));
-				break;
-			case 5:
-				setImage(new Image("textures/hexVentilateur.png"));
-				break;
-			case 6:
-				setImage(new Image("textures/hexSchema.png"));
-				break;
-			case 7:
-				setImage(new Image("textures/hexAimant.png"));
-				break;
-			case 8:
-				setImage(new Image("textures/hexPlutonium.png"));
-				break;
-			case 9:
-				setImage(new Image("textures/hexAutoroute.png"));
-				break;
-		}
+		});*/
 	}
 }

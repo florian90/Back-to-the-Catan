@@ -14,12 +14,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import model.jeu.Epoque;
+import model.jeu.Plateau;
+import vue.VuePlateau;
 
 public class Fenetre extends AnchorPane
 {
 	StackPane stack;
-	ArrayList<Plateau> plateaux;
-	int plateauActuel;//index du plateau dans la liste des plateaux (0 à 3)
+	ArrayList<VuePlateau> plateaux;
+	int plateauActuel;//index du plateau dans la liste des plateaux (0 ï¿½ 3)
 	Button suiv, prec;
 	Label numPlateau;
 
@@ -38,17 +41,17 @@ public class Fenetre extends AnchorPane
 		VBox VMilieu = new VBox();
 		VBox VDroite = new VBox();
 
-		
+
 		plateauActuel =0;
-		numPlateau = new Label("Plateau n° :"+plateauActuel+1);
-		plateaux = new ArrayList<Plateau>();
-		plateaux.add(new Plateau(0, 0));
-		plateaux.add(new Plateau(0, 0));
-		plateaux.add(new Plateau(0, 0));
-		plateaux.add(new Plateau(0, 0));
+		numPlateau = new Label("VuePlateau nÂ° :"+(plateauActuel+1));
+		plateaux = new ArrayList<>();
+		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._1985, 7)));
+		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._1855, 7)));
+		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._1955, 7)));
+		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._2015, 7)));*/
 		stack = new StackPane(plateaux.get(plateauActuel));
 		suiv = new Button("Suivant");
-		prec = new Button("Précédent");
+		prec = new Button("PrÃ©cÃ©dent");
 		
 		TabConstructions.setContent(new Label("Vive M. Gechter !"));
 		TabCartes.setContent(new Label("ou pas"));
@@ -73,8 +76,8 @@ public class Fenetre extends AnchorPane
 		VDroite.setPrefWidth(200); 
 		VDroite.setMaxWidth(200);
 		VDroite.setId("VDroite");
-		
-		PanneauMarche = new TitledPane("Marché",VGauche);
+
+		PanneauMarche = new TitledPane("MarchÃ©",VGauche);
 		PanneauMarche.setCollapsible(false);
 		PanneauMarche.setPrefHeight(800);
 		
@@ -97,7 +100,7 @@ public class Fenetre extends AnchorPane
 				System.out.println("pa :"+plateauActuel);
 				stack.getChildren().removeAll(stack.getChildren());
 				stack.getChildren().add(plateaux.get(plateauActuel));
-				numPlateau.setText("Plateau n° :"+(plateauActuel+1));
+				numPlateau.setText("VuePlateau nÂ° :"+(plateauActuel+1));
 
 			}
 		});
@@ -110,7 +113,7 @@ public class Fenetre extends AnchorPane
 				System.out.println("pa :"+plateauActuel);
 				stack.getChildren().removeAll(stack.getChildren());
 				stack.getChildren().add(plateaux.get(plateauActuel));
-				numPlateau.setText("Plateau n° :"+(plateauActuel+1));
+				numPlateau.setText("VuePlateau nÂ° :"+(plateauActuel+1));
 
 			}
 		});

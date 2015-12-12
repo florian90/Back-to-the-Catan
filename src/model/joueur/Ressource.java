@@ -1,13 +1,14 @@
 package model.joueur;
 
 public enum Ressource {
-    Metal,
-    Bois,
-    Roue,
-    HautParleur,
-    Antenne,
-    Ventilateur,
-    MorceauSchema,
     Aimant,
-    Plutonium
+    Antenne,
+    Autoroute,
+    Bois,
+    HautParleur,
+    Metal,
+    Plutonium,
+    Roue,
+    MorceauSchema,
+    Ventilateur,
 }
