@@ -14,7 +14,7 @@ public class Main extends Application {
 	
 			Fenetre fen = new Fenetre();
 			Group root = new Group();
-			Scene scene = new Scene(root,1200,1000);
+			Scene scene = new Scene(root,1400,800);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 			root.getChildren().add(fen);

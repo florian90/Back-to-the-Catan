@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import model.jeu.Epoque;
 import model.jeu.Plateau;
 import vue.VuePlateau;
@@ -22,9 +23,12 @@ public class Fenetre extends AnchorPane
 {
 	StackPane stack;
 	ArrayList<VuePlateau> plateaux;
-	int plateauActuel;//index du plateau dans la liste des plateaux (0 ï¿½ 3)
+	int plateauActuel;//index du plateau dans la liste des plateaux (0 à 3)
 	Button suiv, prec;
 	Label numPlateau;
+	ContentTabConstructions cTC = new ContentTabConstructions();
+	ContentTabInventions cTI = new ContentTabInventions();
+	ContentTabCartes CTCards = new ContentTabCartes();
 
 	public Fenetre()
 	{
@@ -35,7 +39,8 @@ public class Fenetre extends AnchorPane
 		
 		Tab TabConstructions = new Tab("Constructions");
 		Tab TabCartes = new Tab("Cartes");
-		TabPane TabsMarche = new TabPane(TabConstructions,TabCartes);
+		Tab TabInventions = new Tab("Inventions");
+		TabPane TabsMarche = new TabPane(TabConstructions,TabInventions,TabCartes);
 		
 		VBox VGauche = new VBox();
 		VBox VMilieu = new VBox();
@@ -43,7 +48,7 @@ public class Fenetre extends AnchorPane
 
 
 		plateauActuel =0;
-		numPlateau = new Label("VuePlateau nÂ° :"+(plateauActuel+1));
+		numPlateau = new Label("VuePlateau n° :"+(plateauActuel+1));
 		plateaux = new ArrayList<>();
 		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._1985, 7)));
 		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._1855, 7)));
@@ -51,16 +56,19 @@ public class Fenetre extends AnchorPane
 		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._2015, 7)));
 		stack = new StackPane(plateaux.get(plateauActuel));
 		suiv = new Button("Suivant");
-		prec = new Button("PrÃ©cÃ©dent");
+		prec = new Button("Précédent");
 		
 		TabConstructions.setContent(new Label("Vive M. Gechter !"));
 		TabCartes.setContent(new Label("ou pas"));
+		TabConstructions.setContent(cTC);
+		TabInventions.setContent(cTI);
+		TabCartes.setContent(CTCards);
 
 		
 		VGauche.getChildren().add(TabsMarche);
-		VGauche.setMinWidth(200);
-		VGauche.setPrefWidth(200);
-		VGauche.setMaxWidth(200);
+		VGauche.setMinWidth(300);
+		VGauche.setPrefWidth(300);
+		VGauche.setMaxWidth(300);
 		VGauche.setId("VGauche");
 		
 		VMilieu.getChildren().add(numPlateau);
@@ -71,13 +79,13 @@ public class Fenetre extends AnchorPane
 		VMilieu.setMaxWidth(800);
 		
 		
-		VDroite.getChildren().add(new Label("Coucou les ours !"));
-		VDroite.setMinWidth(200);
-		VDroite.setPrefWidth(200); 
-		VDroite.setMaxWidth(200);
+		VDroite.getChildren().add(new ContentJoueur("textures/hexPlutonium.png","DarkMowah",Color.YELLOW));
+		VDroite.setMinWidth(300);
+		VDroite.setPrefWidth(300); 
+		VDroite.setMaxWidth(300);
 		VDroite.setId("VDroite");
 
-		PanneauMarche = new TitledPane("MarchÃ©",VGauche);
+		PanneauMarche = new TitledPane("Marché",VGauche);
 		PanneauMarche.setCollapsible(false);
 		PanneauMarche.setPrefHeight(800);
 		
@@ -90,7 +98,7 @@ public class Fenetre extends AnchorPane
 		PanneauJoueur.setCollapsible(false);
 		PanneauJoueur.setPrefHeight(800);
 		
-
+		
 		getChildren().add(new HBox(PanneauMarche,PanneauCarte,PanneauJoueur));
 		suiv.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -100,7 +108,7 @@ public class Fenetre extends AnchorPane
 				System.out.println("pa :"+plateauActuel);
 				stack.getChildren().removeAll(stack.getChildren());
 				stack.getChildren().add(plateaux.get(plateauActuel));
-				numPlateau.setText("VuePlateau nÂ° :"+(plateauActuel+1));
+				numPlateau.setText("VuePlateau n° :"+(plateauActuel+1));
 
 			}
 		});
@@ -113,7 +121,7 @@ public class Fenetre extends AnchorPane
 				System.out.println("pa :"+plateauActuel);
 				stack.getChildren().removeAll(stack.getChildren());
 				stack.getChildren().add(plateaux.get(plateauActuel));
-				numPlateau.setText("VuePlateau nÂ° :"+(plateauActuel+1));
+				numPlateau.setText("VuePlateau n° :"+(plateauActuel+1));
 
 			}
 		});
