@@ -3,26 +3,26 @@ package test.plateau.application;
 import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 
-public class Plateau extends AnchorPane
+public class PlateauTest extends AnchorPane
 {
-	Group viewCases;
+	Group ViewCases;
 	Group routes;
 	
-	public Plateau(int x, int y)
+	public PlateauTest(int x, int y)
 	{
 		super();
-		viewCases = new Group();
+		ViewCases = new Group();
 		routes = new Group();
 		drawViewCases();
 		
-		getChildren().add(viewCases);
+		getChildren().add(ViewCases);
 		getChildren().add(routes);
 		setTranslateX(x);
 		setTranslateY(y);
 	}
-	
 
-	
+
+
 	private void drawViewCases()
 	{
 		for(int i=0; i<7;++i)
@@ -33,12 +33,12 @@ public class Plateau extends AnchorPane
 				{
 					if(i==0)
 					{
-						viewCases.getChildren().add(new ViewCase(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
+						ViewCases.getChildren().add(new ViewCase(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
 						addRoutes(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4);
 					}
 					else
 					{
-						viewCases.getChildren().add(new ViewCase(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
+						ViewCases.getChildren().add(new ViewCase(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
 						addRoutes(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4);
 					}
 					
@@ -49,16 +49,16 @@ public class Plateau extends AnchorPane
 			{
 				for(int j=0;j<5;++j)
 				{
-					int x = 2*(Constants.hexWidth/2)+j*Constants.hexWidth;
-					int y =  i*Constants.hexWidth*3/4;
+					float x = 2*(Constants.hexWidth/2)+j*Constants.hexWidth;
+					float y =  i*Constants.hexWidth*3/4;
 					if(i==1)
 					{
-						viewCases.getChildren().add(new ViewCase(x,y,6));
+						ViewCases.getChildren().add(new ViewCase(x,y,6));
 						addRoutes(x,y);
 					}
 					else
 					{
-						viewCases.getChildren().add(new ViewCase(x,y,6));
+						ViewCases.getChildren().add(new ViewCase(x,y,6));
 						addRoutes(x, y);
 					}
 					
@@ -68,9 +68,9 @@ public class Plateau extends AnchorPane
 			{
 				for(int j=0;j<7;++j)
 				{
-					int x = j*Constants.hexWidth;
-					int y = i*Constants.hexWidth*3/4;
-					viewCases.getChildren().add(new ViewCase(x,y ,6));
+					float x = j*Constants.hexWidth;
+					float y = i*Constants.hexWidth*3/4;
+					ViewCases.getChildren().add(new ViewCase(x,y ,6));
 					addRoutes(x,y);
 				}
 			}
@@ -78,17 +78,17 @@ public class Plateau extends AnchorPane
 			{
 				for(int j=0;j<6;++j)
 				{
-					int x = Constants.hexWidth/2+j*Constants.hexWidth;
-					int y = i*Constants.hexWidth*3/4;
+					float x = Constants.hexWidth/2+j*Constants.hexWidth;
+					float y = i*Constants.hexWidth*3/4;
 					
 					if(i==2)
 					{
-						viewCases.getChildren().add(new ViewCase(x, y,6));
+						ViewCases.getChildren().add(new ViewCase(x, y,6));
 						addRoutes(x,y);
 					}
 					else
 					{
-						viewCases.getChildren().add(new ViewCase(x,y,6));
+						ViewCases.getChildren().add(new ViewCase(x,y,6));
 						addRoutes(x,y);
 					}
 				}
@@ -96,7 +96,7 @@ public class Plateau extends AnchorPane
 		}
 	}
 	
-	private void addRoutes(int x,int y)
+	private void addRoutes(float x,float y)
 	{
 		//routes.getChildren().add(new Route(x,y,"/h"));
 		//routes.getChildren().add(new Route(x,y,"/b"));
@@ -106,5 +106,5 @@ public class Plateau extends AnchorPane
 		//routes.getChildren().add(new Route(x,y,"|d"));*/
 	}
 	
-	
+
 }
