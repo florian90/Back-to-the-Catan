@@ -20,5 +20,25 @@ public class Arete {
         this(coord, TypeArete.Vide, null);
     }
 
+    public Joueur getProprietaire()
+    {
+        return m_proprietaire;
+    }
 
+    public TypeArete getType()
+    {
+        return m_type;
+    }
+
+    //Todo: construire un nouveau TypeRoute pour un certain joueur
+    public void construire(Joueur joueur, TypeArete type)
+    {
+
+    }
+
+    //Todo: Check si on peut construire le type demandé pour le joueur
+    public boolean peutConstruire(Joueur joueur, TypeArete type)
+    {
+        return false;
+    }
 }

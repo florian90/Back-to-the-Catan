@@ -13,8 +13,8 @@ public class PlateauTest extends AnchorPane
 		super();
 		ViewCases = new Group();
 		routes = new Group();
-		drawViewCases();
-		
+		//drawViewCases();
+
 		getChildren().add(ViewCases);
 		getChildren().add(routes);
 		setTranslateX(x);
@@ -22,7 +22,7 @@ public class PlateauTest extends AnchorPane
 	}
 
 
-
+/*
 	private void drawViewCases()
 	{
 		for(int i=0; i<7;++i)
@@ -41,9 +41,9 @@ public class PlateauTest extends AnchorPane
 						ViewCases.getChildren().add(new ViewCase(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
 						addRoutes(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4);
 					}
-					
+
 				}
-				
+
 			}
 			else if(i==1 || i==5)
 			{
@@ -61,7 +61,7 @@ public class PlateauTest extends AnchorPane
 						ViewCases.getChildren().add(new ViewCase(x,y,6));
 						addRoutes(x, y);
 					}
-					
+
 				}
 			}
 			else if (i==3)
@@ -80,7 +80,7 @@ public class PlateauTest extends AnchorPane
 				{
 					float x = Constants.hexWidth/2+j*Constants.hexWidth;
 					float y = i*Constants.hexWidth*3/4;
-					
+
 					if(i==2)
 					{
 						ViewCases.getChildren().add(new ViewCase(x, y,6));
@@ -95,7 +95,7 @@ public class PlateauTest extends AnchorPane
 			}
 		}
 	}
-	
+	*/
 	private void addRoutes(float x,float y)
 	{
 		//routes.getChildren().add(new Route(x,y,"/h"));

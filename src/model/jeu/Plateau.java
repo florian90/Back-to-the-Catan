@@ -54,6 +54,8 @@ public class Plateau {
     
     private Ressource getRessource(int i, int j)
     {
+
+        //Todo: Utiliser des fichiers pour stocker la position des ressources (dans : ressources/Plateauxinitiaux:plateauX.txt)
         ArrayList<Integer> list = new ArrayList<>();
         list.add(0);list.add(0);list.add(0);list.add(1);list.add(1);list.add(1);list.add(1);
         list.add(0);list.add(0);list.add(1);list.add(2);list.add(3);list.add(2);list.add(1);
