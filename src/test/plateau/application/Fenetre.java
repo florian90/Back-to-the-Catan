@@ -48,7 +48,7 @@ public class Fenetre extends AnchorPane
 		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._1985, 7)));
 		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._1855, 7)));
 		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._1955, 7)));
-		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._2015, 7)));*/
+		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._2015, 7)));
 		stack = new StackPane(plateaux.get(plateauActuel));
 		suiv = new Button("Suivant");
 		prec = new Button("Précédent");

@@ -27,8 +27,8 @@ public class ViewCase extends ImageView{
 		setY(p_y);
 		m_case = p_case;
 		setImage(new Image("textures/hex"+m_case.getRessource()+".png"));
-		setFitHeight(Constants.hexHeight);
-		setFitWidth(Constants.hexWidth);
+		setFitHeight(Constants.hexHeight-Constants.roadWidth);
+		setFitWidth(Constants.hexWidth-Constants.roadWidth);
 		/*(new EventHandler<MouseEvent>() {
 
 			@Override
