@@ -15,11 +15,6 @@ public class ViewCase extends ImageView{
 
 	private Case m_case;
 
-	public ViewCase(float p_x, float p_y/*, Case case*/, int p_number)
-	{
-		this(p_x, p_y, null);
-	}
-
 	public ViewCase(float p_x, float p_y, Case p_case)
 	{
 		super();
