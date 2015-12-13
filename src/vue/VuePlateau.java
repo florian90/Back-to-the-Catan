@@ -56,6 +56,7 @@ public class VuePlateau extends Group{
      */
     private SimpleFloatCoo getCoord(CoordCase coordCase)
     {
+        //#BUG: Ne marche que pour une taille de 7 :'(
         int rayon = (m_nbrCasesLarge+1)/2;//en nombre d'hexagones
         float x,y, x_offset, y_offset;
         //Positions de l'hexa (0,0) :

@@ -5,8 +5,9 @@ import model.jeu.coordonnee.CoordCase;
 import model.jeu.coordonnee.CoordPoint;
 import model.joueur.Ressource;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,8 +18,7 @@ public class Plateau {
     private HashMap<CoordPoint, Point> points;
     private int m_size;
 
-    public Plateau(Epoque ep, int size)
-    {
+    public Plateau(Epoque ep, int size) {
         epoque = ep;
         m_size = size;
         initCases();
@@ -27,19 +27,16 @@ public class Plateau {
     /*
      * size (int) : largeur de la grille au centre
      */
-    private void initCases()
-    {
+    private void initCases() {
+        int[][] list = getRessourceTab(); // Initialise le tableau des ressources
         cases = new HashMap<>();
         CoordCase coord;
         Case tuile;
         Ressource res;
-        for(int j=1;j<=m_size;j++)
-        {
-            for(int i=1;i<=m_size;i++)
-            {
-                if((res = getRessource(i-1, j-1)) != null)
-                {
-                    coord = new CoordCase(j-4, i-4);
+        for (int j = 1; j <= m_size; j++) {
+            for (int i = 1; i <= m_size; i++) {
+                coord = new CoordCase(j - 4, i - 4);
+                if ((res = getRessource(coord, list)) != null) {
                     tuile = new Case(coord, res, 6);
                     cases.put(coord, tuile);
                 }
@@ -47,50 +44,69 @@ public class Plateau {
         }
     }
 
-    public List<Case> getCases()
-    {
+    public List<Case> getCases() {
         return new ArrayList<>(cases.values());
     }
-    
-    private Ressource getRessource(int i, int j)
-    {
 
-        //Todo: Utiliser des fichiers pour stocker la position des ressources (dans : ressources/Plateauxinitiaux:plateauX.txt)
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(0);list.add(0);list.add(0);list.add(1);list.add(1);list.add(1);list.add(1);
-        list.add(0);list.add(0);list.add(1);list.add(2);list.add(3);list.add(2);list.add(1);
-        list.add(0);list.add(1);list.add(3);list.add(4);list.add(4);list.add(4);list.add(1);
-        list.add(1);list.add(2);list.add(3);list.add(2);list.add(3);list.add(2);list.add(1);
-        list.add(1);list.add(4);list.add(3);list.add(4);list.add(3);list.add(1);list.add(0);
-        list.add(1);list.add(2);list.add(4);list.add(2);list.add(1);list.add(0);list.add(0);
-        list.add(1);list.add(1);list.add(1);list.add(1);list.add(0);list.add(0);list.add(0);
-
+    private Ressource getRessource(CoordCase coordCase, int[][] list) {
         Ressource r1, r2;
-        if(epoque == Epoque._1855) {
+        if (epoque == Epoque._1855) {
             r1 = Ressource.Bois;
             r2 = Ressource.Roue;
-        }else if(epoque == Epoque._1955) {
+        } else if (epoque == Epoque._1955) {
             r1 = Ressource.HautParleur;
             r2 = Ressource.Antenne;
-        }else if(epoque == Epoque._1985) {
+        } else if (epoque == Epoque._1985) {
             r1 = Ressource.Plutonium;
             r2 = Ressource.MorceauSchema;
-        }else {
+        } else {
             r1 = Ressource.Aimant;
             r2 = Ressource.Ventilateur;
         }
-
-        switch(list.get(i+m_size*j))
-        {
-            case 0:
-                return null;
-            case 1:
-                return Ressource.Autoroute;
-            case 2:
-                return Ressource.Metal;
-            case 3:
-                return r1;
+        try {
+            switch (list[coordCase.getLine()+m_size/2][coordCase.getColumn()+m_size/2]) {
+                case 0:
+                    return null;
+                case 1:
+                    return Ressource.Autoroute;
+                case 2:
+                    return Ressource.Metal;
+                case 3:
+                    return r1;
+            }
+            return r2;
         }
-        return r2;
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private int[][] getRessourceTab()
+    {
+        //Todo: Le fichier doit contenir ne matrice 7x7 avec un nombre puis un espace, si on modifie la taille rien ne vas plus !
+        // Crée un tableau avec les ressources présentes dans chaque case
+        // Le tableau tab est initialisé à partir d'un fichier
+        int[][] list = new int[m_size][m_size];
+        String [] tab = null;
+        try
+        {
+            BufferedReader reader = new BufferedReader(new FileReader("ressources/PlateauxInitiaux/plateau1.txt"));
+            for (int i = 0; i < m_size; i++)
+            {
+                tab = reader.readLine().split(" ");
+                for (int j = 0; j < m_size; j++)
+                {
+                    list[i][j] = Integer.parseInt(tab[j]);
+                }
+            }
+            reader.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

@@ -23,7 +23,7 @@ public class Fenetre extends AnchorPane
 {
 	StackPane stack;
 	ArrayList<VuePlateau> plateaux;
-	int plateauActuel;//index du plateau dans la liste des plateaux (0 à 3)
+	int plateauActuel;//index du plateau dans la liste des plateaux (0 ï¿½ 3)
 	Button suiv, prec;
 	Label numPlateau;
 	ContentTabConstructions cTC = new ContentTabConstructions();
@@ -48,7 +48,7 @@ public class Fenetre extends AnchorPane
 
 
 		plateauActuel =0;
-		numPlateau = new Label("VuePlateau n° :"+(plateauActuel+1));
+		numPlateau = new Label("VuePlateau nï¿½ :"+(plateauActuel+1));
 		plateaux = new ArrayList<>();
 		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._1985, 7)));
 		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._1855, 7)));
@@ -56,7 +56,7 @@ public class Fenetre extends AnchorPane
 		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._2015, 7)));
 		stack = new StackPane(plateaux.get(plateauActuel));
 		suiv = new Button("Suivant");
-		prec = new Button("Précédent");
+		prec = new Button("Prï¿½cï¿½dent");
 		
 		TabConstructions.setContent(new Label("Vive M. Gechter !"));
 		TabCartes.setContent(new Label("ou pas"));
@@ -85,7 +85,7 @@ public class Fenetre extends AnchorPane
 		VDroite.setMaxWidth(300);
 		VDroite.setId("VDroite");
 
-		PanneauMarche = new TitledPane("Marché",VGauche);
+		PanneauMarche = new TitledPane("Marchï¿½",VGauche);
 		PanneauMarche.setCollapsible(false);
 		PanneauMarche.setPrefHeight(800);
 		
@@ -108,7 +108,7 @@ public class Fenetre extends AnchorPane
 				System.out.println("pa :"+plateauActuel);
 				stack.getChildren().removeAll(stack.getChildren());
 				stack.getChildren().add(plateaux.get(plateauActuel));
-				numPlateau.setText("VuePlateau n° :"+(plateauActuel+1));
+				numPlateau.setText("VuePlateau nï¿½ :"+(plateauActuel+1));
 
 			}
 		});
@@ -121,7 +121,7 @@ public class Fenetre extends AnchorPane
 				System.out.println("pa :"+plateauActuel);
 				stack.getChildren().removeAll(stack.getChildren());
 				stack.getChildren().add(plateaux.get(plateauActuel));
-				numPlateau.setText("VuePlateau n° :"+(plateauActuel+1));
+				numPlateau.setText("VuePlateau nï¿½ :"+(plateauActuel+1));
 
 			}
 		});
