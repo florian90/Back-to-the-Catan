@@ -21,13 +21,17 @@ public class Plateau {
     public Plateau(Epoque ep, int size) {
         epoque = ep;
         m_size = size;
-        initCases();
+        init();
     }
 
-    /*
-     * size (int) : largeur de la grille au centre
-     */
-    private void initCases() {
+    private void init()
+    {
+        initCases();
+        initPoints();
+    }
+
+    private void initCases()
+    {
         int[][] list = getRessourceTab(); // Initialise le tableau des ressources
         cases = new HashMap<>();
         CoordCase coord;
@@ -42,13 +46,50 @@ public class Plateau {
                 }
             }
         }
+        System.out.println(cases.size()+" cases");
+    }
+
+    private void initPoints()
+    {
+        points = new HashMap<>();
+        CoordCase coo;
+        CoordPoint cooPoint;
+        for (Case tuile: cases.values())
+        {
+            coo = tuile.getCoo();
+            cooPoint = new CoordPoint(coo.west(), coo, coo.northWest());
+            if(!points.containsKey(cooPoint))
+                points.put(cooPoint, new Point(cooPoint));
+            cooPoint = new CoordPoint(coo.northWest(), coo.northEast(), coo);
+            if(!points.containsKey(cooPoint))
+                points.put(cooPoint, new Point(cooPoint));
+            cooPoint = new CoordPoint(coo, coo.east(), coo.northEast());
+            if(!points.containsKey(cooPoint))
+                points.put(cooPoint, new Point(cooPoint));
+            cooPoint = new CoordPoint(coo, coo.east(), coo.southEast());
+            if(!points.containsKey(cooPoint))
+                points.put(cooPoint, new Point(cooPoint));
+            cooPoint = new CoordPoint(coo.southWest(), coo.southEast(), coo);
+            if(!points.containsKey(cooPoint))
+                points.put(cooPoint, new Point(cooPoint));
+            cooPoint = new CoordPoint(coo.west(), coo, coo.southWest());
+            if(!points.containsKey(cooPoint))
+                points.put(cooPoint, new Point(cooPoint));
+        }
+        System.out.println(points.size()+" Points");
     }
 
     public List<Case> getCases() {
         return new ArrayList<>(cases.values());
     }
 
-    private Ressource getRessource(CoordCase coordCase, int[][] list) {
+    public List<Point> getPoints()
+    {
+        return new ArrayList<>(points.values());
+    }
+
+    private Ressource getRessource(CoordCase coordCase, int[][] list)
+    {
         Ressource r1, r2;
         if (epoque == Epoque._1855) {
             r1 = Ressource.Bois;
@@ -109,4 +150,5 @@ public class Plateau {
         }
         return list;
     }
+
 }

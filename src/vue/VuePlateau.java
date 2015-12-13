@@ -1,8 +1,10 @@
 package vue;
 
 import javafx.scene.Group;
+import javafx.scene.shape.Circle;
 import model.jeu.Case;
 import model.jeu.Plateau;
+import model.jeu.Point;
 import model.jeu.coordonnee.CoordCase;
 import test.plateau.application.Constants;
 import test.plateau.application.ViewCase;
@@ -10,6 +12,7 @@ import test.plateau.application.ViewCase;
 public class VuePlateau extends Group{
     private int m_nbrCasesLarge;
     private Group m_cases;
+    private Group m_points;
     private Plateau m_plateau;
 
     public VuePlateau(int x, int y, Plateau plateau)
@@ -19,13 +22,31 @@ public class VuePlateau extends Group{
         setTranslateY(y);
         m_plateau = plateau;
 
-        m_cases = new Group();
         initCases();
-        getChildren().add(m_cases);
+        // Mettre les routes entre les cases et les points
+        initPoints();
+    }
+
+    private void initPoints()
+    {
+        //Todo: Mettre des ViewPoints et pas des cercles
+        SimpleFloatCoo c1, c2, c3;
+        float rad=10;
+        m_points = new Group();
+        for(Point pt: m_plateau.getPoints())
+        {
+            c1 = getCoord(pt.getCoo().getGauche());
+            c2 = getCoord(pt.getCoo().getDroite());
+            c3 = getCoord(pt.getCoo().getVertical());
+            // Calcule les coordonées du centre du point à dessiner
+            m_points.getChildren().add(new Circle((c1.x+c2.x+c3.x)/3, (c1.y+c2.y+c3.y)/3, rad));
+        }
+        getChildren().add(m_points);
     }
 
     private void initCases()
     {
+        m_cases = new Group();
         int min, max;
         min = max = m_plateau.getCases().get(0).getCoo().getLine();
         for(Case tuile : m_plateau.getCases())
@@ -46,9 +67,10 @@ public class VuePlateau extends Group{
         {// Initialise toutes les cases
             coo = tuile.getCoo();
             simplefCoo = getCoord(coo);
-            viewCase = new ViewCase(simplefCoo.x, simplefCoo.y, tuile);
+            viewCase = new ViewCase(simplefCoo.x-Constants.hexWidth/2, simplefCoo.y-Constants.hexHeight/2, tuile);
             m_cases.getChildren().add(viewCase);
         }
+        getChildren().add(m_cases);
     }
 
     /*

@@ -18,18 +18,18 @@ public class ViewCase extends ImageView{
 	public ViewCase(float p_x, float p_y, Case p_case)
 	{
 		super();
-		setX(p_x);
-		setY(p_y);
+		setX(p_x+Constants.roadWidth/2);
+		setY(p_y+Constants.roadWidth/2);
 		m_case = p_case;
 		setImage(new Image("textures/hex"+m_case.getRessource()+".png"));
 		setFitHeight(Constants.hexHeight-Constants.roadWidth);
 		setFitWidth(Constants.hexWidth-Constants.roadWidth);
-		/*(new EventHandler<MouseEvent>() {
+		setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
-				setImage();
+				System.out.print("Yolooooo");
 			}
-		});*/
+		});
 	}
 }

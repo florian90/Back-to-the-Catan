@@ -7,8 +7,8 @@ public enum Ressource {
     Bois,
     HautParleur,
     Metal,
+    MorceauSchema,
     Plutonium,
     Roue,
-    MorceauSchema,
     Ventilateur,
 }

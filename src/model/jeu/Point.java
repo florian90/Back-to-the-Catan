@@ -25,6 +25,11 @@ public class Point {
         return m_proprietaire;
     }
 
+    public CoordPoint getCoo()
+    {
+        return m_coord;
+    }
+
     public TypePoint getType()
     {
         return m_type;
