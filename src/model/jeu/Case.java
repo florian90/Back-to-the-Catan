@@ -30,4 +30,9 @@ public class Case {
     {
         return m_ressource;
     }
+
+    @Override
+    public String toString() {
+        return "Case : " + m_coord + ", contient : " + m_ressource;
+    }
 }

@@ -71,4 +71,9 @@ public class CoordCase {
     {
         return new CoordCase(line, column-1);
     }
+
+    @Override
+    public String toString() {
+        return "(" + line + ", " + column + ")";
+    }
 }

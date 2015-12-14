@@ -1,17 +1,22 @@
 package vue;
 
 import javafx.scene.Group;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import model.jeu.Arete;
 import model.jeu.Case;
 import model.jeu.Plateau;
 import model.jeu.Point;
 import model.jeu.coordonnee.CoordCase;
+import model.jeu.coordonnee.CoordPoint;
 import test.plateau.application.Constants;
 import test.plateau.application.ViewCase;
 
 public class VuePlateau extends Group{
     private int m_nbrCasesLarge;
     private Group m_cases;
+    private Group m_aretes;
     private Group m_points;
     private Plateau m_plateau;
 
@@ -23,30 +28,46 @@ public class VuePlateau extends Group{
         m_plateau = plateau;
 
         initCases();
-        // Mettre les routes entre les cases et les points
+        initAretes();
         initPoints();
     }
 
     private void initPoints()
     {
         //Todo: Mettre des ViewPoints et pas des cercles
-        SimpleFloatCoo c1, c2, c3;
+        SimpleFloatCoo center;
         float rad=10;
         m_points = new Group();
         for(Point pt: m_plateau.getPoints())
         {
-            c1 = getCoord(pt.getCoo().getGauche());
-            c2 = getCoord(pt.getCoo().getDroite());
-            c3 = getCoord(pt.getCoo().getVertical());
-            // Calcule les coordonées du centre du point à dessiner
-            m_points.getChildren().add(new Circle((c1.x+c2.x+c3.x)/3, (c1.y+c2.y+c3.y)/3, rad));
+            center = getCoord(pt.getCoo());
+            m_points.getChildren().add(new Circle(center.x, center.y, rad));
         }
         getChildren().add(m_points);
     }
 
+    private void initAretes()
+    {
+        //Todo: Utiliser des ViewAretes et pas des lignes
+        m_aretes = new Group();
+        SimpleFloatCoo debut, fin;
+        Line line;
+        for(Arete arete: m_plateau.getAretes())
+        {
+            debut = getCoord(arete.getCoord().getDebut());
+            fin = getCoord(arete.getCoord().getFin());
+            line = new Line(debut.x, debut.y, fin.x, fin.y);
+            line.setStrokeWidth(Constants.roadWidth);
+            line.setStroke(Color.RED);
+            m_aretes.getChildren().add(line);
+        }
+        getChildren().add(m_aretes);
+    }
+
     private void initCases()
     {
-        m_cases = new Group();
+        // Retrouve la taille du plateau
+        // /!\ doit être hexagonal
         int min, max;
         min = max = m_plateau.getCases().get(0).getCoo().getLine();
         for(Case tuile : m_plateau.getCases())
@@ -58,13 +79,15 @@ public class VuePlateau extends Group{
             if(i>max)
                 max=i;
         }
-        m_nbrCasesLarge = max-min+1;// Retrouve la taille du plateau
+        m_nbrCasesLarge = max-min+1;
 
+        // Initialise toutes les cases
+        m_cases = new Group();
         ViewCase viewCase;
         CoordCase coo;
         SimpleFloatCoo simplefCoo;
         for(Case tuile : m_plateau.getCases())
-        {// Initialise toutes les cases
+        {
             coo = tuile.getCoo();
             simplefCoo = getCoord(coo);
             viewCase = new ViewCase(simplefCoo.x-Constants.hexWidth/2, simplefCoo.y-Constants.hexHeight/2, tuile);
@@ -87,6 +110,18 @@ public class VuePlateau extends Group{
         x = x_offset + Constants.hexWidth/2*coordCase.getLine() + Constants.hexWidth*coordCase.getColumn();
         y = y_offset + Constants.hexHeight/2*1.5f*coordCase.getLine();
         return new SimpleFloatCoo(x, y);
+    }
+
+    /*
+     * Retourne la position du centre du point
+     */
+    private SimpleFloatCoo getCoord(CoordPoint coordPoint)
+    {
+        SimpleFloatCoo c1, c2, c3;
+        c1 = getCoord(coordPoint.getGauche());
+        c2 = getCoord(coordPoint.getDroite());
+        c3 = getCoord(coordPoint.getVertical());
+        return new SimpleFloatCoo((c1.x+c2.x+c3.x)/3, (c1.y+c2.y+c3.y)/3);
     }
 
     /*

@@ -28,7 +28,7 @@ public class ViewCase extends ImageView{
 
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.print("Yolooooo");
+				System.out.println("Clicked on point : " + m_case);
 			}
 		});
 	}

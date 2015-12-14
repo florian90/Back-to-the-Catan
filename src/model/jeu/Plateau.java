@@ -1,6 +1,6 @@
 package model.jeu;
 
-import model.jeu.coordonnee.CoordArrete;
+import model.jeu.coordonnee.CoordArete;
 import model.jeu.coordonnee.CoordCase;
 import model.jeu.coordonnee.CoordPoint;
 import model.joueur.Ressource;
@@ -14,7 +14,7 @@ import java.util.List;
 public class Plateau {
     private Epoque epoque;
     private HashMap<CoordCase, Case> cases;
-    private HashMap<CoordArrete, Arete> aretes;
+    private HashMap<CoordArete, Arete> aretes;
     private HashMap<CoordPoint, Point> points;
     private int m_size;
 
@@ -28,6 +28,7 @@ public class Plateau {
     {
         initCases();
         initPoints();
+        initAretes();
     }
 
     private void initCases()
@@ -46,7 +47,6 @@ public class Plateau {
                 }
             }
         }
-        System.out.println(cases.size()+" cases");
     }
 
     private void initPoints()
@@ -76,11 +76,53 @@ public class Plateau {
             if(!points.containsKey(cooPoint))
                 points.put(cooPoint, new Point(cooPoint));
         }
-        System.out.println(points.size()+" Points");
+    }
+
+    private void initAretes()
+    {
+        aretes = new HashMap<>();
+        CoordArete cooArete;
+        for(Case tuile: cases.values())
+        {
+            for(int i=0;i<6;i++)
+            {
+                cooArete = new CoordArete(getCooPoint(tuile, i), getCooPoint(tuile, (i+1)%6));
+                if(!aretes.containsKey(cooArete))
+                {
+                    aretes.put(cooArete, new Arete(cooArete));
+                }
+            }
+        }
+    }
+
+    private CoordPoint getCooPoint(Case tuile, int index) throws IndexOutOfBoundsException
+    {
+        CoordCase coo = tuile.getCoo();
+        switch (index)
+        {
+            case 0:
+                return new CoordPoint(coo.northWest(), coo.northEast(), coo);
+            case 1:
+                return new CoordPoint(coo, coo.east(), coo.northEast());
+            case 2:
+                return new CoordPoint(coo, coo.east(), coo.southEast());
+            case 3:
+                return new CoordPoint(coo.southWest(), coo.southEast(), coo);
+            case 4:
+                return new CoordPoint(coo.west(), coo, coo.southWest());
+            case 5:
+                return new CoordPoint(coo.west(), coo, coo.northWest());
+            default:
+                throw new IndexOutOfBoundsException();
+        }
     }
 
     public List<Case> getCases() {
         return new ArrayList<>(cases.values());
+    }
+
+    public List<Arete> getAretes() {
+        return new ArrayList<>(aretes.values());
     }
 
     public List<Point> getPoints()

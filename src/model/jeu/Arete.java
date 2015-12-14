@@ -1,21 +1,21 @@
 package model.jeu;
 
-import model.jeu.coordonnee.CoordArrete;
+import model.jeu.coordonnee.CoordArete;
 import model.joueur.Joueur;
 
 public class Arete {
-    private CoordArrete m_coord;
+    private CoordArete m_coord;
     private TypeArete m_type;
     private Joueur m_proprietaire;
 
-    public Arete(CoordArrete coord, TypeArete type, Joueur propietaire)
+    public Arete(CoordArete coord, TypeArete type, Joueur propietaire)
     {
         m_coord = coord;
         m_type = type;
         m_proprietaire = propietaire;
     }
 
-    public Arete(CoordArrete coord)
+    public Arete(CoordArete coord)
     {
         this(coord, TypeArete.Vide, null);
     }
@@ -40,5 +40,10 @@ public class Arete {
     public boolean peutConstruire(Joueur joueur, TypeArete type)
     {
         return false;
+    }
+
+    public CoordArete getCoord()
+    {
+        return m_coord;
     }
 }
