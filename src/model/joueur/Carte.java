@@ -1,5 +1,6 @@
 package model.joueur;
 
-public class Carte {
+public class Carte
+{
 
 }

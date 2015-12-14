@@ -1,5 +1,6 @@
 package vue;
 
 
-public class VueJeu {
+public class VueJeu
+{
 }

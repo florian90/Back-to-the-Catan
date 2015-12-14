@@ -11,186 +11,219 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Plateau {
-    private Epoque epoque;
-    private HashMap<CoordCase, Case> cases;
-    private HashMap<CoordArete, Arete> aretes;
-    private HashMap<CoordPoint, Point> points;
-    private int m_size;
+public class Plateau
+{
+	private Epoque epoque;
+	private HashMap<CoordCase, Case> cases;
+	private HashMap<CoordArete, Arete> aretes;
+	private HashMap<CoordPoint, Point> points;
+	private int m_size;
 
-    public Plateau(Epoque ep, int size) {
-        epoque = ep;
-        m_size = size;
-        init();
-    }
+	public Plateau(Epoque ep, int size)
+	{
+		epoque = ep;
+		m_size = size;
+		init();
+	}
 
-    private void init()
-    {
-        initCases();
-        initPoints();
-        initAretes();
-    }
+	private void init()
+	{
+		initCases();
+		initPoints();
+		initAretes();
+	}
 
-    private void initCases()
-    {
-        int[][] list = getRessourceTab(); // Initialise le tableau des ressources
-        cases = new HashMap<>();
-        CoordCase coord;
-        Case tuile;
-        Ressource res;
-        for (int j = 1; j <= m_size; j++) {
-            for (int i = 1; i <= m_size; i++) {
-                coord = new CoordCase(j - 4, i - 4);
-                if ((res = getRessource(coord, list)) != null) {
-                    tuile = new Case(coord, res, 6);
-                    cases.put(coord, tuile);
-                }
-            }
-        }
-    }
+	/*
+	 * Initialise la map de cases.
+	 * Les cases sont initialisées avec une ressource et une coordonée.
+	 */
+	private void initCases()
+	{
+		int[][] list = getRessourceTab(); // Initialise le tableau des ressources
+		cases = new HashMap<>();
+		CoordCase coord;
+		Case tuile;
+		Ressource res;
+		for (int j = 1; j <= m_size; j++)
+		{
+			for (int i = 1; i <= m_size; i++)
+			{
+				coord = new CoordCase(j - 4, i - 4);
+				if ((res = getRessource(coord, list)) != null)
+				{
+					tuile = new Case(coord, res, 6);
+					cases.put(coord, tuile);
+				}
+			}
+		}
+	}
 
-    private void initPoints()
-    {
-        points = new HashMap<>();
-        CoordCase coo;
-        CoordPoint cooPoint;
-        for (Case tuile: cases.values())
-        {
-            coo = tuile.getCoo();
-            cooPoint = new CoordPoint(coo.west(), coo, coo.northWest());
-            if(!points.containsKey(cooPoint))
-                points.put(cooPoint, new Point(cooPoint));
-            cooPoint = new CoordPoint(coo.northWest(), coo.northEast(), coo);
-            if(!points.containsKey(cooPoint))
-                points.put(cooPoint, new Point(cooPoint));
-            cooPoint = new CoordPoint(coo, coo.east(), coo.northEast());
-            if(!points.containsKey(cooPoint))
-                points.put(cooPoint, new Point(cooPoint));
-            cooPoint = new CoordPoint(coo, coo.east(), coo.southEast());
-            if(!points.containsKey(cooPoint))
-                points.put(cooPoint, new Point(cooPoint));
-            cooPoint = new CoordPoint(coo.southWest(), coo.southEast(), coo);
-            if(!points.containsKey(cooPoint))
-                points.put(cooPoint, new Point(cooPoint));
-            cooPoint = new CoordPoint(coo.west(), coo, coo.southWest());
-            if(!points.containsKey(cooPoint))
-                points.put(cooPoint, new Point(cooPoint));
-        }
-    }
+	/*
+	 * Initialise les points
+	 * Chaqe point passèe uniquement une coordonée à l'initialisation
+	 * Le type et le propriétaires sont initialilsés à null tant que personne n'a construit desssus.
+	 */
+	private void initPoints()
+	{
+		points = new HashMap<>();
+		CoordCase coo;
+		CoordPoint cooPoint;
+		for (Case tuile : cases.values())
+		{
+			coo = tuile.getCoo();
+			cooPoint = new CoordPoint(coo.west(), coo, coo.northWest());
+			if (!points.containsKey(cooPoint))
+				points.put(cooPoint, new Point(cooPoint));
+			cooPoint = new CoordPoint(coo.northWest(), coo.northEast(), coo);
+			if (!points.containsKey(cooPoint))
+				points.put(cooPoint, new Point(cooPoint));
+			cooPoint = new CoordPoint(coo, coo.east(), coo.northEast());
+			if (!points.containsKey(cooPoint))
+				points.put(cooPoint, new Point(cooPoint));
+			cooPoint = new CoordPoint(coo, coo.east(), coo.southEast());
+			if (!points.containsKey(cooPoint))
+				points.put(cooPoint, new Point(cooPoint));
+			cooPoint = new CoordPoint(coo.southWest(), coo.southEast(), coo);
+			if (!points.containsKey(cooPoint))
+				points.put(cooPoint, new Point(cooPoint));
+			cooPoint = new CoordPoint(coo.west(), coo, coo.southWest());
+			if (!points.containsKey(cooPoint))
+				points.put(cooPoint, new Point(cooPoint));
+		}
+	}
 
-    private void initAretes()
-    {
-        aretes = new HashMap<>();
-        CoordArete cooArete;
-        for(Case tuile: cases.values())
-        {
-            for(int i=0;i<6;i++)
-            {
-                cooArete = new CoordArete(getCooPoint(tuile, i), getCooPoint(tuile, (i+1)%6));
-                if(!aretes.containsKey(cooArete))
-                {
-                    aretes.put(cooArete, new Arete(cooArete));
-                }
-            }
-        }
-    }
+	/*
+	 * Initialise la table des arete.
+	 * Les aretes sont initialisées avec une position,
+	 * le propriétaire et le type sont null tant que personne n'a construit dessus.
+	 */
+	private void initAretes()
+	{
+		aretes = new HashMap<>();
+		CoordArete cooArete;
+		for (Case tuile : cases.values())
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				cooArete = new CoordArete(getCooPoint(tuile, i), getCooPoint(tuile, (i + 1)%6));
+				if (!aretes.containsKey(cooArete))
+				{
+					aretes.put(cooArete, new Arete(cooArete));
+				}
+			}
+		}
+	}
 
-    private CoordPoint getCooPoint(Case tuile, int index) throws IndexOutOfBoundsException
-    {
-        CoordCase coo = tuile.getCoo();
-        switch (index)
-        {
-            case 0:
-                return new CoordPoint(coo.northWest(), coo.northEast(), coo);
-            case 1:
-                return new CoordPoint(coo, coo.east(), coo.northEast());
-            case 2:
-                return new CoordPoint(coo, coo.east(), coo.southEast());
-            case 3:
-                return new CoordPoint(coo.southWest(), coo.southEast(), coo);
-            case 4:
-                return new CoordPoint(coo.west(), coo, coo.southWest());
-            case 5:
-                return new CoordPoint(coo.west(), coo, coo.northWest());
-            default:
-                throw new IndexOutOfBoundsException();
-        }
-    }
+	public List<Case> getCases()
+	{
+		return new ArrayList<>(cases.values());
+	}
 
-    public List<Case> getCases() {
-        return new ArrayList<>(cases.values());
-    }
+	public List<Arete> getAretes()
+	{
+		return new ArrayList<>(aretes.values());
+	}
 
-    public List<Arete> getAretes() {
-        return new ArrayList<>(aretes.values());
-    }
+	public List<Point> getPoints()
+	{
+		return new ArrayList<>(points.values());
+	}
 
-    public List<Point> getPoints()
-    {
-        return new ArrayList<>(points.values());
-    }
+	/*
+	 * Retorne la coordonnée du point celon une case et un index
+	 * L'index représente quel point est sélectionné pour une case donnée
+	 * Les points sont ordonnées de 0 à 5 pour une case.
+	 * L'index 0 correspond au point situé en haut de la case, les suivants tant sélectionés par ordre horaire.
+	 * Si l'index n'est pas compris entre 0 et 5, la fonction renvoie une Exception de type IndexOutOfBoundsException
+	 */
+	private CoordPoint getCooPoint(Case tuile, int index) throws IndexOutOfBoundsException
+	{
+		CoordCase coo = tuile.getCoo();
+		switch (index)
+		{
+			case 0:
+				return new CoordPoint(coo.northWest(), coo.northEast(), coo);
+			case 1:
+				return new CoordPoint(coo, coo.east(), coo.northEast());
+			case 2:
+				return new CoordPoint(coo, coo.east(), coo.southEast());
+			case 3:
+				return new CoordPoint(coo.southWest(), coo.southEast(), coo);
+			case 4:
+				return new CoordPoint(coo.west(), coo, coo.southWest());
+			case 5:
+				return new CoordPoint(coo.west(), coo, coo.northWest());
+			default:
+				throw new IndexOutOfBoundsException();
+		}
+	}
 
-    private Ressource getRessource(CoordCase coordCase, int[][] list)
-    {
-        Ressource r1, r2;
-        if (epoque == Epoque._1855) {
-            r1 = Ressource.Bois;
-            r2 = Ressource.Roue;
-        } else if (epoque == Epoque._1955) {
-            r1 = Ressource.HautParleur;
-            r2 = Ressource.Antenne;
-        } else if (epoque == Epoque._1985) {
-            r1 = Ressource.Plutonium;
-            r2 = Ressource.MorceauSchema;
-        } else {
-            r1 = Ressource.Aimant;
-            r2 = Ressource.Ventilateur;
-        }
-        try {
-            switch (list[coordCase.getLine()+m_size/2][coordCase.getColumn()+m_size/2]) {
-                case 0:
-                    return null;
-                case 1:
-                    return Ressource.Autoroute;
-                case 2:
-                    return Ressource.Metal;
-                case 3:
-                    return r1;
-            }
-            return r2;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-    }
+	/*
+	 * Reourne la ressource possédée par la case dons les coordonées sont passés en paramètres.
+	 * La liste passée en paramètre correspond à la liste de toutes les ressources du plateau selon l'index.
+	 */
+	private Ressource getRessource(CoordCase coordCase, int[][] list)
+	{
+		Ressource r1, r2;
+		if (epoque == Epoque._1855)
+		{
+			r1 = Ressource.Bois;
+			r2 = Ressource.Roue;
+		} else if (epoque == Epoque._1955)
+		{
+			r1 = Ressource.HautParleur;
+			r2 = Ressource.Antenne;
+		} else if (epoque == Epoque._1985)
+		{
+			r1 = Ressource.Plutonium;
+			r2 = Ressource.MorceauSchema;
+		} else
+		{
+			r1 = Ressource.Aimant;
+			r2 = Ressource.Ventilateur;
+		}
+		switch (list[coordCase.getLine() + m_size/2][coordCase.getColumn() + m_size/2])
+		{
+			case 0:
+				return null;
+			case 1:
+				return Ressource.Autoroute;
+			case 2:
+				return Ressource.Metal;
+			case 3:
+				return r1;
+		}
+		return r2;
 
-    private int[][] getRessourceTab()
-    {
-        //Todo: Le fichier doit contenir ne matrice 7x7 avec un nombre puis un espace, si on modifie la taille rien ne vas plus !
-        // Crée un tableau avec les ressources présentes dans chaque case
-        // Le tableau tab est initialisé à partir d'un fichier
-        int[][] list = new int[m_size][m_size];
-        String [] tab = null;
-        try
-        {
-            BufferedReader reader = new BufferedReader(new FileReader("ressources/PlateauxInitiaux/plateau1.txt"));
-            for (int i = 0; i < m_size; i++)
-            {
-                tab = reader.readLine().split(" ");
-                for (int j = 0; j < m_size; j++)
-                {
-                    list[i][j] = Integer.parseInt(tab[j]);
-                }
-            }
-            reader.close();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return list;
-    }
+	}
 
+	/*
+	 * Initialise le tableau des ressources.
+	 * Il sera ensuite utilisé pour retrouver quelle ressource correspond à quelle case du plateau.
+	 */
+	private int[][] getRessourceTab()
+	{
+		//Todo: Le fichier doit contenir ne matrice 7x7 avec un nombre puis un espace, si on modifie la taille rien ne vas plus !
+		// Crée un tableau avec les ressources présentes dans chaque case
+		// Le tableau tab est initialisé à partir d'un fichier
+		int[][] list = new int[m_size][m_size];
+		String[] tab = null;
+		try
+		{
+			BufferedReader reader = new BufferedReader(new FileReader("ressources/PlateauxInitiaux/plateau1.txt"));
+			for (int i = 0; i < m_size; i++)
+			{
+				tab = reader.readLine().split(" ");
+				for (int j = 0; j < m_size; j++)
+				{
+					list[i][j] = Integer.parseInt(tab[j]);
+				}
+			}
+			reader.close();
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

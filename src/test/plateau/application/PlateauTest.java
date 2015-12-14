@@ -22,81 +22,81 @@ public class PlateauTest extends AnchorPane
 	}
 
 
-/*
-	private void drawViewCases()
-	{
-		for(int i=0; i<7;++i)
+	/*
+		private void drawViewCases()
 		{
-			if(i==0 || i==6)
+			for(int i=0; i<7;++i)
 			{
-				for(int j=0;j<4;++j)
+				if(i==0 || i==6)
 				{
-					if(i==0)
+					for(int j=0;j<4;++j)
 					{
-						ViewCases.getChildren().add(new ViewCase(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
-						addRoutes(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4);
-					}
-					else
-					{
-						ViewCases.getChildren().add(new ViewCase(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
-						addRoutes(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4);
+						if(i==0)
+						{
+							ViewCases.getChildren().add(new ViewCase(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
+							addRoutes(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4);
+						}
+						else
+						{
+							ViewCases.getChildren().add(new ViewCase(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4,6));
+							addRoutes(3*(Constants.hexWidth/2)+j*Constants.hexWidth, i*Constants.hexWidth*3/4);
+						}
+
 					}
 
 				}
-
-			}
-			else if(i==1 || i==5)
-			{
-				for(int j=0;j<5;++j)
+				else if(i==1 || i==5)
 				{
-					float x = 2*(Constants.hexWidth/2)+j*Constants.hexWidth;
-					float y =  i*Constants.hexWidth*3/4;
-					if(i==1)
+					for(int j=0;j<5;++j)
 					{
-						ViewCases.getChildren().add(new ViewCase(x,y,6));
-						addRoutes(x,y);
-					}
-					else
-					{
-						ViewCases.getChildren().add(new ViewCase(x,y,6));
-						addRoutes(x, y);
-					}
+						float x = 2*(Constants.hexWidth/2)+j*Constants.hexWidth;
+						float y =  i*Constants.hexWidth*3/4;
+						if(i==1)
+						{
+							ViewCases.getChildren().add(new ViewCase(x,y,6));
+							addRoutes(x,y);
+						}
+						else
+						{
+							ViewCases.getChildren().add(new ViewCase(x,y,6));
+							addRoutes(x, y);
+						}
 
+					}
 				}
-			}
-			else if (i==3)
-			{
-				for(int j=0;j<7;++j)
+				else if (i==3)
 				{
-					float x = j*Constants.hexWidth;
-					float y = i*Constants.hexWidth*3/4;
-					ViewCases.getChildren().add(new ViewCase(x,y ,6));
-					addRoutes(x,y);
-				}
-			}
-			else // i=2 ou 4
-			{
-				for(int j=0;j<6;++j)
-				{
-					float x = Constants.hexWidth/2+j*Constants.hexWidth;
-					float y = i*Constants.hexWidth*3/4;
-
-					if(i==2)
+					for(int j=0;j<7;++j)
 					{
-						ViewCases.getChildren().add(new ViewCase(x, y,6));
+						float x = j*Constants.hexWidth;
+						float y = i*Constants.hexWidth*3/4;
+						ViewCases.getChildren().add(new ViewCase(x,y ,6));
 						addRoutes(x,y);
 					}
-					else
+				}
+				else // i=2 ou 4
+				{
+					for(int j=0;j<6;++j)
 					{
-						ViewCases.getChildren().add(new ViewCase(x,y,6));
-						addRoutes(x,y);
+						float x = Constants.hexWidth/2+j*Constants.hexWidth;
+						float y = i*Constants.hexWidth*3/4;
+
+						if(i==2)
+						{
+							ViewCases.getChildren().add(new ViewCase(x, y,6));
+							addRoutes(x,y);
+						}
+						else
+						{
+							ViewCases.getChildren().add(new ViewCase(x,y,6));
+							addRoutes(x,y);
+						}
 					}
 				}
 			}
 		}
-	}
-	*/
-	private void addRoutes(float x,float y)
+		*/
+	private void addRoutes(float x, float y)
 	{
 		//routes.getChildren().add(new Route(x,y,"/h"));
 		//routes.getChildren().add(new Route(x,y,"/b"));

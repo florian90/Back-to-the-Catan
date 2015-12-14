@@ -1,15 +1,9 @@
 package test.plateau.application;
 
 
-import java.util.ArrayList;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -18,6 +12,8 @@ import javafx.scene.paint.Color;
 import model.jeu.Epoque;
 import model.jeu.Plateau;
 import vue.VuePlateau;
+
+import java.util.ArrayList;
 
 public class Fenetre extends AnchorPane
 {
@@ -33,22 +29,22 @@ public class Fenetre extends AnchorPane
 	public Fenetre()
 	{
 
-		TitledPane PanneauMarche; 
-		TitledPane PanneauCarte; 
-		TitledPane PanneauJoueur; 
+		TitledPane PanneauMarche;
+		TitledPane PanneauCarte;
+		TitledPane PanneauJoueur;
 		
 		Tab TabConstructions = new Tab("Constructions");
 		Tab TabCartes = new Tab("Cartes");
 		Tab TabInventions = new Tab("Inventions");
-		TabPane TabsMarche = new TabPane(TabConstructions,TabInventions,TabCartes);
+		TabPane TabsMarche = new TabPane(TabConstructions, TabInventions, TabCartes);
 		
 		VBox VGauche = new VBox();
 		VBox VMilieu = new VBox();
 		VBox VDroite = new VBox();
 
 
-		plateauActuel =0;
-		numPlateau = new Label("VuePlateau n� :"+(plateauActuel+1));
+		plateauActuel = 0;
+		numPlateau = new Label("VuePlateau n� :" + (plateauActuel + 1));
 		plateaux = new ArrayList<>();
 		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._1985, 7)));
 		plateaux.add(new VuePlateau(0, 0, new Plateau(Epoque._1855, 7)));
@@ -72,20 +68,20 @@ public class Fenetre extends AnchorPane
 		VGauche.setId("VGauche");
 		
 		VMilieu.getChildren().add(numPlateau);
-		VMilieu.getChildren().add(new HBox(prec,suiv));
+		VMilieu.getChildren().add(new HBox(prec, suiv));
 		VMilieu.getChildren().add(stack);
 		VMilieu.setMinWidth(800);
 		VMilieu.setPrefWidth(800);
 		VMilieu.setMaxWidth(800);
 		
 		
-		VDroite.getChildren().add(new ContentJoueur("textures/hexPlutonium.png","DarkMowah",Color.YELLOW));
+		VDroite.getChildren().add(new ContentJoueur("textures/hexPlutonium.png", "DarkMowah", Color.YELLOW));
 		VDroite.setMinWidth(300);
-		VDroite.setPrefWidth(300); 
+		VDroite.setPrefWidth(300);
 		VDroite.setMaxWidth(300);
 		VDroite.setId("VDroite");
 
-		PanneauMarche = new TitledPane("March�",VGauche);
+		PanneauMarche = new TitledPane("March�", VGauche);
 		PanneauMarche.setCollapsible(false);
 		PanneauMarche.setPrefHeight(800);
 		
@@ -94,34 +90,38 @@ public class Fenetre extends AnchorPane
 		PanneauCarte.setCollapsible(false);
 		PanneauCarte.setPrefHeight(800);
 		
-		PanneauJoueur = new TitledPane("Joueur",VDroite);
+		PanneauJoueur = new TitledPane("Joueur", VDroite);
 		PanneauJoueur.setCollapsible(false);
 		PanneauJoueur.setPrefHeight(800);
 		
 		
-		getChildren().add(new HBox(PanneauMarche,PanneauCarte,PanneauJoueur));
-		suiv.setOnAction(new EventHandler<ActionEvent>() {
+		getChildren().add(new HBox(PanneauMarche, PanneauCarte, PanneauJoueur));
+		suiv.setOnAction(new EventHandler<ActionEvent>()
+		{
 
 			@Override
-			public void handle(ActionEvent event) {
-				plateauActuel=(plateauActuel+1)%4;
-				System.out.println("pa :"+plateauActuel);
+			public void handle(ActionEvent event)
+			{
+				plateauActuel = (plateauActuel + 1)%4;
+				System.out.println("pa :" + plateauActuel);
 				stack.getChildren().removeAll(stack.getChildren());
 				stack.getChildren().add(plateaux.get(plateauActuel));
-				numPlateau.setText("VuePlateau n� :"+(plateauActuel+1));
+				numPlateau.setText("VuePlateau n� :" + (plateauActuel + 1));
 
 			}
 		});
 
-		prec.setOnAction(new EventHandler<ActionEvent>() {
+		prec.setOnAction(new EventHandler<ActionEvent>()
+		{
 
 			@Override
-			public void handle(ActionEvent event) {
-				plateauActuel=(plateauActuel+3)%4;
-				System.out.println("pa :"+plateauActuel);
+			public void handle(ActionEvent event)
+			{
+				plateauActuel = (plateauActuel + 3)%4;
+				System.out.println("pa :" + plateauActuel);
 				stack.getChildren().removeAll(stack.getChildren());
 				stack.getChildren().add(plateaux.get(plateauActuel));
-				numPlateau.setText("VuePlateau n� :"+(plateauActuel+1));
+				numPlateau.setText("VuePlateau n� :" + (plateauActuel + 1));
 
 			}
 		});

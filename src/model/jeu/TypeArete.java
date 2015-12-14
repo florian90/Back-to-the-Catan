@@ -1,7 +1,8 @@
 package model.jeu;
 
-public enum TypeArete {
-    Route,
-    Autoroute,
-    Vide
+public enum TypeArete
+{
+	Route,
+	Autoroute,
+	Vide
 }
