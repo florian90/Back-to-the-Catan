@@ -3,9 +3,9 @@ package test.plateau.application;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.jeu.Jeu;
 
 
 public class Main extends Application
@@ -16,11 +16,11 @@ public class Main extends Application
 		try
 		{
 
-			Fenetre fen = new Fenetre();
+			
 			MenuPrincipalView menuView = new MenuPrincipalView();
-			Scene jeu = new Scene(fen, 1400, 800);
-			Scene menu = new Scene(menuView,1400,800);
-			jeu.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			
+			Scene menu = new Scene(menuView,1400,850);
+			//jeu.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			primaryStage.setScene(menu);
 			primaryStage.show();
@@ -39,8 +39,14 @@ public class Main extends Application
 				@Override
 				public void handle(ActionEvent event) {
 					// TODO Auto-generated method stub
-					primaryStage.setScene(jeu);
+					
+					
+					Jeu modelJeu = new Jeu(menuView.getListeJoueurs());
+					Fenetre fen = new Fenetre(modelJeu);
+					Scene EcranJeu = new Scene(fen, 1400, 850);
+					primaryStage.setScene(EcranJeu);
 					primaryStage.show();
+					System.out.println(menuView.getListeJoueurs());
 				}
 			});
 

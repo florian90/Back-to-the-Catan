@@ -2,10 +2,10 @@ package test.plateau.application;
 
 import java.util.ArrayList;
 
-import javax.naming.LimitExceededException;
-
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
@@ -16,11 +16,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+
+import model.joueur.Joueur;
 
 public class MenuPrincipalView extends AnchorPane
 {
-	private StackPane stack;
+
 	private GridPane buttonGrid, parametresGrid;
 	private Spinner<Integer> spinNbJoueurs;
 	private Button nouvellePartie, regles, options;
@@ -35,19 +36,39 @@ public class MenuPrincipalView extends AnchorPane
 		valider= new Button("Valider");
 		
 		parametres = new TitledPane("Paramètres de la partie", null);
-		parametres.setPrefWidth(600);
+		parametres.setPrefWidth(350);
+		parametres.setPadding(new Insets(10,10,10,10));
 		parametres.setTranslateX(700);
 		parametres.setTranslateY(100);
 		parametres.setCollapsible(false);
 		parametres.setVisible(false);
-		spinNbJoueurs = new Spinner<Integer>(2,4,1);
+		spinNbJoueurs = new Spinner<Integer>(2,4,4);
 		spinNbJoueurs.setPrefWidth(75);
+		spinNbJoueurs.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+			
+				actualiseJoueurs();
+			}
+		});
+		
 		parametresGrid = new GridPane();
 		parametresGrid.setHgap(10);
 		parametresGrid.setVgap(10);
+
+		
+		parametresGrid.getChildren().removeAll(parametresGrid.getChildren());
 		parametresGrid.add(new Label("Nombre de Joueurs (2 à 4) :"), 0,0);
-		actualiseJoueurs();
-	
+		for(int i=0; i<4; ++i)
+		{
+			TextField nomJoueur = new TextField("joueur"+(i+1));
+			nomJoueur.setEditable(true);
+			parametresGrid.add(new Label("Joueur "+(i+1)+" :"), 0, (i+1));
+			nomsJoueurs.add(nomJoueur);
+			parametresGrid.add(nomJoueur, 1, i+1);
+			
+		}
 		parametresGrid.add(spinNbJoueurs,1,0);
 		parametresGrid.add(valider, 1, 6);
 		parametres.setContent(parametresGrid);
@@ -58,7 +79,7 @@ public class MenuPrincipalView extends AnchorPane
 		regles = new Button("Règles");
 		regles.setId("bouttonMenuPrincipal");
 		regles.setPrefWidth(100);
-		options = new Button("Options");
+		options = new Button("Quitter");
 		options.setId("boutonMenuPrincipal");
 		options.setPrefWidth(100);
 
@@ -79,15 +100,31 @@ public class MenuPrincipalView extends AnchorPane
 	
 	private void actualiseJoueurs()
 	{
-		
-		for(int i=0; i<4/*spinNbJoueurs.getValue()*/; ++i)
+		for(int i=0; i<4; ++i)
 		{
-			parametresGrid.add(new Label("Joueur "+(i+1)+" :"), 0, (i+1));
-			TextField nomJoueur = new TextField();
-			nomJoueur.setEditable(true);
-			nomsJoueurs.add(nomJoueur);
-			parametresGrid.add(nomJoueur, 1, i+1);
+				nomsJoueurs.get(i).setVisible(i<spinNbJoueurs.getValue());
+				if(!(nomsJoueurs.get(i).isVisible()))
+				{
+					nomsJoueurs.get(i).setText("");
+				}
+
 		}
+	}
+	
+	public ArrayList<Joueur> getListeJoueurs()
+	{
+		ArrayList<Joueur> joueurs = new ArrayList<>();
+		
+		for(TextField tf : nomsJoueurs)
+		{
+			if(!(tf.getText().equals("")))
+			{
+				joueurs.add(new Joueur(tf.getText()));
+			}
+					
+		}
+		
+		return joueurs;
 	}
 	
 	public void setParametersVisible()

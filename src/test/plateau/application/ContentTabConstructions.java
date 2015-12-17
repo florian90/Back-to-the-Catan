@@ -38,10 +38,10 @@ public class ContentTabConstructions extends GridPane
 		add(spinAutoroute, 2, 1);
 		add(spinVillage, 2, 2);
 		add(spinVille, 2, 3);
-		add(new Label("1xMï¿½tal + 1xRS"), 3, 0);
-		add(new Label("2xMï¿½tal + 1xRS"), 3, 1);
-		add(new Label("2xMï¿½tal + 2xRS"), 3, 2);
-		add(new Label("4xMï¿½tal + 3xRS"), 3, 3);
+		add(new Label("1xMétal + 1xRS"), 3, 0);
+		add(new Label("2xMétal + 1xRS"), 3, 1);
+		add(new Label("2xMétal + 2xRS"), 3, 2);
+		add(new Label("4xMétal + 3xRS"), 3, 3);
 		add(acheter, 3, 4);
 
 		

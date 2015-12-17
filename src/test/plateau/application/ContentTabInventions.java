@@ -20,10 +20,10 @@ public class ContentTabInventions extends GridPane
 		Button acheterHoverboard = new Button("Acheter");
 		
 		Label hoverboard = new Label("Convecteur Temporel");
-		Label detailsTrain = new Label("Dï¿½tails");
-		Label detailsRadio = new Label("Dï¿½tails");
-		Label detailsConvecteur = new Label("Dï¿½tails");
-		Label detailsHoverboard = new Label("Dï¿½tails");
+		Label detailsTrain = new Label("Détails");
+		Label detailsRadio = new Label("Détails");
+		Label detailsConvecteur = new Label("Détails");
+		Label detailsHoverboard = new Label("Détails");
 		StackPane stack = new StackPane();
 		
 		hoverboard.setWrapText(true);

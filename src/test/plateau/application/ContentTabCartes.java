@@ -18,7 +18,7 @@ public class ContentTabCartes extends GridPane
 		setPadding(new Insets(20, 20, 20, 20));
 		setHgap(15);
 		setVgap(15);
-		add(new Label("Coï¿½t : 2 ressources d'ï¿½poques diffï¿½rentes"), 0, 0);
+		add(new Label("Coût : 2 ressources d'époques différentes"), 0, 0);
 		add(cartes, 0, 2);
 		
 	}

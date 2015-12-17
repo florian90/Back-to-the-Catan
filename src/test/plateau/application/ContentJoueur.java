@@ -26,12 +26,12 @@ public class ContentJoueur extends GridPane
 		add(LabelPseudo, 1, 0);
 		add(new Label("Ressources :"), 0, 2);
 		
-		add(new Label("Mï¿½tal :"), 0, 4);
+		add(new Label("Métal :"), 0, 4);
 		add(new Label("Bois :"), 0, 5);
 		add(new Label("Roue :"), 0, 6);
 		add(new Label("Haut-Parleurs :"), 0, 7);
 		add(new Label("Antennes :"), 0, 8);
-		add(new Label("Morceaux de Schï¿½ma :"), 0, 9);
+		add(new Label("Morceaux de Schéma :"), 0, 9);
 		add(new Label("Plutonium :"), 0, 10);
 		add(new Label("Aimant :"), 0, 11);
 		add(new Label("Ventilateur :"), 0, 12);
