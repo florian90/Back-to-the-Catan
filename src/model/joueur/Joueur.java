@@ -1,8 +1,9 @@
 package model.joueur;
 
-import model.jeu.Point;
-
 import java.util.HashMap;
+
+import model.jeu.Arete;
+import model.jeu.Point;
 
 public class Joueur
 {
@@ -12,49 +13,75 @@ public class Joueur
 	private HashMap<Ressource, Integer> m_ressources;
 	private HashMap<Invention, Integer> m_inventions;
 	private HashMap<Point, Integer> m_pointsConstruits;
+	private HashMap<Arete, Integer> m_aretesConstruites;
 	private HashMap<Carte, Integer> cartes;
 	
-	public Joueur(String nom, String avatar)
+	public Joueur(String nom)
 	{
 		m_nom = nom;
 		
-		try
-		{
-			m_avatar =avatar;
-		}
-		catch(Exception e)//Si l'url de l'image est incorrecte on en donne une par dÈfaut
-		{
-			m_avatar = "textures/hexagon.jpg";
-		}
+		
 	}
 
-	//Todo: Fonction pour d√©penser un certain nombre d'une ressources : d√©pense les ressources
-	public void depenserRessources(Ressource res, int nombres)
+	/*
+	 * Fonction pour d√©penser un certain nombre d'une ressources : dÈpense les ressources
+	 */
+	public void depenserRessources(Ressource res, int nombre)
 	{
-
+		m_ressources.put(res,m_ressources.get(res)-nombre);
 	}
 
-	//Todo: Ajoute la ressource au joueur
-	public void recevoirRessources(Ressource res)
+	/*
+	 *  Ajoute la ressource au joueur
+	 */
+	public void recevoirRessources(Ressource res, int nombre)
 	{
-
+		m_ressources.put(res,m_ressources.get(res)+nombre);
 	}
 
-	//Todo: Test si le jouer a les ressources pass√©es en param√®tres
+	/*
+	 * Test si le joueur a les ressources passÈes en paramÈtres
+	 */
 	public boolean possede(Ressource res, int nombres)
 	{
-		return false;
+		return m_ressources.get(res)!=0;
+	}
+	
+	/*
+	 * Retourne le nombre de ressources que le joueur
+	 * correspondant ‡ la ressource passÈe en paramËtres 
+	 */
+	public int nbRessource(Ressource res, int nombres)
+	{
+		return m_ressources.get(res);
 	}
 
 	//Todo: Construit un nouvel √©l√©ment au joueur( carte, route, ville, ...), d√©penses les ressources et ajoute l'objet au joueur
-	public void construireTruc()
+	public void construire()
 	{
 
 	}
 
-	//Todo: Echange des ressources avec un autre joueur
-	public void echangerRessources(Joueur autre /*Ressource...*/)
+	/*
+	 * Echange des ressources avec un autre joueur
+	 * le joueur courant (this) Èchange nb2 ressources de type res2
+	 * contre nb1 ressources res1 de la part du joueur 'autre'
+	 */
+	public void echangerRessources(Joueur autre, Ressource res1, int nb1, Ressource res2, int nb2)
 	{
+		autre.depenserRessources(res1, nb1);
+		autre.recevoirRessources(res2, nb2);
+		this.depenserRessources(res2, nb2);
+		this.recevoirRessources(res1, nb1);
 
+	}
+	public String toString()
+	{
+		return m_nom;
+	}
+	
+	public String getNom()
+	{
+		return m_nom;
 	}
 }
