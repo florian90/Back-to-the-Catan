@@ -1,9 +1,13 @@
 package test.plateau.application;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.jeu.Jeu;
 
@@ -46,6 +50,10 @@ public class Main extends Application
 					Scene EcranJeu = new Scene(fen, 1400, 850);
 					primaryStage.setScene(EcranJeu);
 					primaryStage.show();
+					final File file = new File("src/sons/nomdezeus.mp3"); // NOM DE ZEUS !!
+			        final Media media = new Media(file.toURI().toString()); 
+			        final MediaPlayer mediaPlayer = new MediaPlayer(media); 
+			        mediaPlayer.play();
 					System.out.println(menuView.getListeJoueurs());
 				}
 			});
