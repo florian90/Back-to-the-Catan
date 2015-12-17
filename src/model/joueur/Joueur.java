@@ -8,10 +8,25 @@ public class Joueur
 {
 
 	private String m_nom;
+	private String m_avatar;
 	private HashMap<Ressource, Integer> m_ressources;
 	private HashMap<Invention, Integer> m_inventions;
 	private HashMap<Point, Integer> m_pointsConstruits;
 	private HashMap<Carte, Integer> cartes;
+	
+	public Joueur(String nom, String avatar)
+	{
+		m_nom = nom;
+		
+		try
+		{
+			m_avatar =avatar;
+		}
+		catch(Exception e)//Si l'url de l'image est incorrecte on en donne une par d�faut
+		{
+			m_avatar = "textures/hexagon.jpg";
+		}
+	}
 
 	//Todo: Fonction pour dépenser un certain nombre d'une ressources : dépense les ressources
 	public void depenserRessources(Ressource res, int nombres)

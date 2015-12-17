@@ -1,10 +1,19 @@
 package test.plateau.application;
 
 
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -13,13 +22,11 @@ import model.jeu.Epoque;
 import model.jeu.Plateau;
 import vue.VuePlateau;
 
-import java.util.ArrayList;
-
 public class Fenetre extends AnchorPane
 {
 	StackPane stack;
 	ArrayList<VuePlateau> plateaux;
-	int plateauActuel;//index du plateau dans la liste des plateaux (0 ï¿½ 3)
+	int plateauActuel;//index du plateau dans la liste des plateaux (0 à 3)
 	Button suiv, prec;
 	Label numPlateau;
 	ContentTabConstructions cTC = new ContentTabConstructions();
@@ -41,6 +48,18 @@ public class Fenetre extends AnchorPane
 		VBox VGauche = new VBox();
 		VBox VMilieu = new VBox();
 		VBox VDroite = new VBox();
+		
+		GridPane joueurs = new GridPane();
+		
+		ImageView avatar = new ImageView("textures/hexagon1.png");
+		Button echanger1 = new Button("Echanger");
+		avatar.setFitWidth(100);
+		avatar.setPreserveRatio(true);
+		joueurs.add(avatar, 0, 0);
+		joueurs.add(echanger1, 0, 1);
+
+
+
 
 
 		plateauActuel = 0;
@@ -70,6 +89,7 @@ public class Fenetre extends AnchorPane
 		VMilieu.getChildren().add(numPlateau);
 		VMilieu.getChildren().add(new HBox(prec, suiv));
 		VMilieu.getChildren().add(stack);
+		VMilieu.getChildren().add(joueurs);
 		VMilieu.setMinWidth(800);
 		VMilieu.setPrefWidth(800);
 		VMilieu.setMaxWidth(800);
