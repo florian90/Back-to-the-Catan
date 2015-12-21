@@ -12,11 +12,12 @@ public class DetailInvention extends GridPane
 		add(new Label(type), 0, 0);
 		ImageView vignette = new ImageView(new Image(imageUrl));
 		vignette.setPreserveRatio(true);
-		vignette.setFitWidth(75);
+		vignette.setFitWidth(100);
 		add(vignette, 0, 1, 2, 1);
-		add(new Label("Description :"), 0, 3);
-		add(new Label(description), 0, 5);
-		add(new Label("Coï¿½t :" + cout), 0, 7);
+		//add(new Label("Description :"), 1, 0);
+		//add(new Label(description), 1, 1);
+		Label LCout = new Label("Coût : " + cout);
+		add(LCout, 0, 7,4,3);
 		
 		
 	}

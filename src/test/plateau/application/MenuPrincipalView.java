@@ -38,8 +38,8 @@ public class MenuPrincipalView extends AnchorPane
 		parametres = new TitledPane("Paramètres de la partie", null);
 		parametres.setPrefWidth(350);
 		parametres.setPadding(new Insets(10,10,10,10));
-		parametres.setTranslateX(700);
-		parametres.setTranslateY(100);
+		parametres.setTranslateX(75);
+		parametres.setTranslateY(500);
 		parametres.setCollapsible(false);
 		parametres.setVisible(false);
 		spinNbJoueurs = new Spinner<Integer>(2,4,4);
@@ -87,7 +87,7 @@ public class MenuPrincipalView extends AnchorPane
 		buttonGrid = new GridPane();
 		buttonGrid.setVgap(5);
 		buttonGrid.setTranslateX(200);
-		buttonGrid.setTranslateY(200);
+		buttonGrid.setTranslateY(400);
 		setBackground(new Background(new BackgroundImage(new Image("textures/fondMenu.jpg"),null,null,null,null)));
 
 		buttonGrid.add(nouvellePartie, 0, 0);

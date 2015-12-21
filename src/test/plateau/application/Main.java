@@ -28,6 +28,13 @@ public class Main extends Application
 			
 			primaryStage.setScene(menu);
 			primaryStage.show();
+			//Tests
+			/*Jeu modelJeu = new Jeu(menuView.getListeJoueurs());
+			Fenetre fen = new Fenetre(modelJeu);
+			Scene EcranJeu = new Scene(fen, 1400, 850);
+			primaryStage.setScene(EcranJeu);
+			primaryStage.show();*/
+			//Tests
 			
 			menuView.getNouvellePartie().setOnAction(new EventHandler<ActionEvent>() {
 				

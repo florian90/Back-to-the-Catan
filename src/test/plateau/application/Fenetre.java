@@ -9,14 +9,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -24,7 +22,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import model.jeu.Epoque;
 import model.jeu.Jeu;
-import model.jeu.Plateau;
 import vue.VuePlateau;
 
 public class Fenetre extends AnchorPane
@@ -32,12 +29,14 @@ public class Fenetre extends AnchorPane
 	private StackPane stack;
 	private ArrayList<VuePlateau> plateaux;
 	private int plateauActuel;//index du plateau dans la liste des plateaux (0 à 3)
-	private Button suiv, prec, lancerDes;
+	private Button suiv, prec;
 	private Label numPlateau;
 	private ContentTabConstructions cTC = new ContentTabConstructions();
 	private ContentTabInventions cTI = new ContentTabInventions();
 	private ContentTabCartes CTCards = new ContentTabCartes();
 	private Jeu modelJeu;
+	private Label statusBar = new Label("Joueur1 - Lancez les dés pour commencer");
+	private VueDes des = new VueDes();
 
 	public Fenetre(Jeu p_modelJeu)
 	{
@@ -64,7 +63,7 @@ public class Fenetre extends AnchorPane
 		
 		for(int i =0; i<modelJeu.getNbJoueurs();++i)
 		{
-			ImageView avatar = new ImageView("textures/hexagon"+(i+1)+".png");
+			ImageView avatar = new ImageView("textures/Avatar"+(i+1)+".jpg");
 			Button echanger = new Button("Echanger");
 			avatar.setFitWidth(50);
 			avatar.setPreserveRatio(true);
@@ -86,7 +85,7 @@ public class Fenetre extends AnchorPane
 		stack = new StackPane(plateaux.get(plateauActuel));
 		suiv = new Button("> Suivant");
 		prec = new Button("Précédent <");
-		lancerDes = new Button("Lancer les Dés");
+		
 		
 		
 		TabConstructions.setContent(cTC);
@@ -95,13 +94,15 @@ public class Fenetre extends AnchorPane
 
 		
 		VGauche.getChildren().add(TabsMarche);
+		VGauche.getChildren().add(new Separator());
+		VGauche.getChildren().add(des);
 		VGauche.setMinWidth(300);
 		VGauche.setPrefWidth(300);
 		VGauche.setMaxWidth(300);
 		VGauche.setId("VGauche");
 		
 		VMilieu.getChildren().add(numPlateau);
-		VMilieu.getChildren().add(new HBox(10,lancerDes,prec, suiv));
+		VMilieu.getChildren().add(new HBox(10,prec, suiv));
 		VMilieu.getChildren().add(stack);
 		VMilieu.getChildren().add(gridJoueurs);
 		VMilieu.setMinWidth(800);
@@ -109,7 +110,7 @@ public class Fenetre extends AnchorPane
 		VMilieu.setMaxWidth(800);
 		
 		
-		VDroite.getChildren().add(new ContentJoueur("textures/hexPlutonium.png", "joueur1", Color.YELLOW));
+		VDroite.getChildren().add(new ContentJoueur("textures/Avatar1.jpg", "joueur1", Color.YELLOW));
 		VDroite.setMinWidth(300);
 		VDroite.setPrefWidth(300);
 		VDroite.setMaxWidth(300);
@@ -128,8 +129,12 @@ public class Fenetre extends AnchorPane
 		PanneauJoueur.setCollapsible(false);
 		PanneauJoueur.setPrefHeight(800);
 		
+		statusBar.setPadding(new Insets(10));
 		
-		getChildren().add(new HBox(PanneauMarche, PanneauCarte, PanneauJoueur));
+		getChildren().add(new VBox(new HBox(PanneauMarche, PanneauCarte, PanneauJoueur),statusBar));
+	
+		
+		// Gestion des evenements
 		suiv.setOnAction(new EventHandler<ActionEvent>()
 		{
 
@@ -158,6 +163,17 @@ public class Fenetre extends AnchorPane
 				numPlateau.setText("VuePlateau n° :" + (plateauActuel + 1));
 
 			}
+		});
+		
+		des.getLancer().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				des.actualiserResultats(p_modelJeu.lancerDes());
+				des.setEnabled(false);
+				
+			}
+			
 		});
 	}
 }

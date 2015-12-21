@@ -56,7 +56,7 @@ public class Joueur
 		return m_ressources.get(res);
 	}
 
-	//Todo: Construit un nouvel élément au joueur( carte, route, ville, ...), dépenses les ressources et ajoute l'objet au joueur
+	//Todo: Construit un nouvel �l�ment au joueur( carte, route, ville, ...), dépenses les ressources et ajoute l'objet au joueur
 	public void construire()
 	{
 

@@ -42,7 +42,7 @@ public class Point
 
 	}
 
-	//Todo: Check si on peut construire le type demandÃ© pour le joueur
+	//Todo: Vérifie si on peut construire le type demandé pour le joueur
 	public boolean peutConstruire(Joueur joueur, TypePoint type)
 	{
 		return false;

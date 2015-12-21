@@ -73,7 +73,7 @@ public class ContentTabInventions extends GridPane
 			public void handle(MouseEvent event)
 			{
 				stack.getChildren().removeAll(stack.getChildren());
-				stack.getChildren().add(new DetailInvention("Radio", "2xAntenne + 4xHaut-Parleur + 3xMï¿½tal", "textures/radio.jpg", "Ceci est une radio"));
+				stack.getChildren().add(new DetailInvention("Radio", "2xAntenne + 4xHaut-Parleur + 3xMétal", "textures/radio.jpg", "Ceci est une radio"));
 				//add(new DetailInvention("Radio", "2xBois + 2xMetal", "textures/hexBois.png", "Ceci est un train du far west"),0,6,2,10);
 
 				
@@ -86,7 +86,7 @@ public class ContentTabInventions extends GridPane
 			public void handle(MouseEvent event)
 			{
 				stack.getChildren().removeAll(stack.getChildren());
-				stack.getChildren().add(new DetailInvention("Convecteur Temporel", "3xMorceau de Schï¿½ma + 6xPlutonium", "textures/convecteur.gif", "Ceci est un convecteur temporel"));
+				stack.getChildren().add(new DetailInvention("Convecteur Temporel", "3xMorceau de Schéma + 6xPlutonium", "textures/convecteur.gif", "Ceci est un convecteur temporel"));
 				//add(new DetailInvention("Convecteur temporel", "2xBois + 2xMetal", "textures/hexBois.png", "Ceci est un train du far west"),0,6,2,10);
 
 				
@@ -99,7 +99,7 @@ public class ContentTabInventions extends GridPane
 			public void handle(MouseEvent event)
 			{
 				stack.getChildren().removeAll(stack.getChildren());
-				stack.getChildren().add(new DetailInvention("Hoverboard", "4xVentilateur + 2xAimant + 3xMï¿½tal", "textures/hoverboard.jpg", "Ceci est un hoverboard"));
+				stack.getChildren().add(new DetailInvention("Hoverboard", "4xVentilateur + 2xAimant + 3xMétal", "textures/hoverboard.jpg", "Ceci est un hoverboard"));
 				//	add(new DetailInvention("Hoverboard", "2xBois + 2xMetal", "textures/hexBois.png", "Ceci est un train du far west"),0,6,2,10);
 
 				

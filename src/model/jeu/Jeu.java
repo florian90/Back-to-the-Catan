@@ -2,6 +2,7 @@ package model.jeu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import model.joueur.Joueur;
 
@@ -53,6 +54,23 @@ public class Jeu
 	{
 		return joueurs;
 	}
+	/*
+	 * Retourne un tableau d'entier contenant le 
+	 * résultat du dé n°1, le resultat du dé n°2
+	 * et la somme des deux.
+	 */
+	public int[] lancerDes()
+	{
+		Random rnd = new Random();
+		int de1 = rnd.nextInt(6 ) + 1;
+		int de2 = rnd.nextInt(6 ) + 1;
+		
+		int tab[] = {de1,de2,de1+de2};
+		
+		return tab;
+		
+	}
+	
 	public HashMap<Epoque, Plateau> getPlateaux() 
 	{
 		return plateaux;
