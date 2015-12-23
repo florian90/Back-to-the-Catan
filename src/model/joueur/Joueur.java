@@ -9,7 +9,7 @@ public class Joueur
 {
 
 	private String m_nom;
-	private int numJoueur;
+	private int m_numJoueur;
 	private String m_avatar;
 	private PackRess m_ressources;
 	private HashMap<Invention, Integer> m_inventions;
@@ -93,10 +93,10 @@ public class Joueur
 	
 	public String getNom()
 	{
-		return nom;
+		return m_nom;
 	}
 	
 	public int getNumJoueur() {
-		return numJoueur;
+		return m_numJoueur;
 	}
 }

@@ -36,7 +36,7 @@ public class MenuPrincipalView extends AnchorPane
 		nomsJoueurs = new ArrayList<TextField>();
 		valider= new Button("Valider");
 		
-		parametres = new TitledPane("Paramètres de la partie", null);
+		parametres = new TitledPane("ParamÃ¨tres de la partie", null);
 		parametres.setPrefWidth(350);
 		parametres.setPadding(new Insets(10,10,10,10));
 		parametres.setTranslateX(75);
@@ -60,7 +60,7 @@ public class MenuPrincipalView extends AnchorPane
 
 		
 		parametresGrid.getChildren().removeAll(parametresGrid.getChildren());
-		parametresGrid.add(new Label("Nombre de Joueurs (2 à 4) :"), 0,0);
+		parametresGrid.add(new Label("Nombre de Joueurs (2 Ã  4) :"), 0,0);
 		for(int i=0; i<4; ++i)
 		{
 			TextField nomJoueur = new TextField("joueur"+(i+1));
@@ -77,7 +77,7 @@ public class MenuPrincipalView extends AnchorPane
 		nouvellePartie = new Button("Nouvelle Partie");
 		nouvellePartie.setId("bouttonMenuPrincipal");
 		nouvellePartie.setPrefWidth(100);
-		regles = new Button("Règles");
+		regles = new Button("RÃ¨gles");
 		regles.setId("bouttonMenuPrincipal");
 		regles.setPrefWidth(100);
 		quitter = new Button("Quitter");
