@@ -16,11 +16,26 @@ public class PackRess  {
 
 	public PackRess(Ressource... rs)
 	{
-		me = new HashMap<>();
+		this();
 		for(Ressource r : rs)
 		{
 			add(r);
 		}
+	}
+
+	public PackRess(Ressource rs1, int nb1, Ressource rs2, int nb2)
+	{
+		this();
+		add(rs1, nb1);
+		add(rs2, nb2);
+	}
+
+	public PackRess(Ressource rs1, int nb1, Ressource rs2, int nb2, Ressource rs3, int nb3)
+	{
+		this();
+		add(rs1, nb1);
+		add(rs2, nb2);
+		add(rs3, nb3);
 	}
 
 	public PackRess(PackRess pack)
@@ -74,5 +89,20 @@ public class PackRess  {
 		{
 			set(ressource, me.get(ressource) - pack.me.get(ressource));
 		}
+	}
+
+	public boolean contains(PackRess pack)
+	{
+		boolean res = true;
+		for(Ressource ress : Ressource.values())
+		{
+			res &= me.get(ress) >= pack.me.get(ress);
+		}
+		return res;
+	}
+
+	public int count(Ressource ress)
+	{
+		return me.get(ress);
 	}
 }
