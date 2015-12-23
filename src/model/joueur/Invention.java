@@ -1,7 +1,6 @@
 package model.joueur;
 
-public enum Invention implements Achetable
-{
+public enum Invention implements Achetable {
 	/*TrainKiVol,*/
 	Train
 			{

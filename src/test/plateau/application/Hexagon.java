@@ -11,8 +11,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.Random;
 
-public class Hexagon extends Canvas
-{
+public class Hexagon extends Canvas {
 	private int type, number;
 
 
@@ -32,8 +31,7 @@ public class Hexagon extends Canvas
 				paint(getGraphicsContext2D(),x,y);
 			}
 		});*/
-		setOnMouseClicked(new EventHandler<MouseEvent>()
-		{
+		setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event)
@@ -48,8 +46,7 @@ public class Hexagon extends Canvas
 				
 			}
 		});
-		setOnKeyPressed(new EventHandler<Event>()
-		{
+		setOnKeyPressed(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event event)

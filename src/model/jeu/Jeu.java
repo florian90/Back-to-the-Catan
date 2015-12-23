@@ -1,41 +1,35 @@
 package model.jeu;
 
+import model.joueur.Joueur;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import model.joueur.Joueur;
-
-public class Jeu
-{
+public class Jeu {
 	/*
-	 * Gère tous les joueurs ainsi que tous les plateaux.
+	 * Gï¿½re tous les joueurs ainsi que tous les plateaux.
 	 */
 	private HashMap<Epoque, Plateau> plateaux;
 	private ArrayList<Joueur> joueurs;
 	private int nbJoueurs, joueurCourant;
 
 	/*
-	 * Construit le modele de jeu à partir de la liste des joueurs 
+	 * Construit le modele de jeu ï¿½ partir de la liste des joueurs 
 	 * fournie par le menu principal, intialise les plateux de jeu
 	 */
 	public Jeu(ArrayList<Joueur> p_joueurs)
 	{
 		joueurs = p_joueurs;
-		joueurCourant=0; //index du joueur dont le tour est en cours
+		joueurCourant = 0; //index du joueur dont le tour est en cours
 		nbJoueurs = joueurs.size();
-		plateaux = new HashMap<Epoque,Plateau>();
+		plateaux = new HashMap<Epoque, Plateau>();
 		plateaux.put(Epoque._1855, new Plateau(Epoque._1985, 7));
 		plateaux.put(Epoque._1955, new Plateau(Epoque._1955, 7));
 		plateaux.put(Epoque._1985, new Plateau(Epoque._1985, 7));
 		plateaux.put(Epoque._2015, new Plateau(Epoque._2015, 7));
 		initJeu();
 	}
-
-
-
-	
-
 
 
 	//Todo: Initialise toutes les instances du jeu
@@ -59,29 +53,30 @@ public class Jeu
 	{
 		return joueurs;
 	}
+
 	/*
 	 * Retourne un tableau d'entier contenant le 
-	 * résultat du dé n°1, le resultat du dé n°2
+	 * rï¿½sultat du dï¿½ nï¿½1, le resultat du dï¿½ nï¿½2
 	 * et la somme des deux.
 	 */
 	public int[] lancerDes()
 	{
 		Random rnd = new Random();
-		int de1 = rnd.nextInt(6 ) + 1;
-		int de2 = rnd.nextInt(6 ) + 1;
+		int de1 = rnd.nextInt(6) + 1;
+		int de2 = rnd.nextInt(6) + 1;
 		
-		int tab[] = {de1,de2,de1+de2};
+		int tab[] = {de1, de2, de1 + de2};
 		
 		return tab;
 		
 	}
 	
-	public HashMap<Epoque, Plateau> getPlateaux() 
+	public HashMap<Epoque, Plateau> getPlateaux()
 	{
 		return plateaux;
 	}
 	
-	public int getJoueurCourant() 
+	public int getJoueurCourant()
 	{
 		return joueurCourant;
 	}

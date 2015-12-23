@@ -3,8 +3,7 @@ package test.plateau.application;
 import javafx.scene.Group;
 import javafx.scene.layout.AnchorPane;
 
-public class PlateauTest extends AnchorPane
-{
+public class PlateauTest extends AnchorPane {
 	Group ViewCases;
 	Group routes;
 	

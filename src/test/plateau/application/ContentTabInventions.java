@@ -8,8 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
-public class ContentTabInventions extends GridPane
-{
+public class ContentTabInventions extends GridPane {
 
 	public ContentTabInventions()
 	{
@@ -20,10 +19,10 @@ public class ContentTabInventions extends GridPane
 		Button acheterHoverboard = new Button("Acheter");
 		
 		Label hoverboard = new Label("Convecteur Temporel");
-		Label detailsTrain = new Label("Détails");
-		Label detailsRadio = new Label("Détails");
-		Label detailsConvecteur = new Label("Détails");
-		Label detailsHoverboard = new Label("Détails");
+		Label detailsTrain = new Label("DÃ©tails");
+		Label detailsRadio = new Label("DÃ©tails");
+		Label detailsConvecteur = new Label("DÃ©tails");
+		Label detailsHoverboard = new Label("DÃ©tails");
 		StackPane stack = new StackPane();
 		
 		hoverboard.setWrapText(true);
@@ -54,8 +53,7 @@ public class ContentTabInventions extends GridPane
 		add(detailsHoverboard, 3, 3);
 		add(stack, 0, 5, 3, 10);
 		
-		detailsTrain.setOnMouseClicked(new EventHandler<MouseEvent>()
-		{
+		detailsTrain.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event)
@@ -66,40 +64,37 @@ public class ContentTabInventions extends GridPane
 
 			}
 		});
-		detailsRadio.setOnMouseClicked(new EventHandler<MouseEvent>()
-		{
+		detailsRadio.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event)
 			{
 				stack.getChildren().removeAll(stack.getChildren());
-				stack.getChildren().add(new DetailInvention("Radio", "2xAntenne + 4xHaut-Parleur + 3xMétal", "textures/radio.jpg", "Ceci est une radio"));
+				stack.getChildren().add(new DetailInvention("Radio", "2xAntenne + 4xHaut-Parleur + 3xMÃ©tal", "textures/radio.jpg", "Ceci est une radio"));
 				//add(new DetailInvention("Radio", "2xBois + 2xMetal", "textures/hexBois.png", "Ceci est un train du far west"),0,6,2,10);
 
 				
 			}
 		});
-		detailsConvecteur.setOnMouseClicked(new EventHandler<MouseEvent>()
-		{
+		detailsConvecteur.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event)
 			{
 				stack.getChildren().removeAll(stack.getChildren());
-				stack.getChildren().add(new DetailInvention("Convecteur Temporel", "3xMorceau de Schéma + 6xPlutonium", "textures/convecteur.gif", "Ceci est un convecteur temporel"));
+				stack.getChildren().add(new DetailInvention("Convecteur Temporel", "3xMorceau de SchÃ©ma + 6xPlutonium", "textures/convecteur.gif", "Ceci est un convecteur temporel"));
 				//add(new DetailInvention("Convecteur temporel", "2xBois + 2xMetal", "textures/hexBois.png", "Ceci est un train du far west"),0,6,2,10);
 
 				
 			}
 		});
-		detailsHoverboard.setOnMouseClicked(new EventHandler<MouseEvent>()
-		{
+		detailsHoverboard.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event)
 			{
 				stack.getChildren().removeAll(stack.getChildren());
-				stack.getChildren().add(new DetailInvention("Hoverboard", "4xVentilateur + 2xAimant + 3xMétal", "textures/hoverboard.jpg", "Ceci est un hoverboard"));
+				stack.getChildren().add(new DetailInvention("Hoverboard", "4xVentilateur + 2xAimant + 3xMÃ©tal", "textures/hoverboard.jpg", "Ceci est un hoverboard"));
 				//	add(new DetailInvention("Hoverboard", "2xBois + 2xMetal", "textures/hexBois.png", "Ceci est un train du far west"),0,6,2,10);
 
 				

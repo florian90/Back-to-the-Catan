@@ -3,8 +3,7 @@ package model.jeu;
 import model.jeu.coordonnee.CoordArete;
 import model.joueur.Joueur;
 
-public class Arete
-{
+public class Arete {
 	/*
 	 * Correspond à un coté d'une case.
 	 */

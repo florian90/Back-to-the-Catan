@@ -3,8 +3,7 @@ package model.jeu;
 import model.jeu.coordonnee.CoordPoint;
 import model.joueur.Joueur;
 
-public class Point
-{
+public class Point {
 	private CoordPoint m_coord;
 	private TypePoint m_type;
 	private Joueur m_proprietaire; //Si null, le point n'est pas encore utilisé

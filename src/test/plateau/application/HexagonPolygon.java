@@ -5,8 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
-public class HexagonPolygon extends Polygon
-{
+public class HexagonPolygon extends Polygon {
 	private final int spacing = 1;
 	
 	private int type, number;
@@ -18,8 +17,7 @@ public class HexagonPolygon extends Polygon
 		double x = (double) px + rayon, y = (double) py + rayon;
 		this.number = number;
 		this.getPoints().addAll(new Double[]{x, y - rayon, x + rayon, y - rayon/2, x + rayon, y + rayon/2, x, y + rayon, x - rayon, y + rayon/2, x - rayon, y - rayon/2});
-		setOnMouseClicked(new EventHandler<MouseEvent>()
-		{
+		setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event)

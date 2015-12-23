@@ -3,8 +3,7 @@ package model.jeu;
 import model.jeu.coordonnee.CoordCase;
 import model.joueur.Ressource;
 
-public class Case
-{
+public class Case {
 	private CoordCase m_coord;
 	private Ressource m_ressource;
 	private int m_valeur;

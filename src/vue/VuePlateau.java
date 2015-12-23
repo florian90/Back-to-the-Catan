@@ -13,8 +13,7 @@ import model.jeu.coordonnee.CoordPoint;
 import test.plateau.application.Constants;
 import test.plateau.application.ViewCase;
 
-public class VuePlateau extends Group
-{
+public class VuePlateau extends Group {
 	private int m_nbrCasesLarge;
 	private Group m_cases;
 	private Group m_aretes;
@@ -128,8 +127,7 @@ public class VuePlateau extends Group
 	/*
 	 * Classe simple pour retourner 2 valeurs dans une fonction
 	 */
-	private class SimpleFloatCoo
-	{
+	private class SimpleFloatCoo {
 		float x, y;
 
 		SimpleFloatCoo(float p_x, float p_y)

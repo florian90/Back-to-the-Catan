@@ -1,7 +1,6 @@
 package model.jeu.coordonnee;
 
-public class CoordArete
-{
+public class CoordArete {
 	/*
 	 * coordArete : Classe qui permet de caractériser une arrete
 	 * Attributs :

@@ -1,7 +1,6 @@
 package model.joueur;
 
-public enum Ressource
-{
+public enum Ressource {
 	Aimant,
 	Antenne,
 	Autoroute,

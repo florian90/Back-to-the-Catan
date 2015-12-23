@@ -1,7 +1,5 @@
 package test.plateau.application;
 
-import java.io.File;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,9 +10,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.jeu.Jeu;
 
+import java.io.File;
 
-public class Main extends Application
-{
+
+public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage)
 	{
@@ -24,7 +23,7 @@ public class Main extends Application
 			
 			MenuPrincipalView menuView = new MenuPrincipalView();
 			
-			Scene menu = new Scene(menuView,1400,850);
+			Scene menu = new Scene(menuView, 1400, 850);
 			//jeu.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			primaryStage.setScene(menu);
@@ -43,7 +42,8 @@ public class Main extends Application
 			menuView.getNouvellePartie().setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
-				public void handle(ActionEvent event) {
+				public void handle(ActionEvent event)
+				{
 					
 					menuView.setParametersVisible();
 					
@@ -52,7 +52,8 @@ public class Main extends Application
 			menuView.getValider().setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
-				public void handle(ActionEvent event) {
+				public void handle(ActionEvent event)
+				{
 					// TODO Auto-generated method stub
 					
 					
@@ -62,9 +63,9 @@ public class Main extends Application
 					primaryStage.setScene(EcranJeu);
 					primaryStage.show();
 					final File file = new File("src/sons/nomdezeus.mp3"); // NOM DE ZEUS !!
-			        final Media media = new Media(file.toURI().toString()); 
-			        final MediaPlayer mediaPlayer = new MediaPlayer(media); 
-			        mediaPlayer.play();
+					final Media media = new Media(file.toURI().toString());
+					final MediaPlayer mediaPlayer = new MediaPlayer(media);
+					mediaPlayer.play();
 					System.out.println(menuView.getListeJoueurs());
 				}
 			});

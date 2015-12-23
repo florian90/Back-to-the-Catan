@@ -2,8 +2,7 @@ package model.jeu;
 
 import model.joueur.Ressource;
 
-public enum Epoque
-{
+public enum Epoque {
 	_1855,
 	_1955,
 	_1985,
@@ -13,10 +12,14 @@ public enum Epoque
 	{
 		switch (epoque)
 		{
-			case _1855: return Ressource.Bois;
-			case _1955: return Ressource.HautParleur;
-			case _1985: return Ressource.Plutonium;
-			case _2015: return Ressource.Aimant;
+			case _1855:
+				return Ressource.Bois;
+			case _1955:
+				return Ressource.HautParleur;
+			case _1985:
+				return Ressource.Plutonium;
+			case _2015:
+				return Ressource.Aimant;
 		}
 		return null;
 	}
@@ -25,10 +28,14 @@ public enum Epoque
 	{
 		switch (epoque)
 		{
-			case _1855: return Ressource.Roue;
-			case _1955: return Ressource.Antenne;
-			case _1985: return Ressource.MorceauSchema;
-			case _2015: return Ressource.Ventilateur;
+			case _1855:
+				return Ressource.Roue;
+			case _1955:
+				return Ressource.Antenne;
+			case _1985:
+				return Ressource.MorceauSchema;
+			case _2015:
+				return Ressource.Ventilateur;
 		}
 		return null;
 	}

@@ -6,8 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.jeu.Case;
 
-public class ViewCase extends ImageView
-{
+public class ViewCase extends ImageView {
 
 	private Case m_case;
 
@@ -20,8 +19,7 @@ public class ViewCase extends ImageView
 		setImage(new Image("textures/hex" + m_case.getRessource() + ".png"));
 		setFitHeight(Constants.hexHeight - Constants.roadWidth);
 		setFitWidth(Constants.hexWidth - Constants.roadWidth);
-		setOnMouseClicked(new EventHandler<MouseEvent>()
-		{
+		setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event)

@@ -4,8 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Route extends Canvas
-{
+public class Route extends Canvas {
 	String type = "";
 
 	public Route(int x, int y, String type)

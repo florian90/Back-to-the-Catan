@@ -5,8 +5,7 @@ import model.jeu.Point;
 
 import java.util.HashMap;
 
-public class Joueur
-{
+public class Joueur {
 
 	private String m_nom;
 	private int m_numJoueur;
@@ -15,14 +14,22 @@ public class Joueur
 	private HashMap<Invention, Integer> m_inventions;
 	private HashMap<Point, Integer> m_pointsConstruits;
 	private HashMap<Arete, Integer> m_aretesConstruites;
-	private HashMap<Carte, Integer> cartes;
+	private HashMap<Carte, Integer> m_cartes;
 	
 	public Joueur(String nom, int num)
 	{
 		m_nom = nom;
+		m_numJoueur = num;
+		m_ressources = new PackRess();
+		m_inventions = new HashMap<>();
+		m_pointsConstruits = new HashMap<>();
+		m_aretesConstruites = new HashMap<>();
+		m_cartes = new HashMap<>();
+
+		for (Invention inv : Invention.values())
+			m_inventions.put(inv, 0);
 	}
 
-	
 
 	/*
 	 * Fonction pour dépenser un certain nombre d'une ressources : dépense les ressources
@@ -63,7 +70,7 @@ public class Joueur
 	 */
 	public boolean possedeInvention(Invention inv)
 	{
-		return (m_inventions.get(inv)==1);
+		return (m_inventions.get(inv) >= 1);
 	}
 
 
@@ -96,7 +103,8 @@ public class Joueur
 		return m_nom;
 	}
 	
-	public int getNumJoueur() {
+	public int getNumJoueur()
+	{
 		return m_numJoueur;
 	}
 }

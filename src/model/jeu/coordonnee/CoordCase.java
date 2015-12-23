@@ -1,7 +1,6 @@
 package model.jeu.coordonnee;
 
-public class CoordCase
-{
+public class CoordCase {
 	/*
 	 * La case de coordonée nulle est la case centrale.
 	 * La coo ligne augmente quand on prend la case à  l'est de la case initiale.

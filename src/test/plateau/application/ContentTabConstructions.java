@@ -6,8 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.GridPane;
 
-public class ContentTabConstructions extends GridPane
-{
+public class ContentTabConstructions extends GridPane {
 
 
 	public ContentTabConstructions()
@@ -38,10 +37,10 @@ public class ContentTabConstructions extends GridPane
 		add(spinAutoroute, 2, 1);
 		add(spinVillage, 2, 2);
 		add(spinVille, 2, 3);
-		add(new Label("1xMétal + 1xRS"), 3, 0);
-		add(new Label("2xMétal + 1xRS"), 3, 1);
-		add(new Label("2xMétal + 2xRS"), 3, 2);
-		add(new Label("4xMétal + 3xRS"), 3, 3);
+		add(new Label("1xMÃ©tal + 1xRS"), 3, 0);
+		add(new Label("2xMÃ©tal + 1xRS"), 3, 1);
+		add(new Label("2xMÃ©tal + 2xRS"), 3, 2);
+		add(new Label("4xMÃ©tal + 3xRS"), 3, 3);
 		add(acheter, 3, 4);
 
 		

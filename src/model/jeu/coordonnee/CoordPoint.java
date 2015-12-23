@@ -1,7 +1,6 @@
 package model.jeu.coordonnee;
 
-public class CoordPoint
-{
+public class CoordPoint {
 	/*
 	 * Les coordonées d'un points sont les trois coordonées des cases touchant ce point.
 	 */

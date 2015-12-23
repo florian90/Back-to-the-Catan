@@ -5,8 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-public class VueDes extends GridPane
-{
+public class VueDes extends GridPane {
 	private Button lancer;
 	private Label de1;
 	private Label de2;
@@ -17,19 +16,19 @@ public class VueDes extends GridPane
 		setHgap(20);
 		setVgap(20);
 		
-		de1 = new Label("Dé n° 1 :");
-		de2 = new Label("Dé n° 2 :");
+		de1 = new Label("DÃ© nÂ° 1 :");
+		de2 = new Label("DÃ© nÂ° 2 :");
 		somme = new Label("Somme :");
-		lancer = new Button("Lancer les dés");
+		lancer = new Button("Lancer les dÃ©s");
 		ImageView imgDes = new ImageView("textures/dice.jpg");
 		
 		imgDes.setFitWidth(50);
 		imgDes.setPreserveRatio(true);
-		add(imgDes,0,1);
-		add(lancer,2,1);
-		add(de1,0,3,2,1);
-		add(de2,2,3);
-		add(somme,0,5);
+		add(imgDes, 0, 1);
+		add(lancer, 2, 1);
+		add(de1, 0, 3, 2, 1);
+		add(de2, 2, 3);
+		add(somme, 0, 5);
 	}
 	
 	public Button getLancer()
@@ -38,19 +37,19 @@ public class VueDes extends GridPane
 	}
 	
 	/*
-	 * Modifie les résultats afichés en fonction
+	 * Modifie les rÃ©sultats afichÃ©s en fonction
 	 * du tableau d'int en parametre
 	 */
 	public void actualiserResultats(int[] tab)
 	{
-		de1.setText("Dé n° 1 : "+tab[0]);
-		de2.setText("Dé n° 2 : "+tab[1]);
-		somme.setText("Somme : "+tab[2]);
+		de1.setText("DÃ© nÂ° 1 : " + tab[0]);
+		de2.setText("DÃ© nÂ° 2 : " + tab[1]);
+		somme.setText("Somme : " + tab[2]);
 	}
 	
 	/*
 	 * Permet d'activer ou desactiver le lancer
-	 * de dés.
+	 * de dÃ©s.
 	 */
 	public void setEnabled(boolean b)
 	{

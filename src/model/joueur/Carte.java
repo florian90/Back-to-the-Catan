@@ -1,7 +1,6 @@
 package model.joueur;
 
-public class Carte implements Achetable
-{
+public class Carte implements Achetable {
 	public PackRess cout()
 	{
 		//FixMe: Mettre le cour réel
