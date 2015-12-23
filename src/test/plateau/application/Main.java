@@ -27,6 +27,7 @@ public class Main extends Application
 			//jeu.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			primaryStage.setScene(menu);
+			primaryStage.setResizable(false);
 			primaryStage.show();
 			//Tests
 			/*Jeu modelJeu = new Jeu(menuView.getListeJoueurs());

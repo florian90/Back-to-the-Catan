@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -50,6 +51,7 @@ public class Fenetre extends AnchorPane
 		Tab TabCartes = new Tab("Cartes");
 		Tab TabInventions = new Tab("Inventions");
 		TabPane TabsMarche = new TabPane(TabConstructions, TabInventions, TabCartes);
+		TabsMarche.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		
 		VBox VGauche = new VBox();
 		VBox VMilieu = new VBox();
