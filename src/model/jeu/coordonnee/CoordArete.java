@@ -3,9 +3,9 @@ package model.jeu.coordonnee;
 public class CoordArete
 {
 	/*
-	 * coordArete : Classe qui permet de caractÃ©riser une arÃ¨te
+	 * coordArete : Classe qui permet de caractériser une arrete
 	 * Attributs :
-	 *  - debut, fin : coordonÃ©es des points dÃ©lÃ©mitants l'arrete
+	 *  - debut, fin : coordonées des points délimitants l'arrete
 	 * Les dex attributs sont interchangeables.
 	 */
 	private CoordPoint debut, fin;
@@ -30,7 +30,7 @@ public class CoordArete
 	@Override
 	public int hashCode()
 	{
-		// Le hashCode est le mÃªme si on intervertis debut et fin.
+		// Le hashCode est le même si on intervertis debut et fin.
 		return debut.hashCode()*fin.hashCode();
 	}
 

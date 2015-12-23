@@ -30,11 +30,12 @@ public class Fenetre extends AnchorPane
 	private StackPane stack;
 	private ArrayList<VuePlateau> plateaux;
 	private int plateauActuel;//index du plateau dans la liste des plateaux (0 à 3)
-	private Button suiv, prec;
+	private Button suiv, prec, finTour;
 	private Label numPlateau;
 	private ContentTabConstructions cTC = new ContentTabConstructions();
 	private ContentTabInventions cTI = new ContentTabInventions();
 	private ContentTabCartes CTCards = new ContentTabCartes();
+	private ContentJoueur panneauJoueur; 
 	private Jeu modelJeu;
 	private Label statusBar = new Label("Joueur1 - Lancez les dés pour commencer");
 	private VueDes des = new VueDes();
@@ -42,6 +43,7 @@ public class Fenetre extends AnchorPane
 	public Fenetre(Jeu p_modelJeu)
 	{
 		modelJeu = p_modelJeu;
+		finTour = new Button("Fin du Tour");
 		
 		TitledPane PanneauMarche;
 		TitledPane PanneauCarte;
@@ -73,7 +75,7 @@ public class Fenetre extends AnchorPane
 			gridJoueurs.add(new Label(modelJeu.getJoueurs().get(i).getNom()), i, 1);
 			gridJoueurs.add(echanger, i, 2);
 		}
-		gridJoueurs.add(new Button("Fin du tour"), modelJeu.getNbJoueurs(), 1);
+		gridJoueurs.add(finTour, modelJeu.getNbJoueurs(), 1);
 
 
 		plateauActuel = 0;
@@ -85,6 +87,7 @@ public class Fenetre extends AnchorPane
 		plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateaux().get(Epoque._1985)));
 		plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateaux().get(Epoque._2015)));
 		
+		panneauJoueur = new  ContentJoueur(p_modelJeu.getJoueurs().get(0));
 		stack = new StackPane(plateaux.get(plateauActuel));
 		suiv = new Button("> Suivant");
 		prec = new Button("Précédent <");
@@ -113,7 +116,7 @@ public class Fenetre extends AnchorPane
 		VMilieu.setMaxWidth(800);
 		
 		
-		VDroite.getChildren().add(new ContentJoueur(p_modelJeu.getJoueurs().get(0)));
+		VDroite.getChildren().add(panneauJoueur);
 		VDroite.setMinWidth(300);
 		VDroite.setPrefWidth(300);
 		VDroite.setMaxWidth(300);
@@ -177,6 +180,16 @@ public class Fenetre extends AnchorPane
 				
 			}
 			
+		});
+		
+		finTour.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				
+				panneauJoueur.update(p_modelJeu.getJoueurs().get((p_modelJeu.getJoueurCourant()+1)%4));
+				p_modelJeu.setJoueurCourant((p_modelJeu.getJoueurCourant()+1)%4);			
+				}
 		});
 	}
 }

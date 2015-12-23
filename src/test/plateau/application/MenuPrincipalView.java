@@ -1,5 +1,6 @@
 package test.plateau.application;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import javafx.event.Event;
@@ -24,7 +25,7 @@ public class MenuPrincipalView extends AnchorPane
 
 	private GridPane buttonGrid, parametresGrid;
 	private Spinner<Integer> spinNbJoueurs;
-	private Button nouvellePartie, regles, options;
+	private Button nouvellePartie, regles, quitter;
 	private TitledPane parametres;
 	private Button valider;
 	private ArrayList<TextField> nomsJoueurs;
@@ -79,9 +80,9 @@ public class MenuPrincipalView extends AnchorPane
 		regles = new Button("Règles");
 		regles.setId("bouttonMenuPrincipal");
 		regles.setPrefWidth(100);
-		options = new Button("Quitter");
-		options.setId("boutonMenuPrincipal");
-		options.setPrefWidth(100);
+		quitter = new Button("Quitter");
+		quitter.setId("boutonMenuPrincipal");
+		quitter.setPrefWidth(100);
 
 
 		buttonGrid = new GridPane();
@@ -92,10 +93,12 @@ public class MenuPrincipalView extends AnchorPane
 
 		buttonGrid.add(nouvellePartie, 0, 0);
 		buttonGrid.add(regles, 0, 1);
-		buttonGrid.add(options, 0, 2);
+		buttonGrid.add(quitter, 0, 2);
 		
 		getChildren().add(buttonGrid);
 		getChildren().add(parametres);
+		
+
 	}
 	
 	private void actualiseJoueurs()
@@ -143,9 +146,9 @@ public class MenuPrincipalView extends AnchorPane
 		return regles;
 	}
 
-	public Button getOptions()
+	public Button getQuitter()
 	{
-		return options;
+		return quitter;
 	}
 	
 	public Button getValider()

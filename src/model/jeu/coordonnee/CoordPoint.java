@@ -3,7 +3,7 @@ package model.jeu.coordonnee;
 public class CoordPoint
 {
 	/*
-	 * Les coordonÃ©es d'un points sont les trois coordonÃ©es des cases touchant ce point.
+	 * Les coordonées d'un points sont les trois coordonées des cases touchant ce point.
 	 */
 	private CoordCase gauche, droite, vertical;
 

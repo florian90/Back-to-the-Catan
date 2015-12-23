@@ -13,7 +13,7 @@ public class Jeu
 	 */
 	private HashMap<Epoque, Plateau> plateaux;
 	private ArrayList<Joueur> joueurs;
-	private int nbJoueurs;
+	private int nbJoueurs, joueurCourant;
 
 	/*
 	 * Construit le modele de jeu à partir de la liste des joueurs 
@@ -22,6 +22,7 @@ public class Jeu
 	public Jeu(ArrayList<Joueur> p_joueurs)
 	{
 		joueurs = p_joueurs;
+		joueurCourant=0; //index du joueur dont le tour est en cours
 		nbJoueurs = joueurs.size();
 		plateaux = new HashMap<Epoque,Plateau>();
 		plateaux.put(Epoque._1855, new Plateau(Epoque._1985, 7));
@@ -30,6 +31,10 @@ public class Jeu
 		plateaux.put(Epoque._2015, new Plateau(Epoque._2015, 7));
 		initJeu();
 	}
+
+
+
+	
 
 
 
@@ -74,5 +79,15 @@ public class Jeu
 	public HashMap<Epoque, Plateau> getPlateaux() 
 	{
 		return plateaux;
+	}
+	
+	public int getJoueurCourant() 
+	{
+		return joueurCourant;
+	}
+
+	public void setJoueurCourant(int joueurCourant)
+	{
+		this.joueurCourant = joueurCourant;
 	}
 }
