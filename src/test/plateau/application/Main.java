@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -28,6 +29,8 @@ public class Main extends Application
 			
 			primaryStage.setScene(menu);
 			primaryStage.setResizable(false);
+			primaryStage.setTitle("Back To The Catane");
+			primaryStage.getIcons().add(new Image("textures/favicon.jpg"));
 			primaryStage.show();
 			//Tests
 			/*Jeu modelJeu = new Jeu(menuView.getListeJoueurs());

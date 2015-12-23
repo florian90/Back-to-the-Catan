@@ -73,6 +73,7 @@ public class Fenetre extends AnchorPane
 			gridJoueurs.add(new Label(modelJeu.getJoueurs().get(i).getNom()), i, 1);
 			gridJoueurs.add(echanger, i, 2);
 		}
+		gridJoueurs.add(new Button("Fin du tour"), modelJeu.getNbJoueurs(), 1);
 
 
 		plateauActuel = 0;
