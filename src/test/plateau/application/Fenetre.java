@@ -113,7 +113,7 @@ public class Fenetre extends AnchorPane
 		VMilieu.setMaxWidth(800);
 		
 		
-		VDroite.getChildren().add(new ContentJoueur("textures/Avatar1.jpg", "joueur1", Color.YELLOW));
+		VDroite.getChildren().add(new ContentJoueur(p_modelJeu.getJoueurs().get(0)));
 		VDroite.setMinWidth(300);
 		VDroite.setPrefWidth(300);
 		VDroite.setMaxWidth(300);

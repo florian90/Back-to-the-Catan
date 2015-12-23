@@ -8,23 +8,46 @@ import model.jeu.Point;
 public class Joueur
 {
 
-	private String m_nom;
-	private String m_avatar;
+	private String nom;
+	private int numJoueur;
 	private HashMap<Ressource, Integer> m_ressources;
 	private HashMap<Invention, Integer> m_inventions;
 	private HashMap<Point, Integer> m_pointsConstruits;
 	private HashMap<Arete, Integer> m_aretesConstruites;
 	private HashMap<Carte, Integer> cartes;
 	
-	public Joueur(String nom)
+	public Joueur(String nom, int num)
 	{
-		m_nom = nom;
-		
+		this.nom = nom;
+		numJoueur = num;
+		m_ressources = new HashMap<Ressource, Integer>();
+			m_ressources.put(Ressource.Aimant, 0);
+			m_ressources.put(Ressource.Antenne, 0);
+			m_ressources.put(Ressource.Bois, 0);
+			m_ressources.put(Ressource.HautParleur, 0);
+			m_ressources.put(Ressource.Metal, 0);
+			m_ressources.put(Ressource.MorceauSchema, 0);
+			m_ressources.put(Ressource.Plutonium, 0);
+			m_ressources.put(Ressource.Roue, 0);
+			m_ressources.put(Ressource.Ventilateur, 0);
+			
+		m_inventions = new HashMap<Invention, Integer>();
+			m_inventions.put(Invention.ConvecteurTemporel, 0);
+			m_inventions.put(Invention.HoverBoard, 0);
+			m_inventions.put(Invention.Radio, 0);
+			m_inventions.put(Invention.Train, 0);
+			m_inventions.put(Invention.TrainKiVol, 0);
+			
+		m_pointsConstruits = new HashMap<Point, Integer>();
+		m_aretesConstruites = new HashMap<Arete, Integer>();
+		cartes = new HashMap<Carte, Integer>();
 		
 	}
 
+	
+
 	/*
-	 * Fonction pour dÃ©penser un certain nombre d'une ressources : dépense les ressources
+	 * Fonction pour dépenser un certain nombre d'une ressources : dépense les ressources
 	 */
 	public void depenserRessources(Ressource res, int nombre)
 	{
@@ -48,15 +71,24 @@ public class Joueur
 	}
 	
 	/*
-	 * Retourne le nombre de ressources que le joueur
+	 * Retourne le nombre de ressources que le joueur possède
 	 * correspondant à la ressource passée en paramètres 
 	 */
-	public int nbRessource(Ressource res, int nombres)
+	public int nbRessource(Ressource res/*, int nombres*/)
 	{
 		return m_ressources.get(res);
 	}
+	
+	/*
+	 * Retourne vrai si le joueur possède l'invention 
+	 * passée en paramètre
+	 */
+	public boolean possedeInvention(Invention inv)
+	{
+		return (m_inventions.get(inv)==1);
+	}
 
-	//Todo: Construit un nouvel élément au joueur( carte, route, ville, ...), dÃ©penses les ressources et ajoute l'objet au joueur
+	//Todo: Construit un nouvel élément au joueur( carte, route, ville, ...), dépense les ressources et ajoute l'objet au joueur
 	public void construire()
 	{
 
@@ -77,11 +109,15 @@ public class Joueur
 	}
 	public String toString()
 	{
-		return m_nom;
+		return nom;
 	}
 	
 	public String getNom()
 	{
-		return m_nom;
+		return nom;
+	}
+	
+	public int getNumJoueur() {
+		return numJoueur;
 	}
 }

@@ -114,12 +114,13 @@ public class MenuPrincipalView extends AnchorPane
 	public ArrayList<Joueur> getListeJoueurs()
 	{
 		ArrayList<Joueur> joueurs = new ArrayList<>();
-		
+		int i=1;
 		for(TextField tf : nomsJoueurs)
 		{
 			if(!(tf.getText().equals("")))
 			{
-				joueurs.add(new Joueur(tf.getText()));
+				joueurs.add(new Joueur(tf.getText(),i));
+				++i;
 			}
 					
 		}
