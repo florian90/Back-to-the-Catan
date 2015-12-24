@@ -5,10 +5,13 @@ import model.jeu.Point;
 
 import java.util.HashMap;
 
+import javafx.scene.paint.Color;
+
 public class Joueur {
 
 	private String m_nom;
 	private int m_numJoueur;
+	private Color m_couleur;
 	private String m_avatar;
 	private PackRess m_ressources;
 	private HashMap<Invention, Integer> m_inventions;
@@ -20,6 +23,21 @@ public class Joueur {
 	{
 		m_nom = nom;
 		m_numJoueur = num;
+		switch(m_numJoueur)
+		{
+			case 1:
+				m_couleur = Color.RED;
+				break;
+			case 2:
+				m_couleur = Color.BLUE;
+				break;
+			case 3:
+				m_couleur = Color.YELLOW;
+				break;
+			case 4:
+				m_couleur = Color.GREEN;
+				break;
+		}
 		m_ressources = new PackRess();
 		m_inventions = new HashMap<>();
 		m_pointsConstruits = new HashMap<>();
@@ -48,7 +66,7 @@ public class Joueur {
 	}
 
 	/*
-	 * Test si le joueur a les ressources passées en paramètres
+	 * Teste si le joueur a les ressources passées en paramètres
 	 */
 	public boolean possede(PackRess pack)
 	{
@@ -59,14 +77,14 @@ public class Joueur {
 	 * Retourne le nombre de ressources que le joueur
 	 * correspondant à la ressource pass"e en paramètres
 	 */
-	public int nbRessource(Ressource res/*FixMe:, int nombres ??*/)
+	public int nbRessource(Ressource res/*FixMe:, int nombres ??*/)//Je crois que ca sert à rien ca doit être un résidu de copier coller 
 	{
 		return m_ressources.count(res);
 	}
 	
 	/*
-	 * Retourne vrai si le joueur poss�de l'invention 
-	 * pass�e en param�tre
+	 * Retourne vrai si le joueur possède l'invention 
+	 * passée en paramètre
 	 */
 	public boolean possedeInvention(Invention inv)
 	{
@@ -106,5 +124,10 @@ public class Joueur {
 	public int getNumJoueur()
 	{
 		return m_numJoueur;
+	}
+	
+	public Color getM_Couleur()
+	{
+		return m_couleur;
 	}
 }

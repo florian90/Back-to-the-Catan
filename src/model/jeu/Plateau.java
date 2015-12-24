@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Plateau {
+	
 	private Epoque epoque;
 	private HashMap<CoordCase, Case> cases;
 	private HashMap<CoordArete, Arete> aretes;

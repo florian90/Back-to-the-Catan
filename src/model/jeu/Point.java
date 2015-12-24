@@ -41,9 +41,14 @@ public class Point {
 
 	}
 
-	//Todo: Vérifie si on peut construire le type demandé pour le joueur
+	//Todo: VÃ©rifie si on peut construire le type demandÃ© pour le joueur
 	public boolean peutConstruire(Joueur joueur, TypePoint type)
 	{
 		return false;
+	}
+	
+	public String toString()
+	{
+		return m_coord.toString();
 	}
 }

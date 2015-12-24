@@ -14,6 +14,7 @@ import test.plateau.application.Constants;
 import test.plateau.application.ViewCase;
 
 public class VuePlateau extends Group {
+	
 	private int m_nbrCasesLarge;
 	private Group m_cases;
 	private Group m_aretes;
@@ -41,7 +42,8 @@ public class VuePlateau extends Group {
 		for (Point pt : m_plateau.getPoints())
 		{
 			center = getCoord(pt.getCoo());
-			m_points.getChildren().add(new Circle(center.x, center.y, rad));
+			//m_points.getChildren().add(new Circle(center.x, center.y, rad));
+			m_points.getChildren().add(new VuePoint(pt,center.x, center.y, rad));
 		}
 		getChildren().add(m_points);
 	}
@@ -51,15 +53,21 @@ public class VuePlateau extends Group {
 		//Todo: Utiliser des ViewAretes et pas des lignes
 		m_aretes = new Group();
 		SimpleFloatCoo debut, fin;
-		Line line;
+		//Line line;
+		VueArete vueArete;
 		for (Arete arete : m_plateau.getAretes())
 		{
-			debut = getCoord(arete.getCoord().getDebut());
+			/*debut = getCoord(arete.getCoord().getDebut());
 			fin = getCoord(arete.getCoord().getFin());
 			line = new Line(debut.x, debut.y, fin.x, fin.y);
 			line.setStrokeWidth(Constants.roadWidth);
-			line.setStroke(Color.RED);
-			m_aretes.getChildren().add(line);
+			line.setStroke(Color.GRAY);
+			m_aretes.getChildren().add(line);*/
+			
+			debut = getCoord(arete.getCoord().getDebut());
+			fin = getCoord(arete.getCoord().getFin());
+			vueArete = new VueArete(arete, debut.x, debut.y, fin.x, fin.y);
+			m_aretes.getChildren().add(vueArete);
 		}
 		getChildren().add(m_aretes);
 	}
@@ -128,7 +136,7 @@ public class VuePlateau extends Group {
 	 * Classe simple pour retourner 2 valeurs dans une fonction
 	 */
 	private class SimpleFloatCoo {
-		float x, y;
+		private float x, y;
 
 		SimpleFloatCoo(float p_x, float p_y)
 		{

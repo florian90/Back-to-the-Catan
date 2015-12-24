@@ -60,6 +60,7 @@ public class Main extends Application {
 					Jeu modelJeu = new Jeu(menuView.getListeJoueurs());
 					Fenetre fen = new Fenetre(modelJeu);
 					Scene EcranJeu = new Scene(fen, 1400, 850);
+					EcranJeu.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 					primaryStage.setScene(EcranJeu);
 					primaryStage.show();
 					final File file = new File("src/sons/nomdezeus.mp3"); // NOM DE ZEUS !!

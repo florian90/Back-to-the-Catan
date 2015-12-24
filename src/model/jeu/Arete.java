@@ -49,5 +49,10 @@ public class Arete {
 	{
 		return false;
 	}
+	
+	public String toString()
+	{
+		return m_coord.toString();
+	}
 
 }

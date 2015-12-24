@@ -8,14 +8,14 @@ import java.util.Random;
 
 public class Jeu {
 	/*
-	 * G�re tous les joueurs ainsi que tous les plateaux.
+	 * Gère tous les joueurs ainsi que tous les plateaux.
 	 */
 	private HashMap<Epoque, Plateau> plateaux;
 	private ArrayList<Joueur> joueurs;
 	private int nbJoueurs, joueurCourant;
 
 	/*
-	 * Construit le modele de jeu � partir de la liste des joueurs 
+	 * Construit le modele de jeu à partir de la liste des joueurs 
 	 * fournie par le menu principal, intialise les plateux de jeu
 	 */
 	public Jeu(ArrayList<Joueur> p_joueurs)

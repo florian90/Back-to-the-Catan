@@ -54,4 +54,9 @@ public class CoordPoint {
 	{
 		return vertical;
 	}
+	
+	public String toString()
+	{
+		return"("+droite.toString()+";"+gauche.toString()+";"+vertical.toString()+")";
+	}
 }
