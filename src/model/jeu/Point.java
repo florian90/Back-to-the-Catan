@@ -36,10 +36,10 @@ public class Point {
 	}
 
 	//Todo: construire un nouveau TypePoint pour un certain joueur
-	public void construire(Joueur joueur, TypePoint type)
+	/*public void construire(Joueur joueur, TypePoint type)
 	{
-
-	}
+		//Utilité ? (Ref à construirePoint de la classe Joueur)
+	}*/
 
 	//Todo: Vérifie si on peut construire le type demandé pour le joueur
 	public boolean peutConstruire(Joueur joueur, TypePoint type)

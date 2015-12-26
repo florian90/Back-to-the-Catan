@@ -1,11 +1,11 @@
 package model.joueur;
 
-import model.jeu.Arete;
-import model.jeu.Point;
-
 import java.util.HashMap;
 
 import javafx.scene.paint.Color;
+import model.jeu.Arete;
+import model.jeu.Point;
+import test.plateau.application.Route;
 
 public class Joueur {
 
@@ -93,11 +93,32 @@ public class Joueur {
 
 
 	//A vérifier (Val): Construit un nouvel élément au joueur( carte, route, ville, ...), dépenses les ressources et ajoute l'objet au joueur
-	public void construire(PackRess pack, Invention inv)
+	public void construireInvention(PackRess pack, Invention inv)
 	{
 		depenserRessources(pack);
-		int nbInv = m_inventions.get(Invention.inv);
+		int nbInv = m_inventions.get(inv);
 		m_inventions.put(inv, nbInv+1);
+	}
+	
+	public void acheterCarte(PackRess pack, Carte card)
+	{
+		depenserRessources(pack);
+		int nbCard = m_cartes.get(card);
+		m_cartes.put(card, nbCard+1);
+	}
+	
+	public void construireRoute(PackRess pack, Arete road)
+	{
+		depenserRessources(pack);
+		int nbRoad = m_aretesConstruites.get(road);
+		m_aretesConstruites.put(road, nbRoad+1);
+	}
+	//A vérifier si point doit être une hashmap ou pas. Séparer Ville et Village ?
+	public void construirePoint(PackRess pack, Point point)
+	{
+		depenserRessources(pack);
+		int nbPoint = m_pointsConstruits.get(point);
+		m_pointsConstruits.put(point, nbPoint+1);
 	}
 
 	/*
