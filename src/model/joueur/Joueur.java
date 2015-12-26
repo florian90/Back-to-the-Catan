@@ -92,10 +92,12 @@ public class Joueur {
 	}
 
 
-	//Todo: Construit un nouvel élément au joueur( carte, route, ville, ...), dépenses les ressources et ajoute l'objet au joueur
-	public void construire()
+	//A vérifier (Val): Construit un nouvel élément au joueur( carte, route, ville, ...), dépenses les ressources et ajoute l'objet au joueur
+	public void construire(PackRess pack, Invention inv)
 	{
-
+		depenserRessources(pack);
+		int nbInv = m_inventions.get(Invention.inv);
+		m_inventions.put(inv, nbInv+1);
 	}
 
 	/*
