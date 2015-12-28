@@ -3,6 +3,7 @@ package test.plateau.application;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import vue.jeu.Constants;
 
 public class Route extends Canvas {
 	String type = "";

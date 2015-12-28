@@ -1,17 +1,14 @@
-package vue;
+package vue.jeu.plateau;
 
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import model.jeu.Arete;
 import model.jeu.Case;
 import model.jeu.Plateau;
 import model.jeu.Point;
 import model.jeu.coordonnee.CoordCase;
 import model.jeu.coordonnee.CoordPoint;
-import test.plateau.application.Constants;
-import test.plateau.application.ViewCase;
+import vue.Constants;
+import vue.VuePoint;
 
 public class VuePlateau extends Group {
 	

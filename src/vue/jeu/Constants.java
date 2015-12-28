@@ -1,4 +1,4 @@
-package test.plateau.application;
+package vue.jeu;
 
 public interface Constants {
 	float hexWidth = 100;

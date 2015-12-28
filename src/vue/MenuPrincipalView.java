@@ -1,4 +1,4 @@
-package test.plateau.application;
+package vue;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;

@@ -1,4 +1,4 @@
-package test.plateau.application;
+package vue.jeu;
 
 
 import javafx.event.ActionEvent;
@@ -11,7 +11,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import model.jeu.Epoque;
 import model.jeu.Jeu;
-import vue.VuePlateau;
+import vue.jeu.panneauMarche.ContentTabCartes;
+import vue.jeu.panneauMarche.ContentTabConstructions;
+import vue.jeu.panneauMarche.ContentTabInventions;
+import vue.jeu.plateau.VuePlateau;
 
 import java.util.ArrayList;
 

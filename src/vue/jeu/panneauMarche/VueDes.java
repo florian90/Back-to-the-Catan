@@ -1,4 +1,4 @@
-package test.plateau.application;
+package vue.jeu.panneauMarche;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

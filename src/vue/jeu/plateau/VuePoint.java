@@ -1,30 +1,28 @@
-package vue;
+package vue.jeu.plateau;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import model.jeu.Arete;
-import test.plateau.application.Constants;
+import javafx.scene.shape.Circle;
+import model.jeu.Point;
 
-public class VueArete extends Line
-{
-	private Arete m_arete;
+public class VuePoint extends Circle{
 	
-	public VueArete(Arete a, float debutX, float debutY, float finX, float finY)
+	private Point m_point;
+	
+	public VuePoint(Point p, float centreX, float centreY, float rayon)
 	{
-		super(debutX,debutY,finX,finY);
-		m_arete = a;
+		super(centreX,centreY,rayon);
+		m_point = p;
 		
-		setStrokeWidth(Constants.roadWidth);
-		setStroke(Color.GRAY);
+		setStroke(Color.BLACK);
+		setFill(Color.BLACK);
 		
 		setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent event) {
-				setStroke(Color.WHITE);
-				
+				setFill(Color.WHITE);				
 			}
 		});
 		
@@ -32,7 +30,7 @@ public class VueArete extends Line
 
 			@Override
 			public void handle(MouseEvent event) {
-				setStroke(Color.GRAY);				
+				setFill(Color.BLACK);				
 			}
 		});
 		
@@ -40,12 +38,12 @@ public class VueArete extends Line
 
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println(m_arete.toString());
+				System.out.println(m_point.toString());
+				setFill(Color.BLACK);
+				setStroke(Color.WHITE);
 				
 			}
 		});
-		
-		
 	}
 
 }

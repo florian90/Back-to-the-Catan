@@ -1,4 +1,4 @@
-package test.plateau.application;
+package vue.jeu.panneauMarche;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

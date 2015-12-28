@@ -1,4 +1,4 @@
-package test.plateau.application;
+package vue.jeu;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
