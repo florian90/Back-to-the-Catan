@@ -175,7 +175,7 @@ public class Fenetre extends AnchorPane {
 			public void handle(ActionEvent event)
 			{
 
-				panneauJoueur.update(p_modelJeu.getJoueurs().get((p_modelJeu.getJoueurCourant() + 1)%4));
+				panneauJoueur.update(p_modelJeu.getJoueurs().get((p_modelJeu.getJoueurCourant() + 1)%4));//FixMe: le '%4' dépend du nmbre de joueurs
 				p_modelJeu.setJoueurCourant((p_modelJeu.getJoueurCourant() + 1)%4);
 			}
 		});
