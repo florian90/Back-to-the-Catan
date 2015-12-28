@@ -14,6 +14,7 @@ import model.jeu.Jeu;
 import vue.jeu.panneauMarche.ContentTabCartes;
 import vue.jeu.panneauMarche.ContentTabConstructions;
 import vue.jeu.panneauMarche.ContentTabInventions;
+import vue.jeu.panneauMarche.VueDes;
 import vue.jeu.plateau.VuePlateau;
 
 import java.util.ArrayList;

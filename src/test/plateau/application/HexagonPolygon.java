@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import vue.jeu.Constants;
 
 public class HexagonPolygon extends Polygon {
 	private final int spacing = 1;

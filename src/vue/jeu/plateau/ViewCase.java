@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.jeu.Case;
-import vue.Constants;
+import vue.jeu.Constants;
 
 public class ViewCase extends ImageView {
 

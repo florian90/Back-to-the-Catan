@@ -9,6 +9,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.jeu.Jeu;
+import vue.jeu.Fenetre;
 
 import java.io.File;
 

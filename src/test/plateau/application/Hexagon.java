@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
+import vue.jeu.Constants;
 
 import java.util.Random;
 

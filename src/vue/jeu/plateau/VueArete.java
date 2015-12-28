@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import model.jeu.Arete;
-import vue.Constants;
+import vue.jeu.Constants;
 
 public class VueArete extends Line
 {

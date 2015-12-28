@@ -7,8 +7,7 @@ import model.jeu.Plateau;
 import model.jeu.Point;
 import model.jeu.coordonnee.CoordCase;
 import model.jeu.coordonnee.CoordPoint;
-import vue.Constants;
-import vue.VuePoint;
+import vue.jeu.Constants;
 
 public class VuePlateau extends Group {
 	
