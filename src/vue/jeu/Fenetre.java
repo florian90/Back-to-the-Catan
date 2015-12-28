@@ -32,6 +32,7 @@ public class Fenetre extends AnchorPane {
 	private Jeu modelJeu;
 	private Label statusBar = new Label("Joueur1 - Lancez les dés pour commencer");
 	private VueDes des = new VueDes();
+	private Button[] echangerList;
 
 	public Fenetre(Jeu p_modelJeu)
 	{
@@ -57,16 +58,17 @@ public class Fenetre extends AnchorPane {
 		gridJoueurs.setVgap(10);
 		gridJoueurs.setAlignment(Pos.CENTER);
 		gridJoueurs.setPadding(new Insets(20, 10, 10, 10));
+		echangerList = new Button[modelJeu.getNbJoueurs()];
 		
 		for (int i = 0; i < modelJeu.getNbJoueurs(); ++i)
 		{
 			ImageView avatar = new ImageView("textures/Avatar" + (i + 1) + ".jpg");
-			Button echanger = new Button("Echanger");
+			echangerList[i] = new Button("Echanger");
 			avatar.setFitWidth(50);
 			avatar.setPreserveRatio(true);
 			gridJoueurs.add(avatar, i, 0);
 			gridJoueurs.add(new Label(modelJeu.getJoueurs().get(i).getNom()), i, 1);
-			gridJoueurs.add(echanger, i, 2);
+			gridJoueurs.add(echangerList[i], i, 2);
 		}
 		gridJoueurs.add(finTour, modelJeu.getNbJoueurs(), 1);
 
@@ -81,7 +83,7 @@ public class Fenetre extends AnchorPane {
 		plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateaux().get(Epoque._2015)));
 		
 		panneauJoueur = new ContentJoueur(p_modelJeu.getJoueurs().get(0));
-		stack = new StackPane(plateaux.get(plateauActuel));
+		stack = new StackPane();
 		suiv = new Button("> Suivant");
 		prec = new Button("Précédent <");
 		
@@ -138,12 +140,7 @@ public class Fenetre extends AnchorPane {
 			@Override
 			public void handle(ActionEvent event)
 			{
-				plateauActuel = (plateauActuel + 1)%4;
-				System.out.println("pa :" + plateauActuel);
-				stack.getChildren().removeAll(stack.getChildren());
-				stack.getChildren().add(plateaux.get(plateauActuel));
-				numPlateau.setText("VuePlateau n° :" + (plateauActuel + 1));
-
+				plateauSuivant();
 			}
 		});
 
@@ -152,12 +149,7 @@ public class Fenetre extends AnchorPane {
 			@Override
 			public void handle(ActionEvent event)
 			{
-				plateauActuel = (plateauActuel + 3)%4;
-				System.out.println("pa :" + plateauActuel);
-				stack.getChildren().removeAll(stack.getChildren());
-				stack.getChildren().add(plateaux.get(plateauActuel));
-				numPlateau.setText("VuePlateau n° :" + (plateauActuel + 1));
-
+				plateauPrecedent();
 			}
 		});
 		
@@ -166,9 +158,7 @@ public class Fenetre extends AnchorPane {
 			@Override
 			public void handle(ActionEvent event)
 			{
-				des.actualiserResultats(p_modelJeu.lancerDes());
-				des.setEnabled(false);
-				
+				lanceDes();
 			}
 			
 		});
@@ -178,10 +168,73 @@ public class Fenetre extends AnchorPane {
 			@Override
 			public void handle(ActionEvent event)
 			{
-
-				panneauJoueur.update(p_modelJeu.getJoueurs().get((p_modelJeu.getJoueurCourant() + 1)%4));//FixMe: le '%4' dépend du nmbre de joueurs
-				p_modelJeu.setJoueurCourant((p_modelJeu.getJoueurCourant() + 1)%4);
+				passerJoueurSuivant();
 			}
 		});
+
+		// Initialise la vue
+		init();
+	}
+
+	public void init()
+	{
+		initTourJoueur();
+		chargerPlateau(0);
+	}
+
+	public void initTourJoueur()
+	{
+		des.setEnabled(true);
+		finTour.setDisable(true);
+		statusBar.setText(modelJeu.getJoueur().getNom() + " lancez les dés");
+		panneauJoueur.update(modelJeu.getJoueur());
+		desactiveEchangeBouttonJoueurActuel();
+	}
+
+	public void desactiveEchangeBouttonJoueurActuel()
+	{
+		// Active tous les boutons pour les changes
+		for(int i=0;i<modelJeu.getNbJoueurs();++i)
+			echangerList[i].setDisable(false);
+		// Désactive le bouton pour le joueur actuel
+		echangerList[modelJeu.getJoueur().getNumJoueur()-1].setDisable(true);
+	}
+
+	public void passerJoueurSuivant()
+	{
+		modelJeu.joueurSuivant();
+		initTourJoueur();
+	}
+
+	public void lanceDes()
+	{
+		des.actualiserResultats(modelJeu.lancerDes());
+		des.setEnabled(false);
+		finTour.setDisable(false);
+		statusBar.setText(modelJeu.getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant");
+	}
+
+	public void chargerPlateau(int idxPlateau)
+	{
+		plateauActuel = idxPlateau;
+		stack.getChildren().removeAll(stack.getChildren());
+		stack.getChildren().add(plateaux.get(plateauActuel));
+		numPlateau.setText("VuePlateau n° :" + (plateauActuel + 1));
+	}
+
+	public void plateauSuivant()
+	{
+		if(plateauActuel >= plateaux.size()-1)
+			chargerPlateau(0);
+		else
+			chargerPlateau(plateauActuel+1);
+	}
+
+	public void plateauPrecedent()
+	{
+		if(plateauActuel <= 0)
+			chargerPlateau(plateaux.size()-1);
+		else
+			chargerPlateau(plateauActuel - 1);
 	}
 }

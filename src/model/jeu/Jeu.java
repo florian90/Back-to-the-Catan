@@ -26,7 +26,7 @@ public class Jeu {
 		plateaux = new HashMap<Epoque, Plateau>();
 		plateaux.put(Epoque._1855, new Plateau(Epoque._1985, 7));
 		plateaux.put(Epoque._1955, new Plateau(Epoque._1955, 7));
-		plateaux.put(Epoque._1985, new Plateau(Epoque._1985, 7));
+		plateaux.put(Epoque._1985, new Plateau(Epoque._1855, 7));
 		plateaux.put(Epoque._2015, new Plateau(Epoque._2015, 7));
 		initJeu();
 	}
@@ -56,7 +56,7 @@ public class Jeu {
 
 	/*
 	 * Retourne un tableau d'entier contenant le 
-	 * r�sultat du d� n�1, le resultat du d� n�2
+	 * résultat du dé n°1, le résultat du dé n°2
 	 * et la somme des deux.
 	 */
 	public int[] lancerDes()
@@ -84,5 +84,16 @@ public class Jeu {
 	public void setJoueurCourant(int joueurCourant)
 	{
 		this.joueurCourant = joueurCourant;
+	}
+
+	public void joueurSuivant()
+	{
+		if(++joueurCourant >= nbJoueurs)
+			joueurCourant = 0;
+	}
+
+	public Joueur getJoueur()
+	{
+		return joueurs.get(joueurCourant);
 	}
 }
