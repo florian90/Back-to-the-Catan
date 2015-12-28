@@ -1,11 +1,11 @@
 package model.joueur;
 
-import java.util.HashMap;
-
 import javafx.scene.paint.Color;
 import model.jeu.Arete;
+import model.jeu.Epoque;
 import model.jeu.Point;
-import test.plateau.application.Route;
+
+import java.util.HashMap;
 
 public class Joueur {
 
@@ -91,6 +91,23 @@ public class Joueur {
 		return (m_inventions.get(inv) >= 1);
 	}
 
+	/*
+	 * Vérifie si le joueur peut construire nbr objet(s) de type passé en paramètre
+	 */
+	public boolean peutConstruire(Achetable obj, int nbr, Epoque epoque)
+	{
+		PackRess cout = obj.cout(epoque);
+		cout.mult(nbr);
+		return possede(cout);
+	}
+
+	/*
+	 * Vérifie si le joueur peut construire un objet de type passé en paramètre
+	 */
+	public boolean peutConstruire(Achetable obj, Epoque epoque)
+	{
+		return peutConstruire(obj, 1, epoque);
+	}
 
 	//A vérifier (Val): Construit un nouvel élément au joueur( carte, route, ville, ...), dépenses les ressources et ajoute l'objet au joueur
 	public void construireInvention(PackRess pack, Invention inv)

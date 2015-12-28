@@ -1,24 +1,32 @@
 package model.jeu;
 
+import model.joueur.Achetable;
 import model.joueur.PackRess;
 import model.joueur.Ressource;
 
-public enum TypeArete {
-	Route,
-	Autoroute,
-	Vide;
-
-	public static PackRess cout(TypeArete type, Epoque epoque)
-	{
-		Ressource spe = Epoque.getR1(epoque);
-		switch (type)
-		{
-			case Route:
-				return new PackRess(Ressource.Metal, spe);
-			case Autoroute:
-				return new PackRess(Ressource.Metal, Ressource.Metal, spe);
-			default:
-				return null;
-		}
-	}
+public enum TypeArete implements Achetable{
+	Route
+			{
+				@Override
+				public PackRess cout(Epoque epoque)
+				{
+					return new PackRess(Ressource.Metal, Epoque.getR1(epoque));
+				}
+			},
+	Autoroute
+			{
+				@Override
+				public PackRess cout(Epoque epoque)
+				{
+					return new PackRess(Ressource.Metal, Ressource.Metal, Epoque.getR2(epoque));
+				}
+			},
+	Vide
+			{
+				@Override
+				public PackRess cout(Epoque epoque)
+				{
+					return null;
+				}
+			}
 }

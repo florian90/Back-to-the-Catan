@@ -1,11 +1,13 @@
 package model.joueur;
 
+import model.jeu.Epoque;
+
 public enum Invention implements Achetable {
 	/*TrainKiVol,*/
 	Train
 			{
 				@Override
-				public PackRess cout()
+				public PackRess cout(Epoque epoque)
 				{
 					return new PackRess(Ressource.Roue, 4, Ressource.Bois, 5);
 				}
@@ -13,7 +15,7 @@ public enum Invention implements Achetable {
 	HoverBoard
 			{
 				@Override
-				public PackRess cout()
+				public PackRess cout(Epoque epoque)
 				{
 					return new PackRess(Ressource.Antenne, 2, Ressource.HautParleur, 4, Ressource.Metal, 3);
 				}
@@ -21,7 +23,7 @@ public enum Invention implements Achetable {
 	ConvecteurTemporel
 			{
 				@Override
-				public PackRess cout()
+				public PackRess cout(Epoque epoque)
 				{
 					return new PackRess(Ressource.MorceauSchema, 3, Ressource.Plutonium, 6);
 				}
@@ -29,7 +31,7 @@ public enum Invention implements Achetable {
 	Radio
 			{
 				@Override
-				public PackRess cout()
+				public PackRess cout(Epoque epoque)
 				{
 					return new PackRess(Ressource.Ventilateur, 4, Ressource.Aimant, 2, Ressource.Metal, 3);
 				}
