@@ -151,6 +151,15 @@ public class Joueur {
 		autre.recevoirRessources(donne);
 	}
 
+	public void acheter(Achetable obj, int nbr)
+	{
+		PackRess cout = obj.cout(Epoque._1855); //FixMe: recupérer la vraie époque
+		cout.mult(nbr);
+		depenserRessources(cout);
+		System.out.println(m_nom + " a recu " + nbr + "x" + obj);
+		//FixMe: recevoir l'objet
+	}
+
 	public String toString()
 	{
 		return m_nom;

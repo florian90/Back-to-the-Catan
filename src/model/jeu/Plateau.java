@@ -129,6 +129,11 @@ public class Plateau {
 		return new ArrayList<>(points.values());
 	}
 
+	public Epoque getEpoque()
+	{
+		return epoque;
+	}
+
 	/*
 	 * Retorne la coordonnée du point selon une case et un index
 	 * L'index représente quel point est sélectionné pour une case donnée

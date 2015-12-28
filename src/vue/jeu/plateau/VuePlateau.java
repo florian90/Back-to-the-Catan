@@ -31,7 +31,6 @@ public class VuePlateau extends Group {
 
 	private void initPoints()
 	{
-		//Todo: Mettre des ViewPoints et pas des cercles
 		SimpleFloatCoo center;
 		float rad = 10;
 		m_points = new Group();
@@ -46,7 +45,6 @@ public class VuePlateau extends Group {
 
 	private void initAretes()
 	{
-		//Todo: Utiliser des ViewAretes et pas des lignes
 		m_aretes = new Group();
 		SimpleFloatCoo debut, fin;
 		//Line line;
@@ -98,6 +96,11 @@ public class VuePlateau extends Group {
 			m_cases.getChildren().add(viewCase);
 		}
 		getChildren().add(m_cases);
+	}
+
+	public Plateau getPlateau()
+	{
+		return m_plateau;
 	}
 
 	/*

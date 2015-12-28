@@ -55,8 +55,6 @@ public class Main extends Application {
 				@Override
 				public void handle(ActionEvent event)
 				{
-					// TODO Auto-generated method stub
-					
 					
 					Jeu modelJeu = new Jeu(menuView.getListeJoueurs());
 					Fenetre fen = new Fenetre(modelJeu);

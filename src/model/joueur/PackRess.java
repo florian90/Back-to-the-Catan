@@ -83,6 +83,14 @@ public class PackRess {
 		}
 	}
 
+	public void add(PackRess pack, int nbr)
+	{
+		for (Ressource ressource : Ressource.values())
+		{
+			set(ressource, me.get(ressource) + nbr*pack.me.get(ressource));
+		}
+	}
+
 	public void remove(PackRess pack)
 	{
 		for (Ressource ressource : Ressource.values())

@@ -189,6 +189,7 @@ public class Fenetre extends AnchorPane {
 		statusBar.setText(modelJeu.getJoueur().getNom() + " lancez les dés");
 		panneauJoueur.update(modelJeu.getJoueur());
 		desactiveEchangeBouttonJoueurActuel();
+		cTC.setJoueur(modelJeu.getJoueur());
 	}
 
 	public void desactiveEchangeBouttonJoueurActuel()
@@ -220,6 +221,7 @@ public class Fenetre extends AnchorPane {
 		stack.getChildren().removeAll(stack.getChildren());
 		stack.getChildren().add(plateaux.get(plateauActuel));
 		numPlateau.setText("VuePlateau n° :" + (plateauActuel + 1));
+		cTC.setEpoque(plateaux.get(plateauActuel).getPlateau().getEpoque());
 	}
 
 	public void plateauSuivant()

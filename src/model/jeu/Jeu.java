@@ -1,6 +1,8 @@
 package model.jeu;
 
 import model.joueur.Joueur;
+import model.joueur.PackRess;
+import model.joueur.Ressource;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +23,7 @@ public class Jeu {
 	public Jeu(ArrayList<Joueur> p_joueurs)
 	{
 		joueurs = p_joueurs;
+		joueurs.get(0).recevoirRessources(new PackRess(Ressource.Metal, Ressource.Plutonium));//FixMe: remove this
 		joueurCourant = 0; //index du joueur dont le tour est en cours
 		nbJoueurs = joueurs.size();
 		plateaux = new HashMap<Epoque, Plateau>();
@@ -30,7 +33,6 @@ public class Jeu {
 		plateaux.put(Epoque._2015, new Plateau(Epoque._2015, 7));
 		initJeu();
 	}
-
 
 	//Todo: Initialise toutes les instances du jeu
 	public void initJeu()
