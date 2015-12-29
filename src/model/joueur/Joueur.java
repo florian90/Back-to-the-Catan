@@ -1,11 +1,15 @@
 package model.joueur;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.scene.paint.Color;
 import model.jeu.Arete;
 import model.jeu.Epoque;
+import model.jeu.Jeu;
 import model.jeu.Point;
-
-import java.util.HashMap;
+import model.jeu.TypeArete;
+import model.jeu.TypePoint;
 
 public class Joueur {
 
@@ -18,11 +22,13 @@ public class Joueur {
 	private HashMap<Point, Integer> m_pointsConstruits;
 	private HashMap<Arete, Integer> m_aretesConstruites;
 	private HashMap<Carte, Integer> m_cartes;
+	private Jeu m_jeu;
 	
 	public Joueur(String nom, int num)
 	{
 		m_nom = nom;
 		m_numJoueur = num;
+		
 		switch(m_numJoueur)
 		{
 			case 1:
@@ -153,11 +159,50 @@ public class Joueur {
 
 	public void acheter(Achetable obj, int nbr)
 	{
-		PackRess cout = obj.cout(Epoque._1855); //FixMe: recupérer la vraie époque
+		PackRess cout = obj.cout(m_jeu.getEpoqueActuelle()); //FixMe: recupérer la vraie époque // Normalement c'est bon
 		cout.mult(nbr);
 		depenserRessources(cout);
 		System.out.println(m_nom + " a recu " + nbr + "x" + obj);
+		
 		//FixMe: recevoir l'objet
+	}
+	
+	/*
+	 * Retourne le nombre de points correspondant au type passé en paramètre
+	 */
+	public int getNbPoints(TypePoint tp)
+	{
+		int nbPoints=0;
+		
+				for(Map.Entry<Point, Integer> entry : m_pointsConstruits.entrySet())
+				{
+					if (entry.getKey().equals(tp))
+					{
+						nbPoints++;
+					}
+						
+				}
+				System.out.println("NbPoints : "+nbPoints);
+				return nbPoints;
+	}
+	
+	/*
+	 * Retourne le nombre d'arètes correspondant au type passé en paramètre
+	 */
+	public int getNbAretes(TypeArete ta)
+	{
+		int nbAretes=0;
+		
+				for(Map.Entry<Point, Integer> entry : m_pointsConstruits.entrySet())
+				{
+					if (entry.getKey().equals(ta))
+					{
+						nbAretes++;
+					}
+						
+				}
+				System.out.println("NbAretes : "+nbAretes);
+				return nbAretes;
 	}
 
 	public String toString()
@@ -178,5 +223,9 @@ public class Joueur {
 	public Color getM_Couleur()
 	{
 		return m_couleur;
+	}
+	
+	public void setM_jeu(Jeu m_jeu) {
+		this.m_jeu = m_jeu;
 	}
 }

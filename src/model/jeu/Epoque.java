@@ -12,14 +12,14 @@ public enum Epoque {
 	{
 		switch (epoque)
 		{
-			case _1855:
-				return Ressource.Bois;
-			case _1955:
-				return Ressource.HautParleur;
-			case _1985:
-				return Ressource.Plutonium;
-			case _2015:
-				return Ressource.Aimant;
+		case _1855:
+			return Ressource.Bois;
+		case _1955:
+			return Ressource.HautParleur;
+		case _1985:
+			return Ressource.Plutonium;
+		case _2015:
+			return Ressource.Aimant;
 		}
 		return null;
 	}
@@ -28,14 +28,30 @@ public enum Epoque {
 	{
 		switch (epoque)
 		{
+		case _1855:
+			return Ressource.Roue;
+		case _1955:
+			return Ressource.Antenne;
+		case _1985:
+			return Ressource.MorceauSchema;
+		case _2015:
+			return Ressource.Ventilateur;
+		}
+		return null;
+	}
+
+	public static String toString(Epoque epoque)
+	{
+		switch(epoque)
+		{
 			case _1855:
-				return Ressource.Roue;
+				return "1855";
 			case _1955:
-				return Ressource.Antenne;
+				return "1955";
 			case _1985:
-				return Ressource.MorceauSchema;
+				return "1985";
 			case _2015:
-				return Ressource.Ventilateur;
+				return "2015";
 		}
 		return null;
 	}

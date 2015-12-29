@@ -133,6 +133,8 @@ public class Plateau {
 	{
 		return epoque;
 	}
+	
+
 
 	/*
 	 * Retourne la coordonnée du point selon une case et un index

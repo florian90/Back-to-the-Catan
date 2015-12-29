@@ -6,13 +6,13 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.GridPane;
 import model.jeu.Epoque;
 import model.jeu.TypeArete;
 import model.jeu.TypePoint;
 import model.joueur.Joueur;
 import model.joueur.PackRess;
+import vue.jeu.ContentJoueur;
 import vue.jeu.Desactivable;
 
 public class ContentTabConstructions extends GridPane implements Desactivable {
@@ -21,13 +21,15 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 	private Spinner <Integer> spinVillage;
 	private Spinner <Integer> spinVille;
 	private Button  acheter;
+	private ContentJoueur ctj;
 
 	private	PackRess coutTotal;
 	private	Epoque epoque;
 	private	Joueur joueur;
 
-	public ContentTabConstructions()
+	public ContentTabConstructions(ContentJoueur ctj)
 	{
+		this.ctj = ctj;
 		coutTotal = new PackRess();
 		spinRoute = new Spinner<Integer>(0, 100, 0);
 		spinAutoroute = new Spinner <Integer>(0, 100, 0);
@@ -55,7 +57,7 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 			@Override
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
 				
-				if(!test((int) newValue, (int) spinAutoroute.getValue(), (int) spinVillage.getValue(), (int) spinVille.getValue()))
+				if(!test(newValue, spinAutoroute.getValue(), spinVillage.getValue(), spinVille.getValue()))
 				{
 					spinRoute.getValueFactory().setValue(oldValue);
 					System.out.println("pas assez de ressources");
@@ -131,14 +133,16 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 		});
 
 		acheter.setOnMouseClicked((e)->{
-			if((int) spinRoute.getValue() > 0)
-				joueur.acheter(TypeArete.Route, (int) spinRoute.getValue());
-			if((int) spinAutoroute.getValue() > 0)
-				joueur.acheter(TypeArete.Autoroute, (int) spinAutoroute.getValue());
-			if((int) spinVillage.getValue() > 0)
-				joueur.acheter(TypePoint.Village, (int) spinVillage.getValue());
-			if((int) spinVille.getValue() > 0)
-				joueur.acheter(TypePoint.Ville, (int) spinVille.getValue());
+			if( spinRoute.getValue() > 0)
+				joueur.acheter(TypeArete.Route, spinRoute.getValue());
+			if( spinAutoroute.getValue() > 0)
+				joueur.acheter(TypeArete.Autoroute, spinAutoroute.getValue());
+			if( spinVillage.getValue() > 0)
+				joueur.acheter(TypePoint.Village, spinVillage.getValue());
+			if( spinVille.getValue() > 0)
+				joueur.acheter(TypePoint.Ville,  spinVille.getValue());
+			
+			ctj.update(joueur);
 		});
 
 		setPadding(new Insets(20, 20, 20, 20));
@@ -202,6 +206,14 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 		acheter.setDisable(true);
 		
 	}
+	
+	@Override
+	public void activer() {
+		
+		acheter.setDisable(false);
+		
+	}
+
 
 
 

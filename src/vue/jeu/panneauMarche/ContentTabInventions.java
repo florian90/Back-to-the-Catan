@@ -7,16 +7,22 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import vue.jeu.Desactivable;
 
-public class ContentTabInventions extends GridPane {
+public class ContentTabInventions extends GridPane implements Desactivable{
 
+	private Button acheterTrain; 
+	private Button acheterRadio; 
+	private Button acheterConvecteur; 
+	private Button acheterHoverboard;
+	
 	public ContentTabInventions()
 	{
-
-		Button acheterTrain = new Button("Acheter");
-		Button acheterRadio = new Button("Acheter");
-		Button acheterConvecteur = new Button("Acheter");
-		Button acheterHoverboard = new Button("Acheter");
+		 acheterTrain = new Button("Acheter");
+		 acheterRadio = new Button("Acheter");
+		 acheterConvecteur = new Button("Acheter");
+		 acheterHoverboard = new Button("Acheter");
+		
 		
 		Label hoverboard = new Label("Convecteur Temporel");
 		Label detailsTrain = new Label("Détails");
@@ -103,4 +109,23 @@ public class ContentTabInventions extends GridPane {
 
 		
 	}
+
+	@Override
+	public void desactiver() {
+		
+		acheterConvecteur.setDisable(true);
+		acheterHoverboard.setDisable(true);
+		acheterRadio.setDisable(true);
+		acheterTrain.setDisable(true);
+		
+	}
+	
+	@Override
+	public void activer() {
+		acheterConvecteur.setDisable(false);
+		acheterHoverboard.setDisable(false);
+		acheterRadio.setDisable(false);
+		acheterTrain.setDisable(false);
+	}
+
 }

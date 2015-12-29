@@ -5,8 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import vue.jeu.Desactivable;
 
-public class ContentTabCartes extends GridPane {
+public class ContentTabCartes extends GridPane implements Desactivable{
 	public ContentTabCartes()
 	{
 		ImageView cartes = new ImageView(new Image("textures/cards.jpg"));
@@ -19,6 +20,18 @@ public class ContentTabCartes extends GridPane {
 		setVgap(15);
 		add(new Label("Coût : 2 ressources d'époques différentes"), 0, 0);
 		add(cartes, 0, 2);
+		
+	}
+
+	@Override
+	public void desactiver() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void activer() {
+		// TODO Auto-generated method stub
 		
 	}
 }

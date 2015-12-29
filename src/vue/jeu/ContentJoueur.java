@@ -4,6 +4,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import model.jeu.TypeArete;
+import model.jeu.TypePoint;
 import model.joueur.Invention;
 import model.joueur.Joueur;
 import model.joueur.Ressource;
@@ -42,9 +44,16 @@ public class ContentJoueur extends GridPane {
 		add(new Label("Aimant :" + j.nbRessource(Ressource.Aimant)), 0, 11);
 		add(new Label("Ventilateur :" + j.nbRessource(Ressource.Ventilateur)), 0, 12);
 		
+		add(new Label("Routes :" + j.getNbAretes(TypeArete.Route)), 1, 9);
+		add(new Label("Autoroutes :" + j.getNbAretes(TypeArete.Autoroute)), 1, 10);
+		add(new Label("Villages :" + j.getNbPoints(TypePoint.Village)), 1, 11);
+		add(new Label("Villes :" + j.getNbPoints(TypePoint.Ville)), 1, 12);
+		
+		
+		
 		add(new Label("Inventions :"), 0, 14);
 		
-		add(new Label("Train :" + j.possedeInvention(Invention.Train)), 0, 16);
+		add(new Label("Train :" + j.possedeInvention(Invention.Train)+"  Radio :" + j.possedeInvention(Invention.Radio)), 0, 16);
 		add(new Label("Radio :" + j.possedeInvention(Invention.Radio)), 0, 17);
 		add(new Label("Convecteur temporel :" + j.possedeInvention(Invention.ConvecteurTemporel)), 0, 18);
 		add(new Label("Hoverboard :" + j.possedeInvention(Invention.HoverBoard)), 0, 19);

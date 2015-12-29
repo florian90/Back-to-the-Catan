@@ -17,6 +17,10 @@ public class VuePlateau extends Group {
 	private Group m_points;
 	private Plateau m_plateau;
 
+	public Plateau getM_plateau() {
+		return m_plateau;
+	}
+
 	public VuePlateau(int x, int y, Plateau plateau)
 	{
 		super();

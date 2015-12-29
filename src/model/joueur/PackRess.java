@@ -3,6 +3,7 @@ package model.joueur;
 import java.util.HashMap;
 
 public class PackRess {
+	
 	private HashMap<Ressource, Integer> me;
 
 	public PackRess()

@@ -25,7 +25,7 @@ public class Fenetre extends AnchorPane {
 	private int plateauActuel;//index du plateau dans la liste des plateaux (0 à 3)
 	private Button suiv, prec, finTour;
 	private Label numPlateau;
-	private ContentTabConstructions cTC = new ContentTabConstructions();
+	private ContentTabConstructions cTC; //= new ContentTabConstructions();
 	private ContentTabInventions cTI = new ContentTabInventions();
 	private ContentTabCartes CTCards = new ContentTabCartes();
 	private ContentJoueur panneauJoueur;
@@ -38,6 +38,7 @@ public class Fenetre extends AnchorPane {
 	{
 		modelJeu = p_modelJeu;
 		finTour = new Button("Fin du Tour");
+		
 		
 		TitledPane PanneauMarche;
 		TitledPane PanneauCarte;
@@ -74,19 +75,21 @@ public class Fenetre extends AnchorPane {
 
 
 		plateauActuel = 0;
-		numPlateau = new Label("VuePlateau n° :" + (plateauActuel + 1));
-		plateaux = new ArrayList<>();
+	
+		plateaux = new ArrayList<VuePlateau>();
 		
 		plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateaux().get(Epoque._1855)));
 		plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateaux().get(Epoque._1955)));
 		plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateaux().get(Epoque._1985)));
 		plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateaux().get(Epoque._2015)));
 		
+		numPlateau = new Label();		
 		panneauJoueur = new ContentJoueur(p_modelJeu.getJoueurs().get(0));
 		stack = new StackPane();
 		suiv = new Button("> Suivant");
 		prec = new Button("Précédent <");
 		
+		cTC = new ContentTabConstructions(panneauJoueur);		
 		
 		TabConstructions.setContent(cTC);
 		TabInventions.setContent(cTI);
@@ -184,7 +187,10 @@ public class Fenetre extends AnchorPane {
 
 	public void initTourJoueur()
 	{
-		des.setEnabled(true);
+		//des.desactiver();
+		//cTC.desactiver();
+		cTI.desactiver();
+		CTCards.desactiver();
 		finTour.setDisable(true);
 		statusBar.setText(modelJeu.getJoueur().getNom() + " lancez les dés");
 		panneauJoueur.update(modelJeu.getJoueur());
@@ -210,7 +216,7 @@ public class Fenetre extends AnchorPane {
 	public void lanceDes()
 	{
 		des.actualiserResultats(modelJeu.lancerDes());
-		des.setEnabled(false);
+		des.desactiver();
 		finTour.setDisable(false);
 		statusBar.setText(modelJeu.getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant");
 	}
@@ -220,16 +226,18 @@ public class Fenetre extends AnchorPane {
 		plateauActuel = idxPlateau;
 		stack.getChildren().removeAll(stack.getChildren());
 		stack.getChildren().add(plateaux.get(plateauActuel));
-		numPlateau.setText("VuePlateau n° :" + (plateauActuel + 1));
+		numPlateau.setText("Epoque : "+ Epoque.toString(plateaux.get(plateauActuel).getM_plateau().getEpoque()));
 		cTC.setEpoque(plateaux.get(plateauActuel).getPlateau().getEpoque());
 	}
 
 	public void plateauSuivant()
 	{
-		if(plateauActuel >= plateaux.size()-1)
+		/*if(plateauActuel >= plateaux.size()-1)
 			chargerPlateau(0);
 		else
-			chargerPlateau(plateauActuel+1);
+			chargerPlateau(plateauActuel+1);*/
+		chargerPlateau((plateauActuel+1)%4);
+		modelJeu.setEpoqueActuelle(plateaux.get(plateauActuel).getM_plateau().getEpoque());
 	}
 
 	public void plateauPrecedent()
@@ -238,5 +246,7 @@ public class Fenetre extends AnchorPane {
 			chargerPlateau(plateaux.size()-1);
 		else
 			chargerPlateau(plateauActuel - 1);
+		
+		modelJeu.setEpoqueActuelle(plateaux.get(plateauActuel).getM_plateau().getEpoque());
 	}
 }

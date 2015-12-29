@@ -4,8 +4,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import vue.jeu.Desactivable;
 
-public class VueDes extends GridPane {
+public class VueDes extends GridPane implements Desactivable {
 	private Button lancer;
 	private Label de1;
 	private Label de2;
@@ -51,9 +52,16 @@ public class VueDes extends GridPane {
 	 * Permet d'activer ou desactiver le lancer
 	 * de dés.
 	 */
-	public void setEnabled(boolean b)
-	{
-		lancer.setDisable(!b);
+
+	@Override
+	public void desactiver() {
+		
+		lancer.setDisable(true);
+	}
+
+	@Override
+	public void activer() {
+		lancer.setDisable(false);
 	}
 
 }

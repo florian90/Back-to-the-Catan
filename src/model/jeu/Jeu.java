@@ -15,6 +15,8 @@ public class Jeu {
 	private HashMap<Epoque, Plateau> plateaux;
 	private ArrayList<Joueur> joueurs;
 	private int nbJoueurs, joueurCourant;
+	private Epoque epoqueActuelle;
+
 
 	/*
 	 * Construit le modele de jeu à partir de la liste des joueurs 
@@ -22,14 +24,19 @@ public class Jeu {
 	 */
 	public Jeu(ArrayList<Joueur> p_joueurs)
 	{
+		epoqueActuelle = Epoque._1985; 
 		joueurs = p_joueurs;
-		joueurs.get(0).recevoirRessources(new PackRess(Ressource.Metal, Ressource.Plutonium));//FixMe: remove this
+		for(Joueur j : joueurs)
+		{
+			j.setM_jeu(this);
+		}
+		joueurs.get(0).recevoirRessources(new PackRess(Ressource.Metal, Ressource.HautParleur));//FixMe: remove this
 		joueurCourant = 0; //index du joueur dont le tour est en cours
 		nbJoueurs = joueurs.size();
 		plateaux = new HashMap<Epoque, Plateau>();
 		plateaux.put(Epoque._1855, new Plateau(Epoque._1855, 7));
 		plateaux.put(Epoque._1955, new Plateau(Epoque._1955, 7));
-		plateaux.put(Epoque._1985, new Plateau(Epoque._1855, 7));
+		plateaux.put(Epoque._1985, new Plateau(Epoque._1985, 7));
 		plateaux.put(Epoque._2015, new Plateau(Epoque._2015, 7));
 		initJeu();
 	}
@@ -98,4 +105,15 @@ public class Jeu {
 	{
 		return joueurs.get(joueurCourant);
 	}
+
+	public Epoque getEpoqueActuelle() {
+		return epoqueActuelle;
+	}
+
+	public void setEpoqueActuelle(Epoque epoqueActuelle) {
+		this.epoqueActuelle = epoqueActuelle;
+	}
+
+	
 }
+
