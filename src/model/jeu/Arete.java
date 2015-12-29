@@ -41,12 +41,26 @@ public class Arete {
 	//Todo: construire un nouveau TypeRoute pour un certain joueur
 	public void construire(Joueur joueur, TypeArete type)
 	{
-
+		//Fait par Val à vérifier
+		/*if (peutConstruire(joueur, type))
+		{
+				m_type = type;
+				m_proprietaire = joueur;
+		}*/
 	}
 
 	//Todo: Check si on peut construire le type demandé pour le joueur
 	public boolean peutConstruire(Joueur joueur, TypeArete type)
 	{
+		//Fait par Val non fini
+		/*if ((type==Route ET m_type==Vide ET  m_coord != Autorouteconstructible) OU (type=Autoroute ET m_type=Vide ET m_coord = Autorouteconstructible))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}*/
 		return false;
 	}
 	
