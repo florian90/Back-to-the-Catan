@@ -27,7 +27,7 @@ public class Jeu {
 		joueurCourant = 0; //index du joueur dont le tour est en cours
 		nbJoueurs = joueurs.size();
 		plateaux = new HashMap<Epoque, Plateau>();
-		plateaux.put(Epoque._1855, new Plateau(Epoque._1985, 7));
+		plateaux.put(Epoque._1855, new Plateau(Epoque._1855, 7));
 		plateaux.put(Epoque._1955, new Plateau(Epoque._1955, 7));
 		plateaux.put(Epoque._1985, new Plateau(Epoque._1855, 7));
 		plateaux.put(Epoque._2015, new Plateau(Epoque._2015, 7));

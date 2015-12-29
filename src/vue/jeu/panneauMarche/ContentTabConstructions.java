@@ -13,35 +13,36 @@ import model.jeu.TypeArete;
 import model.jeu.TypePoint;
 import model.joueur.Joueur;
 import model.joueur.PackRess;
+import vue.jeu.Desactivable;
 
-public class ContentTabConstructions extends GridPane {
-	Spinner spinRoute;
-	Spinner spinAutoroute;
-	Spinner spinVillage;
-	Spinner spinVille;
-	Button acheter;
+public class ContentTabConstructions extends GridPane implements Desactivable {
+	private Spinner<Integer> spinRoute; // en ajoutant un type générique ca supprime tous les warnings du bas
+	private Spinner <Integer> spinAutoroute;
+	private Spinner <Integer> spinVillage;
+	private Spinner <Integer> spinVille;
+	private Button  acheter;
 
-	PackRess coutTotal;
-	Epoque epoque;
-	Joueur joueur;
+	private	PackRess coutTotal;
+	private	Epoque epoque;
+	private	Joueur joueur;
 
 	public ContentTabConstructions()
 	{
 		coutTotal = new PackRess();
-		spinRoute = new Spinner(0, 100, 0);
-		spinAutoroute = new Spinner(0, 100, 0);
-		spinVillage = new Spinner(0, 100, 0);
-		spinVille = new Spinner(0, 100, 0);
+		spinRoute = new Spinner<Integer>(0, 100, 0);
+		spinAutoroute = new Spinner <Integer>(0, 100, 0);
+		spinVillage = new Spinner <Integer>(0, 100, 0);
+		spinVille = new Spinner <Integer>(0, 100, 0);
 
 		acheter = new Button("Acheter");
 
-		spinRoute.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99));
+		/*spinRoute.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99));
 		spinAutoroute.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99));
 		spinVillage.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99));
-		spinVille.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99));
+		spinVille.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99));*/
 
-		spinRoute.valueProperty().addListener(new ChangeListener() {
-			@Override
+		spinRoute.valueProperty().addListener(new ChangeListener<Integer>() {
+			/*@Override
 			public void changed(ObservableValue observable, Object oldValue, Object newValue)
 			{
 				if(!test((int) newValue, (int) spinAutoroute.getValue(), (int) spinVillage.getValue(), (int) spinVille.getValue()))
@@ -49,11 +50,32 @@ public class ContentTabConstructions extends GridPane {
 					spinRoute.getValueFactory().setValue(oldValue);
 					System.out.println("pas assez de ressources");
 				}
+			}*/
+			
+			@Override
+			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+				
+				if(!test((int) newValue, (int) spinAutoroute.getValue(), (int) spinVillage.getValue(), (int) spinVille.getValue()))
+				{
+					spinRoute.getValueFactory().setValue(oldValue);
+					System.out.println("pas assez de ressources");
+				}
+				
 			}
 		});
 
-		spinAutoroute.valueProperty().addListener(new ChangeListener() {
+		spinAutoroute.valueProperty().addListener(new ChangeListener<Integer>() {
+
 			@Override
+			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue)
+			{
+				if(!test(spinRoute.getValue(),newValue, spinVillage.getValue(),spinVille.getValue()))
+				{
+					spinAutoroute.getValueFactory().setValue(oldValue);
+					System.out.println("pas assez de ressources");
+				
+			}
+			/*@Override
 			public void changed(ObservableValue observable, Object oldValue, Object newValue)
 			{
 				if(!test((int) spinRoute.getValue(), (int) newValue, (int) spinVillage.getValue(), (int) spinVille.getValue()))
@@ -61,11 +83,22 @@ public class ContentTabConstructions extends GridPane {
 					spinAutoroute.getValueFactory().setValue(oldValue);
 					System.out.println("pas assez de ressources");
 				}
+			}*/
 			}
 		});
 
-		spinVillage.valueProperty().addListener(new ChangeListener() {
+		spinVillage.valueProperty().addListener(new ChangeListener<Integer>() {
+
 			@Override
+			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+				if(!test(spinRoute.getValue(), spinAutoroute.getValue(), newValue,  spinVille.getValue()))
+				{
+					spinVillage.getValueFactory().setValue(oldValue);
+					System.out.println("pas assez de ressources");
+				}
+				
+			}
+			/*@Override
 			public void changed(ObservableValue observable, Object oldValue, Object newValue)
 			{
 				if(!test((int) spinRoute.getValue(), (int) spinAutoroute.getValue(), (int) newValue, (int) spinVille.getValue()))
@@ -73,11 +106,20 @@ public class ContentTabConstructions extends GridPane {
 					spinVillage.getValueFactory().setValue(oldValue);
 					System.out.println("pas assez de ressources");
 				}
-			}
+			}*/
 		});
 
-		spinVille.valueProperty().addListener(new ChangeListener() {
+		spinVille.valueProperty().addListener(new ChangeListener<Integer>() {
+
 			@Override
+			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+				if(!test(spinRoute.getValue(), spinAutoroute.getValue(), spinVillage.getValue(), newValue))
+				{
+					spinVille.getValueFactory().setValue(oldValue);
+					System.out.println("pas assez de ressources");
+				}
+			}
+			/*@Override
 			public void changed(ObservableValue observable, Object oldValue, Object newValue)
 			{
 				if(!test((int) spinRoute.getValue(), (int) spinAutoroute.getValue(), (int) spinVillage.getValue(), (int) newValue))
@@ -85,7 +127,7 @@ public class ContentTabConstructions extends GridPane {
 					spinVille.getValueFactory().setValue(oldValue);
 					System.out.println("pas assez de ressources");
 				}
-			}
+			}*/
 		});
 
 		acheter.setOnMouseClicked((e)->{
@@ -153,6 +195,15 @@ public class ContentTabConstructions extends GridPane {
 	{
 		epoque = e;
 	}
+
+	@Override
+	public void desactiver() {
+		
+		acheter.setDisable(true);
+		
+	}
+
+
 
 	/*
 	public class MyChangeListenr implements ChangeListener {

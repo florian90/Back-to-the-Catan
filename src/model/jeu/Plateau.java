@@ -135,7 +135,7 @@ public class Plateau {
 	}
 
 	/*
-	 * Retorne la coordonnée du point selon une case et un index
+	 * Retourne la coordonnée du point selon une case et un index
 	 * L'index représente quel point est sélectionné pour une case donnée
 	 * Les points sont ordonnées de 0 à 5 pour une case.
 	 * L'index 0 correspond au point situé en haut de la case, les suivants tant sélectionés par ordre horaire.
