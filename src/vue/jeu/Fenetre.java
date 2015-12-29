@@ -27,7 +27,7 @@ public class Fenetre extends AnchorPane {
 	private Label numPlateau;
 	private ContentTabConstructions cTC; //= new ContentTabConstructions();
 	private ContentTabInventions cTI = new ContentTabInventions();
-	private ContentTabCartes CTCards = new ContentTabCartes();
+	private ContentTabCartes CTCards;// = new ContentTabCartes();
 	private ContentJoueur panneauJoueur;
 	private Jeu modelJeu;
 	private Label statusBar = new Label("Joueur1 - Lancez les dés pour commencer");
@@ -89,7 +89,8 @@ public class Fenetre extends AnchorPane {
 		suiv = new Button("> Suivant");
 		prec = new Button("Précédent <");
 		
-		cTC = new ContentTabConstructions(panneauJoueur);		
+		cTC = new ContentTabConstructions(panneauJoueur);	
+		CTCards = new ContentTabCartes(modelJeu.getJoueur(),modelJeu,panneauJoueur);
 		
 		TabConstructions.setContent(cTC);
 		TabInventions.setContent(cTI);

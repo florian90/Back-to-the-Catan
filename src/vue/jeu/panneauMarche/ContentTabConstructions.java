@@ -143,6 +143,7 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 				joueur.acheter(TypePoint.Ville,  spinVille.getValue());
 			
 			ctj.update(joueur);
+			reset();
 		});
 
 		setPadding(new Insets(20, 20, 20, 20));

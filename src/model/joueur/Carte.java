@@ -3,6 +3,7 @@ package model.joueur;
 import model.jeu.Epoque;
 
 public class Carte implements Achetable {
+	
 	public PackRess cout(Epoque epoque)
 	{
 		//FixMe: Mettre le cour réel

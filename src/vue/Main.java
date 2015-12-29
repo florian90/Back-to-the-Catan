@@ -25,7 +25,7 @@ public class Main extends Application {
 			MenuPrincipalView menuView = new MenuPrincipalView();
 			
 			Scene menu = new Scene(menuView, 1400, 850);
-			//jeu.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			menu.getStylesheets().add(getClass().getResource("StyleMenu.css").toExternalForm());
 			
 			primaryStage.setScene(menu);
 			primaryStage.setResizable(false);
@@ -59,7 +59,7 @@ public class Main extends Application {
 					Jeu modelJeu = new Jeu(menuView.getListeJoueurs());
 					Fenetre fen = new Fenetre(modelJeu);
 					Scene EcranJeu = new Scene(fen, 1400, 850);
-					EcranJeu.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+					EcranJeu.getStylesheets().add(getClass().getResource("StyleEcranJeu.css").toExternalForm());
 					primaryStage.setScene(EcranJeu);
 					primaryStage.show();
 					final File file = new File("src/sons/nomdezeus.mp3"); // NOM DE ZEUS !!

@@ -10,7 +10,7 @@ public enum TypePoint implements Achetable{
 				@Override
 				public PackRess cout(Epoque epoque)
 				{
-					return new PackRess(Ressource.Metal, 4, Epoque.getR1(epoque), 3);
+					return new PackRess(Ressource.Metal, 4, Epoque.getR1(epoque), 3); // ou Epoque.getR2(epoque) non ?
 				}
 			},
 	Village
@@ -18,7 +18,7 @@ public enum TypePoint implements Achetable{
 				@Override
 				public PackRess cout(Epoque epoque)
 				{
-					return new PackRess(Ressource.Metal, 2, Epoque.getR2(epoque), 2);
+					return new PackRess(Ressource.Metal, 2, Epoque.getR2(epoque), 2); // same
 				}
 			},
 	Vide

@@ -1,12 +1,14 @@
 package model.jeu;
 
-import model.joueur.Joueur;
-import model.joueur.PackRess;
-import model.joueur.Ressource;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+
+import model.joueur.Carte;
+import model.joueur.Joueur;
+import model.joueur.PackRess;
+import model.joueur.Ressource;
+import model.joueur.TypeCarte;
 
 public class Jeu {
 	/*
@@ -30,7 +32,7 @@ public class Jeu {
 		{
 			j.setM_jeu(this);
 		}
-		joueurs.get(0).recevoirRessources(new PackRess(Ressource.Metal, Ressource.HautParleur));//FixMe: remove this
+		joueurs.get(0).recevoirRessources(new PackRess(Ressource.Metal, Ressource.HautParleur,Ressource.Metal, Ressource.HautParleur,Ressource.Metal, Ressource.HautParleur,Ressource.Metal, Ressource.HautParleur,Ressource.Metal, Ressource.HautParleur));//FixMe: remove this
 		joueurCourant = 0; //index du joueur dont le tour est en cours
 		nbJoueurs = joueurs.size();
 		plateaux = new HashMap<Epoque, Plateau>();
@@ -78,6 +80,22 @@ public class Jeu {
 		
 		return tab;
 		
+	}
+	
+	public TypeCarte tirerCarte()
+	{
+		Random rnd = new Random();
+		int res = rnd.nextInt(2) ; // à redéfinir pour modifier la fréquence d'apparition des cartes
+		
+		if (res == 1)
+		{
+			return TypeCarte.Developpement;
+		}
+		else
+		{
+			return TypeCarte.DeplacerVoleur;
+		}
+
 	}
 	
 	public HashMap<Epoque, Plateau> getPlateaux()

@@ -1,7 +1,7 @@
 package model.joueur;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import javafx.scene.paint.Color;
 import model.jeu.Arete;
@@ -13,15 +13,29 @@ import model.jeu.TypePoint;
 
 public class Joueur {
 
+
 	private String m_nom;
 	private int m_numJoueur;
 	private Color m_couleur;
 	private String m_avatar;
 	private PackRess m_ressources;
 	private HashMap<Invention, Integer> m_inventions;
-	private HashMap<Point, Integer> m_pointsConstruits;
-	private HashMap<Arete, Integer> m_aretesConstruites;
-	private HashMap<Carte, Integer> m_cartes;
+	/*private HashMap<Point, Integer> m_pointsConstruits;
+	private HashMap<Arete, Integer> m_aretesConstruites;*/
+
+	private ArrayList<Point> m_villagesConstruits;
+	private ArrayList<Point> m_villesConstruites;
+	private ArrayList<Arete> m_routesConstruites;
+	private ArrayList<Arete> m_autoroutesConstruites;
+	
+	private int nbRoutesAConstruire=0;
+	private int nbAutoroutesAConstruire=0;
+	private int nbVillagesAConstruire=0;
+	private int nbVillesAConstruire=0;
+	
+	//private HashMap<Carte, Integer> m_cartes;
+	private int nbCartesDev;
+	private int nbCartesDeplacerVoleur;
 	private Jeu m_jeu;
 	
 	public Joueur(String nom, int num)
@@ -46,9 +60,15 @@ public class Joueur {
 		}
 		m_ressources = new PackRess();
 		m_inventions = new HashMap<>();
-		m_pointsConstruits = new HashMap<>();
-		m_aretesConstruites = new HashMap<>();
-		m_cartes = new HashMap<>();
+		//m_pointsConstruits = new HashMap<>();
+		//m_aretesConstruites = new HashMap<>();
+		
+		m_villagesConstruits = new ArrayList<Point>();
+		m_villesConstruites = new ArrayList<Point>();
+		m_autoroutesConstruites = new ArrayList<Arete>();
+		m_routesConstruites = new ArrayList<Arete>();
+		
+		//m_cartes = new HashMap<>();
 
 		for (Invention inv : Invention.values())
 			m_inventions.put(inv, 0);
@@ -123,31 +143,67 @@ public class Joueur {
 		m_inventions.put(inv, nbInv+1);
 	}
 	
-	public void acheterCarte(PackRess pack, Carte card)
+	public void acheterCarte(PackRess pack, TypeCarte tc)
 	{
 		depenserRessources(pack);
-		int nbCard = m_cartes.get(card);
-		m_cartes.put(card, nbCard+1);
+		if (tc == TypeCarte.DeplacerVoleur)
+		{
+			nbCartesDeplacerVoleur++;
+			System.out.println(nbCartesDeplacerVoleur);
+		}
+		else
+		{
+			nbCartesDev++;
+		}
+		
+		//int nbCard = m_cartes.get(card);
+		//m_cartes.put(card, nbCard+1);
 	}
 	
+	public int getNbCartesDev() {
+		return nbCartesDev;
+	}
+
+
+	public int getNbCartesDeplacerVoleur() {
+		return nbCartesDeplacerVoleur;
+	}
+
+
 	public void construireRoute(PackRess pack, Arete road)
 	{
 		depenserRessources(pack);
-		int nbRoad = m_aretesConstruites.get(road);
-		m_aretesConstruites.put(road, nbRoad+1);
+		//int nbRoad = m_aretesConstruites.get(road);
+		//m_aretesConstruites.put(road, nbRoad+1);
+		if (road.getType() == TypeArete.Autoroute)
+		{
+			m_autoroutesConstruites.add(road);
+		}
+		else if (road.getType() == TypeArete.Route)
+		{
+			m_routesConstruites.add(road);
+		}
 	}
 	//A vérifier si point doit être une hashmap ou pas. Séparer Ville et Village ?
 	public void construirePoint(PackRess pack, Point point)
 	{
 		depenserRessources(pack);
-		int nbPoint = m_pointsConstruits.get(point);
-		m_pointsConstruits.put(point, nbPoint+1);
+		//int nbPoint = m_pointsConstruits.get(point);
+		//m_pointsConstruits.put(point, nbPoint+1);
+		if (point.getType() == TypePoint.Village)
+		{
+			m_villagesConstruits.add(point);
+		}
+		else if (point.getType() == TypePoint.Ville)
+		{
+			m_villesConstruites.add(point);
+		}
 	}
 
 	/*
 	 * Echange des ressources avec un autre joueur
 	 * le joueur courant (this) échange 'donne' ressources à autre joueur
-	 * et recois 'recois' ressources en retour
+	 * et recoit 'recois' ressources en retour
 	 */
 	public void echangerRessources(Joueur autre, PackRess donne, PackRess recois)
 	{
@@ -164,6 +220,22 @@ public class Joueur {
 		depenserRessources(cout);
 		System.out.println(m_nom + " a recu " + nbr + "x" + obj);
 		
+		if(obj == TypeArete.Route)
+		{
+			nbRoutesAConstruire+=nbr;
+		}
+		else if(obj == TypeArete.Autoroute)
+		{
+			nbAutoroutesAConstruire+=nbr;
+		}
+		else if(obj == TypePoint.Village)
+		{
+			nbVillagesAConstruire+=nbr;
+		}
+		else if(obj == TypePoint.Village)
+		{
+			nbVillesAConstruire+=nbr;
+		}
 		//FixMe: recevoir l'objet
 	}
 	
@@ -172,7 +244,7 @@ public class Joueur {
 	 */
 	public int getNbPoints(TypePoint tp)
 	{
-		int nbPoints=0;
+		/*int nbPoints=0;
 		
 				for(Map.Entry<Point, Integer> entry : m_pointsConstruits.entrySet())
 				{
@@ -183,7 +255,16 @@ public class Joueur {
 						
 				}
 				System.out.println("NbPoints : "+nbPoints);
-				return nbPoints;
+				return nbPoints;*/
+		switch(tp)
+		{
+			case Village:
+				return m_villagesConstruits.size();
+			case Ville:
+				return m_villesConstruites.size();
+			default:
+				return 0;
+		}
 	}
 	
 	/*
@@ -191,7 +272,7 @@ public class Joueur {
 	 */
 	public int getNbAretes(TypeArete ta)
 	{
-		int nbAretes=0;
+		/*int nbAretes=0;
 		
 				for(Map.Entry<Point, Integer> entry : m_pointsConstruits.entrySet())
 				{
@@ -202,7 +283,16 @@ public class Joueur {
 						
 				}
 				System.out.println("NbAretes : "+nbAretes);
-				return nbAretes;
+				return nbAretes;*/
+		switch(ta)
+		{
+			case Route:
+				return m_routesConstruites.size();
+			case Autoroute:
+				return m_autoroutesConstruites.size();
+			default:
+				return 0;
+		}
 	}
 
 	public String toString()
@@ -227,5 +317,25 @@ public class Joueur {
 	
 	public void setM_jeu(Jeu m_jeu) {
 		this.m_jeu = m_jeu;
+	}
+
+
+	public int getNbRoutesAConstruire() {
+		return nbRoutesAConstruire;
+	}
+
+
+	public int getNbAutoroutesAConstruire() {
+		return nbAutoroutesAConstruire;
+	}
+
+
+	public int getNbVillagesAConstruire() {
+		return nbVillagesAConstruire;
+	}
+
+
+	public int getNbVillesAConstruire() {
+		return nbVillesAConstruire;
 	}
 }
