@@ -36,14 +36,28 @@ public class Point {
 	}
 
 	//Todo: construire un nouveau TypePoint pour un certain joueur
-	/*public void construire(Joueur joueur, TypePoint type)
+	public void construire(Joueur joueur, TypePoint type)
 	{
-		//Utilité ? (Ref à construirePoint de la classe Joueur)
-	}*/
+		//Fait par Val à vérifier
+		/*if (peutConstruire(joueur, type))
+		{
+				m_type = type;
+				m_proprietaire = joueur;
+		}*/
+	}
 
 	//Todo: Vérifie si on peut construire le type demandé pour le joueur
 	public boolean peutConstruire(Joueur joueur, TypePoint type)
 	{
+		//Commencé par Val à vérifier et finir
+		/*if ((m_proprietaire == NULL && //Tester si il y a 2 routes consécutives à proximité ?) && (m_type == Vide && type == Village || m_type == Village && type == Ville))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}*/
 		return false;
 	}
 	
