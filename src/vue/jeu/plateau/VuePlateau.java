@@ -1,10 +1,7 @@
 package vue.jeu.plateau;
 
 import javafx.scene.Group;
-import model.jeu.Arete;
-import model.jeu.Case;
-import model.jeu.Plateau;
-import model.jeu.Point;
+import model.jeu.*;
 import model.jeu.coordonnee.CoordCase;
 import model.jeu.coordonnee.CoordPoint;
 import vue.jeu.Constants;
@@ -17,16 +14,19 @@ public class VuePlateau extends Group {
 	private Group m_points;
 	private Plateau m_plateau;
 
+	private Jeu m_jeu;
+
 	public Plateau getM_plateau() {
 		return m_plateau;
 	}
 
-	public VuePlateau(int x, int y, Plateau plateau)
+	public VuePlateau(int x, int y, Plateau plateau, Jeu jeu)
 	{
 		super();
 		setTranslateX(x);
 		setTranslateY(y);
 		m_plateau = plateau;
+		m_jeu = jeu;
 
 		initCases();
 		initAretes();
@@ -36,13 +36,11 @@ public class VuePlateau extends Group {
 	private void initPoints()
 	{
 		SimpleFloatCoo center;
-		float rad = 10;
 		m_points = new Group();
 		for (Point pt : m_plateau.getPoints())
 		{
 			center = getCoord(pt.getCoo());
-			//m_points.getChildren().add(new Circle(center.x, center.y, rad));
-			m_points.getChildren().add(new VuePoint(pt,center.x, center.y, rad));
+			m_points.getChildren().add(new VuePoint(pt,center.x, center.y, m_jeu));
 		}
 		getChildren().add(m_points);
 	}
@@ -55,16 +53,9 @@ public class VuePlateau extends Group {
 		VueArete vueArete;
 		for (Arete arete : m_plateau.getAretes())
 		{
-			/*debut = getCoord(arete.getCoord().getDebut());
-			fin = getCoord(arete.getCoord().getFin());
-			line = new Line(debut.x, debut.y, fin.x, fin.y);
-			line.setStrokeWidth(Constants.roadWidth);
-			line.setStroke(Color.GRAY);
-			m_aretes.getChildren().add(line);*/
-			
 			debut = getCoord(arete.getCoord().getDebut());
 			fin = getCoord(arete.getCoord().getFin());
-			vueArete = new VueArete(arete, debut.x, debut.y, fin.x, fin.y);
+			vueArete = new VueArete(arete, debut.x, debut.y, fin.x, fin.y, m_jeu);
 			m_aretes.getChildren().add(vueArete);
 		}
 		getChildren().add(m_aretes);

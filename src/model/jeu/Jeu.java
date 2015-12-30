@@ -21,6 +21,9 @@ public class Jeu {
 	private int nbJoueurs, joueurActuel;
 	private Epoque epoqueActuelle;
 
+	private boolean m_constructionActrive;
+	private boolean m_desLences;
+
 	private Fenetre m_vue;
 	
 	/*
@@ -49,6 +52,8 @@ public class Jeu {
 	public void initJeu()
 	{
 		// Initialise ce que les joueurs possèdent  au début
+		joueurActuel=0;
+		m_desLences = false;
 		epoqueModifiee();
 		m_vue.initTourJoueur();
 	}
@@ -82,8 +87,8 @@ public class Jeu {
 		int de2 = rnd.nextInt(6) + 1;
 		
 		int tab[] = {de1, de2};
+		m_desLences = true;
 		m_vue.lanceDes(tab);
-		
 	}
 	
 	public TypeCarte tirerCarte()
@@ -104,6 +109,7 @@ public class Jeu {
 
 	public void joueurSuivant()
 	{
+		m_desLences = false;
 		if(++joueurActuel >= nbJoueurs)
 			joueurActuel = 0;
 		m_vue.initTourJoueur();
@@ -123,7 +129,7 @@ public class Jeu {
 		return epoqueActuelle;
 	}
 
-	public Epoque epoqueSuivante(){
+	public void epoqueSuivante(){
 		switch (epoqueActuelle)
 		{
 			case _1855:
@@ -140,10 +146,9 @@ public class Jeu {
 				break;
 		}
 		epoqueModifiee();
-		return epoqueActuelle;
 	}
 
-	public Epoque epoquePrecedente(){
+	public void epoquePrecedente(){
 		switch (epoqueActuelle)
 		{
 			case _1855:
@@ -160,11 +165,50 @@ public class Jeu {
 				break;
 		}
 		epoqueModifiee();
-		return epoqueActuelle;
 	}
+
 	public void epoqueModifiee()
 	{
 		m_vue.chargerPlateau(epoqueActuelle);
 	}
-}
 
+	public void clicPoint(Point point)
+	{//Todo: clicPoint
+		if(m_constructionActrive)
+		{
+
+		}
+	}
+
+	public void clicArete(Arete arete)
+	{//Todo: clicArete
+		if(m_constructionActrive)
+		{
+
+		}
+	}
+
+	public void changeConstructionActive()
+	{
+		m_constructionActrive = !m_constructionActrive;
+		if(m_constructionActrive)
+			m_vue.setMessageClassique("Sélectionner la case sur laquelle vous souhaitez construire");
+		else
+			m_vue.setMessageClassique(getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant");
+	}
+
+	public boolean isConstructionActrive()
+	{
+		return m_constructionActrive;
+	}
+
+	public Fenetre getFenetre()
+	{
+		return m_vue;
+	}
+
+	public boolean isDeLance()
+	{
+		return m_desLences;
+	}
+}

@@ -41,6 +41,8 @@ public class Fenetre extends AnchorPane {
 
 	private Jeu modelJeu;
 
+	private String messageClassique;
+
 	// Test Popup Echange
 	private VueEchange echange;
 
@@ -98,12 +100,12 @@ public class Fenetre extends AnchorPane {
 
 		for(Epoque epoque : Epoque.values())
 		{
-			plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateau(epoque)));
+			plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateau(epoque), modelJeu));
 		}
 
 		numPlateau = new Label();
 		statusBar = new Label();
-		panneauJoueur = new ContentJoueur(p_modelJeu.getJoueur());
+		panneauJoueur = new ContentJoueur(modelJeu.getJoueur(), modelJeu);
 		stack = new StackPane();
 
 		cTC = new ContentTabConstructions(panneauJoueur);
@@ -151,7 +153,7 @@ public class Fenetre extends AnchorPane {
 
 		statusBar.setPadding(new Insets(10));
 
-		getChildren().add(new StackPane(new VBox(new HBox(PanneauMarche, PanneauCarte, PanneauJoueur), statusBar),echange));
+		getChildren().add(new StackPane(new VBox(new HBox(PanneauMarche, PanneauCarte, PanneauJoueur), statusBar)/*,echange*/));
 
 		/****************************************************\
 		 *              Gestion des evenements              *
@@ -200,13 +202,15 @@ public class Fenetre extends AnchorPane {
 
 	public void initTourJoueur()
 	{
+		System.out.println("test");
 		//cTC.desactiver();
 		cTI.desactiver();
 		des.activer();
 		CTCards.desactiver();
-		des.activer();
+		panneauJoueur.desactiver();
 		finTour.setDisable(true);
-		setStatus(modelJeu.getJoueur().getNom() + " - Lancez les dés pour commencer\"");
+		messageClassique = modelJeu.getJoueur().getNom() + " - Lancez les dés pour commencer";
+		resetStatus();
 		panneauJoueur.update(modelJeu.getJoueur());
 		desactiveEchangeBouttonJoueurActuel();
 		cTC.setJoueur(modelJeu.getJoueur());
@@ -225,8 +229,10 @@ public class Fenetre extends AnchorPane {
 	{
 		des.actualiserResultats(tab);
 		des.desactiver();
+		panneauJoueur.activer();
 		finTour.setDisable(false);
-		setStatus(modelJeu.getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant");
+		messageClassique = modelJeu.getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant";
+		resetStatus();
 	}
 
 	public void chargerPlateau(Epoque epoque)
@@ -243,11 +249,22 @@ public class Fenetre extends AnchorPane {
 		statusBar.setText(str);
 	}
 
+	public void resetStatus()
+	{
+		statusBar.setText(messageClassique);
+	}
+
 	public VuePlateau getVuePlateau(Epoque epoque)
 	{
 		for(VuePlateau pl : plateaux)
 			if(pl.getPlateau().getEpoque() == epoque)
 				return pl;
 		return null;
+	}
+
+	public void setMessageClassique(String str)
+	{
+		messageClassique = str;
+		resetStatus();
 	}
 }

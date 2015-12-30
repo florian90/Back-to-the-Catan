@@ -169,6 +169,7 @@ public class Joueur {
 	public void construireRoute(PackRess pack, Arete road)
 	{
 		depenserRessources(pack);
+
 		//int nbRoad = m_aretesConstruites.get(road);
 		//m_aretesConstruites.put(road, nbRoad+1);
 		if (road.getType() == TypeArete.Autoroute)
@@ -189,10 +190,15 @@ public class Joueur {
 		if (point.getType() == TypePoint.Village)
 		{
 			m_villagesConstruits.add(point);
+			point.construire(this, type);
 		}
 		else if (point.getType() == TypePoint.Ville)
 		{
+			if(nbVillesAConstruire <= 0)
+				return;
+			nbVillesAConstruire--;
 			m_villesConstruites.add(point);
+			point.construire(this, type);
 		}
 	}
 

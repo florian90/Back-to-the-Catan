@@ -215,23 +215,4 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 		
 	}
 
-
-
-
-	/*
-	public class MyChangeListenr implements ChangeListener {
-		Achetable m_obj;
-
-		public MyChangeListenr(Achetable obj)
-		{
-			super();
-			m_obj = obj;
-		}
-
-		@Override
-		public void changed(ObservableValue observable, Object oldValue, Object newValue)
-		{
-			coutTotal.add(m_obj.cout(Epoque._1855));
-		}
-	}*/
 }
