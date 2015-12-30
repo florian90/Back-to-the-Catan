@@ -110,7 +110,7 @@ public class Plateau {
 				cooArete = new CoordArete(getCooPoint(tuile, i), getCooPoint(tuile, (i + 1)%6));
 				if (!aretes.containsKey(cooArete))
 				{
-					aretes.put(cooArete, new Arete(cooArete));
+					aretes.put(cooArete, new Arete(cooArete,this));
 				}
 			}
 		}

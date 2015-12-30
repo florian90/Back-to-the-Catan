@@ -1,7 +1,12 @@
 package vue.jeu;
 
 public interface Constants {
-	float hexWidth = 100;
-	float hexHeight = 100;
-	float roadWidth = 10;
+	
+	public final float hexWidth = 100;
+	public final float hexHeight = 100;
+	public final float roadWidth = 10;
+	
+	
+	
+	
 }

@@ -23,9 +23,9 @@ public class Arete {
 		m_plateau = plateau;
 	}
 
-	public Arete(CoordArete coord)
+	public Arete(CoordArete coord, Plateau plateau)
 	{
-		this(coord, TypeArete.Vide, null, null); // A vérifier le dernier NULL
+		this(coord, TypeArete.Vide, null, plateau); // A vérifier le dernier NULL
 	}
 
 	public CoordArete getCoord()
@@ -78,41 +78,53 @@ public class Arete {
 		CoordCase dy = y.getDroite();
 		CoordCase gy = y.getGauche();
 		CoordCase vy = y.getVertical();
-		if(dx==dy)
+		
+		
+		
+		if(dx.equals(dy))
 		{
 			if(m_plateau.getCases().get(dx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(gx).getRessource()==Ressource.Autoroute)
 			{
+				System.out.println("Vertical vrai");
 				return true;
 			}
 			else
 			{
+				System.out.println("Vertical faux");
 				return false;
+				
 			}
 		}
-		else if(dx==vy)
+		else if(gx.equals(vy))
 		{
-			if(m_plateau.getCases().get(dx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(vx).getRessource()==Ressource.Autoroute)
+			if(m_plateau.getCases().get(gx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(dy).getRessource()==Ressource.Autoroute)
 			{
+				System.out.println("/ vrai");
 				return true;
+				
 			}
 			else
 			{
+				System.out.println("/ faux");
 				return false;
 			}
 		}
-		else if(vx==gy)
+		else if(vx.equals(gy))
 		{
 			if(m_plateau.getCases().get(vx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(dx).getRessource()==Ressource.Autoroute)
 			{
+				System.out.println("\\ vrai");
 				return true;
 			}
 			else
 			{
+				System.out.println("\\ gy faux");
 				return false;
 			}
 		}
 		else
 		{
+			System.out.println("default faux");
 			return false;
 		}
 	}

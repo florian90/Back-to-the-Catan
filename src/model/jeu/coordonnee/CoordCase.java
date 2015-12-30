@@ -2,8 +2,8 @@ package model.jeu.coordonnee;
 
 public class CoordCase {
 	/*
-	 * La case de coordonée nulle est la case centrale.
-	 * La coo ligne augmente quand on prend la case à  l'est de la case initiale.
+	 * La case de coordonï¿½e nulle est la case centrale.
+	 * La coo ligne augmente quand on prend la case ï¿½ l'est de la case initiale.
 	 * La coo column augmente quand on prend la case au sudWest de la case initiale
 	 */
 	private int line;
@@ -83,5 +83,10 @@ public class CoordCase {
 	public String toString()
 	{
 		return "(" + line + ", " + column + ")";
+	}
+	
+	public boolean equals(CoordCase cc)
+	{
+		return (line == cc.getLine() && column == cc.getColumn());
 	}
 }
