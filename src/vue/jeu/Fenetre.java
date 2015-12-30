@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import model.jeu.Epoque;
 import model.jeu.Jeu;
+import model.joueur.Joueur;
 import vue.jeu.panneauMarche.ContentTabCartes;
 import vue.jeu.panneauMarche.ContentTabConstructions;
 import vue.jeu.panneauMarche.ContentTabInventions;
@@ -73,8 +74,18 @@ public class Fenetre extends AnchorPane {
 
 		for (int i = 0; i < modelJeu.getNbJoueurs(); ++i)
 		{ // Initialise les images des joueurs en bas et les boutons échanger
+			final int index = i; 
 			ImageView avatar = new ImageView(modelJeu.getJoueur(i).getAvatar());
 			bt_echangerList[i] = new Button("Echanger");
+			bt_echangerList[i].setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					
+					echange.show(modelJeu.getJoueur(), modelJeu.getJoueur(index));
+					
+				}
+			});
 			avatar.setFitWidth(50);
 			avatar.setPreserveRatio(true);
 			gridJoueurs.add(avatar, i, 0);
