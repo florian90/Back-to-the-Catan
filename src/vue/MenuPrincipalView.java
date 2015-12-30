@@ -56,7 +56,7 @@ public class MenuPrincipalView extends AnchorPane {
 		parametresGrid.add(new Label("Nombre de Joueurs (2 à 4) :"), 0, 0);
 		for (int i = 0; i < 4; ++i)
 		{
-			TextField nomJoueur = new TextField("joueur" + (i + 1));
+			TextField nomJoueur = new TextField("Joueur " + (i + 1));
 			nomJoueur.setEditable(true);
 			parametresGrid.add(new Label("Joueur " + (i + 1) + " :"), 0, (i + 1));
 			nomsJoueurs.add(nomJoueur);

@@ -1,23 +1,33 @@
 package vue.jeu;
 
 
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import model.jeu.Epoque;
 import model.jeu.Jeu;
 import vue.jeu.panneauMarche.ContentTabCartes;
 import vue.jeu.panneauMarche.ContentTabConstructions;
 import vue.jeu.panneauMarche.ContentTabInventions;
 import vue.jeu.panneauMarche.VueDes;
+import vue.jeu.plateau.VueEchange;
 import vue.jeu.plateau.VuePlateau;
-
-import java.util.ArrayList;
 
 public class Fenetre extends AnchorPane {
 	private StackPane stack;
@@ -33,12 +43,16 @@ public class Fenetre extends AnchorPane {
 	private Label statusBar = new Label("Joueur1 - Lancez les dés pour commencer");
 	private VueDes des = new VueDes();
 	private Button[] echangerList;
+	
+	// Test Popup Echange
+	private VueEchange echange;
 
 	public Fenetre(Jeu p_modelJeu)
 	{
 		modelJeu = p_modelJeu;
 		finTour = new Button("Fin du Tour");
 		
+		echange = new VueEchange();
 		
 		TitledPane PanneauMarche;
 		TitledPane PanneauCarte;
@@ -109,6 +123,7 @@ public class Fenetre extends AnchorPane {
 		VMilieu.getChildren().add(new HBox(10, prec, suiv));
 		VMilieu.getChildren().add(stack);
 		VMilieu.getChildren().add(gridJoueurs);
+		
 		VMilieu.setMinWidth(800);
 		VMilieu.setPrefWidth(800);
 		VMilieu.setMaxWidth(800);
@@ -135,9 +150,8 @@ public class Fenetre extends AnchorPane {
 		
 		statusBar.setPadding(new Insets(10));
 		
-		getChildren().add(new VBox(new HBox(PanneauMarche, PanneauCarte, PanneauJoueur), statusBar));
+		getChildren().add(new StackPane(new VBox(new HBox(PanneauMarche, PanneauCarte, PanneauJoueur), statusBar),echange));
 
-		
 		// Gestion des evenements
 		suiv.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -191,6 +205,7 @@ public class Fenetre extends AnchorPane {
 		//des.desactiver();
 		//cTC.desactiver();
 		cTI.desactiver();
+		des.activer();
 		CTCards.desactiver();
 		finTour.setDisable(true);
 		statusBar.setText(modelJeu.getJoueur().getNom() + " lancez les dés");
