@@ -81,7 +81,7 @@ public class Arete {
 		
 		
 		
-		if(dx.equals(dy))
+		if(dx.equals(dy) || gx.equals(gy))
 		{
 			if(m_plateau.getCases().get(dx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(gx).getRessource()==Ressource.Autoroute)
 			{
@@ -95,7 +95,7 @@ public class Arete {
 				
 			}
 		}
-		else if(gx.equals(vy))
+		else if(gx.equals(vy) || dy.equals(vx))
 		{
 			if(m_plateau.getCases().get(gx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(dy).getRessource()==Ressource.Autoroute)
 			{
@@ -109,7 +109,7 @@ public class Arete {
 				return false;
 			}
 		}
-		else if(vx.equals(gy))
+		else if(vx.equals(gy) || vy.equals(dx))
 		{
 			if(m_plateau.getCases().get(vx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(dx).getRessource()==Ressource.Autoroute)
 			{
