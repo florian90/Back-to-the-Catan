@@ -5,16 +5,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import model.jeu.Arete;
+import model.jeu.Jeu;
 import vue.jeu.Constants;
 
 public class VueArete extends Line
 {
 	private Arete m_arete;
+	private Jeu m_jeu;
 	
-	public VueArete(Arete a, float debutX, float debutY, float finX, float finY)
+	public VueArete(Arete a, float debutX, float debutY, float finX, float finY, Jeu jeu)
 	{
 		super(debutX,debutY,finX,finY);
 		m_arete = a;
+		m_jeu = jeu;
 		
 		setStrokeWidth(Constants.roadWidth);
 		setStroke(Color.GRAY);

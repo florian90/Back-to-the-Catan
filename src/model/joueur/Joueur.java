@@ -183,7 +183,7 @@ public class Joueur {
 	}
 	//A vérifier si point doit être une hashmap ou pas. Séparer Ville et Village ?
 	public void construirePoint(PackRess pack, Point point)
-	{
+	{/*
 		depenserRessources(pack);
 		//int nbPoint = m_pointsConstruits.get(point);
 		//m_pointsConstruits.put(point, nbPoint+1);
@@ -199,7 +199,7 @@ public class Joueur {
 			nbVillesAConstruire--;
 			m_villesConstruites.add(point);
 			point.construire(this, type);
-		}
+		}*/
 	}
 
 	/*
