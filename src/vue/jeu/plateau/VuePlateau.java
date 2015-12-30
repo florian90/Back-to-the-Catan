@@ -75,8 +75,8 @@ public class VuePlateau extends Group {
 		// Retrouve la taille du plateau
 		// /!\ doit être hexagonal
 		int min, max;
-		min = max = m_plateau.getCases().get(0).getCoo().getLine();
-		for (Case tuile : m_plateau.getCases())
+		min = max = m_plateau.getListCases().get(0).getCoo().getLine();
+		for (Case tuile : m_plateau.getListCases())
 		{
 			int i;
 			i = tuile.getCoo().getLine();
@@ -92,7 +92,7 @@ public class VuePlateau extends Group {
 		ViewCase viewCase;
 		CoordCase coo;
 		SimpleFloatCoo simplefCoo;
-		for (Case tuile : m_plateau.getCases())
+		for (Case tuile : m_plateau.getListCases())
 		{
 			coo = tuile.getCoo();
 			simplefCoo = getCoord(coo);

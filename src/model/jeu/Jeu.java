@@ -1,5 +1,7 @@
 package model.jeu;
 
+import model.jeu.coordonnee.CoordCase;
+import model.jeu.coordonnee.CoordPoint;
 import model.joueur.Joueur;
 import model.joueur.PackRess;
 import model.joueur.Ressource;
@@ -20,7 +22,7 @@ public class Jeu {
 	private Epoque epoqueActuelle;
 
 	private Fenetre m_vue;
-
+	
 	/*
 	 * Construit le modele de jeu à partir de la liste des joueurs 
 	 * fournie par le menu principal, intialise les plateux de jeu

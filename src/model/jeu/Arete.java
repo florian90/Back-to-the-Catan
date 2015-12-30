@@ -1,7 +1,10 @@
 package model.jeu;
 
 import model.jeu.coordonnee.CoordArete;
+import model.jeu.coordonnee.CoordCase;
+import model.jeu.coordonnee.CoordPoint;
 import model.joueur.Joueur;
+import model.joueur.Ressource;
 
 public class Arete {
 	/*
@@ -10,17 +13,19 @@ public class Arete {
 	private CoordArete m_coord;
 	private TypeArete m_type;
 	private Joueur m_proprietaire;
+	private Plateau m_plateau;
 
-	public Arete(CoordArete coord, TypeArete type, Joueur propietaire)
+	public Arete(CoordArete coord, TypeArete type, Joueur propietaire, Plateau plateau)
 	{
 		m_coord = coord;
 		m_type = type;
 		m_proprietaire = propietaire;
+		m_plateau = plateau;
 	}
 
 	public Arete(CoordArete coord)
 	{
-		this(coord, TypeArete.Vide, null);
+		this(coord, TypeArete.Vide, null, null); // A vérifier le dernier NULL
 	}
 
 	public CoordArete getCoord()
@@ -41,54 +46,75 @@ public class Arete {
 	//Todo: construire un nouveau TypeRoute pour un certain joueur
 	public void construire(Joueur joueur, TypeArete type)
 	{
-		//Fait par Val à vérifier
-		/*if (peutConstruire(joueur, type))
+		//Fait par Val
+		if (peutConstruire(joueur, type))
 		{
-				m_type = type;
-				m_proprietaire = joueur;
-		}*/
+			m_type = type;
+			m_proprietaire = joueur;
+		}
 	}
-
+	
 	//Todo: Check si on peut construire le type demandé pour le joueur
 	public boolean peutConstruire(Joueur joueur, TypeArete type)
 	{
-		//Fait par Val non fini
-		//Base pour savoir quelles Aretes sont compatibles autoroute.
-		/*int o,i;
-	    for(o=-4;o<-2;o++)
-	    {
-	        for(i=-4;i<0;i++)
-	        {
-	            System.out.println("1. (%d,%d ; %d,%d ; %d,%d)\n",i,o,i+1,o,i+1,o+1);
-	            System.out.println("2. (%d,%d ; %d,%d ; %d,%d)\n",i,o+1,i+1,o+1,i,o);
-	            System.out.println("3. (%d,%d ; %d,%d ; %d,%d)\n",-(i+1),-o,-i,-o,-(i+1),-(o+1));
-	            System.out.println("4. (%d,%d ; %d,%d ; %d,%d)\n",-(i+1),-(o+1),-i,-(o+1),-i,-o);
-	            System.out.println("5. (%d,%d ; %d,%d ; %d,%d)\n",i+4,o+i+5,i+5,o+i+5,i+4,o+i+4);
-	            System.out.println("6. (%d,%d ; %d,%d ; %d,%d)\n",i+4,o+i+5,i+5,o+i+5,i+5,o+i+6);
-	            System.out.println("7. (%d,%d ; %d,%d ; %d,%d)\n",-(i+5),-(o+i+5),-(i+4),-(o+i+5),-(i+4),-(o+i+4));
-	            System.out.println("8. (%d,%d ; %d,%d ; %d,%d)\n",-(i+5),-(o+i+5),-(i+4),-(o+i+5),-(i+5),-(o+i+6));
-	        }
-	        for(i=-2;i<0;i++)
-	        {
-	            if((i-1)!= -3 || (o+3) != 0 || -(i-1)!= 3)
-	            {
-	                System.out.println("9. (%d,%d ; %d,%d ; %d,%d)\n",i-2,o+2,i-1,o+2,i-1,o+3);
-	                System.out.println("10. (%d,%d ; %d,%d ; %d,%d)\n",-(i-1),-(o+2),-(i-2),-(o+2),-(i-1),-(o+3));
-	            }
-	        }
-	    }
-	    System.out.println("11. (%d,%d ; %d,%d ; %d,%d)\n",-3,-1,-2,-1,-3,-2);
-	    System.out.println("12. (%d,%d ; %d,%d ; %d,%d)\n",2,1,3,1,3,2);*/
-		
-		/*if ((type==Route ET m_type==Vide ET  m_coord != Autorouteconstructible) OU (type=Autoroute ET m_type=Vide ET m_coord = Autorouteconstructible))
+		//Fait par Val		
+		if ((type==TypeArete.Route && m_type==TypeArete.Vide && !peutEtreAutoroute()) || (type==TypeArete.Autoroute && m_type==TypeArete.Vide && peutEtreAutoroute()))
 		{
 			return true;
 		}
 		else
 		{
 			return false;
-		}*/
-		return false;
+		}
+	}
+	
+	public boolean peutEtreAutoroute()
+	{
+		CoordPoint x = m_coord.getDebut();
+		CoordPoint y = m_coord.getFin();
+		CoordCase dx = x.getDroite();
+		CoordCase gx = x.getGauche();
+		CoordCase vx = x.getVertical();
+		CoordCase dy = y.getDroite();
+		CoordCase gy = y.getGauche();
+		CoordCase vy = y.getVertical();
+		if(dx==dy)
+		{
+			if(m_plateau.getCases().get(dx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(gx).getRessource()==Ressource.Autoroute)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else if(dx==vy)
+		{
+			if(m_plateau.getCases().get(dx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(vx).getRessource()==Ressource.Autoroute)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else if(vx==gy)
+		{
+			if(m_plateau.getCases().get(vx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(dx).getRessource()==Ressource.Autoroute)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public String toString()

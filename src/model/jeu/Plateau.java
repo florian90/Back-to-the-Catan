@@ -18,6 +18,8 @@ public class Plateau {
 	private HashMap<CoordArete, Arete> aretes;
 	private HashMap<CoordPoint, Point> points;
 	private int m_size;
+	
+	//private ArrayList<CoordPoint> listPointAutoroute;
 
 	public Plateau(Epoque ep, int size)
 	{
@@ -114,9 +116,14 @@ public class Plateau {
 		}
 	}
 
-	public List<Case> getCases()
+	public List<Case> getListCases()
 	{
 		return new ArrayList<>(cases.values());
+	}
+	
+	public HashMap<CoordCase, Case> getCases()
+	{
+		return cases;
 	}
 
 	public List<Arete> getAretes()
@@ -233,4 +240,46 @@ public class Plateau {
 		}
 		return list;
 	}
+	
+	/*public void listeAreteAutoroute()
+	{
+		listPointAutoroute = new ArrayList<CoordPoint>();
+		int o,i;
+	    for(o=-4;o<-2;o++)
+	    {	
+	        for(i=-4;i<0;i++)
+	        {
+	        	listPointAutoroute.add(new CoordPoint(new CoordCase(i, o), new CoordCase(i+1, o), new CoordCase(i+1, o+1)));
+	            //i,o,i+1,o,i+1,o+1
+	        	listPointAutoroute.add(new CoordPoint(new CoordCase(i,o+1), new CoordCase(i+1,o+1), new CoordCase(i,o)));
+	            //i,o+1,i+1,o+1,i,o
+	            listPointAutoroute.add(new CoordPoint(new CoordCase(-(i+1),-o), new CoordCase(-i,-o), new CoordCase(-(i+1),-(o+1))));
+	            //-(i+1),-o,-i,-o,-(i+1),-(o+1)
+	            listPointAutoroute.add(new CoordPoint(new CoordCase(-(i+1),-(o+1)), new CoordCase(-i,-(o+1)), new CoordCase(-i,-o)));
+	            //-(i+1),-(o+1),-i,-(o+1),-i,-o
+	            listPointAutoroute.add(new CoordPoint(new CoordCase(i+4,o+i+5), new CoordCase(i+5,o+i+5), new CoordCase(i+4,o+i+4)));
+	            //i+4,o+i+5,i+5,o+i+5,i+4,o+i+4
+	            listPointAutoroute.add(new CoordPoint(new CoordCase(i+4,o+i+5), new CoordCase(i+5,o+i+5), new CoordCase(i+5,o+i+6)));
+	            //i+4,o+i+5,i+5,o+i+5,i+5,o+i+6
+	            listPointAutoroute.add(new CoordPoint(new CoordCase(-(i+5),-(o+i+5)), new CoordCase(-(i+4),-(o+i+5)), new CoordCase(-(i+4),-(o+i+4))));
+	            //-(i+5),-(o+i+5),-(i+4),-(o+i+5),-(i+4),-(o+i+4)
+	            listPointAutoroute.add(new CoordPoint(new CoordCase(-(i+5),-(o+i+5)), new CoordCase(-(i+4),-(o+i+5)), new CoordCase(-(i+5),-(o+i+6))));
+	            //-(i+5),-(o+i+5),-(i+4),-(o+i+5),-(i+5),-(o+i+6)
+	        }
+	        for(i=-2;i<0;i++)
+	        {
+	            if((i-1)!= -3 || (o+3) != 0 || -(i-1)!= 3)
+	            {
+	            	listPointAutoroute.add(new CoordPoint(new CoordCase(i-2,o+2), new CoordCase(i-1,o+2), new CoordCase(i-1,o+3)));
+	                //i-2,o+2,i-1,o+2,i-1,o+3
+	                listPointAutoroute.add(new CoordPoint(new CoordCase(-(i-1),-(o+2)), new CoordCase(-(i-2),-(o+2)), new CoordCase(-(i-1),-(o+3))));
+	                //-(i-1),-(o+2),-(i-2),-(o+2),-(i-1),-(o+3)
+	            }
+	        }
+	    }
+	    listPointAutoroute.add(new CoordPoint(new CoordCase(-3,-1), new CoordCase(-2,-1), new CoordCase(-3,-2)));
+	    //-3,-1,-2,-1,-3,-2
+	    listPointAutoroute.add(new CoordPoint(new CoordCase(2,1), new CoordCase(3,1), new CoordCase(3,2)));
+	    //2,1,3,1,3,2
+	}*/
 }

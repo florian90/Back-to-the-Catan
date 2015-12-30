@@ -41,6 +41,7 @@ public class VueArete extends Line
 			@Override
 			public void handle(MouseEvent event) {
 				System.out.println(m_arete.toString());
+				System.out.println(m_arete.peutEtreAutoroute());
 				
 			}
 		});
