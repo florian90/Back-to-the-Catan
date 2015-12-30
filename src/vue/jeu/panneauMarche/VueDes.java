@@ -45,7 +45,7 @@ public class VueDes extends GridPane implements Desactivable {
 	{
 		de1.setText("Dé n° 1 : " + tab[0]);
 		de2.setText("Dé n° 2 : " + tab[1]);
-		somme.setText("Somme : " + tab[2]);
+		somme.setText("Somme : " + (tab[0]+tab[1]));
 	}
 	
 	/*

@@ -20,9 +20,8 @@ public class ContentJoueur extends GridPane {
 	
 	public void update(Joueur j)
 	{
-		
 		getChildren().removeAll(getChildren());
-		ImageView ImgAvatar = new ImageView("textures/Avatar" + j.getNumJoueur() + ".jpg");
+		ImageView ImgAvatar = new ImageView(j.getAvatar());
 		Label labelPseudo = new Label(j.getNom());
 		labelPseudo.setId("labelPseudo");
 		setPadding(new Insets(20, 20, 20, 20));

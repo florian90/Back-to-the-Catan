@@ -1,15 +1,10 @@
 package model.joueur;
 
+import javafx.scene.paint.Color;
+import model.jeu.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javafx.scene.paint.Color;
-import model.jeu.Arete;
-import model.jeu.Epoque;
-import model.jeu.Jeu;
-import model.jeu.Point;
-import model.jeu.TypeArete;
-import model.jeu.TypePoint;
 
 public class Joueur {
 
@@ -42,6 +37,7 @@ public class Joueur {
 	{
 		m_nom = nom;
 		m_numJoueur = num;
+		m_avatar = "textures/Avatar" + num + ".jpg";
 		
 		switch(m_numJoueur)
 		{
@@ -338,4 +334,9 @@ public class Joueur {
 	public int getNbVillesAConstruire() {
 		return nbVillesAConstruire;
 	}
+
+	public String getAvatar(){
+		return m_avatar;
+	}
+
 }

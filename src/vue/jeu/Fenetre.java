@@ -1,25 +1,14 @@
 package vue.jeu;
 
 
-import java.util.ArrayList;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.control.TabPane.TabClosingPolicy;
-import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import model.jeu.Epoque;
 import model.jeu.Jeu;
 import vue.jeu.panneauMarche.ContentTabCartes;
@@ -29,88 +18,91 @@ import vue.jeu.panneauMarche.VueDes;
 import vue.jeu.plateau.VueEchange;
 import vue.jeu.plateau.VuePlateau;
 
+import java.util.ArrayList;
+
 public class Fenetre extends AnchorPane {
+
 	private StackPane stack;
-	private ArrayList<VuePlateau> plateaux;
-	private int plateauActuel;//index du plateau dans la liste des plateaux (0 à 3)
+	private TitledPane PanneauMarche;
+	private TitledPane PanneauCarte;
+	private TitledPane PanneauJoueur;
 	private Button suiv, prec, finTour;
+	private Button[] bt_echangerList;
 	private Label numPlateau;
-	private ContentTabConstructions cTC; //= new ContentTabConstructions();
-	private ContentTabInventions cTI = new ContentTabInventions();
-	private ContentTabCartes CTCards;// = new ContentTabCartes();
-	private ContentJoueur panneauJoueur;
-	private Jeu modelJeu;
-	private Label statusBar = new Label("Joueur1 - Lancez les dés pour commencer");
+	private Label statusBar;
+
 	private VueDes des = new VueDes();
-	private Button[] echangerList;
-	
+	private ArrayList<VuePlateau> plateaux;
+	private ContentTabConstructions cTC;
+	private ContentTabInventions cTI;
+	private ContentTabCartes CTCards;
+	private ContentJoueur panneauJoueur;
+
+	private Jeu modelJeu;
+
 	// Test Popup Echange
 	private VueEchange echange;
 
 	public Fenetre(Jeu p_modelJeu)
 	{
 		modelJeu = p_modelJeu;
-		finTour = new Button("Fin du Tour");
-		
+		modelJeu.setVue(this);
+
 		echange = new VueEchange();
-		
-		TitledPane PanneauMarche;
-		TitledPane PanneauCarte;
-		TitledPane PanneauJoueur;
-		
+
+		finTour = new Button("Fin du Tour");
+		suiv = new Button("> Suivant");
+		prec = new Button("Précédent <");
+
 		Tab TabConstructions = new Tab("Constructions");
 		Tab TabCartes = new Tab("Cartes");
 		Tab TabInventions = new Tab("Inventions");
 		TabPane TabsMarche = new TabPane(TabConstructions, TabInventions, TabCartes);
 		TabsMarche.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-		
+
 		VBox VGauche = new VBox();
 		VBox VMilieu = new VBox();
 		VBox VDroite = new VBox();
-		
+
 		GridPane gridJoueurs = new GridPane();
 		gridJoueurs.setHgap(40);
 		gridJoueurs.setVgap(10);
 		gridJoueurs.setAlignment(Pos.CENTER);
 		gridJoueurs.setPadding(new Insets(20, 10, 10, 10));
-		echangerList = new Button[modelJeu.getNbJoueurs()];
-		
+		bt_echangerList = new Button[modelJeu.getNbJoueurs()];
+
 		for (int i = 0; i < modelJeu.getNbJoueurs(); ++i)
-		{
-			ImageView avatar = new ImageView("textures/Avatar" + (i + 1) + ".jpg");
-			echangerList[i] = new Button("Echanger");
+		{ // Initialise les images des joueurs en bas et les boutons échanger
+			ImageView avatar = new ImageView(modelJeu.getJoueur(i).getAvatar());
+			bt_echangerList[i] = new Button("Echanger");
 			avatar.setFitWidth(50);
 			avatar.setPreserveRatio(true);
 			gridJoueurs.add(avatar, i, 0);
-			gridJoueurs.add(new Label(modelJeu.getJoueurs().get(i).getNom()), i, 1);
-			gridJoueurs.add(echangerList[i], i, 2);
+			gridJoueurs.add(new Label(modelJeu.getJoueur(i).getNom()), i, 1);
+			gridJoueurs.add(bt_echangerList[i], i, 2);
 		}
 		gridJoueurs.add(finTour, modelJeu.getNbJoueurs(), 1);
 
+		plateaux = new ArrayList<>();
 
-		plateauActuel = 0;
-	
-		plateaux = new ArrayList<VuePlateau>();
-		
-		plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateaux().get(Epoque._1855)));
-		plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateaux().get(Epoque._1955)));
-		plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateaux().get(Epoque._1985)));
-		plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateaux().get(Epoque._2015)));
-		
-		numPlateau = new Label();		
-		panneauJoueur = new ContentJoueur(p_modelJeu.getJoueurs().get(0));
+		for(Epoque epoque : Epoque.values())
+		{
+			plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateau(epoque)));
+		}
+
+		numPlateau = new Label();
+		statusBar = new Label();
+		panneauJoueur = new ContentJoueur(p_modelJeu.getJoueur());
 		stack = new StackPane();
-		suiv = new Button("> Suivant");
-		prec = new Button("Précédent <");
-		
-		cTC = new ContentTabConstructions(panneauJoueur);	
+
+		cTC = new ContentTabConstructions(panneauJoueur);
 		CTCards = new ContentTabCartes(modelJeu.getJoueur(),modelJeu,panneauJoueur);
-		
+		cTI = new ContentTabInventions();
+
 		TabConstructions.setContent(cTC);
 		TabInventions.setContent(cTI);
 		TabCartes.setContent(CTCards);
 
-		
 		VGauche.getChildren().add(TabsMarche);
 		VGauche.getChildren().add(new Separator());
 		VGauche.getChildren().add(des);
@@ -118,17 +110,16 @@ public class Fenetre extends AnchorPane {
 		VGauche.setPrefWidth(300);
 		VGauche.setMaxWidth(300);
 		VGauche.setId("VGauche");
-		
+
 		VMilieu.getChildren().add(numPlateau);
 		VMilieu.getChildren().add(new HBox(10, prec, suiv));
 		VMilieu.getChildren().add(stack);
 		VMilieu.getChildren().add(gridJoueurs);
-		
+
 		VMilieu.setMinWidth(800);
 		VMilieu.setPrefWidth(800);
 		VMilieu.setMaxWidth(800);
-		
-		
+
 		VDroite.getChildren().add(panneauJoueur);
 		VDroite.setMinWidth(300);
 		VDroite.setPrefWidth(300);
@@ -138,77 +129,73 @@ public class Fenetre extends AnchorPane {
 		PanneauMarche = new TitledPane("Marché", VGauche);
 		PanneauMarche.setCollapsible(false);
 		PanneauMarche.setPrefHeight(800);
-		
-		
+
 		PanneauCarte = new TitledPane("Carte", VMilieu);
 		PanneauCarte.setCollapsible(false);
 		PanneauCarte.setPrefHeight(800);
-		
+
 		PanneauJoueur = new TitledPane("Joueur", VDroite);
 		PanneauJoueur.setCollapsible(false);
 		PanneauJoueur.setPrefHeight(800);
-		
+
 		statusBar.setPadding(new Insets(10));
-		
+
 		getChildren().add(new StackPane(new VBox(new HBox(PanneauMarche, PanneauCarte, PanneauJoueur), statusBar),echange));
 
-		// Gestion des evenements
+		/****************************************************\
+		 *              Gestion des evenements              *
+ 		\****************************************************/
 		suiv.setOnAction(new EventHandler<ActionEvent>() {
-
+			// Passer au plateau suivant
 			@Override
 			public void handle(ActionEvent event)
 			{
-				plateauSuivant();
+				modelJeu.epoqueSuivante();
 			}
 		});
 
 		prec.setOnAction(new EventHandler<ActionEvent>() {
-
+			// Passer au platea précédent
 			@Override
 			public void handle(ActionEvent event)
 			{
-				plateauPrecedent();
+
+				modelJeu.epoquePrecedente();
 			}
 		});
-		
+
 		des.getLancer().setOnAction(new EventHandler<ActionEvent>() {
-
+			// Lance les dés
 			@Override
 			public void handle(ActionEvent event)
 			{
-				lanceDes();
+				modelJeu.lancerDes();
 			}
-			
-		});
-		
-		finTour.setOnAction(new EventHandler<ActionEvent>() {
 
+		});
+
+		finTour.setOnAction(new EventHandler<ActionEvent>() {
+			// finit le tour d'un joueur et passer au joueur suivant
 			@Override
 			public void handle(ActionEvent event)
 			{
-				passerJoueurSuivant();
+				modelJeu.joueurSuivant();
 			}
 		});
 
 		// Initialise la vue
-		init();
-	}
-
-	public void init()
-	{
-		initTourJoueur();
-		chargerPlateau(0);
+		modelJeu.initJeu();
 	}
 
 	public void initTourJoueur()
 	{
-		//des.desactiver();
 		//cTC.desactiver();
 		cTI.desactiver();
 		des.activer();
 		CTCards.desactiver();
+		des.activer();
 		finTour.setDisable(true);
-		statusBar.setText(modelJeu.getJoueur().getNom() + " lancez les dés");
+		setStatus(modelJeu.getJoueur().getNom() + " - Lancez les dés pour commencer\"");
 		panneauJoueur.update(modelJeu.getJoueur());
 		desactiveEchangeBouttonJoueurActuel();
 		cTC.setJoueur(modelJeu.getJoueur());
@@ -216,53 +203,40 @@ public class Fenetre extends AnchorPane {
 
 	public void desactiveEchangeBouttonJoueurActuel()
 	{
-		// Active tous les boutons pour les changes
+		// Active tous les boutons pour les échanges
 		for(int i=0;i<modelJeu.getNbJoueurs();++i)
-			echangerList[i].setDisable(false);
+			bt_echangerList[i].setDisable(false);
 		// Désactive le bouton pour le joueur actuel
-		echangerList[modelJeu.getJoueur().getNumJoueur()-1].setDisable(true);
+		bt_echangerList[modelJeu.getJoueur().getNumJoueur()-1].setDisable(true);
 	}
 
-	public void passerJoueurSuivant()
+	public void lanceDes(int[] tab)
 	{
-		modelJeu.joueurSuivant();
-		initTourJoueur();
-	}
-
-	public void lanceDes()
-	{
-		des.actualiserResultats(modelJeu.lancerDes());
+		des.actualiserResultats(tab);
 		des.desactiver();
 		finTour.setDisable(false);
-		statusBar.setText(modelJeu.getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant");
+		setStatus(modelJeu.getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant");
 	}
 
-	public void chargerPlateau(int idxPlateau)
+	public void chargerPlateau(Epoque epoque)
 	{
-		plateauActuel = idxPlateau;
+		VuePlateau newPlateau = getVuePlateau(epoque);
 		stack.getChildren().removeAll(stack.getChildren());
-		stack.getChildren().add(plateaux.get(plateauActuel));
-		numPlateau.setText("Epoque : "+ Epoque.toString(plateaux.get(plateauActuel).getM_plateau().getEpoque()));
-		cTC.setEpoque(plateaux.get(plateauActuel).getPlateau().getEpoque());
+		stack.getChildren().add(newPlateau);
+		numPlateau.setText("Epoque : " + epoque);
+		cTC.setEpoque(epoque);
 	}
 
-	public void plateauSuivant()
+	public void setStatus(String str)
 	{
-		/*if(plateauActuel >= plateaux.size()-1)
-			chargerPlateau(0);
-		else
-			chargerPlateau(plateauActuel+1);*/
-		chargerPlateau((plateauActuel+1)%4);
-		modelJeu.setEpoqueActuelle(plateaux.get(plateauActuel).getM_plateau().getEpoque());
+		statusBar.setText(str);
 	}
 
-	public void plateauPrecedent()
+	public VuePlateau getVuePlateau(Epoque epoque)
 	{
-		if(plateauActuel <= 0)
-			chargerPlateau(plateaux.size()-1);
-		else
-			chargerPlateau(plateauActuel - 1);
-		
-		modelJeu.setEpoqueActuelle(plateaux.get(plateauActuel).getM_plateau().getEpoque());
+		for(VuePlateau pl : plateaux)
+			if(pl.getPlateau().getEpoque() == epoque)
+				return pl;
+		return null;
 	}
 }
