@@ -239,8 +239,8 @@ public class Jeu {
 		{
 			getJoueur().construirePoint(type, point);
 			point.construire(getJoueur(), type);
-			m_vue.updatePlateau();
 			m_vue.updateJoueur();
+			point.getVue().update();
 		}
 	}
 }

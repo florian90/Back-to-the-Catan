@@ -267,11 +267,6 @@ public class Fenetre extends AnchorPane {
 		resetStatus();
 	}
 
-	public void updatePlateau()
-	{
-		System.out.println("updatePlateau");
-	}
-
 	public void updateJoueur()
 	{
 		System.out.println("updateJoueur");
