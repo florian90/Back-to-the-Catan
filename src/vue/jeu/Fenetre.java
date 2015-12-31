@@ -42,8 +42,6 @@ public class Fenetre extends AnchorPane {
 	private Jeu modelJeu;
 
 	private String messageClassique;
-
-	// Test Popup Echange
 	private VueEchange echange;
 
 	public Fenetre(Jeu p_modelJeu)
@@ -51,7 +49,7 @@ public class Fenetre extends AnchorPane {
 		modelJeu = p_modelJeu;
 		modelJeu.setVue(this);
 
-		echange = new VueEchange();
+		
 
 		finTour = new Button("Fin du Tour");
 		suiv = new Button("> Suivant");
@@ -106,6 +104,7 @@ public class Fenetre extends AnchorPane {
 		numPlateau = new Label();
 		statusBar = new Label();
 		panneauJoueur = new ContentJoueur(modelJeu.getJoueur(), modelJeu);
+		echange = new VueEchange(panneauJoueur);
 		stack = new StackPane();
 
 		cTC = new ContentTabConstructions(panneauJoueur);
@@ -153,7 +152,7 @@ public class Fenetre extends AnchorPane {
 
 		statusBar.setPadding(new Insets(10));
 
-		getChildren().add(new StackPane(new VBox(new HBox(PanneauMarche, PanneauCarte, PanneauJoueur), statusBar)/*,echange*/));
+		getChildren().add(new StackPane(new VBox(new HBox(PanneauMarche, PanneauCarte, PanneauJoueur), statusBar),echange));
 
 		/****************************************************\
 		 *              Gestion des evenements              *

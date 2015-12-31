@@ -52,6 +52,14 @@ public class VueArete extends Line
 			@Override
 			public void handle(MouseEvent event) {
 				System.out.println(m_arete.toString());
+				if(m_arete.peutEtreAutoroute())
+				{
+					setStroke(Color.YELLOW);	
+				}
+				else
+				{
+					setStroke(Color.BLUE);
+				}
 				
 			
 			}

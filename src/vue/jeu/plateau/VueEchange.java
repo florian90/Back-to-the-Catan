@@ -13,22 +13,30 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.jeu.Jeu;
 import model.joueur.Joueur;
+import model.joueur.PackRess;
 import model.joueur.Ressource;
+import vue.jeu.ContentJoueur;
 
 public class VueEchange extends TitledPane{
 	
 	private Joueur jGauche, jDroite;
-	private Button annuler, echanger;
-	AfficheJoueur aj1, aj2;
+	private Button fermer, echanger;
+	private AfficheJoueur aj1, aj2;
+	private ContentJoueur ctj;
 	
-	public VueEchange()
+	
+	public VueEchange(ContentJoueur p_ctj)
 	{
 		aj1 = new AfficheJoueur();
 		aj2 = new AfficheJoueur();
+		ctj = p_ctj;
 		
 		setVisible(false);
 		setText("Echange");
@@ -37,25 +45,25 @@ public class VueEchange extends TitledPane{
 		setMaxWidth(1000);
 		setId("popup");
 		
-		annuler = new Button("Annuler");
+		fermer = new Button("Fermer");
 		echanger = new Button("Echanger");
 		
 		HBox contenu = new HBox(aj1,new Separator(Orientation.VERTICAL),aj2);
 		contenu.setSpacing(100);
 		contenu.setAlignment(Pos.CENTER);
 		
-		annuler.setAlignment(Pos.BASELINE_RIGHT);
+		fermer.setAlignment(Pos.BASELINE_RIGHT);
 		echanger.setAlignment(Pos.BASELINE_RIGHT);
-		HBox boutons = new HBox(annuler,echanger);
+		HBox boutons = new HBox(fermer,echanger);
 		VBox vbox = new VBox(contenu,boutons);
-		vbox.setSpacing(20);
+		vbox.setSpacing(10);
 		vbox.setAlignment(Pos.CENTER_RIGHT);
 		
 		/********************************************\
 		**          Gestion des Evenements			**
 		\********************************************/
 		
-		annuler.setOnAction(new EventHandler<ActionEvent>() {
+		fermer.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent event) {
@@ -69,6 +77,23 @@ public class VueEchange extends TitledPane{
 			@Override
 			public void handle(ActionEvent event) {
 				
+				PackRess donne = new PackRess();
+				PackRess recois = new PackRess();
+				
+				for(Entry<Ressource, Spinner<Integer>> e : aj1.getQuantites().entrySet())
+				{
+					donne.add(e.getKey(),e.getValue().getValue());
+				}
+				
+				for(Entry<Ressource, Spinner<Integer>> e : aj2.getQuantites().entrySet())
+				{
+					recois.add(e.getKey(),e.getValue().getValue());
+				}
+				
+				jGauche.echangerRessources(jDroite, donne, recois);
+				
+				show(jGauche,jDroite);
+				ctj.update(jGauche);
 				
 			}
 		});
@@ -104,12 +129,14 @@ public class VueEchange extends TitledPane{
 		private HashMap<Ressource,Label> disponibles;
 		private Label nomJoueur;
 		private Joueur joueur;
+		private ImageView imgAvatar;
 		
 		public  AfficheJoueur()
 		{
 			int i=0;
 			quantites = new HashMap<Ressource, Spinner<Integer>>();
 			disponibles = new HashMap<Ressource,Label>();
+			imgAvatar = new ImageView();
 			setHgap(20);
 			setVgap(20);
 			
@@ -123,7 +150,7 @@ public class VueEchange extends TitledPane{
 					add(spinTemp,2,i+3);
 					
 					//Ajout des labels de type
-					add(new Label(r.toString()+" :"),0,i+3);
+					add(new Label(Ressource.toString(r)+" :"),0,i+3);
 					
 					//Ajout des labels de ressources disponibles
 					Label lTemp = new Label("0");
@@ -135,10 +162,14 @@ public class VueEchange extends TitledPane{
 				
 			}
 			
+			imgAvatar.setFitWidth(50);
+			imgAvatar.setPreserveRatio(true);
+			add(imgAvatar,0,0);
+			
 			nomJoueur = new Label("");
 			nomJoueur.setId("divisions");
 			nomJoueur.setAlignment(Pos.CENTER);
-			add(nomJoueur,0,0,3,1);
+			add(nomJoueur,1,0,3,1);
 			
 			Label lType = new Label("Type");
 			lType.setId("divisions");
@@ -154,9 +185,14 @@ public class VueEchange extends TitledPane{
 			
 		}
 		
+		public HashMap<Ressource, Spinner<Integer>> getQuantites() {
+			return quantites;
+		}
+
 		public void updateFields(Joueur j)
 		{
 			nomJoueur.setText(j.getNom());
+			imgAvatar.setImage(new Image(j.getAvatar()));
 			
 			for(Entry<Ressource,Label> e : disponibles.entrySet())
 			{
