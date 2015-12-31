@@ -27,27 +27,32 @@ public class CoordCase {
 
 	public CoordCase northEast()
 	{
-		return new CoordCase(line + 1, column - 1);
+		return new CoordCase(line - 1, column + 1);
 	}
 
 	public CoordCase east()
 	{
-		return new CoordCase(line + 1, column);
+		return new CoordCase(line, column + 1);
 	}
 
 	public CoordCase southEast()
 	{
-		return new CoordCase(line, column + 1);
+		return new CoordCase(line + 1, column);
 	}
 
 	public CoordCase southWest()
 	{
-		return new CoordCase(line - 1, column + 1);
+		return new CoordCase(line + 1, column - 1);
 	}
 
 	public CoordCase west()
 	{
-		return new CoordCase(line - 1, column);
+		return new CoordCase(line, column-1);
+	}
+
+	public CoordCase northWest()
+	{
+		return new CoordCase(line-1, column);
 	}
 
 	@Override
@@ -71,12 +76,6 @@ public class CoordCase {
 		int result = line;
 		result = 31*result + column;
 		return result;
-	}
-
-	public CoordCase northWest()
-
-	{
-		return new CoordCase(line, column - 1);
 	}
 
 	@Override
