@@ -176,7 +176,12 @@ public class Jeu {
 	{//Todo: clicPoint
 		if(m_constructionActrive)
 		{
-
+			TypePoint type = point.getType();
+			if(type == TypePoint.Vide)
+				type = TypePoint.Village;
+			else if(type == TypePoint.Village)
+				type = TypePoint.Ville;
+			construirePoint(type, point);
 		}
 	}
 
@@ -210,5 +215,32 @@ public class Jeu {
 	public boolean isDeLance()
 	{
 		return m_desLences;
+	}
+
+	public boolean peutConstruirePoint(TypePoint type, Point point)
+	{
+		if(!getJoueur().possede(type))
+		{
+			m_vue.setStatus("Voue n'avez pas " + type + " disponible, ahetez-en au marché !");
+			return false;
+		}
+		String res = point.peutConstruire(getJoueur(), type);
+		if(res != null)
+		{
+			m_vue.setStatus(res);
+			return false;
+		}
+		return true;
+	}
+
+	public void construirePoint(TypePoint type, Point point)
+	{
+		if(peutConstruirePoint(type, point))
+		{
+			getJoueur().construirePoint(type, point);
+			point.construire(getJoueur(), type);
+			m_vue.updatePlateau();
+			m_vue.updateJoueur();
+		}
 	}
 }

@@ -23,10 +23,10 @@ public class Joueur {
 	private ArrayList<Arete> m_routesConstruites;
 	private ArrayList<Arete> m_autoroutesConstruites;
 	
-	private int nbRoutesAConstruire=0;
-	private int nbAutoroutesAConstruire=0;
-	private int nbVillagesAConstruire=0;
-	private int nbVillesAConstruire=0;
+	private int nbRoutesAConstruire;
+	private int nbAutoroutesAConstruire;
+	private int nbVillagesAConstruire;
+	private int nbVillesAConstruire;
 	
 	//private HashMap<Carte, Integer> m_cartes;
 	private int nbCartesDev;
@@ -56,15 +56,16 @@ public class Joueur {
 		}
 		m_ressources = new PackRess();
 		m_inventions = new HashMap<>();
-		//m_pointsConstruits = new HashMap<>();
-		//m_aretesConstruites = new HashMap<>();
 		
-		m_villagesConstruits = new ArrayList<Point>();
-		m_villesConstruites = new ArrayList<Point>();
-		m_autoroutesConstruites = new ArrayList<Arete>();
-		m_routesConstruites = new ArrayList<Arete>();
-		
-		//m_cartes = new HashMap<>();
+		m_villagesConstruits    = new ArrayList<>();
+		m_villesConstruites     = new ArrayList<>();
+		m_autoroutesConstruites = new ArrayList<>();
+		m_routesConstruites     = new ArrayList<>();
+
+		nbRoutesAConstruire     = 5;
+		nbAutoroutesAConstruire = 5;
+		nbVillagesAConstruire   = 5;
+		nbVillesAConstruire     = 5;
 
 		for (Invention inv : Invention.values())
 			m_inventions.put(inv, 0);
@@ -93,6 +94,18 @@ public class Joueur {
 	public boolean possede(PackRess pack)
 	{
 		return m_ressources.contains(pack);
+	}
+
+	/*
+	 * Teste si le joueur possède un point de type type en stock
+	 */
+	public boolean possede(TypePoint type)
+	{
+		if(type == TypePoint.Village)
+			return nbVillagesAConstruire >= 0;
+		else if(type == TypePoint.Ville)
+			return nbVillesAConstruire >= 0;
+		return false;
 	}
 
 	/*
@@ -181,25 +194,13 @@ public class Joueur {
 			m_routesConstruites.add(road);
 		}
 	}
-	//A vérifier si point doit être une hashmap ou pas. Séparer Ville et Village ?
-	public void construirePoint(PackRess pack, Point point)
-	{/*
-		depenserRessources(pack);
-		//int nbPoint = m_pointsConstruits.get(point);
-		//m_pointsConstruits.put(point, nbPoint+1);
-		if (point.getType() == TypePoint.Village)
-		{
+
+	public void construirePoint(TypePoint type, Point point)
+	{
+		if(type == TypePoint.Village)
 			m_villagesConstruits.add(point);
-			point.construire(this, type);
-		}
-		else if (point.getType() == TypePoint.Ville)
-		{
-			if(nbVillesAConstruire <= 0)
-				return;
-			nbVillesAConstruire--;
+		else
 			m_villesConstruites.add(point);
-			point.construire(this, type);
-		}*/
 	}
 
 	/*
