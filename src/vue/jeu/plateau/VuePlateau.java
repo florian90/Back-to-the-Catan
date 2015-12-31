@@ -40,7 +40,9 @@ public class VuePlateau extends Group {
 		for (Point pt : m_plateau.getPoints())
 		{
 			center = getCoord(pt.getCoo());
-			m_points.getChildren().add(new VuePoint(pt,center.x, center.y, m_jeu));
+			VuePoint vue = new VuePoint(pt,center.x, center.y, m_jeu);
+			m_points.getChildren().add(vue);
+			pt.setVue(vue);
 		}
 		getChildren().add(m_points);
 	}

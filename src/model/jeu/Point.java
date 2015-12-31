@@ -2,11 +2,13 @@ package model.jeu;
 
 import model.jeu.coordonnee.CoordPoint;
 import model.joueur.Joueur;
+import vue.jeu.plateau.VuePoint;
 
 public class Point {
 	private CoordPoint m_coord;
 	private TypePoint m_type;
 	private Joueur m_proprietaire; //Si null, le point n'est pas encore utilisé
+	private VuePoint m_vue;
 
 	public Point(CoordPoint coord, TypePoint type, Joueur propietaire)
 	{
@@ -72,5 +74,15 @@ public class Point {
 	public String toString()
 	{
 		return m_coord.toString();
+	}
+
+	public void setVue(VuePoint vue)
+	{
+		m_vue = vue;
+	}
+
+	public VuePoint getVue()
+	{
+		return m_vue;
 	}
 }
