@@ -102,9 +102,9 @@ public class Joueur {
 	public boolean possede(TypePoint type)
 	{
 		if(type == TypePoint.Village)
-			return nbVillagesAConstruire >= 0;
+			return nbVillagesAConstruire >= 1;
 		else if(type == TypePoint.Ville)
-			return nbVillesAConstruire >= 0;
+			return nbVillesAConstruire >= 1;
 		return false;
 	}
 
@@ -198,9 +198,15 @@ public class Joueur {
 	public void construirePoint(TypePoint type, Point point)
 	{
 		if(type == TypePoint.Village)
+		{
 			m_villagesConstruits.add(point);
+			nbVillagesAConstruire--;
+		}
 		else
+		{
 			m_villesConstruites.add(point);
+			nbVillesAConstruire--;
+		}
 	}
 
 	/*
@@ -313,7 +319,7 @@ public class Joueur {
 		return m_numJoueur;
 	}
 	
-	public Color getM_Couleur()
+	public Color getCouleur()
 	{
 		return m_couleur;
 	}
