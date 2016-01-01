@@ -54,7 +54,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		construire =new Button("Construire");
 		construire.setOnMouseClicked((e)->{
 			m_jeu.changeConstructionActive();
-			if(m_jeu.isConstructionActrive())
+			if(m_jeu.isConstructionActive())
 				construire.setEffect(new InnerShadow());
 			else
 				construire.setEffect(null);
@@ -102,10 +102,10 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		add(construire,1,9);
 		add(inventions, 0, 13);
 		
-		add(new Label("Train :" + j.possedeInvention(Invention.Train)), 0, 14);
-		add(new Label("Radio :" + j.possedeInvention(Invention.Radio)), 1, 14);
-		add(new Label("Conv. temporel :" + j.possedeInvention(Invention.ConvecteurTemporel)), 0, 15);
-		add(new Label("Hoverboard :" + j.possedeInvention(Invention.HoverBoard)), 1, 15);
+		add(new Label("Train :" + (j.possedeInvention(Invention.Train)?" Acquis":" Non Acquis")), 0, 14);
+		add(new Label("Radio :" + (j.possedeInvention(Invention.Radio)?" Acquis":" Non Acquis")), 1, 14);
+		add(new Label("Conv. temp. :" +(j.possedeInvention(Invention.ConvecteurTemporel)?" Acquis":" Non Acquis")), 0, 15);
+		add(new Label("Hoverboard :" + (j.possedeInvention(Invention.HoverBoard)?" Acquis":" Non Acquis")), 1, 15);
 
 		add(cartes, 0, 17);
 		add(new Label("Dépl. Voleur :" + j.getNbCartesDeplacerVoleur()), 0, 18);

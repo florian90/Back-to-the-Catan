@@ -35,10 +35,10 @@ public class VuePoint extends Group{
 			m_cercle.setFill(Color.WHITE);
 			if(m_jeu.isDeLance())
 			{
-				if (m_jeu.isConstructionActrive())
+				if (m_jeu.isConstructionActive())
 					m_fenetre.setStatus("Construire un nouveau point");
 				else
-					m_fenetre.setStatus("Cliquez sr le boutton construire si vous souhaitez construire un bâtiment ici");
+					m_fenetre.setStatus("Cliquez sur le boutton construire si vous souhaitez construire un bâtiment ici");
 			}
 		});
 		setOnMouseExited((e)->{
@@ -73,7 +73,7 @@ public class VuePoint extends Group{
 		imageVillage.setY(centreY-imageVillage.getFitWidth()/2);
 
 		/** Initialisation de l'image Ville **/
-		imageVille = new ImageView("textures/Ville.jpg");
+		imageVille = new ImageView("textures/ville.png");
 		imageVille.setFitHeight(30);
 		imageVille.setFitWidth(30);
 		imageVille.setX(centreX-imageVille.getFitHeight()/2);

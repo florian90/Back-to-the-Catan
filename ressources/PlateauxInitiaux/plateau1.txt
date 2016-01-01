@@ -22,6 +22,6 @@
  * 0 : Rien
  * 1 : Autoroute
  * 2 : Metal
- * 3 : Ressource unique 1
- * 4 : Ressource unique 2
+ * 3 : Ressource unique 1// plutonium
+ * 4 : Ressource unique 2//schema
  */

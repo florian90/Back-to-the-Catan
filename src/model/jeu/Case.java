@@ -8,6 +8,7 @@ public class Case {
 	private Ressource m_ressource;
 	private int m_valeur;
 
+
 	public Case(CoordCase coo, Ressource res, int val)
 	{
 		m_coord = coo;
@@ -28,6 +29,9 @@ public class Case {
 	public Ressource getRessource()
 	{
 		return m_ressource;
+	}
+	public int getM_valeur() {
+		return m_valeur;
 	}
 
 	@Override

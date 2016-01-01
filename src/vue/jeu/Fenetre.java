@@ -239,7 +239,7 @@ public class Fenetre extends AnchorPane {
 		VuePlateau newPlateau = getVuePlateau(epoque);
 		stack.getChildren().removeAll(stack.getChildren());
 		stack.getChildren().add(newPlateau);
-		numPlateau.setText("Epoque : " + epoque);
+		numPlateau.setText("Epoque : " + Epoque.toString(epoque));
 		cTC.setEpoque(epoque);
 	}
 

@@ -21,7 +21,7 @@ public class Jeu {
 	private int nbJoueurs, joueurActuel;
 	private Epoque epoqueActuelle;
 
-	private boolean m_constructionActrive;
+	private boolean m_constructionActive;
 	private boolean m_desLences;
 
 	private Fenetre m_vue;
@@ -174,7 +174,7 @@ public class Jeu {
 
 	public void clicPoint(Point point)
 	{//Todo: clicPoint
-		if(m_constructionActrive)
+		if(m_constructionActive)
 		{
 			TypePoint type = point.getType();
 			if(type == TypePoint.Vide)
@@ -187,7 +187,7 @@ public class Jeu {
 
 	public void clicArete(Arete arete)
 	{//Todo: clicArete
-		if(m_constructionActrive)
+		if(m_constructionActive)
 		{
 
 		}
@@ -195,16 +195,16 @@ public class Jeu {
 
 	public void changeConstructionActive()
 	{
-		m_constructionActrive = !m_constructionActrive;
-		if(m_constructionActrive)
+		m_constructionActive = !m_constructionActive;
+		if(m_constructionActive)
 			m_vue.setMessageClassique("Sélectionner la case sur laquelle vous souhaitez construire");
 		else
 			m_vue.setMessageClassique(getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant");
 	}
 
-	public boolean isConstructionActrive()
+	public boolean isConstructionActive()
 	{
-		return m_constructionActrive;
+		return m_constructionActive;
 	}
 
 	public Fenetre getFenetre()
@@ -221,7 +221,7 @@ public class Jeu {
 	{
 		if(!getJoueur().possede(type))
 		{
-			m_vue.setStatus("Voue n'avez pas " + type + " disponible, ahetez-en au marché !");
+			m_vue.setStatus("Vous n'avez pas de " + type + " disponible, ahetez-en au marché !");
 			return false;
 		}
 		String res = point.peutConstruire(getJoueur(), type);

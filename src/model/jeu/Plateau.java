@@ -41,7 +41,8 @@ public class Plateau {
 	 */
 	private void initCases()
 	{
-		int[][] list = getRessourceTab(); // Initialise le tableau des ressources
+		int[][] listRessources = getRessourceTab(); // Initialise le tableau des ressources
+		int[][] listValeurs = getValeursTab();
 		cases = new HashMap<>();
 		CoordCase coord;
 		Case tuile;
@@ -51,9 +52,9 @@ public class Plateau {
 			for (int i = 1; i <= m_size; i++)
 			{
 				coord = new CoordCase(j - 4, i - 4);
-				if ((res = getRessource(coord, list)) != null)
+				if ((res = getRessource(coord, listRessources)) != null)
 				{
-					tuile = new Case(coord, res, 6);
+					tuile = new Case(coord, res, listValeurs[j-1][i-1]); //TODO:atribuer le bon numéro à chaque case
 					cases.put(coord, tuile);
 				}
 			}
@@ -225,6 +226,36 @@ public class Plateau {
 		try
 		{
 			BufferedReader reader = new BufferedReader(new FileReader("ressources/PlateauxInitiaux/plateau1.txt"));
+			for (int i = 0; i < m_size; i++)
+			{
+				tab = reader.readLine().split(" ");
+				for (int j = 0; j < m_size; j++)
+				{
+					list[i][j] = Integer.parseInt(tab[j]);
+				}
+			}
+			reader.close();
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/*
+	 * Initialise le tableau des valeurs des cases.
+	 * Il sera ensuite utilisé pour retrouver quelle ressource correspond à quelle case du plateau.
+	 */
+	private int[][] getValeursTab()
+	{
+		//Todo: Le fichier doit contenir ne matrice 7x7 avec un nombre puis un espace, si on modifie la taille rien ne vas plus !
+		// Crée un tableau avec les ressources présentes dans chaque case
+		// Le tableau tab est initialisé à partir d'un fichier
+		int[][] list = new int[m_size][m_size];
+		String[] tab = null;
+		try
+		{
+			BufferedReader reader = new BufferedReader(new FileReader("ressources/PlateauxInitiaux/plateau1valeurs.txt"));
 			for (int i = 0; i < m_size; i++)
 			{
 				tab = reader.readLine().split(" ");

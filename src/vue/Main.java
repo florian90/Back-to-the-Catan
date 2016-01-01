@@ -62,10 +62,10 @@ public class Main extends Application {
 					EcranJeu.getStylesheets().add(getClass().getResource("StyleEcranJeu.css").toExternalForm());
 					primaryStage.setScene(EcranJeu);
 					primaryStage.show();
-					final File file = new File("src/sons/nomdezeus.mp3"); // NOM DE ZEUS !!
+					/*final File file = new File("src/sons/nomdezeus.mp3"); // NOM DE ZEUS !!
 					final Media media = new Media(file.toURI().toString());
 					final MediaPlayer mediaPlayer = new MediaPlayer(media);
-					mediaPlayer.play();
+					mediaPlayer.play();*/
 					System.out.println(menuView.getListeJoueurs());
 				}
 			});
