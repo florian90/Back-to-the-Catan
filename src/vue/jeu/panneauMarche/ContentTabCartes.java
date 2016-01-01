@@ -18,14 +18,13 @@ import vue.jeu.Desactivable;
 public class ContentTabCartes extends GridPane implements Desactivable{
 	
 	private Button tirer;
-	private	Joueur joueur;
-	private Jeu jeu;
+	private Jeu m_jeu;
 	private ContentJoueur ctj;
 	
-	public ContentTabCartes(Joueur p_joueur, Jeu p_jeu, ContentJoueur p_ctj)
+	public ContentTabCartes(Jeu p_jeu, ContentJoueur p_ctj)
 	{
-		joueur = p_joueur;
-		jeu = p_jeu;
+
+		m_jeu = p_jeu;
 		ctj = p_ctj;
 		
 		ImageView cartes = new ImageView(new Image("textures/cards.jpg"));
@@ -44,9 +43,9 @@ public class ContentTabCartes extends GridPane implements Desactivable{
 			
 			@Override
 			public void handle(ActionEvent event) {
-				joueur.acheterCarte(new PackRess(Ressource.Metal), jeu.tirerCarte()); //mettre le vrai cout d'une carte
-				System.out.println(jeu.tirerCarte());
-				ctj.update(joueur);
+				m_jeu.getJoueur().acheterCarte(new PackRess(Ressource.Metal), m_jeu.tirerCarte()); //mettre le vrai cout d'une carte
+				System.out.println(m_jeu.tirerCarte());
+				ctj.update(m_jeu.getJoueur());
 				
 			}
 		});
@@ -55,13 +54,13 @@ public class ContentTabCartes extends GridPane implements Desactivable{
 
 	@Override
 	public void desactiver() {
-		// TODO Auto-generated method stub
+		tirer.setDisable(true);
 		
 	}
 
 	@Override
 	public void activer() {
-		// TODO Auto-generated method stub
+		tirer.setDisable(false);
 		
 	}
 }

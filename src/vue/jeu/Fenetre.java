@@ -107,9 +107,9 @@ public class Fenetre extends AnchorPane {
 		echange = new VueEchange(panneauJoueur);
 		stack = new StackPane();
 
-		cTC = new ContentTabConstructions(panneauJoueur);
-		CTCards = new ContentTabCartes(modelJeu.getJoueur(),modelJeu,panneauJoueur);
-		cTI = new ContentTabInventions();
+		cTC = new ContentTabConstructions(modelJeu,panneauJoueur);
+		CTCards = new ContentTabCartes(modelJeu,panneauJoueur);
+		cTI = new ContentTabInventions(modelJeu,panneauJoueur);
 
 		TabConstructions.setContent(cTC);
 		TabInventions.setContent(cTI);
@@ -203,7 +203,7 @@ public class Fenetre extends AnchorPane {
 	{
 		System.out.println("test");
 		//cTC.desactiver();
-		cTI.desactiver();
+		cTI.update();
 		des.activer();
 		CTCards.desactiver();
 		panneauJoueur.desactiver();
@@ -213,6 +213,10 @@ public class Fenetre extends AnchorPane {
 		panneauJoueur.update(modelJeu.getJoueur());
 		desactiveEchangeBouttonJoueurActuel();
 		cTC.setJoueur(modelJeu.getJoueur());
+	}
+
+	public ContentJoueur getPanneauJoueur() {
+		return panneauJoueur;
 	}
 
 	public void desactiveEchangeBouttonJoueurActuel()

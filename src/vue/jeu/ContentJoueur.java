@@ -63,11 +63,11 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		aConstruire = new Label("A construire");
 		aConstruire.setId("divisions");
 
-		inventions = new Label("Inventions :");
+		inventions = new Label("Inventions : ");
 		inventions.setId("divisions");
 
 
-		cartes = new Label("Cartes :");
+		cartes = new Label("Cartes : ");
 		cartes.setId("divisions");
 	}
 	
@@ -83,33 +83,33 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		add(labelPseudo, 1, 0);
 		add(ressources, 0, 2);
 
-		add(new Label("Métal :" + j.nbRessource(Ressource.Metal)), 0, 3);
-		add(new Label("Bois :" + j.nbRessource(Ressource.Bois)), 0, 4);
-		add(new Label("Roue :" + j.nbRessource(Ressource.Roue)), 0, 5);
-		add(new Label("Haut-Parleurs :" + j.nbRessource(Ressource.HautParleur)), 0, 6);
-		add(new Label("Morceaux de Schéma :" + j.nbRessource(Ressource.MorceauSchema)), 0, 7);
-		add(new Label("Antennes :" + j.nbRessource(Ressource.Antenne)), 1, 3);
-		add(new Label("Plutonium :" + j.nbRessource(Ressource.Plutonium)), 1, 4);
-		add(new Label("Aimant :" + j.nbRessource(Ressource.Aimant)), 1, 5);
-		add(new Label("Ventilateur :" + j.nbRessource(Ressource.Ventilateur)), 1, 6);
+		add(new Label("Métal : " + j.nbRessource(Ressource.Metal)), 0, 3);
+		add(new Label("Bois : " + j.nbRessource(Ressource.Bois)), 0, 4);
+		add(new Label("Roue : " + j.nbRessource(Ressource.Roue)), 0, 5);
+		add(new Label("Haut-Parleurs : " + j.nbRessource(Ressource.HautParleur)), 0, 6);
+		add(new Label("Morceaux de Schéma : " + j.nbRessource(Ressource.MorceauSchema)), 0, 7);
+		add(new Label("Antennes : " + j.nbRessource(Ressource.Antenne)), 1, 3);
+		add(new Label("Plutonium : " + j.nbRessource(Ressource.Plutonium)), 1, 4);
+		add(new Label("Aimant : " + j.nbRessource(Ressource.Aimant)), 1, 5);
+		add(new Label("Ventilateur : " + j.nbRessource(Ressource.Ventilateur)), 1, 6);
 		
-		add(new Label("Routes :" + j.getNbRoutesAConstruire()), 0, 10);
-		add(new Label("Autoroutes :" + j.getNbAutoroutesAConstruire()), 0, 11);
-		add(new Label("Villages :" + j.getNbVillagesAConstruire()), 1, 10);
-		add(new Label("Villes :" + j.getNbVillesAConstruire()), 1, 11);
+		add(new Label("Routes : " + j.getNbRoutesAConstruire()), 0, 10);
+		add(new Label("Autoroutes : " + j.getNbAutoroutesAConstruire()), 0, 11);
+		add(new Label("Villages : " + j.getNbVillagesAConstruire()), 1, 10);
+		add(new Label("Villes : " + j.getNbVillesAConstruire()), 1, 11);
 
 		add(aConstruire, 0, 9);
 		add(construire,1,9);
 		add(inventions, 0, 13);
 		
-		add(new Label("Train :" + (j.possedeInvention(Invention.Train)?" Acquis":" Non Acquis")), 0, 14);
-		add(new Label("Radio :" + (j.possedeInvention(Invention.Radio)?" Acquis":" Non Acquis")), 1, 14);
-		add(new Label("Conv. temp. :" +(j.possedeInvention(Invention.ConvecteurTemporel)?" Acquis":" Non Acquis")), 0, 15);
-		add(new Label("Hoverboard :" + (j.possedeInvention(Invention.HoverBoard)?" Acquis":" Non Acquis")), 1, 15);
+		add(new Label("Train : " + (j.possedeInvention(Invention.Train)?" Acquis": " Non Acquis")), 0, 14,2,1);
+		add(new Label("Radio : " + (j.possedeInvention(Invention.Radio)?" Acquis": " Non Acquis")), 0, 15,2,1);
+		add(new Label("Conv. temp. : " +(j.possedeInvention(Invention.ConvecteurTemporel)?" Acquis": " Non Acquis")), 0, 16,2,1);
+		add(new Label("Hoverboard : " + (j.possedeInvention(Invention.HoverBoard)?" Acquis": " Non Acquis")), 0, 17,2,1);
 
-		add(cartes, 0, 17);
-		add(new Label("Dépl. Voleur :" + j.getNbCartesDeplacerVoleur()), 0, 18);
-		add(new Label("Développement :" + j.getNbCartesDev()), 0, 19);
+		add(cartes, 0, 19);
+		add(new Label("Dépl. Voleur : " + j.getNbCartesDeplacerVoleur()), 0, 20);
+		add(new Label("Développement : " + j.getNbCartesDev()), 0, 21);
 	}
 
 	@Override

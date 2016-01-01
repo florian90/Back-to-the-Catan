@@ -3,7 +3,7 @@ package model.joueur;
 import model.jeu.Epoque;
 
 public enum Invention implements Achetable {
-	/*TrainKiVol,*/
+
 	Train
 			{
 				@Override

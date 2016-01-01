@@ -60,8 +60,8 @@ public class VuePoint extends Group{
 
 		/** Initialisation du rectangle **/
 		rectangle = new Rectangle();
-		rectangle.setWidth(35);
-		rectangle.setHeight(35);
+		rectangle.setWidth(30);
+		rectangle.setHeight(30);
 		rectangle.setX(centreX-rectangle.getWidth()/2);
 		rectangle.setY(centreY-rectangle.getHeight()/2);
 

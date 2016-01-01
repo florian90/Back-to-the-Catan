@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.GridPane;
 import model.jeu.Epoque;
+import model.jeu.Jeu;
 import model.jeu.TypeArete;
 import model.jeu.TypePoint;
 import model.joueur.Joueur;
@@ -16,20 +17,22 @@ import vue.jeu.ContentJoueur;
 import vue.jeu.Desactivable;
 
 public class ContentTabConstructions extends GridPane implements Desactivable {
-	private Spinner<Integer> spinRoute; // en ajoutant un type générique ca supprime tous les warnings du bas
+	private Spinner<Integer> spinRoute; 
 	private Spinner <Integer> spinAutoroute;
 	private Spinner <Integer> spinVillage;
 	private Spinner <Integer> spinVille;
 	private Button  acheter;
 	private ContentJoueur ctj;
+	private Jeu m_jeu;
 
 	private	PackRess coutTotal;
 	private	Epoque epoque;
 	private	Joueur joueur;
 
-	public ContentTabConstructions(ContentJoueur ctj)
+	public ContentTabConstructions(Jeu jeu,ContentJoueur ctj)
 	{
 		this.ctj = ctj;
+		m_jeu = jeu; 
 		coutTotal = new PackRess();
 		spinRoute = new Spinner<Integer>(0, 100, 0);
 		spinAutoroute = new Spinner <Integer>(0, 100, 0);
@@ -38,31 +41,17 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 
 		acheter = new Button("Acheter");
 
-		/*spinRoute.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99));
-		spinAutoroute.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99));
-		spinVillage.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99));
-		spinVille.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 99));*/
 
 		spinRoute.valueProperty().addListener(new ChangeListener<Integer>() {
-			/*@Override
-			public void changed(ObservableValue observable, Object oldValue, Object newValue)
-			{
-				if(!test((int) newValue, (int) spinAutoroute.getValue(), (int) spinVillage.getValue(), (int) spinVille.getValue()))
-				{
-					spinRoute.getValueFactory().setValue(oldValue);
-					System.out.println("pas assez de ressources");
-				}
-			}*/
-			
 			@Override
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-				
-				if(!test(newValue, spinAutoroute.getValue(), spinVillage.getValue(), spinVille.getValue()))
+
+				if(!(m_jeu.test(newValue, spinAutoroute.getValue(), spinVillage.getValue(), spinVille.getValue(),epoque,joueur)))
 				{
 					spinRoute.getValueFactory().setValue(oldValue);
 					System.out.println("pas assez de ressources");
 				}
-				
+
 			}
 		});
 
@@ -71,21 +60,12 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 			@Override
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue)
 			{
-				if(!test(spinRoute.getValue(),newValue, spinVillage.getValue(),spinVille.getValue()))
+				if(!(m_jeu.test(spinRoute.getValue(),newValue, spinVillage.getValue(),spinVille.getValue(),epoque,joueur)))
 				{
 					spinAutoroute.getValueFactory().setValue(oldValue);
 					System.out.println("pas assez de ressources");
-				
-			}
-			/*@Override
-			public void changed(ObservableValue observable, Object oldValue, Object newValue)
-			{
-				if(!test((int) spinRoute.getValue(), (int) newValue, (int) spinVillage.getValue(), (int) spinVille.getValue()))
-				{
-					spinAutoroute.getValueFactory().setValue(oldValue);
-					System.out.println("pas assez de ressources");
+
 				}
-			}*/
 			}
 		});
 
@@ -93,43 +73,25 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 
 			@Override
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-				if(!test(spinRoute.getValue(), spinAutoroute.getValue(), newValue,  spinVille.getValue()))
+				if(!(m_jeu.test(spinRoute.getValue(), spinAutoroute.getValue(), newValue,  spinVille.getValue(),epoque,joueur)))
 				{
 					spinVillage.getValueFactory().setValue(oldValue);
 					System.out.println("pas assez de ressources");
 				}
-				
+
 			}
-			/*@Override
-			public void changed(ObservableValue observable, Object oldValue, Object newValue)
-			{
-				if(!test((int) spinRoute.getValue(), (int) spinAutoroute.getValue(), (int) newValue, (int) spinVille.getValue()))
-				{
-					spinVillage.getValueFactory().setValue(oldValue);
-					System.out.println("pas assez de ressources");
-				}
-			}*/
 		});
 
 		spinVille.valueProperty().addListener(new ChangeListener<Integer>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-				if(!test(spinRoute.getValue(), spinAutoroute.getValue(), spinVillage.getValue(), newValue))
+				if(!(m_jeu.test(spinRoute.getValue(), spinAutoroute.getValue(), spinVillage.getValue(), newValue,epoque,joueur)))
 				{
 					spinVille.getValueFactory().setValue(oldValue);
 					System.out.println("pas assez de ressources");
 				}
 			}
-			/*@Override
-			public void changed(ObservableValue observable, Object oldValue, Object newValue)
-			{
-				if(!test((int) spinRoute.getValue(), (int) spinAutoroute.getValue(), (int) spinVillage.getValue(), (int) newValue))
-				{
-					spinVille.getValueFactory().setValue(oldValue);
-					System.out.println("pas assez de ressources");
-				}
-			}*/
 		});
 
 		acheter.setOnMouseClicked((e)->{
@@ -141,7 +103,7 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 				joueur.acheter(TypePoint.Village, spinVillage.getValue());
 			if( spinVille.getValue() > 0)
 				joueur.acheter(TypePoint.Ville,  spinVille.getValue());
-			
+
 			ctj.update(joueur);
 			reset();
 		});
@@ -154,7 +116,7 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 		add(new Label("Autoroute"), 0, 1);
 		add(new Label("Village"), 0, 2);
 		add(new Label("Ville"), 0, 3);
-		
+
 		spinRoute.setPrefWidth(50);
 		spinAutoroute.setPrefWidth(50);
 		spinVillage.setPrefWidth(50);
@@ -180,16 +142,7 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 		spinVille.getValueFactory().setValue(0);
 	}
 
-	private boolean test(int nbRoute, int nbAutoroute, int nbVillage, int nbVille)
-	{
-		PackRess cout = new PackRess();
-		cout.add(TypeArete.Route.cout(epoque), nbRoute);
-		cout.add(TypeArete.Autoroute.cout(epoque), nbAutoroute);
-		cout.add(TypePoint.Village.cout(epoque), nbVillage);
-		cout.add(TypePoint.Ville.cout(epoque), nbVille);
-
-		return joueur.possede(cout);
-	}
+	
 
 	public void setJoueur(Joueur j)
 	{
@@ -203,16 +156,16 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 
 	@Override
 	public void desactiver() {
-		
+
 		acheter.setDisable(true);
-		
+
 	}
-	
+
 	@Override
 	public void activer() {
-		
+
 		acheter.setDisable(false);
-		
+
 	}
 
 }

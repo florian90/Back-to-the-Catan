@@ -1,16 +1,14 @@
 package model.jeu;
 
-import model.jeu.coordonnee.CoordCase;
-import model.jeu.coordonnee.CoordPoint;
-import model.joueur.Joueur;
-import model.joueur.PackRess;
-import model.joueur.Ressource;
-import model.joueur.TypeCarte;
-import vue.jeu.Fenetre;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+
+import model.joueur.Invention;
+import model.joueur.Joueur;
+import model.joueur.PackRess;
+import model.joueur.TypeCarte;
+import vue.jeu.Fenetre;
 
 public class Jeu {
 	/*
@@ -38,7 +36,13 @@ public class Jeu {
 		{
 			j.setM_jeu(this);
 		}
-		joueurs.get(0).recevoirRessources(new PackRess(Ressource.Metal, Ressource.HautParleur,Ressource.Metal, Ressource.HautParleur,Ressource.Metal, Ressource.HautParleur,Ressource.Metal, Ressource.HautParleur,Ressource.Metal, Ressource.HautParleur));//FixMe: remove this
+		PackRess packInitial = new PackRess();
+		packInitial.add(Invention.ConvecteurTemporel.cout(null));
+		packInitial.add(Invention.HoverBoard.cout(null));
+		packInitial.add(Invention.Radio.cout(null));
+		packInitial.add(Invention.Train.cout(null));
+		
+		joueurs.get(0).recevoirRessources(packInitial);
 		joueurActuel = 0; //index du joueur dont le tour est en cours
 		nbJoueurs = joueurs.size();
 		plateaux = new HashMap<Epoque, Plateau>();
@@ -94,7 +98,7 @@ public class Jeu {
 	public TypeCarte tirerCarte()
 	{
 		Random rnd = new Random();
-		int res = rnd.nextInt(2) ; //Todo: à redéfinir pour modifier la fréquence d'apparition des cartes
+		int res = rnd.nextInt(2) ; //TODO: à redéfinir pour modifier la fréquence d'apparition des cartes
 		
 		if (res == 1)
 		{
@@ -221,7 +225,7 @@ public class Jeu {
 	{
 		if(!getJoueur().possede(type))
 		{
-			m_vue.setStatus("Vous n'avez pas de " + type + " disponible, ahetez-en au marché !");
+			m_vue.setStatus("Vous n'avez pas de " + type + " disponible, achetez-en au marché !");
 			return false;
 		}
 		String res = point.peutConstruire(getJoueur(), type);
@@ -242,5 +246,17 @@ public class Jeu {
 			m_vue.updateJoueur();
 			point.getVue().update();
 		}
+	}
+	
+	//Remark: méthode déplacée depuis la classe ContentTabConstruction, il faudrait la renommer non ?
+	public boolean test(int nbRoute, int nbAutoroute, int nbVillage, int nbVille, Epoque epoque, Joueur joueur)
+	{
+		PackRess cout = new PackRess();
+		cout.add(TypeArete.Route.cout(epoque), nbRoute);
+		cout.add(TypeArete.Autoroute.cout(epoque), nbAutoroute);
+		cout.add(TypePoint.Village.cout(epoque), nbVillage);
+		cout.add(TypePoint.Ville.cout(epoque), nbVille);
+
+		return joueur.possede(cout);
 	}
 }

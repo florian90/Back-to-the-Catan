@@ -14,9 +14,7 @@ public class Joueur {
 	private Color m_couleur;
 	private String m_avatar;
 	private PackRess m_ressources;
-	private HashMap<Invention, Integer> m_inventions;
-	/*private HashMap<Point, Integer> m_pointsConstruits;
-	private HashMap<Arete, Integer> m_aretesConstruites;*/
+	private HashMap<Invention,Boolean> m_inventions;
 
 	private ArrayList<Point> m_villagesConstruits;
 	private ArrayList<Point> m_villesConstruites;
@@ -28,7 +26,6 @@ public class Joueur {
 	private int nbVillagesAConstruire;
 	private int nbVillesAConstruire;
 	
-	//private HashMap<Carte, Integer> m_cartes;
 	private int nbCartesDev;
 	private int nbCartesDeplacerVoleur;
 	private Jeu m_jeu;
@@ -68,7 +65,7 @@ public class Joueur {
 		nbVillesAConstruire     = 5;
 
 		for (Invention inv : Invention.values())
-			m_inventions.put(inv, 0);
+			m_inventions.put(inv, false);
 	}
 
 
@@ -123,7 +120,7 @@ public class Joueur {
 	 */
 	public boolean possedeInvention(Invention inv)
 	{
-		return (m_inventions.get(inv) >= 1);
+		return (m_inventions.get(inv));
 	}
 
 	/*
@@ -148,8 +145,8 @@ public class Joueur {
 	public void construireInvention(PackRess pack, Invention inv)
 	{
 		depenserRessources(pack);
-		int nbInv = m_inventions.get(inv);
-		m_inventions.put(inv, nbInv+1);
+		//int nbInv = m_inventions.get(inv);
+		m_inventions.put(inv, true);
 	}
 	
 	public void acheterCarte(PackRess pack, TypeCarte tc)
@@ -224,7 +221,7 @@ public class Joueur {
 
 	public void acheter(Achetable obj, int nbr)
 	{
-		PackRess cout = obj.cout(m_jeu.getEpoqueActuelle()); //FixMe: recupérer la vraie époque // Normalement c'est bon
+		PackRess cout = obj.cout(m_jeu.getEpoqueActuelle()); 
 		cout.mult(nbr);
 		depenserRessources(cout);
 		System.out.println(m_nom + " a recu " + nbr + "x" + obj);
@@ -245,9 +242,12 @@ public class Joueur {
 		{
 			nbVillesAConstruire+=nbr;
 		}
+
 		//FixMe: recevoir l'objet
 	}
 	
+	
+
 	/*
 	 * Retourne le nombre de points correspondant au type passé en paramètre
 	 */
@@ -351,5 +351,10 @@ public class Joueur {
 	public String getAvatar(){
 		return m_avatar;
 	}
+	
+	public HashMap<Invention, Boolean> getM_inventions() {
+		return m_inventions;
+	}
+
 
 }
