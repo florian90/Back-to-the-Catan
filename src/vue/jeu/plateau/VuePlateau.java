@@ -58,6 +58,7 @@ public class VuePlateau extends Group {
 			debut = getCoord(arete.getCoord().getDebut());
 			fin = getCoord(arete.getCoord().getFin());
 			vueArete = new VueArete(arete, debut.x, debut.y, fin.x, fin.y, m_jeu);
+			arete.setVue(vueArete);
 			m_aretes.getChildren().add(vueArete);
 		}
 		getChildren().add(m_aretes);
