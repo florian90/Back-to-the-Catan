@@ -101,19 +101,22 @@ public class Jeu {
 		m_vue.updateJoueur();
 	}
 	
-	public TypeCarte tirerCarte()
+	public void tirerCarte()
 	{
 		Random rnd = new Random();
 		int res = rnd.nextInt(2); //TODO: à redéfinir pour modifier la fréquence d'apparition des cartes
-		
+		TypeCarte typeCarte;
 		if (res == 1)
 		{
-			return TypeCarte.Developpement;
+			typeCarte = TypeCarte.Developpement;
 		} else
 		{
-			return TypeCarte.DeplacerVoleur;
+			typeCarte = TypeCarte.DeplacerVoleur;
 		}
-
+		if(getJoueur().peutConstruire(typeCarte, epoqueActuelle))
+			getJoueur().acheterCarte(typeCarte);
+		else
+			m_vue.setStatus("Vous ne possédez pas assez de ressources pour acheter ne carte");
 	}
 
 	public void joueurSuivant()

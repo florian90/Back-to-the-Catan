@@ -161,21 +161,17 @@ public class Joueur {
 		m_inventions.put(inv, true);
 	}
 	
-	public void acheterCarte(PackRess pack, TypeCarte tc)
+	public void acheterCarte(TypeCarte tc)
 	{
-		depenserRessources(pack);
+		depenserRessources(tc.cout(m_jeu.getEpoqueActuelle()));
 		if (tc == TypeCarte.DeplacerVoleur)
 		{
 			nbCartesDeplacerVoleur++;
-			System.out.println(nbCartesDeplacerVoleur);
 		}
 		else
 		{
 			nbCartesDev++;
 		}
-		
-		//int nbCard = m_cartes.get(card);
-		//m_cartes.put(card, nbCard+1);
 	}
 	
 	public int getNbCartesDev() {
@@ -185,23 +181,6 @@ public class Joueur {
 
 	public int getNbCartesDeplacerVoleur() {
 		return nbCartesDeplacerVoleur;
-	}
-
-
-	public void construireRoute(PackRess pack, Arete road)
-	{
-		depenserRessources(pack);
-
-		//int nbRoad = m_aretesConstruites.get(road);
-		//m_aretesConstruites.put(road, nbRoad+1);
-		if (road.getType() == TypeArete.Autoroute)
-		{
-			m_autoroutesConstruites.add(road);
-		}
-		else if (road.getType() == TypeArete.Route)
-		{
-			m_routesConstruites.add(road);
-		}
 	}
 
 	public void construirePoint(TypePoint type, Point point)
@@ -268,8 +247,6 @@ public class Joueur {
 		{
 			nbVillesAConstruire+=nbr;
 		}
-
-		//FixMe: recevoir l'objet
 	}
 	
 	
