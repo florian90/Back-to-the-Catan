@@ -60,22 +60,22 @@ public class VuePoint extends Group{
 
 		/** Initialisation du rectangle **/
 		rectangle = new Rectangle();
-		rectangle.setWidth(30);
-		rectangle.setHeight(30);
+		rectangle.setWidth(35);
+		rectangle.setHeight(35);
 		rectangle.setX(centreX-rectangle.getWidth()/2);
 		rectangle.setY(centreY-rectangle.getHeight()/2);
 
 		/** Initialisation de l'image Village **/
-		imageVillage = new ImageView("textures/Village.jpg");
-		imageVillage.setFitHeight(30);
-		imageVillage.setFitWidth(30);
+		imageVillage = new ImageView("textures/village.png");
+		imageVillage.setFitHeight(35);
+		imageVillage.setFitWidth(35);
 		imageVillage.setX(centreX-imageVillage.getFitHeight()/2);
 		imageVillage.setY(centreY-imageVillage.getFitWidth()/2);
 
 		/** Initialisation de l'image Ville **/
 		imageVille = new ImageView("textures/ville.png");
-		imageVille.setFitHeight(30);
-		imageVille.setFitWidth(30);
+		imageVille.setFitHeight(35);
+		imageVille.setFitWidth(35);
 		imageVille.setX(centreX-imageVille.getFitHeight()/2);
 		imageVille.setY(centreY-imageVille.getFitWidth()/2);
 
