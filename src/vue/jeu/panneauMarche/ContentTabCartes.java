@@ -45,7 +45,7 @@ public class ContentTabCartes extends GridPane implements Desactivable{
 			public void handle(ActionEvent event) {
 				m_jeu.getJoueur().acheterCarte(new PackRess(Ressource.Metal), m_jeu.tirerCarte()); //mettre le vrai cout d'une carte
 				System.out.println(m_jeu.tirerCarte());
-				ctj.update(m_jeu.getJoueur());
+				ctj.update();
 				
 			}
 		});

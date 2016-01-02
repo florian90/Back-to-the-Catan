@@ -133,7 +133,7 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 					pack.add(Ressource.Bois,5);*/
 					m_jeu.getJoueur().construireInvention(Invention.Train.cout(Epoque._1855), Invention.Train);		
 					acheterTrain.setDisable(true);
-					ctj.update(m_jeu.getJoueur());
+					ctj.update();
 					
 				}
 				else
@@ -156,7 +156,7 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 					pack.add(Ressource.Metal,3);*/
 					m_jeu.getJoueur().construireInvention(Invention.Radio.cout(Epoque._1955), Invention.Radio);	
 					acheterRadio.setDisable(true);
-					ctj.update(m_jeu.getJoueur());
+					ctj.update();
 				}
 				else
 				{
@@ -176,7 +176,7 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 					pack.add(Ressource.Plutonium,6);*/
 					m_jeu.getJoueur().construireInvention(Invention.ConvecteurTemporel.cout(Epoque._1985), Invention.ConvecteurTemporel);		
 					acheterConvecteur.setDisable(true);
-					ctj.update(m_jeu.getJoueur());
+					ctj.update();
 				}
 				else
 				{
@@ -197,7 +197,7 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 					pack.add(Ressource.Metal,3);*/
 					m_jeu.getJoueur().construireInvention(Invention.HoverBoard.cout(Epoque._2015), Invention.HoverBoard);
 					acheterHoverboard.setDisable(true);
-					ctj.update(m_jeu.getJoueur());
+					ctj.update();
 				}
 				else
 				{

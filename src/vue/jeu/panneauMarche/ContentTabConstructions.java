@@ -104,7 +104,7 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 			if( spinVille.getValue() > 0)
 				joueur.acheter(TypePoint.Ville,  spinVille.getValue());
 
-			ctj.update(joueur);
+			ctj.update();
 			reset();
 		});
 

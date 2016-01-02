@@ -54,7 +54,7 @@ public class Plateau {
 				coord = new CoordCase(j - 4, i - 4);
 				if ((res = getRessource(coord, listRessources)) != null)
 				{
-					tuile = new Case(coord, res, listValeurs[j-1][i-1]);
+					tuile = new Case(coord, res, listValeurs[j - 1][i - 1]);
 					cases.put(coord, tuile);
 				}
 			}
@@ -111,7 +111,7 @@ public class Plateau {
 				cooArete = new CoordArete(getCooPoint(tuile, i), getCooPoint(tuile, (i + 1)%6));
 				if (!aretes.containsKey(cooArete))
 				{
-					aretes.put(cooArete, new Arete(cooArete,this));
+					aretes.put(cooArete, new Arete(cooArete, this));
 				}
 			}
 		}
@@ -141,8 +141,6 @@ public class Plateau {
 	{
 		return epoque;
 	}
-	
-
 
 	/*
 	 * Retourne la coordonnée du point selon une case et un index
@@ -313,4 +311,20 @@ public class Plateau {
 	    listPointAutoroute.add(new CoordPoint(new CoordCase(2,1), new CoordCase(3,1), new CoordCase(3,2)));
 	    //2,1,3,1,3,2
 	}*/
+
+	public void recolterRessources(int val)
+	{
+		for (Point pt : points.values())
+			if (pt.getType() != TypePoint.Vide)
+				for (CoordCase coordCase : new CoordCase[]{pt.getCoo().getGauche(), pt.getCoo().getDroite(), pt.getCoo().getVertical()})
+				{
+					Case tuile = cases.get(coordCase);
+					if (tuile.getRessource() != Ressource.Autoroute && tuile.getValeur() == val)
+					{
+						pt.getProprietaire().recevoirRessource(tuile.getRessource());
+						if (pt.getType() == TypePoint.Ville)
+							pt.getProprietaire().recevoirRessource(tuile.getRessource());
+					}
+				}
+	}
 }

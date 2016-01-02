@@ -1,7 +1,9 @@
 package model.jeu;
 
+import model.jeu.coordonnee.CoordCase;
 import model.jeu.coordonnee.CoordPoint;
 import model.joueur.Joueur;
+import model.joueur.Ressource;
 import vue.jeu.plateau.VuePoint;
 
 public class Point {

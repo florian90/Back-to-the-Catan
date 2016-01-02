@@ -103,7 +103,7 @@ public class Fenetre extends AnchorPane {
 
 		numPlateau = new Label();
 		statusBar = new Label();
-		panneauJoueur = new ContentJoueur(modelJeu.getJoueur(), modelJeu);
+		panneauJoueur = new ContentJoueur(modelJeu);
 		echange = new VueEchange(panneauJoueur);
 		stack = new StackPane();
 
@@ -201,7 +201,6 @@ public class Fenetre extends AnchorPane {
 
 	public void initTourJoueur()
 	{
-		System.out.println("test");
 		//cTC.desactiver();
 		cTI.update();
 		des.activer();
@@ -210,7 +209,7 @@ public class Fenetre extends AnchorPane {
 		finTour.setDisable(true);
 		messageClassique = modelJeu.getJoueur().getNom() + " - Lancez les dés pour commencer";
 		resetStatus();
-		panneauJoueur.update(modelJeu.getJoueur());
+		panneauJoueur.update();
 		desactiveEchangeBouttonJoueurActuel();
 		cTC.setJoueur(modelJeu.getJoueur());
 	}
@@ -273,6 +272,6 @@ public class Fenetre extends AnchorPane {
 
 	public void updateJoueur()
 	{
-		System.out.println("updateJoueur");
+		panneauJoueur.update();
 	}
 }

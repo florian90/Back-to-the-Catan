@@ -93,7 +93,7 @@ public class VueEchange extends TitledPane{
 				jGauche.echangerRessources(jDroite, donne, recois);
 				
 				show(jGauche,jDroite);
-				ctj.update(jGauche);
+				ctj.update();
 				
 			}
 		});

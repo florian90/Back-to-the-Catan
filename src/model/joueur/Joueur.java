@@ -382,5 +382,8 @@ public class Joueur {
 		return m_inventions;
 	}
 
-
+	public void recevoirRessource(Ressource res)
+	{
+		m_ressources.add(res);
+	}
 }

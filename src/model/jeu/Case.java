@@ -30,7 +30,7 @@ public class Case {
 	{
 		return m_ressource;
 	}
-	public int getM_valeur() {
+	public int getValeur() {
 		return m_valeur;
 	}
 

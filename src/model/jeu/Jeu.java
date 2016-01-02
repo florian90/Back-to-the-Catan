@@ -1,14 +1,14 @@
 package model.jeu;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-
 import model.joueur.Invention;
 import model.joueur.Joueur;
 import model.joueur.PackRess;
 import model.joueur.TypeCarte;
 import vue.jeu.Fenetre;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 public class Jeu {
 	/*
@@ -30,9 +30,9 @@ public class Jeu {
 	 */
 	public Jeu(ArrayList<Joueur> p_joueurs)
 	{
-		epoqueActuelle = Epoque._1985; 
+		epoqueActuelle = Epoque._1985;
 		joueurs = p_joueurs;
-		for(Joueur j : joueurs)
+		for (Joueur j : joueurs)
 		{
 			j.setM_jeu(this);
 		}
@@ -46,7 +46,7 @@ public class Jeu {
 		joueurActuel = 0; //index du joueur dont le tour est en cours
 		nbJoueurs = joueurs.size();
 		plateaux = new HashMap<Epoque, Plateau>();
-		for(Epoque epoque : Epoque.values())
+		for (Epoque epoque : Epoque.values())
 		{
 			plateaux.put(epoque, new Plateau(epoque, 7));
 		}
@@ -56,19 +56,23 @@ public class Jeu {
 	public void initJeu()
 	{
 		// Initialise ce que les joueurs possèdent  au début
-		joueurActuel=0;
+		joueurActuel = 0;
 		m_desLences = false;
 		epoqueModifiee();
 		m_vue.initTourJoueur();
 	}
 
-	/** Setters classiques **/
+	/**
+	 * Setters classiques
+	 **/
 	public void setVue(Fenetre fen)
 	{
 		m_vue = fen;
 	}
 
-	/** getters classiques **/
+	/**
+	 * getters classiques
+	 **/
 	public int getNbJoueurs()
 	{
 		return nbJoueurs;
@@ -93,18 +97,19 @@ public class Jeu {
 		int tab[] = {de1, de2};
 		m_desLences = true;
 		m_vue.lanceDes(tab);
+		recolterRessources(de1 + de2);
+		m_vue.updateJoueur();
 	}
 	
 	public TypeCarte tirerCarte()
 	{
 		Random rnd = new Random();
-		int res = rnd.nextInt(2) ; //TODO: à redéfinir pour modifier la fréquence d'apparition des cartes
+		int res = rnd.nextInt(2); //TODO: à redéfinir pour modifier la fréquence d'apparition des cartes
 		
 		if (res == 1)
 		{
 			return TypeCarte.Developpement;
-		}
-		else
+		} else
 		{
 			return TypeCarte.DeplacerVoleur;
 		}
@@ -114,7 +119,7 @@ public class Jeu {
 	public void joueurSuivant()
 	{
 		m_desLences = false;
-		if(++joueurActuel >= nbJoueurs)
+		if (++joueurActuel >= nbJoueurs)
 			joueurActuel = 0;
 		m_vue.initTourJoueur();
 	}
@@ -129,43 +134,46 @@ public class Jeu {
 		return joueurs.get(i);
 	}
 
-	public Epoque getEpoqueActuelle() {
+	public Epoque getEpoqueActuelle()
+	{
 		return epoqueActuelle;
 	}
 
-	public void epoqueSuivante(){
+	public void epoqueSuivante()
+	{
 		switch (epoqueActuelle)
 		{
 			case _1855:
-				epoqueActuelle=Epoque._1955;
+				epoqueActuelle = Epoque._1955;
 				break;
 			case _1955:
-				epoqueActuelle=Epoque._1985;
+				epoqueActuelle = Epoque._1985;
 				break;
 			case _1985:
-				epoqueActuelle=Epoque._2015;
+				epoqueActuelle = Epoque._2015;
 				break;
 			case _2015:
-				epoqueActuelle=Epoque._1855;
+				epoqueActuelle = Epoque._1855;
 				break;
 		}
 		epoqueModifiee();
 	}
 
-	public void epoquePrecedente(){
+	public void epoquePrecedente()
+	{
 		switch (epoqueActuelle)
 		{
 			case _1855:
-				epoqueActuelle=Epoque._2015;
+				epoqueActuelle = Epoque._2015;
 				break;
 			case _1955:
-				epoqueActuelle=Epoque._1855;
+				epoqueActuelle = Epoque._1855;
 				break;
 			case _1985:
-				epoqueActuelle=Epoque._1955;
+				epoqueActuelle = Epoque._1955;
 				break;
 			case _2015:
-				epoqueActuelle=Epoque._1985;
+				epoqueActuelle = Epoque._1985;
 				break;
 		}
 		epoqueModifiee();
@@ -178,12 +186,12 @@ public class Jeu {
 
 	public void clicPoint(Point point)
 	{
-		if(m_constructionActive)
+		if (m_constructionActive)
 		{
 			TypePoint type = point.getType();
-			if(type == TypePoint.Vide)
+			if (type == TypePoint.Vide)
 				type = TypePoint.Village;
-			else if(type == TypePoint.Village)
+			else if (type == TypePoint.Village)
 				type = TypePoint.Ville;
 			construirePoint(type, point);
 		}
@@ -191,12 +199,12 @@ public class Jeu {
 
 	public void clicArete(Arete arete)
 	{
-		if(m_constructionActive)
+		if (m_constructionActive)
 		{
 			TypeArete type = arete.getType();
-			if(type == TypeArete.Vide)
+			if (type == TypeArete.Vide)
 			{
-				if(arete.peutEtreAutoroute())
+				if (arete.peutEtreAutoroute())
 					type = TypeArete.Autoroute;
 				else
 					type = TypeArete.Route;
@@ -208,7 +216,7 @@ public class Jeu {
 	public void changeConstructionActive()
 	{
 		m_constructionActive = !m_constructionActive;
-		if(m_constructionActive)
+		if (m_constructionActive)
 			m_vue.setMessageClassique("Sélectionner la case sur laquelle vous souhaitez construire");
 		else
 			m_vue.setMessageClassique(getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant");
@@ -231,13 +239,13 @@ public class Jeu {
 
 	public boolean peutConstruirePoint(TypePoint type, Point point)
 	{
-		if(!getJoueur().possede(type))
+		if (!getJoueur().possede(type))
 		{
 			m_vue.setStatus("Vous n'avez pas de " + type + " disponible, achetez-en au marché !");
 			return false;
 		}
 		String res = point.peutConstruire(getJoueur(), type);
-		if(res != null)
+		if (res != null)
 		{
 			m_vue.setStatus(res);
 			return false;
@@ -247,7 +255,7 @@ public class Jeu {
 
 	public void construirePoint(TypePoint type, Point point)
 	{
-		if(peutConstruirePoint(type, point))
+		if (peutConstruirePoint(type, point))
 		{
 			getJoueur().construirePoint(type, point);
 			point.construire(getJoueur(), type);
@@ -258,13 +266,13 @@ public class Jeu {
 
 	public boolean peutConstruireArete(TypeArete type, Arete arete)
 	{
-		if(!getJoueur().possede(type))
+		if (!getJoueur().possede(type))
 		{
 			m_vue.setStatus("Vous n'avez pas de " + type + " disponible, achetez-en au marché !");
 			return false;
 		}
 		String res = arete.peutConstruire(getJoueur(), type);
-		if(res != null)
+		if (res != null)
 		{
 			m_vue.setStatus(res);
 			return false;
@@ -274,7 +282,7 @@ public class Jeu {
 
 	public void construireArete(TypeArete type, Arete arete)
 	{
-		if(peutConstruireArete(type, arete))
+		if (peutConstruireArete(type, arete))
 		{
 			getJoueur().construireArete(type, arete);
 			arete.construire(getJoueur(), type);
@@ -293,5 +301,11 @@ public class Jeu {
 		cout.add(TypePoint.Ville.cout(epoque), nbVille);
 
 		return joueur.possede(cout);
+	}
+
+	public void recolterRessources(int val)
+	{
+		for (Plateau plateau : plateaux.values())
+			plateau.recolterRessources(val);
 	}
 }

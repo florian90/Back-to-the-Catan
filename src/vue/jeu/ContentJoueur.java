@@ -30,18 +30,18 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	private Label inventions;
 	private Label cartes;
 
-	public ContentJoueur(Joueur j, Jeu jeu)
+	public ContentJoueur(Jeu jeu)
 	{
 		m_jeu = jeu;
 		m_fenetre = m_jeu.getFenetre();
 
-		init(j);
-		update(j);
+		init();
+		update();
 	}
 
-	public void init(Joueur j){
-		imgAvatar = new ImageView(j.getAvatar());
-		labelPseudo = new Label(j.getNom());
+	public void init(){
+		imgAvatar = new ImageView();
+		labelPseudo = new Label();
 		setPadding(new Insets(20, 20, 20, 20));
 		setHgap(15);
 		setVgap(15);
@@ -71,8 +71,9 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		cartes.setId("divisions");
 	}
 	
-	public void update(Joueur j)
+	public void update()
 	{
+		Joueur j= m_jeu.getJoueur();
 		getChildren().removeAll(getChildren());
 
 		imgAvatar.setImage(new Image(j.getAvatar()));

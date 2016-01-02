@@ -1,7 +1,6 @@
 package vue.jeu.plateau;
 
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -32,23 +31,23 @@ public class ViewCase extends Group {
 		
 		getChildren().add(imgRessource);
 		
-		if(m_case.getRessource()!=Ressource.Autoroute)//on ajoute un numéro que s'il ne s'agit pas d'une case autoroute
+		if (m_case.getRessource() != Ressource.Autoroute)//on ajoute un numéro que s'il ne s'agit pas d'une case autoroute
 		{
 		
-		/*Affichage du numéro*/
-		double milieuX = imgRessource.getFitWidth()/2;
-		double milieuY = imgRessource.getFitHeight()/2;
-		Circle cercleNoir = new Circle(milieuX,milieuY+15,10,Color.BLACK);
-		Circle cercleBlanc = new Circle(milieuX,milieuY+15,9,Color.WHITE);
-		Label numero = new Label(""+m_case.getM_valeur());
-		numero.setTranslateX(milieuX-7);
-		numero.setTranslateY(milieuY+7);
-		numero.setTextAlignment(TextAlignment.CENTER);
-		numero.setId("gras");
-		
-		getChildren().add(cercleNoir);
-		getChildren().add(cercleBlanc);
-		getChildren().add(numero);
+			/*Affichage du numéro*/
+			double milieuX = imgRessource.getFitWidth()/2;
+			double milieuY = imgRessource.getFitHeight()/2;
+			Circle cercleNoir = new Circle(milieuX, milieuY + 15, 10, Color.BLACK);
+			Circle cercleBlanc = new Circle(milieuX, milieuY + 15, 9, Color.WHITE);
+			Label numero = new Label("" + m_case.getValeur());
+			numero.setTranslateX(milieuX - 7);
+			numero.setTranslateY(milieuY + 7);
+			numero.setTextAlignment(TextAlignment.CENTER);
+			numero.setId("gras");
+
+			getChildren().add(cercleNoir);
+			getChildren().add(cercleBlanc);
+			getChildren().add(numero);
 		}
 		setOnMouseClicked(new EventHandler<MouseEvent>() {
 
