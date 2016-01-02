@@ -193,7 +193,15 @@ public class Jeu {
 	{//Todo: clicArete
 		if(m_constructionActive)
 		{
-
+			TypeArete type = arete.getType();
+			if(type == TypeArete.Vide)
+			{
+				if(arete.peutEtreAutoroute())
+					type = TypeArete.Autoroute;
+				else
+					type = TypeArete.Route;
+			}
+			construireArete(type, arete);
 		}
 	}
 
@@ -245,6 +253,33 @@ public class Jeu {
 			point.construire(getJoueur(), type);
 			m_vue.updateJoueur();
 			point.getVue().update();
+		}
+	}
+
+	public boolean peutConstruireArete(TypeArete type, Arete arete)
+	{
+		if(!getJoueur().possede(type))
+		{
+			m_vue.setStatus("Vous n'avez pas de " + type + " disponible, achetez-en au marché !");
+			return false;
+		}
+		String res = arete.peutConstruire(getJoueur(), type);
+		if(res != null)
+		{
+			m_vue.setStatus(res);
+			return false;
+		}
+		return true;
+	}
+
+	public void construireArete(TypeArete type, Arete arete)
+	{
+		if(peutConstruireArete(type, arete))
+		{
+			getJoueur().construireArete(type, arete);
+			arete.construire(getJoueur(), type);
+			m_vue.updateJoueur();
+			arete.getVue().update();
 		}
 	}
 	
