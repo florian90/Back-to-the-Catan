@@ -58,31 +58,7 @@ public class VueArete extends Group {
 				m_jeu.clicArete(m_arete);
 			}
 		});
-
-		/***** Test sur les lignes *****/
-		/*
-		m_ligne.setOnMouseExited(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-			//	setStroke(Color.GRAY);				
-			}
-		});
-		m_ligne.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				System.out.println(m_arete.toString());
-				if(m_arete.peutEtreAutoroute())
-				{
-					m_ligne.setStroke(Color.YELLOW);
-				}
-				else
-				{
-					m_ligne.setStroke(Color.BLUE);
-				}
-			}
-		});*/
+		
 		update();
 	}
 

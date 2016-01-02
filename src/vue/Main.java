@@ -20,8 +20,6 @@ public class Main extends Application {
 	{
 		try
 		{
-
-			
 			MenuPrincipalView menuView = new MenuPrincipalView();
 			
 			Scene menu = new Scene(menuView, 1400, 850);

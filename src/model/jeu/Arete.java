@@ -77,7 +77,10 @@ public class Arete {
 		}
 		return null;
 	}
-	
+	/*
+	 * Renvoie true si la constructions sur l'arete doit 
+	 * être une autoroute
+	 */
 	public boolean peutEtreAutoroute()
 	{
 		CoordPoint x = m_coord.getDebut();
@@ -92,42 +95,34 @@ public class Arete {
 		
 		if (dx.equals(dy) || gx.equals(gy))
 		{
-			if (m_plateau.getCases().get(dx).getRessource() == Ressource.Autoroute || m_plateau.getCases().get(gx).getRessource() == Ressource.Autoroute)
+			if (m_plateau.getCasesVirtuelles(dx).getRessource() == Ressource.Autoroute || m_plateau.getCasesVirtuelles(gx).getRessource() == Ressource.Autoroute)
 			{
-				System.out.println("Vertical vrai");
 				return true;
 			} else
 			{
-				System.out.println("Vertical faux");
 				return false;
-				
 			}
 		} else if (gx.equals(vy) || dy.equals(vx))
 		{
-			if (m_plateau.getCases().get(gx).getRessource() == Ressource.Autoroute || m_plateau.getCases().get(dy).getRessource() == Ressource.Autoroute)
+			if (m_plateau.getCasesVirtuelles(dy).getRessource() == Ressource.Autoroute || m_plateau.getCasesVirtuelles(gx).getRessource() == Ressource.Autoroute)
 			{
-				System.out.println("/ vrai");
 				return true;
 				
 			} else
 			{
-				System.out.println("/ faux");
 				return false;
 			}
 		} else if (vx.equals(gy) || vy.equals(dx))
 		{
-			if (m_plateau.getCases().get(vx).getRessource() == Ressource.Autoroute || m_plateau.getCases().get(dx).getRessource() == Ressource.Autoroute)
+			if (m_plateau.getCasesVirtuelles(vx).getRessource() == Ressource.Autoroute || m_plateau.getCasesVirtuelles(dx).getRessource() == Ressource.Autoroute)
 			{
-				System.out.println("\\ vrai");
 				return true;
 			} else
 			{
-				System.out.println("\\ gy faux");
 				return false;
 			}
 		} else
 		{
-			System.out.println("default faux");
 			return false;
 		}
 	}
