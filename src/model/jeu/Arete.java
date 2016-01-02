@@ -5,6 +5,7 @@ import model.jeu.coordonnee.CoordCase;
 import model.jeu.coordonnee.CoordPoint;
 import model.joueur.Joueur;
 import model.joueur.Ressource;
+import vue.jeu.plateau.VueArete;
 
 public class Arete {
 	/*
@@ -14,6 +15,8 @@ public class Arete {
 	private TypeArete m_type;
 	private Joueur m_proprietaire;
 	private Plateau m_plateau;
+
+	private VueArete m_vue;
 
 	public Arete(CoordArete coord, TypeArete type, Joueur propietaire, Plateau plateau)
 	{
@@ -43,29 +46,38 @@ public class Arete {
 		return m_type;
 	}
 
+	public void setVue(VueArete vue)
+	{
+		m_vue = vue;
+	}
+
+	public VueArete getVue()
+	{
+
+		return m_vue;
+	}
+
 	//Todo: construire un nouveau TypeRoute pour un certain joueur
 	public void construire(Joueur joueur, TypeArete type)
 	{
-		//Fait par Val
-		if (peutConstruire(joueur, type))
-		{
-			m_type = type;
-			m_proprietaire = joueur;
-		}
+		m_type = type;
+		m_proprietaire = joueur;
 	}
 	
 	//Todo: Check si on peut construire le type demandé pour le joueur
-	public boolean peutConstruire(Joueur joueur, TypeArete type)
+	public String peutConstruire(Joueur joueur, TypeArete type)
 	{
-		//Fait par Val		
-		if ((type==TypeArete.Route && m_type==TypeArete.Vide && !peutEtreAutoroute()) || (type==TypeArete.Autoroute && m_type==TypeArete.Vide && peutEtreAutoroute()))
+		if (m_proprietaire != null && m_proprietaire != joueur)
 		{
-			return true;
+			return "Cette arète appartient déjà à un autre joueur";
+		} else if (m_type != TypeArete.Vide)
+		{//
+			return "Cette arète est déjà construite";
+		} else if (false)
+		{// Todo: doit être rataché à une autre route
+			return "Cette arète doit être ratachéz à une autre vous appartenant";
 		}
-		else
-		{
-			return false;
-		}
+		return null;
 	}
 	
 	public boolean peutEtreAutoroute()
@@ -80,49 +92,42 @@ public class Arete {
 		CoordCase vy = y.getVertical();
 		
 		
-		
-		if(dx.equals(dy) || gx.equals(gy))
+		if (dx.equals(dy) || gx.equals(gy))
 		{
-			if(m_plateau.getCases().get(dx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(gx).getRessource()==Ressource.Autoroute)
+			if (m_plateau.getCases().get(dx).getRessource() == Ressource.Autoroute || m_plateau.getCases().get(gx).getRessource() == Ressource.Autoroute)
 			{
 				System.out.println("Vertical vrai");
 				return true;
-			}
-			else
+			} else
 			{
 				System.out.println("Vertical faux");
 				return false;
 				
 			}
-		}
-		else if(gx.equals(vy) || dy.equals(vx))
+		} else if (gx.equals(vy) || dy.equals(vx))
 		{
-			if(m_plateau.getCases().get(gx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(dy).getRessource()==Ressource.Autoroute)
+			if (m_plateau.getCases().get(gx).getRessource() == Ressource.Autoroute || m_plateau.getCases().get(dy).getRessource() == Ressource.Autoroute)
 			{
 				System.out.println("/ vrai");
 				return true;
 				
-			}
-			else
+			} else
 			{
 				System.out.println("/ faux");
 				return false;
 			}
-		}
-		else if(vx.equals(gy) || vy.equals(dx))
+		} else if (vx.equals(gy) || vy.equals(dx))
 		{
-			if(m_plateau.getCases().get(vx).getRessource()==Ressource.Autoroute || m_plateau.getCases().get(dx).getRessource()==Ressource.Autoroute)
+			if (m_plateau.getCases().get(vx).getRessource() == Ressource.Autoroute || m_plateau.getCases().get(dx).getRessource() == Ressource.Autoroute)
 			{
 				System.out.println("\\ vrai");
 				return true;
-			}
-			else
+			} else
 			{
 				System.out.println("\\ gy faux");
 				return false;
 			}
-		}
-		else
+		} else
 		{
 			System.out.println("default faux");
 			return false;
