@@ -99,6 +99,12 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		add(new Label("Villages : " + j.getNbVillagesAConstruire()), 1, 10);
 		add(new Label("Villes : " + j.getNbVillesAConstruire()), 1, 11);
 
+		if(m_jeu.isConstructionActive())
+		{
+			m_jeu.changeConstructionActive();
+			construire.setEffect(null);
+		}
+
 		add(aConstruire, 0, 9);
 		add(construire,1,9);
 		add(inventions, 0, 13);
