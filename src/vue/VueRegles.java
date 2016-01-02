@@ -21,9 +21,9 @@ public class VueRegles extends GridPane{
 		setVgap(10);
 
 		retour = new Button("Retour");	
-		URL urlHello = getClass().getResource("Regles.html");
+		URL urlRegles = getClass().getResource("Regles.html");
 
-		webEngine.load("http://utcaching.esy.es/"); 
+		webEngine.load(urlRegles.toExternalForm());
 
 		browser.setPrefHeight(850);
 		browser.setPrefWidth(1400);
