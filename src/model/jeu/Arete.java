@@ -72,7 +72,8 @@ public class Arete {
 		{//
 			return "Cette arète est déjà construite";
 		} else if (false)
-		{// Todo: doit être rataché à une autre route
+		{// Todo: doit être rataché à une autre route ++ OU au centre du plateau (Au début du jeu)
+			//else if ((m_coord.equals(0,0))==false || /**/)
 			return "Cette arète doit être ratachéz à une autre vous appartenant";
 		}
 		return null;
