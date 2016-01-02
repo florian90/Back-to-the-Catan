@@ -1,5 +1,7 @@
 package model.jeu.coordonnee;
 
+import model.jeu.Epoque;
+
 public class CoordCase {
 	/*
 	 * La case de coordon�e nulle est la case centrale.
@@ -8,11 +10,13 @@ public class CoordCase {
 	 */
 	private int line;
 	private int column;
+	private Epoque m_epoque;
 
-	public CoordCase(int l, int c)
+	public CoordCase(int l, int c, Epoque epoque)
 	{
 		line = l;
 		column = c;
+		m_epoque = epoque;
 	}
 
 	public int getLine()
@@ -25,34 +29,39 @@ public class CoordCase {
 		return column;
 	}
 
+	public Epoque getEpoque()
+	{
+		return m_epoque;
+	}
+
 	public CoordCase northEast()
 	{
-		return new CoordCase(line - 1, column + 1);
+		return new CoordCase(line - 1, column + 1, m_epoque);
 	}
 
 	public CoordCase east()
 	{
-		return new CoordCase(line, column + 1);
+		return new CoordCase(line, column + 1, m_epoque);
 	}
 
 	public CoordCase southEast()
 	{
-		return new CoordCase(line + 1, column);
+		return new CoordCase(line + 1, column, m_epoque);
 	}
 
 	public CoordCase southWest()
 	{
-		return new CoordCase(line + 1, column - 1);
+		return new CoordCase(line + 1, column - 1, m_epoque);
 	}
 
 	public CoordCase west()
 	{
-		return new CoordCase(line, column-1);
+		return new CoordCase(line, column-1, m_epoque);
 	}
 
 	public CoordCase northWest()
 	{
-		return new CoordCase(line-1, column);
+		return new CoordCase(line-1, column, m_epoque);
 	}
 
 	@Override
@@ -86,6 +95,6 @@ public class CoordCase {
 	
 	public boolean equals(CoordCase cc)
 	{
-		return (line == cc.getLine() && column == cc.getColumn());
+		return (line == cc.getLine() && column == cc.getColumn() && m_epoque.equals(cc.getEpoque()));
 	}
 }

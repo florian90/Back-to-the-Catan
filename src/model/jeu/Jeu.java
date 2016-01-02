@@ -1,6 +1,5 @@
 package model.jeu;
 
-import model.joueur.Invention;
 import model.joueur.Joueur;
 import model.joueur.PackRess;
 import model.joueur.TypeCarte;
@@ -20,9 +19,11 @@ public class Jeu {
 	private Epoque epoqueActuelle;
 
 	private boolean m_constructionActive;
-	private boolean m_desLences;
-
+	private boolean m_desLances;
+	private boolean m_initPeriod;
 	private Fenetre m_vue;
+
+	private Random random = new Random();
 	
 	/*
 	 * Construit le modele de jeu à partir de la liste des joueurs 
@@ -32,34 +33,24 @@ public class Jeu {
 	{
 		epoqueActuelle = Epoque._1985;
 		joueurs = p_joueurs;
-		for (Joueur j : joueurs)
-		{
-			j.setM_jeu(this);
-		}
-		PackRess packInitial = new PackRess();
-		packInitial.add(Invention.ConvecteurTemporel.cout(null));
-		packInitial.add(Invention.HoverBoard.cout(null));
-		packInitial.add(Invention.Radio.cout(null));
-		packInitial.add(Invention.Train.cout(null));
-		
-		joueurs.get(0).recevoirRessources(packInitial);
-		joueurActuel = 0; //index du joueur dont le tour est en cours
 		nbJoueurs = joueurs.size();
+		for (Joueur j : joueurs)
+			j.setM_jeu(this);
+
 		plateaux = new HashMap<Epoque, Plateau>();
 		for (Epoque epoque : Epoque.values())
-		{
 			plateaux.put(epoque, new Plateau(epoque, 7));
-		}
 	}
 
 	//Todo: Initialise toutes les instances du jeu
 	public void initJeu()
 	{
-		// Initialise ce que les joueurs possèdent  au début
 		joueurActuel = 0;
-		m_desLences = false;
+		m_desLances = false;
+		m_initPeriod = true;
+		m_constructionActive = true;
 		epoqueModifiee();
-		m_vue.initTourJoueur();
+		m_vue.initTourInitiaux();
 	}
 
 	/**
@@ -83,19 +74,13 @@ public class Jeu {
 		return plateaux.get(epoque);
 	}
 
-	/*
-	 * Retourne un tableau d'entier contenant le 
-	 * résultat du dé n°1, le résultat du dé n°2
-	 * et la somme des deux.
-	 */
 	public void lancerDes()
 	{
-		Random rnd = new Random();
-		int de1 = rnd.nextInt(6) + 1;
-		int de2 = rnd.nextInt(6) + 1;
+		int de1 = random.nextInt(6) + 1;
+		int de2 = random.nextInt(6) + 1;
 		
 		int tab[] = {de1, de2};
-		m_desLences = true;
+		m_desLances = true;
 		m_vue.lanceDes(tab);
 		recolterRessources(de1 + de2);
 		m_vue.updateJoueur();
@@ -103,8 +88,7 @@ public class Jeu {
 	
 	public void tirerCarte()
 	{
-		Random rnd = new Random();
-		int res = rnd.nextInt(2); //TODO: à redéfinir pour modifier la fréquence d'apparition des cartes
+		int res = random.nextInt(2); //TODO: à redéfinir pour modifier la fréquence d'apparition des cartes
 		TypeCarte typeCarte;
 		if (res == 1)
 		{
@@ -113,7 +97,7 @@ public class Jeu {
 		{
 			typeCarte = TypeCarte.DeplacerVoleur;
 		}
-		if(getJoueur().peutConstruire(typeCarte, epoqueActuelle))
+		if (getJoueur().peutConstruire(typeCarte, epoqueActuelle))
 			getJoueur().acheterCarte(typeCarte);
 		else
 			m_vue.setStatus("Vous ne possédez pas assez de ressources pour acheter ne carte");
@@ -121,10 +105,27 @@ public class Jeu {
 
 	public void joueurSuivant()
 	{
-		m_desLences = false;
-		if (++joueurActuel >= nbJoueurs)
-			joueurActuel = 0;
-		m_vue.initTourJoueur();
+		if(m_initPeriod)
+		{
+			if(++joueurActuel >= nbJoueurs)
+			{
+				joueurActuel=0;
+				m_initPeriod = false;
+				m_vue.initTourJoueur();
+			}
+			else
+			{
+				m_vue.initTourInitiaux();
+				m_constructionActive = true;
+			}
+		}
+		else
+		{
+			m_desLances = false;
+			if (++joueurActuel >= nbJoueurs)
+				joueurActuel = 0;
+			m_vue.initTourJoueur();
+		}
 	}
 
 	public Joueur getJoueur()
@@ -202,7 +203,7 @@ public class Jeu {
 
 	public void clicArete(Arete arete)
 	{
-		if (m_constructionActive)
+		if (m_constructionActive && !m_initPeriod)
 		{
 			TypeArete type = arete.getType();
 			if (type == TypeArete.Vide)
@@ -237,7 +238,7 @@ public class Jeu {
 
 	public boolean isDeLance()
 	{
-		return m_desLences;
+		return m_desLances;
 	}
 
 	public boolean peutConstruirePoint(TypePoint type, Point point)
@@ -264,6 +265,10 @@ public class Jeu {
 			point.construire(getJoueur(), type);
 			m_vue.updateJoueur();
 			point.getVue().update();
+			if(m_initPeriod)
+			{
+				joueurSuivant();
+			}
 		}
 	}
 

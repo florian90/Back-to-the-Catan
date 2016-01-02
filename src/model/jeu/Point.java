@@ -63,6 +63,14 @@ public class Point {
 		{// t sur t
 			return "Ce point est déjà de type " + type;
 		}
+		else if(joueur.isPremierPointSurPlateau())
+		{
+			CoordCase init = new CoordCase(0, 0, getEpoque());
+			if(m_coord.getVertical().equals(init) || m_coord.getGauche().equals(init) || m_coord.getDroite().equals(init))
+				return null;
+			else
+				return "Votre première colonie du plateau doit se trouver autour du point central";
+		}
 		else if(false)
 		{// Todo: doit être rataché à une route et être à plus de 2 case d'une autre construction
 			return "Erreur 76 : Chemin d'accès introuvavle";
@@ -84,5 +92,10 @@ public class Point {
 	public VuePoint getVue()
 	{
 		return m_vue;
+	}
+
+	public Epoque getEpoque()
+	{
+		return m_coord.getDroite().getEpoque();
 	}
 }

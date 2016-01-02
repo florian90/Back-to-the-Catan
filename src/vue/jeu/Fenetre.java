@@ -201,15 +201,17 @@ public class Fenetre extends AnchorPane {
 
 	public void initTourJoueur()
 	{
-		//cTC.desactiver();
 		cTI.update();
-		des.activer();
+		panneauJoueur.update();
+		cTC.desactiver();
+		cTI.desactiver();
+		cTC.desactiver();
 		CTCards.desactiver();
 		panneauJoueur.desactiver();
+		des.activer();
 		finTour.setDisable(true);
 		messageClassique = modelJeu.getJoueur().getNom() + " - Lancez les dés pour commencer";
 		resetStatus();
-		panneauJoueur.update();
 		desactiveEchangeBouttonJoueurActuel();
 		cTC.setJoueur(modelJeu.getJoueur());
 	}
@@ -274,5 +276,13 @@ public class Fenetre extends AnchorPane {
 	public void updateJoueur()
 	{
 		panneauJoueur.update();
+	}
+
+	public void initTourInitiaux()
+	{
+		initTourJoueur();
+		des.desactiver();
+		setMessageClassique(modelJeu.getJoueur() + " - Construisez votre première colonie !");
+		modelJeu.changeConstructionActive();
 	}
 }

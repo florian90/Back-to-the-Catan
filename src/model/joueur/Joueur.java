@@ -53,21 +53,23 @@ public class Joueur {
 		}
 		m_ressources = new PackRess();
 		m_inventions = new HashMap<>();
-		
 		m_villagesConstruits    = new ArrayList<>();
 		m_villesConstruites     = new ArrayList<>();
 		m_autoroutesConstruites = new ArrayList<>();
 		m_routesConstruites     = new ArrayList<>();
 
-		nbRoutesAConstruire     = 5;
-		nbAutoroutesAConstruire = 5;
-		nbVillagesAConstruire   = 5;
-		nbVillesAConstruire     = 5;
-
 		for (Invention inv : Invention.values())
 			m_inventions.put(inv, false);
+		init();
 	}
 
+	public void init()
+	{
+		nbRoutesAConstruire = 2;
+		nbAutoroutesAConstruire = 0;
+		nbVillagesAConstruire = 2;
+		nbVillesAConstruire = 0;
+	}
 
 	/*
 	 * Fonction pour dépenser un certain nombre d'une ressources : dépense les ressources
@@ -362,5 +364,13 @@ public class Joueur {
 	public void recevoirRessource(Ressource res)
 	{
 		m_ressources.add(res);
+	}
+
+	public boolean isPremierPointSurPlateau()
+	{
+		for(Point point: m_villagesConstruits)
+			if(point.getEpoque() == m_jeu.getEpoqueActuelle())
+				return false;
+		return true;
 	}
 }

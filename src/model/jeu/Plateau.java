@@ -51,7 +51,7 @@ public class Plateau {
 		{
 			for (int i = 1; i <= m_size; i++)
 			{
-				coord = new CoordCase(j - 4, i - 4);
+				coord = new CoordCase(j - 4, i - 4, epoque);
 				if ((res = getRessource(coord, listRessources)) != null)
 				{
 					tuile = new Case(coord, res, listValeurs[j - 1][i - 1]);
