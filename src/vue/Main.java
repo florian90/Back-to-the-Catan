@@ -21,22 +21,18 @@ public class Main extends Application {
 		try
 		{
 			MenuPrincipalView menuView = new MenuPrincipalView();
-			
 			Scene menu = new Scene(menuView, 1400, 850);
 			menu.getStylesheets().add(getClass().getResource("StyleMenu.css").toExternalForm());
+			
+			VueRegles reglesView = new VueRegles(primaryStage);
+			Scene regles = new Scene(reglesView,1400,850);
+			//menu.getStylesheets().add(getClass().getResource("StyleMenu.css").toExternalForm());
 			
 			primaryStage.setScene(menu);
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Back To The Catane");
 			primaryStage.getIcons().add(new Image("textures/favicon.jpg"));
 			primaryStage.show();
-			//Tests
-			/*Jeu modelJeu = new Jeu(menuView.getListeJoueurs());
-			Fenetre fen = new Fenetre(modelJeu);
-			Scene EcranJeu = new Scene(fen, 1400, 850);
-			primaryStage.setScene(EcranJeu);
-			primaryStage.show();*/
-			//Tests
 			
 			menuView.getNouvellePartie().setOnAction(new EventHandler<ActionEvent>() {
 				
@@ -67,7 +63,36 @@ public class Main extends Application {
 					System.out.println(menuView.getListeJoueurs());
 				}
 			});
+			
+			menuView.getQuitter().setOnAction(new EventHandler<ActionEvent>() {
 
+				@Override
+				public void handle(ActionEvent event) {
+					primaryStage.close();
+					
+				}
+			});
+			
+			menuView.getRegles().setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					primaryStage.setScene(regles);
+					primaryStage.show();
+					
+					
+				}
+			});
+			
+			reglesView.getRetour().setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent event) {
+					//primaryStage.setScene(menu);
+					
+					
+				}
+			});
 			
 		} catch (Exception e)
 		{

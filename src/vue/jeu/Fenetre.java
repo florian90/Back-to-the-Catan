@@ -235,6 +235,8 @@ public class Fenetre extends AnchorPane {
 		des.desactiver();
 		panneauJoueur.activer();
 		finTour.setDisable(false);
+		cTC.activer();
+		cTI.activer();
 		CTCards.activer();
 		messageClassique = modelJeu.getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant";
 		resetStatus();

@@ -73,7 +73,7 @@ public class Point {
 		}
 		else if(false)
 		{// Todo: doit être rataché à une route et être à plus de 2 case d'une autre construction
-			return "Erreur 76 : Chemin d'accès introuvavle";
+			return "Erreur 76 : Chemin d'accès introuvable";
 		}
 		// Sinon on peut construire
 		return null;
