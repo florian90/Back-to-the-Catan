@@ -94,7 +94,7 @@ public class Joueur {
 	}
 
 	/*
-	 * Teste si le joueur possède un point de type type en stock
+	 * Test si le joueur possède un point de type type en stock
 	 */
 	public boolean possede(TypePoint type)
 	{
@@ -102,6 +102,18 @@ public class Joueur {
 			return nbVillagesAConstruire >= 1;
 		else if(type == TypePoint.Ville)
 			return nbVillesAConstruire >= 1;
+		return false;
+	}
+
+	/*
+	 * Test si le joueur possède un point de type type en stock
+	 */
+	public boolean possede(TypeArete type)
+	{
+		if(type == TypeArete.Autoroute)
+			return nbAutoroutesAConstruire >= 1;
+		else if(type == TypeArete.Route)
+			return nbRoutesAConstruire >= 1;
 		return false;
 	}
 
@@ -203,6 +215,20 @@ public class Joueur {
 		{
 			m_villesConstruites.add(point);
 			nbVillesAConstruire--;
+		}
+	}
+
+	public void construireArete(TypeArete type, Arete arete)
+	{
+		if(type == TypeArete.Autoroute)
+		{
+			m_autoroutesConstruites.add(arete);
+			nbAutoroutesAConstruire--;
+		}
+		else // TypeArete.Route
+		{
+			m_routesConstruites.add(arete);
+			nbRoutesAConstruire--;
 		}
 	}
 
