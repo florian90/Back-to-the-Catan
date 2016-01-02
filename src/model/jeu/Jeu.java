@@ -177,7 +177,7 @@ public class Jeu {
 	}
 
 	public void clicPoint(Point point)
-	{//Todo: clicPoint
+	{
 		if(m_constructionActive)
 		{
 			TypePoint type = point.getType();
@@ -190,7 +190,7 @@ public class Jeu {
 	}
 
 	public void clicArete(Arete arete)
-	{//Todo: clicArete
+	{
 		if(m_constructionActive)
 		{
 			TypeArete type = arete.getType();

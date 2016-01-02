@@ -54,7 +54,7 @@ public class Plateau {
 				coord = new CoordCase(j - 4, i - 4);
 				if ((res = getRessource(coord, listRessources)) != null)
 				{
-					tuile = new Case(coord, res, listValeurs[j-1][i-1]); //TODO:atribuer le bon numéro à chaque case
+					tuile = new Case(coord, res, listValeurs[j-1][i-1]);
 					cases.put(coord, tuile);
 				}
 			}

@@ -121,7 +121,7 @@ public class Joueur {
 	 * Retourne le nombre de ressources que le joueur
 	 * correspondant à la ressource pass"e en paramètres
 	 */
-	public int nbRessource(Ressource res/*FixMe:, int nombres ??*/)//Je crois que ca sert à rien ca doit être un résidu de copier coller 
+	public int nbRessource(Ressource res)
 	{
 		return m_ressources.count(res);
 	}

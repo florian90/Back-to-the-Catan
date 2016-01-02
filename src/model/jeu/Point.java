@@ -37,14 +37,12 @@ public class Point {
 		return m_coord;
 	}
 
-	//Todo: construire un nouveau TypePoint pour un certain joueur
 	public void construire(Joueur joueur, TypePoint type)
 	{
 		m_type = type;
 		m_proprietaire = joueur;
 	}
 
-	//Todo: Vérifie si on peut construire le type demandé pour le joueur
 	public String peutConstruire(Joueur joueur, TypePoint type)
 	{
 		if(m_proprietaire != null && m_proprietaire != joueur)
@@ -64,7 +62,7 @@ public class Point {
 			return "Ce point est déjà de type " + type;
 		}
 		else if(false)
-		{// Todo: doit être rataché à une rote et être à plusde 2 case d'une autre construction
+		{// Todo: doit être rataché à une route et être à plus de 2 case d'une autre construction
 			return "Erreur 76 : Chemin d'accès introuvavle";
 		}
 		// Sinon on peut construire

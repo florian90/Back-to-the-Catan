@@ -57,14 +57,12 @@ public class Arete {
 		return m_vue;
 	}
 
-	//Todo: construire un nouveau TypeRoute pour un certain joueur
 	public void construire(Joueur joueur, TypeArete type)
 	{
 		m_type = type;
 		m_proprietaire = joueur;
 	}
-	
-	//Todo: Check si on peut construire le type demandé pour le joueur
+
 	public String peutConstruire(Joueur joueur, TypeArete type)
 	{
 		if (m_proprietaire != null && m_proprietaire != joueur)
