@@ -90,9 +90,9 @@ public class Jeu {
 	
 	public void tirerCarte()
 	{
-		int res = random.nextInt(2); //TODO: à redéfinir pour modifier la fréquence d'apparition des cartes
+		int res = random.nextInt(3);
 		TypeCarte typeCarte;
-		if (res == 1)
+		if (res <= 2)
 		{
 			typeCarte = TypeCarte.Developpement;
 		} else
@@ -102,7 +102,7 @@ public class Jeu {
 		if (getJoueur().peutConstruire(typeCarte, epoqueActuelle))
 			getJoueur().acheterCarte(typeCarte);
 		else
-			m_vue.setStatus("Vous ne possédez pas assez de ressources pour acheter ne carte");
+			m_vue.setStatus("Vous ne possédez pas assez de ressources pour acheter une carte");
 	}
 
 	public void joueurSuivant()

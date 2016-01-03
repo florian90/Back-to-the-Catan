@@ -173,7 +173,8 @@ public class Joueur {
 		}
 		else
 		{
-			nbCartesDev++;
+			nbRoutesAConstruire += 2;
+			m_jeu.getFenetre().setStatus("Vous venez de piocher une carte developpement. Vous gagnez 2 routes constructibles.");
 		}
 	}
 	
@@ -259,18 +260,6 @@ public class Joueur {
 	 */
 	public int getNbPoints(TypePoint tp)
 	{
-		/*int nbPoints=0;
-		
-				for(Map.Entry<Point, Integer> entry : m_pointsConstruits.entrySet())
-				{
-					if (entry.getKey().equals(tp))
-					{
-						nbPoints++;
-					}
-						
-				}
-				System.out.println("NbPoints : "+nbPoints);
-				return nbPoints;*/
 		switch(tp)
 		{
 			case Village:
@@ -287,18 +276,6 @@ public class Joueur {
 	 */
 	public int getNbAretes(TypeArete ta)
 	{
-		/*int nbAretes=0;
-		
-				for(Map.Entry<Point, Integer> entry : m_pointsConstruits.entrySet())
-				{
-					if (entry.getKey().equals(ta))
-					{
-						nbAretes++;
-					}
-						
-				}
-				System.out.println("NbAretes : "+nbAretes);
-				return nbAretes;*/
 		switch(ta)
 		{
 			case Route:
@@ -383,4 +360,5 @@ public class Joueur {
 	public void utiliserCarteVoleur() {
 		nbCartesDeplacerVoleur--;
 	}
+	
 }

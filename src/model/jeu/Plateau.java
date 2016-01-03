@@ -356,7 +356,6 @@ public class Plateau {
 		{
 			if(point.getCoo().equals(a.getCoord().getDebut()) || point.getCoo().equals(a.getCoord().getFin()))
 			{
-				System.out.println("Coucou");
 				listArete.add(a);
 			}
 		}

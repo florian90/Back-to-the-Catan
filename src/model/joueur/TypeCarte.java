@@ -9,7 +9,7 @@ public enum TypeCarte implements Achetable{
 				@Override
 				public PackRess cout(Epoque epoque)
 				{
-					return new PackRess(Ressource.HautParleur, Ressource.Aimant, Ressource.Aimant, Ressource.Bois);
+					return new PackRess(Epoque.getR1(epoque),Epoque.getR2(epoque));
 				}
 			},
 	DeplacerVoleur
@@ -17,7 +17,7 @@ public enum TypeCarte implements Achetable{
 				@Override
 				public PackRess cout(Epoque epoque)
 				{
-					return new PackRess(Ressource.HautParleur, Ressource.Aimant, Ressource.Aimant, Ressource.Bois);
+					return new PackRess(Epoque.getR1(epoque),Epoque.getR2(epoque));
 				}
 			};
 
