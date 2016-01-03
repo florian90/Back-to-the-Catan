@@ -37,6 +37,10 @@ public class Fenetre extends AnchorPane {
 	private ContentTabConstructions cTC;
 	private ContentTabInventions cTI;
 	private ContentTabCartes CTCards;
+	public ContentTabCartes getCTCards() {
+		return CTCards;
+	}
+
 	private ContentJoueur panneauJoueur;
 
 	private Jeu modelJeu;

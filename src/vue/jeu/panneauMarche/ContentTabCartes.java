@@ -21,6 +21,7 @@ public class ContentTabCartes extends GridPane implements Desactivable{
 	private Button tirer;
 	private Jeu m_jeu;
 	private ContentJoueur ctj;
+	private Label cout;
 	
 	public ContentTabCartes(Jeu p_jeu, ContentJoueur p_ctj)
 	{
@@ -36,7 +37,8 @@ public class ContentTabCartes extends GridPane implements Desactivable{
 		setPadding(new Insets(20, 20, 20, 20));
 		setHgap(15);
 		setVgap(15);
-		add(new Label("Coût : \n - 1 x "+Ressource.toString(Epoque.getR1(p_jeu.getEpoqueActuelle()))+"\n - 1 x "+Ressource.toString(Epoque.getR2(p_jeu.getEpoqueActuelle()))), 0, 0,2,1);
+		cout = new Label("Coût : \n - 1 x "+Ressource.toString(Epoque.getR1(p_jeu.getEpoqueActuelle()))+"\n - 1 x "+Ressource.toString(Epoque.getR2(p_jeu.getEpoqueActuelle())));
+		add(cout, 0, 0,2,1);
 		add(cartes, 0, 2);
 		add(tirer,1,2);
 		
@@ -50,6 +52,11 @@ public class ContentTabCartes extends GridPane implements Desactivable{
 			}
 		});
 		
+	}
+	
+	public void update()
+	{
+		cout.setText("Coût : \n - 1 x "+Ressource.toString(Epoque.getR1(m_jeu.getEpoqueActuelle()))+"\n - 1 x "+Ressource.toString(Epoque.getR2(m_jeu.getEpoqueActuelle())));
 	}
 
 	@Override

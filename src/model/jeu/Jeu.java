@@ -196,6 +196,7 @@ public class Jeu {
 	public void epoqueModifiee()
 	{
 		m_vue.chargerPlateau(epoqueActuelle);
+		m_vue.getCTCards().update();
 	}
 
 	public void clicPoint(Point point)
