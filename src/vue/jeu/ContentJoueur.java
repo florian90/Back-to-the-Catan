@@ -131,7 +131,6 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		add(cartes, 0, 19);
 		add(new Label("Dépl. Voleur : " + j.getNbCartesDeplacerVoleur()), 0, 20);
 		add(utiliserCarteVoleur,1,20);
-		add(new Label("Développement : " + j.getNbCartesDev()), 0, 21);
 	}
 
 	@Override
