@@ -313,4 +313,24 @@ public class Plateau {
 	public void setCoordVoleur(CoordCase coordVoleur) {
 		this.coordVoleur = coordVoleur;
 	}
+	
+	public ArrayList<Point> getAdjacentPoints(Arete arete)
+	{
+		ArrayList<Point> list = new ArrayList<>(2);
+		list.add(points.get(arete.getCoord().getDebut()));
+		list.add(points.get(arete.getCoord().getFin()));
+		return list;
+	}
+
+	public ArrayList<Arete> getAdjacentArete(Arete arete)
+	{
+		ArrayList<Point> listPts = getAdjacentPoints(arete);
+		/*for(Arete a : aretes.values())
+		{
+			if()
+			{
+
+			}
+		}*/
+		return new ArrayList<>();
 }
