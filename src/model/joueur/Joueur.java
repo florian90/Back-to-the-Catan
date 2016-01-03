@@ -263,6 +263,7 @@ public class Joueur {
 		autre.recevoirRessources(donne);
 	}
 
+	/*Bug au niveau de cette fonction : possibilité dans certains cas d'aller dans le négatif (après 1 achat, en réitérant ça peut foutre la merde*/
 	public void acheter(Achetable obj, int nbr)
 	{
 		PackRess cout = obj.cout(m_jeu.getEpoqueActuelle()); 
