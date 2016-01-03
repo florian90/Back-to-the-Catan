@@ -322,16 +322,30 @@ public class Plateau {
 		return list;
 	}
 
-	public ArrayList<Arete> getAdjacentArete(Arete arete)
-	{
+	public ArrayList<Arete> getAdjacentArete(Arete arete) {
 		ArrayList<Point> listPts = getAdjacentPoints(arete);
-		/*for(Arete a : aretes.values())
+		ArrayList<Arete> res = new ArrayList<>();
+		for(Arete a : aretes.values())
 		{
-			if()
+			if(listPts.get(0).getCoo().equals(a.getCoord().getDebut()))
 			{
-
+				res.add(a);
 			}
-		}*/
-		return new ArrayList<>();
+			else if(listPts.get(0).getCoo().equals(a.getCoord().getFin()))
+			{
+				res.add(a);
+			}
+			else if(listPts.get(1).getCoo().equals(a.getCoord().getDebut()))
+			{
+				res.add(a);
+			}
+			else if(listPts.get(1).getCoo().equals(a.getCoord().getFin()))
+			{
+				res.add(a);
+			}
+		}
+		while (res.contains(arete))
+			res.remove(arete);
+		return res;
 	}
 }

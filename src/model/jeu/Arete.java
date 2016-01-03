@@ -146,11 +146,12 @@ public class Arete {
 		// Test si une arete adjacent est occupé
 		ArrayList<Arete> areteAdjacents = m_plateau.getAdjacentArete(this);
 		for(Arete a : areteAdjacents)
+		{
 			if(a.getProprietaire() == joueur)
 			{
-				System.out.println("res : true");
 				return true;
 			}
+		}
 		return false;
 	}
 
