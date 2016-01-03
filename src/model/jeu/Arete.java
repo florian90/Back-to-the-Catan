@@ -7,6 +7,8 @@ import model.joueur.Joueur;
 import model.joueur.Ressource;
 import vue.jeu.plateau.VueArete;
 
+import java.util.ArrayList;
+
 public class Arete {
 	/*
 	 * Correspond à un coté d'une case.
@@ -71,9 +73,8 @@ public class Arete {
 		} else if (m_type != TypeArete.Vide)
 		{//
 			return "Cette arète est déjà construite";
-		} else if (false)
+		} else if (!isAttache(joueur))
 		{// Todo: doit être rataché à une autre route ++ OU au centre du plateau (Au début du jeu)
-			//else if ((m_coord.equals(0,0))==false || /**/)
 			return "Cette arète doit être ratachéz à une autre vous appartenant";
 		}
 		return null;
@@ -131,6 +132,26 @@ public class Arete {
 	public String toString()
 	{
 		return m_coord.toString();
+	}
+
+	public boolean isAttache(Joueur joueur)
+	{
+		// Test si un point adjacent est occupé
+		ArrayList<Point> ptsAdjacents = m_plateau.getAdjacentPoints(this);
+		for(Point pt : ptsAdjacents)
+			if(pt.getProprietaire() == joueur)
+			{
+				return true;
+			}
+		// Test si une arete adjacent est occupé
+		ArrayList<Arete> areteAdjacents = m_plateau.getAdjacentArete(this);
+		for(Arete a : areteAdjacents)
+			if(a.getProprietaire() == joueur)
+			{
+				System.out.println("res : true");
+				return true;
+			}
+		return false;
 	}
 
 }
