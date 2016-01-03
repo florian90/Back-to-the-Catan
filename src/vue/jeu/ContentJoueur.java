@@ -138,11 +138,13 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	public void desactiver()
 	{
 		construire.setDisable(true);
+		utiliserCarteVoleur.setDisable(true);
 	}
 
 	@Override
 	public void activer()
 	{
 		construire.setDisable(false);
+		utiliserCarteVoleur.setDisable(false);
 	}
 }

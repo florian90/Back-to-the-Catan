@@ -69,6 +69,7 @@ public class Joueur {
 		nbAutoroutesAConstruire = 0;
 		nbVillagesAConstruire = 2;
 		nbVillesAConstruire = 0;
+		nbCartesDeplacerVoleur =6;
 	}
 
 	/*
@@ -372,5 +373,14 @@ public class Joueur {
 			if(point.getEpoque() == m_jeu.getEpoqueActuelle())
 				return false;
 		return true;
+	}
+
+	public boolean peutDeplacerVoleur() {
+		
+		return(nbCartesDeplacerVoleur > 0);
+	}
+
+	public void utiliserCarteVoleur() {
+		nbCartesDeplacerVoleur--;
 	}
 }

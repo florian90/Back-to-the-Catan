@@ -32,6 +32,7 @@ public class ViewCase extends Group {
 		imgRessource = new ImageView("textures/hex" + m_case.getRessource() + ".png");
 		imgRessource.setFitHeight(Constants.hexHeight - Constants.roadWidth);
 		imgRessource.setFitWidth(Constants.hexWidth - Constants.roadWidth);
+		setImageVoleur(m_case.isVoleurPresent());
 
 		getChildren().add(imgRessource);
 
@@ -70,7 +71,7 @@ public class ViewCase extends Group {
 	public void setImageVoleur(boolean voleurPresent)
 	{
 		if(voleurPresent)
-			imgRessource.setImage(new Image("textures/voleur.jpg"));
+			imgRessource.setImage(new Image("textures/voleur.png"));
 		else
 			imgRessource.setImage(new Image("textures/hex" + m_case.getRessource() + ".png"));
 	}

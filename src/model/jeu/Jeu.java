@@ -229,23 +229,21 @@ public class Jeu {
 	
 	public void clicCase(Case c, ViewCase vc)
 	{
-		if(m_deplacementVoleurActif)
+		if(m_deplacementVoleurActif && getJoueur().peutDeplacerVoleur())
 		{
 			deplacerVoleur(c,vc);
-			
+			getJoueur().utiliserCarteVoleur();
+			m_vue.updateJoueur();
+			m_deplacementVoleurActif=false;
 		}
 	}
 	
 	private void deplacerVoleur(Case c, ViewCase vc)
 	{
-		//model
 		c.setVoleurPresent(true);
-		
 		Case voleurActuelle = plateaux.get(epoqueActuelle).getCases().get(plateaux.get(epoqueActuelle).getCoordVoleur());
 		voleurActuelle.setVoleurPresent(false);
 		plateaux.get(epoqueActuelle).setCoordVoleur(c.getCoo());
-		//
-
 	}
 
 	public void changeConstructionActive()

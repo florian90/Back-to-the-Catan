@@ -297,7 +297,7 @@ public class Plateau {
 				for (CoordCase coordCase : new CoordCase[]{pt.getCoo().getGauche(), pt.getCoo().getDroite(), pt.getCoo().getVertical()})
 				{
 					Case tuile = cases.get(coordCase);
-					if (tuile.getRessource() != Ressource.Autoroute && tuile.getValeur() == val)
+					if (tuile.getRessource() != Ressource.Autoroute && tuile.getValeur() == val && !(tuile.isVoleurPresent()))
 					{
 						pt.getProprietaire().recevoirRessource(tuile.getRessource());
 						if (pt.getType() == TypePoint.Ville)
@@ -333,4 +333,5 @@ public class Plateau {
 			}
 		}*/
 		return new ArrayList<>();
+	}
 }

@@ -16,7 +16,10 @@ public class Case {
 		m_coord = coo;
 		m_ressource = res;
 		m_valeur = val;
-		voleurPresent = false;
+		if(m_valeur ==7)
+			voleurPresent = true;
+		else
+			voleurPresent=false;
 	}
 
 	public Case(CoordCase coo)
