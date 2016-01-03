@@ -67,14 +67,18 @@ public class Arete {
 
 	public String peutConstruire(Joueur joueur, TypeArete type)
 	{
-		if (m_proprietaire != null && m_proprietaire != joueur)
+		if(!joueur.aAcces(m_plateau.getEpoque()))
+		{
+			return "Vous n'avez pas accès à cette époque";
+		}
+		else if (m_proprietaire != null && m_proprietaire != joueur)
 		{
 			return "Cette arète appartient déjà à un autre joueur";
 		} else if (m_type != TypeArete.Vide)
 		{//
 			return "Cette arète est déjà construite";
 		} else if (!isAttache(joueur))
-		{// Todo: doit être rataché à une autre route ++ OU au centre du plateau (Au début du jeu)
+		{
 			return "Cette arète doit être ratachéz à une autre vous appartenant";
 		}
 		return null;
@@ -154,5 +158,8 @@ public class Arete {
 		}
 		return false;
 	}
-
+	public Epoque getEpoque()
+	{
+		return m_plateau.getEpoque();
+	}
 }

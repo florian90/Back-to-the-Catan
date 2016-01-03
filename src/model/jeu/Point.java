@@ -51,7 +51,11 @@ public class Point {
 
 	public String peutConstruire(Joueur joueur, TypePoint type)
 	{
-		if(m_proprietaire != null && m_proprietaire != joueur)
+	    if(!joueur.aAcces(m_plateau.getEpoque()))
+	    {
+	    	return "Vous n'avez pas accès à cette époque";
+	    }
+		else if(m_proprietaire != null && m_proprietaire != joueur)
 		{// Chez un autre joueur
 			return "Ce point appartient déjà à un autre joueur";
 		}

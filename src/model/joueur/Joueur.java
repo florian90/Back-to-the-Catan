@@ -66,11 +66,11 @@ public class Joueur {
 
 	public void init()
 	{
-		nbRoutesAConstruire = 2;
-		nbAutoroutesAConstruire = 0;
-		nbVillagesAConstruire = 2;
-		nbVillesAConstruire = 0;
-		nbCartesDeplacerVoleur =6;
+		nbRoutesAConstruire = 65;
+		nbAutoroutesAConstruire = 65;
+		nbVillagesAConstruire = 65;
+		nbVillesAConstruire = 65;
+		nbCartesDeplacerVoleur =65;
 		m_accesEpoque = 1;
 	}
 
@@ -208,6 +208,20 @@ public class Joueur {
 	{
 		if(type == TypeArete.Autoroute)
 		{
+			boolean accesEpoque =true;
+			for(Arete a : m_autoroutesConstruites)
+			{
+				if(m_jeu.getEpoqueActuelle() == a.getEpoque())
+				{
+					accesEpoque = false;
+					System.out.println("Bite");
+				}
+			}
+			if(accesEpoque)
+			{
+				accesNouvelleEpoque();
+			}
+				
 			m_autoroutesConstruites.add(arete);
 			nbAutoroutesAConstruire--;
 		}
