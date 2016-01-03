@@ -4,9 +4,9 @@ import model.jeu.Epoque;
 
 public class CoordCase {
 	/*
-	 * La case de coordon�e nulle est la case centrale.
-	 * La coo ligne augmente quand on prend la case � l'est de la case initiale.
-	 * La coo column augmente quand on prend la case au sudWest de la case initiale
+	 * La case de coordonée nulle est la case centrale.
+	 * La coo ligne augmente quand on prend la case à l'est de la case initiale.
+	 * La coo column augmente quand on prend la case au SudEst de la case initiale
 	 */
 	private int line;
 	private int column;

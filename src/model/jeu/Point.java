@@ -1,27 +1,31 @@
 package model.jeu;
 
+import java.util.ArrayList;
+
 import model.jeu.coordonnee.CoordCase;
 import model.jeu.coordonnee.CoordPoint;
 import model.joueur.Joueur;
-import model.joueur.Ressource;
 import vue.jeu.plateau.VuePoint;
+
 
 public class Point {
 	private CoordPoint m_coord;
 	private TypePoint m_type;
 	private Joueur m_proprietaire; //Si null, le point n'est pas encore utilisé
 	private VuePoint m_vue;
+	private Plateau m_plateau;
 
-	public Point(CoordPoint coord, TypePoint type, Joueur propietaire)
+	public Point(CoordPoint coord, TypePoint type, Joueur propietaire, Plateau plateau)
 	{
 		m_coord = coord;
 		m_type = type;
 		m_proprietaire = propietaire;
+		m_plateau = plateau;
 	}
 
-	public Point(CoordPoint coord)
+	public Point(CoordPoint coord, Plateau plateau)
 	{
-		this(coord, TypePoint.Vide, null);
+		this(coord, TypePoint.Vide, null, plateau);
 	}
 
 	public Joueur getProprietaire()
@@ -71,12 +75,26 @@ public class Point {
 			else
 				return "Votre première colonie du plateau doit se trouver autour du point central";
 		}
-		else if(false)
+		else if(!isAttache(joueur))
 		{// Todo: doit être rataché à une route et être à plus de 2 case d'une autre construction
-			return "Erreur 76 : Chemin d'accès introuvable";
+			return "Le point que vous souhaitez construire doit rejoindre une de vos routes.";
 		}
 		// Sinon on peut construire
 		return null;
+	}
+	
+	public boolean isAttache(Joueur joueur)
+	{
+		ArrayList<Arete> listArete = m_plateau.getAdjacentArete(this);
+		System.out.println(listArete.size());
+		for(Arete a : listArete)
+		{
+			if(a.getProprietaire()==joueur)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public String toString()

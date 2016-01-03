@@ -80,22 +80,22 @@ public class Plateau {
 			coo = tuile.getCoo();
 			cooPoint = new CoordPoint(coo.west(), coo, coo.northWest());
 			if (!points.containsKey(cooPoint))
-				points.put(cooPoint, new Point(cooPoint));
+				points.put(cooPoint, new Point(cooPoint,this));
 			cooPoint = new CoordPoint(coo.northWest(), coo.northEast(), coo);
 			if (!points.containsKey(cooPoint))
-				points.put(cooPoint, new Point(cooPoint));
+				points.put(cooPoint, new Point(cooPoint,this));
 			cooPoint = new CoordPoint(coo, coo.east(), coo.northEast());
 			if (!points.containsKey(cooPoint))
-				points.put(cooPoint, new Point(cooPoint));
+				points.put(cooPoint, new Point(cooPoint,this));
 			cooPoint = new CoordPoint(coo, coo.east(), coo.southEast());
 			if (!points.containsKey(cooPoint))
-				points.put(cooPoint, new Point(cooPoint));
+				points.put(cooPoint, new Point(cooPoint,this));
 			cooPoint = new CoordPoint(coo.southWest(), coo.southEast(), coo);
 			if (!points.containsKey(cooPoint))
-				points.put(cooPoint, new Point(cooPoint));
+				points.put(cooPoint, new Point(cooPoint,this));
 			cooPoint = new CoordPoint(coo.west(), coo, coo.southWest());
 			if (!points.containsKey(cooPoint))
-				points.put(cooPoint, new Point(cooPoint));
+				points.put(cooPoint, new Point(cooPoint,this));
 		}
 	}
 
@@ -347,5 +347,19 @@ public class Plateau {
 		while (res.contains(arete))
 			res.remove(arete);
 		return res;
+	}
+	
+	public ArrayList<Arete> getAdjacentArete(Point point)
+	{		
+		ArrayList<Arete> listArete = new ArrayList<>(3);
+		for (Arete a : aretes.values())
+		{
+			if(point.getCoo().equals(a.getCoord().getDebut()) || point.getCoo().equals(a.getCoord().getFin()))
+			{
+				System.out.println("Coucou");
+				listArete.add(a);
+			}
+		}
+		return listArete;
 	}
 }
