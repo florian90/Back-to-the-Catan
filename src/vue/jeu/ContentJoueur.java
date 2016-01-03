@@ -1,5 +1,7 @@
 package vue.jeu;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,7 +24,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	private Jeu m_jeu;
 	private Fenetre m_fenetre;
 
-	private Button construire;
+	private Button construire, utiliserCarteVoleur;
 	private ImageView imgAvatar;
 	private Label labelPseudo;
 	private Label ressources;
@@ -40,6 +42,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	}
 
 	public void init(){
+		
 		imgAvatar = new ImageView();
 		labelPseudo = new Label();
 		setPadding(new Insets(20, 20, 20, 20));
@@ -62,7 +65,18 @@ public class ContentJoueur extends GridPane implements Desactivable {
 
 		aConstruire = new Label("A construire");
 		aConstruire.setId("divisions");
+		
+		utiliserCarteVoleur = new Button("Utiliser");
+		utiliserCarteVoleur.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				
+				m_jeu.setM_deplacementVoleurActif(true);
 
+				
+			}
+		});
 		inventions = new Label("Inventions : ");
 		inventions.setId("divisions");
 
@@ -116,6 +130,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 
 		add(cartes, 0, 19);
 		add(new Label("Dépl. Voleur : " + j.getNbCartesDeplacerVoleur()), 0, 20);
+		add(utiliserCarteVoleur,1,20);
 		add(new Label("Développement : " + j.getNbCartesDev()), 0, 21);
 	}
 

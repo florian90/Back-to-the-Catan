@@ -90,8 +90,9 @@ public class VuePlateau extends Group {
 		{
 			coo = tuile.getCoo();
 			simplefCoo = getCoord(coo);
-			viewCase = new ViewCase(simplefCoo.x - Constants.hexWidth/2, simplefCoo.y - Constants.hexHeight/2, tuile);
+			viewCase = new ViewCase(simplefCoo.x - Constants.hexWidth/2, simplefCoo.y - Constants.hexHeight/2, tuile,m_jeu);
 			m_cases.getChildren().add(viewCase);
+			tuile.setVue(viewCase);
 		}
 		getChildren().add(m_cases);
 	}

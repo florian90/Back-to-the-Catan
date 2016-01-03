@@ -60,6 +60,7 @@ public class Fenetre extends AnchorPane {
 		Tab TabInventions = new Tab("Inventions");
 		TabPane TabsMarche = new TabPane(TabConstructions, TabInventions, TabCartes);
 		TabsMarche.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+		TabsMarche.setPrefHeight(450);
 
 		VBox VGauche = new VBox();
 		VBox VMilieu = new VBox();

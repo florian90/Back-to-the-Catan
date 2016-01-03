@@ -18,8 +18,11 @@ public class VueDes extends GridPane implements Desactivable {
 		setVgap(20);
 		
 		de1 = new Label("Dé n° 1 :");
+		de1.setId("divisions");
 		de2 = new Label("Dé n° 2 :");
+		de2.setId("divisions");
 		somme = new Label("Somme :");
+		somme.setId("divisions");
 		lancer = new Button("Lancer les dés");
 		ImageView imgDes = new ImageView("textures/dice.jpg");
 		

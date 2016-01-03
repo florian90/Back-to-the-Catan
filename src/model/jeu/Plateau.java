@@ -14,6 +14,7 @@ import java.util.List;
 public class Plateau {
 	
 	private Epoque epoque;
+	private CoordCase coordVoleur;
 	private HashMap<CoordCase, Case> cases;
 	private HashMap<CoordArete, Arete> aretes;
 	private HashMap<CoordPoint, Point> points;
@@ -26,7 +27,10 @@ public class Plateau {
 		epoque = ep;
 		m_size = size;
 		init();
+		coordVoleur = new CoordCase(0, 0, ep) ;
 	}
+
+
 
 	private void init()
 	{
@@ -223,7 +227,7 @@ public class Plateau {
 		String[] tab = null;
 		try
 		{
-			BufferedReader reader = new BufferedReader(new FileReader("ressources/PlateauxInitiaux/plateau1.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("ressources/PlateauxInitiaux/plateau2.txt"));
 			for (int i = 0; i < m_size; i++)
 			{
 				tab = reader.readLine().split(" ");
@@ -300,5 +304,13 @@ public class Plateau {
 							pt.getProprietaire().recevoirRessource(tuile.getRessource());
 					}
 				}
+	}
+	
+	public CoordCase getCoordVoleur() {
+		return coordVoleur;
+	}
+
+	public void setCoordVoleur(CoordCase coordVoleur) {
+		this.coordVoleur = coordVoleur;
 	}
 }

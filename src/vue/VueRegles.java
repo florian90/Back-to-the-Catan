@@ -21,7 +21,7 @@ public class VueRegles extends GridPane{
 		setVgap(10);
 
 		retour = new Button("Retour");	
-		URL urlRegles = getClass().getResource("Regles.html");
+		URL urlRegles = getClass().getResource("Règles.html");
 
 		webEngine.load(urlRegles.toExternalForm());
 

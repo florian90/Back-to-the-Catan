@@ -4,6 +4,7 @@ import model.joueur.Joueur;
 import model.joueur.PackRess;
 import model.joueur.TypeCarte;
 import vue.jeu.Fenetre;
+import vue.jeu.plateau.ViewCase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class Jeu {
 	private int nbJoueurs, joueurActuel;
 	private Epoque epoqueActuelle;
 
-	private boolean m_constructionActive;
+	private boolean m_constructionActive, m_deplacementVoleurActif;
 	private boolean m_desLances;
 	private boolean m_initPeriod;
 	private Fenetre m_vue;
@@ -49,6 +50,7 @@ public class Jeu {
 		m_desLances = false;
 		m_initPeriod = true;
 		m_constructionActive = true;
+		m_deplacementVoleurActif = false;
 		epoqueModifiee();
 		m_vue.initTourInitiaux();
 	}
@@ -126,6 +128,14 @@ public class Jeu {
 				joueurActuel = 0;
 			m_vue.initTourJoueur();
 		}
+	}
+
+	public boolean isM_deplacementVoleurActif() {
+		return m_deplacementVoleurActif;
+	}
+
+	public void setM_deplacementVoleurActif(boolean m_deplacementVoleurActif) {
+		this.m_deplacementVoleurActif = m_deplacementVoleurActif;
 	}
 
 	public Joueur getJoueur()
@@ -215,6 +225,27 @@ public class Jeu {
 			}
 			construireArete(type, arete);
 		}
+	}
+	
+	public void clicCase(Case c, ViewCase vc)
+	{
+		if(m_deplacementVoleurActif)
+		{
+			deplacerVoleur(c,vc);
+			
+		}
+	}
+	
+	private void deplacerVoleur(Case c, ViewCase vc)
+	{
+		//model
+		c.setVoleurPresent(true);
+		
+		Case voleurActuelle = plateaux.get(epoqueActuelle).getCases().get(plateaux.get(epoqueActuelle).getCoordVoleur());
+		voleurActuelle.setVoleurPresent(false);
+		plateaux.get(epoqueActuelle).setCoordVoleur(c.getCoo());
+		//
+
 	}
 
 	public void changeConstructionActive()

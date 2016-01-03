@@ -30,14 +30,14 @@ public class ContentTabCartes extends GridPane implements Desactivable{
 		ImageView cartes = new ImageView(new Image("textures/cards.jpg"));
 		tirer = new Button("Tirer une carte");
 		cartes.setPreserveRatio(true);
-		cartes.setFitWidth(200);
+		cartes.setFitWidth(100);
 		
 		setPadding(new Insets(20, 20, 20, 20));
 		setHgap(15);
 		setVgap(15);
-		add(new Label("Coût : 2 ressources d'époques différentes"), 0, 0);
+		add(new Label("Coût : 2 ressources d'époques différentes"), 0, 0,2,1);
 		add(cartes, 0, 2);
-		add(tirer,0,4);
+		add(tirer,1,2);
 		
 		tirer.setOnAction(new EventHandler<ActionEvent>() {
 			
