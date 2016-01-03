@@ -10,8 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import model.jeu.Epoque;
 import model.jeu.Jeu;
-import model.joueur.Joueur;
-import model.joueur.PackRess;
 import model.joueur.Ressource;
 import vue.jeu.ContentJoueur;
 import vue.jeu.Desactivable;

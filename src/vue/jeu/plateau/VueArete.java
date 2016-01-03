@@ -26,7 +26,7 @@ public class VueArete extends Group {
 		m_fenetre = jeu.getFenetre();
 
 		m_ligne = new Line(debutX, debutY, finX, finY);
-		m_ligne.setStrokeWidth(Constants.roadWidth - 2);
+		m_ligne.setStrokeWidth(Constants.roadWidth - 4);
 		m_ligne.setStroke(Color.GRAY);
 
 		m_ligneJoueur = new Line(debutX, debutY, finX, finY);

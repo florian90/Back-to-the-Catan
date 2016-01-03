@@ -61,7 +61,6 @@ public class ViewCase extends Group {
 			@Override
 			public void handle(MouseEvent event)
 			{
-				System.out.println("Clicked on point : " + m_case);
 				m_jeu.clicCase(m_case, (ViewCase)event.getSource());
 				
 			}

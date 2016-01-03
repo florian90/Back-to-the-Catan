@@ -18,7 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.jeu.Jeu;
 import model.joueur.Joueur;
 import model.joueur.PackRess;
 import model.joueur.Ressource;
@@ -113,7 +112,7 @@ public class VueEchange extends TitledPane{
 		setJoueurs(j1,j2);
 		aj1.updateFields(j1);
 		aj2.updateFields(j2);
-		System.out.println(j1.getNom()+j2.getNom());
+
 		setVisible(true);
 	}
 	
@@ -128,7 +127,6 @@ public class VueEchange extends TitledPane{
 		private HashMap<Ressource,Spinner<Integer>> quantites;
 		private HashMap<Ressource,Label> disponibles;
 		private Label nomJoueur;
-		private Joueur joueur;
 		private ImageView imgAvatar;
 		
 		public  AfficheJoueur()
@@ -146,6 +144,7 @@ public class VueEchange extends TitledPane{
 				{
 					//Ajout des spinners
 					Spinner<Integer> spinTemp = new Spinner<Integer>(0,99,0);
+					spinTemp.setPrefWidth(100);
 					quantites.put(r,spinTemp);
 					add(spinTemp,2,i+3);
 					

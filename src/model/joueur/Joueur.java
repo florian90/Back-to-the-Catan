@@ -66,11 +66,11 @@ public class Joueur {
 
 	public void init()
 	{
-		nbRoutesAConstruire = 65;
-		nbAutoroutesAConstruire = 65;
-		nbVillagesAConstruire = 65;
-		nbVillesAConstruire = 65;
-		nbCartesDeplacerVoleur =65;
+		nbRoutesAConstruire = 2;
+		nbAutoroutesAConstruire = 0;
+		nbVillagesAConstruire = 2;
+		nbVillesAConstruire = 0;
+		nbCartesDeplacerVoleur =0;
 		m_accesEpoque = 1;
 	}
 
@@ -164,6 +164,25 @@ public class Joueur {
 		depenserRessources(pack);
 		//int nbInv = m_inventions.get(inv);
 		m_inventions.put(inv, true);
+		testVictoire();
+		
+	}
+	
+	private void testVictoire()
+	{
+		boolean possedeTout = true;
+		for(Invention i : Invention.values())
+		{
+			if(! possedeInvention(i))
+			{
+				possedeTout=false;
+			}
+		}
+		
+		if(possedeTout)
+		{
+			m_jeu.getFenetre().videoFin();
+		}
 	}
 	
 	public void acheterCarte(TypeCarte tc)
@@ -214,7 +233,6 @@ public class Joueur {
 				if(m_jeu.getEpoqueActuelle() == a.getEpoque())
 				{
 					accesEpoque = false;
-					System.out.println("Bite");
 				}
 			}
 			if(accesEpoque)
@@ -250,7 +268,7 @@ public class Joueur {
 		PackRess cout = obj.cout(m_jeu.getEpoqueActuelle()); 
 		cout.mult(nbr);
 		depenserRessources(cout);
-		System.out.println(m_nom + " a recu " + nbr + "x" + obj);
+
 		
 		if(obj == TypeArete.Route)
 		{

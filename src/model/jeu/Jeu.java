@@ -197,6 +197,7 @@ public class Jeu {
 	{
 		m_vue.chargerPlateau(epoqueActuelle);
 		m_vue.getCTCards().update();
+		m_vue.getcTC().update();
 	}
 
 	public void clicPoint(Point point)
@@ -329,8 +330,8 @@ public class Jeu {
 		}
 	}
 	
-	//Remark: méthode déplacée depuis la classe ContentTabConstruction, il faudrait la renommer non ?
-	public boolean test(int nbRoute, int nbAutoroute, int nbVillage, int nbVille, Epoque epoque, Joueur joueur)
+	
+	public boolean testAchatConstructions(int nbRoute, int nbAutoroute, int nbVillage, int nbVille, Epoque epoque, Joueur joueur)
 	{
 		PackRess cout = new PackRess();
 		cout.add(TypeArete.Route.cout(epoque), nbRoute);

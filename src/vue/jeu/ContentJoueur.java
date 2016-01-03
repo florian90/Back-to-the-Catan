@@ -5,15 +5,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import model.jeu.Jeu;
 import model.joueur.Invention;
 import model.joueur.Joueur;
@@ -22,8 +17,6 @@ import model.joueur.Ressource;
 public class ContentJoueur extends GridPane implements Desactivable {
 
 	private Jeu m_jeu;
-	private Fenetre m_fenetre;
-
 	private Button construire, utiliserCarteVoleur;
 	private ImageView imgAvatar;
 	private Label labelPseudo;
@@ -35,8 +28,6 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	public ContentJoueur(Jeu jeu)
 	{
 		m_jeu = jeu;
-		m_fenetre = m_jeu.getFenetre();
-
 		init();
 		update();
 	}

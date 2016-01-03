@@ -1,25 +1,42 @@
 package vue.jeu;
 
 
+import java.io.File;
+import java.util.ArrayList;
+
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import model.jeu.Epoque;
 import model.jeu.Jeu;
-import model.joueur.Joueur;
 import vue.jeu.panneauMarche.ContentTabCartes;
 import vue.jeu.panneauMarche.ContentTabConstructions;
 import vue.jeu.panneauMarche.ContentTabInventions;
 import vue.jeu.panneauMarche.VueDes;
 import vue.jeu.plateau.VueEchange;
 import vue.jeu.plateau.VuePlateau;
-
-import java.util.ArrayList;
 
 public class Fenetre extends AnchorPane {
 
@@ -47,13 +64,14 @@ public class Fenetre extends AnchorPane {
 
 	private String messageClassique;
 	private VueEchange echange;
+	Stage primaryStage;
 
-	public Fenetre(Jeu p_modelJeu)
+	public Fenetre(Jeu p_modelJeu, Stage p_primaryStage)
 	{
 		modelJeu = p_modelJeu;
 		modelJeu.setVue(this);
 
-		
+		primaryStage = p_primaryStage;
 
 		finTour = new Button("Fin du Tour");
 		suiv = new Button("> Suivant");
@@ -172,7 +190,7 @@ public class Fenetre extends AnchorPane {
 		});
 
 		prec.setOnAction(new EventHandler<ActionEvent>() {
-			// Passer au platea précédent
+			// Passer au plateau précédent
 			@Override
 			public void handle(ActionEvent event)
 			{
@@ -219,6 +237,10 @@ public class Fenetre extends AnchorPane {
 		resetStatus();
 		desactiveEchangeBouttonJoueurActuel();
 		cTC.setJoueur(modelJeu.getJoueur());
+	}
+
+	public ContentTabConstructions getcTC() {
+		return cTC;
 	}
 
 	public ContentJoueur getPanneauJoueur() {
@@ -291,5 +313,30 @@ public class Fenetre extends AnchorPane {
 		des.desactiver();
 		setMessageClassique(modelJeu.getJoueur() + " - Construisez votre première colonie !");
 		modelJeu.changeConstructionActive();
+	}
+	
+	public void videoFin()
+	{
+	    final File f = new File("src/sons/VideoFinLO.mp4");
+	    final Media m = new Media(f.toURI().toString());
+	    final MediaPlayer mp = new MediaPlayer(m);
+	    final MediaView mv = new MediaView(mp);
+
+	    final DoubleProperty width = mv.fitWidthProperty();
+	    final DoubleProperty height = mv.fitHeightProperty();
+	    
+	    width.bind(Bindings.selectDouble(mv.sceneProperty(), "width"));
+	    height.bind(Bindings.selectDouble(mv.sceneProperty(), "height"));
+	    
+	    mv.setPreserveRatio(true);
+	    StackPane root = new StackPane();
+	    root.getChildren().add(mv);
+	    final Scene scene = new Scene(root, 960, 540);
+	    scene.setFill(Color.BLACK);
+	    primaryStage.setScene(scene);
+	    primaryStage.setFullScreen(true);
+	    primaryStage.show();
+		mp.play();
+
 	}
 }

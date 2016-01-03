@@ -90,7 +90,7 @@ public class Point {
 	public boolean isAttache(Joueur joueur)
 	{
 		ArrayList<Arete> listArete = m_plateau.getAdjacentArete(this);
-		System.out.println(listArete.size());
+
 		for(Arete a : listArete)
 		{
 			if(a.getProprietaire()==joueur)

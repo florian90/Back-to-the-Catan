@@ -10,7 +10,7 @@ public enum TypeArete implements Achetable{
 				@Override
 				public PackRess cout(Epoque epoque)
 				{
-					return new PackRess(Ressource.Metal, Epoque.getR1(epoque));
+					return new PackRess(Ressource.Metal, Epoque.getR2(epoque));
 				}
 			},
 	Autoroute
@@ -18,7 +18,7 @@ public enum TypeArete implements Achetable{
 				@Override
 				public PackRess cout(Epoque epoque)
 				{
-					return new PackRess(Ressource.Metal, Ressource.Metal, Epoque.getR2(epoque));
+					return new PackRess(Ressource.Metal, Ressource.Metal, Epoque.getR1(epoque));
 				}
 			},
 	Vide

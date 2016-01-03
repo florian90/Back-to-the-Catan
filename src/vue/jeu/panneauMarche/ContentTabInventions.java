@@ -11,11 +11,8 @@ import javafx.scene.layout.StackPane;
 import model.jeu.Epoque;
 import model.jeu.Jeu;
 import model.joueur.Invention;
-import model.joueur.PackRess;
-import model.joueur.Ressource;
 import vue.jeu.ContentJoueur;
 import vue.jeu.Desactivable;
-import vue.jeu.Fenetre;
 
 public class ContentTabInventions extends GridPane implements Desactivable{
 
@@ -50,7 +47,6 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 		setVgap(15);
 		setHeight(800);
 
-		//	add(new Label("Constructions"),0,0);
 		add(new Label("Train"), 0, 0);
 		add(new Label("Radio"), 0, 1);
 		add(hoverboard, 0, 2);
@@ -81,7 +77,7 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 			public void handle(MouseEvent event)
 			{
 				stack.getChildren().removeAll(stack.getChildren());
-				stack.getChildren().add(new DetailInvention("Train", " - 4xRoue\n           - 5xBois", "textures/train.jpg", "Ceci est un train du far west"));
+				stack.getChildren().add(new DetailInvention("Train", " - 4 x Roue\n           - 5 x Bois", "textures/train.jpg", "Ceci est un train du far west"));
 
 
 			}
@@ -92,7 +88,7 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 			public void handle(MouseEvent event)
 			{
 				stack.getChildren().removeAll(stack.getChildren());
-				stack.getChildren().add(new DetailInvention("Radio", " - 2xAntenne \n           - 4xHaut-Parleur \n           - 3xMétal", "textures/radio.jpg", "Ceci est une radio"));
+				stack.getChildren().add(new DetailInvention("Radio", " - 2 x Antenne \n           - 4 x Haut-Parleur \n           - 3 x Métal", "textures/radio.jpg", "Ceci est une radio"));
 
 
 
@@ -104,10 +100,7 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 			public void handle(MouseEvent event)
 			{
 				stack.getChildren().removeAll(stack.getChildren());
-				stack.getChildren().add(new DetailInvention("Convecteur Temporel", " - 3xMorceau de Schéma \n           - 6xPlutonium", "textures/convecteur.gif", "Ceci est un convecteur temporel"));
-				//add(new DetailInvention("Convecteur temporel", "2xBois + 2xMetal", "textures/hexBois.png", "Ceci est un train du far west"),0,6,2,10);
-
-
+				stack.getChildren().add(new DetailInvention("Convecteur Temporel", " - 3 x Morceau de Schéma \n           - 6 x Plutonium", "textures/convecteur.gif", "Ceci est un convecteur temporel"));
 			}
 		});
 		detailsHoverboard.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -116,10 +109,7 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 			public void handle(MouseEvent event)
 			{
 				stack.getChildren().removeAll(stack.getChildren());
-				stack.getChildren().add(new DetailInvention("Hoverboard", " - 4xVentilateur \n           - 2xAimant \n           - 3xMétal", "textures/hoverboard.jpg", "Ceci est un hoverboard"));
-				//	add(new DetailInvention("Hoverboard", "2xBois + 2xMetal", "textures/hexBois.png", "Ceci est un train du far west"),0,6,2,10);
-
-
+				stack.getChildren().add(new DetailInvention("Hoverboard", " - 4 x Ventilateur \n           - 2 x Aimant \n           - 3 x Métal", "textures/hoverboard.jpg", "Ceci est un hoverboard"));
 			}
 		});
 
@@ -129,19 +119,11 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 			public void handle(ActionEvent event) {
 				if (m_jeu.getJoueur().peutConstruire(Invention.Train, Epoque._2015))
 				{
-					/*	PackRess pack = new PackRess();
-					pack.add(Ressource.Roue,4);
-					pack.add(Ressource.Bois,5);*/
 					m_jeu.getJoueur().construireInvention(Invention.Train.cout(Epoque._1855), Invention.Train);		
 					acheterTrain.setDisable(true);
 					ctj.update();
 
 				}
-				else
-				{
-					System.out.println("Pas assez de ressources");
-				}
-
 			}
 		});
 
@@ -151,17 +133,9 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 			public void handle(ActionEvent event) {
 				if (m_jeu.getJoueur().peutConstruire(Invention.Radio, Epoque._1955))
 				{
-					/*PackRess pack = new PackRess();
-					pack.add(Ressource.Antenne,2);
-					pack.add(Ressource.HautParleur,4);
-					pack.add(Ressource.Metal,3);*/
 					m_jeu.getJoueur().construireInvention(Invention.Radio.cout(Epoque._1955), Invention.Radio);	
 					acheterRadio.setDisable(true);
 					ctj.update();
-				}
-				else
-				{
-					System.out.println("Pas assez de ressources");
 				}
 			}
 		});
@@ -172,17 +146,11 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 			public void handle(ActionEvent event) {
 				if (m_jeu.getJoueur().peutConstruire(Invention.ConvecteurTemporel, Epoque._1985))
 				{
-					/*PackRess pack = new PackRess();
-					pack.add(Ressource.MorceauSchema,3);
-					pack.add(Ressource.Plutonium,6);*/
 					m_jeu.getJoueur().construireInvention(Invention.ConvecteurTemporel.cout(Epoque._1985), Invention.ConvecteurTemporel);		
 					acheterConvecteur.setDisable(true);
 					ctj.update();
 				}
-				else
-				{
-					System.out.println("Pas assez de ressources");
-				}
+				
 			}
 		});
 
@@ -192,17 +160,9 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 			public void handle(ActionEvent event) {
 				if (m_jeu.getJoueur().peutConstruire(Invention.HoverBoard, Epoque._2015))
 				{
-					/*PackRess pack = new PackRess();
-					pack.add(Ressource.Ventilateur,4);
-					pack.add(Ressource.Aimant,2);
-					pack.add(Ressource.Metal,3);*/
 					m_jeu.getJoueur().construireInvention(Invention.HoverBoard.cout(Epoque._2015), Invention.HoverBoard);
 					acheterHoverboard.setDisable(true);
 					ctj.update();
-				}
-				else
-				{
-					System.out.println("Pas assez de ressources");
 				}
 			}
 		});
@@ -213,22 +173,22 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 	public void update()
 	{
 		activer();
-		/*if(m_jeu.getJoueur().getM_inventions().get(Invention.ConvecteurTemporel) );
+		if(m_jeu.getJoueur().possedeInvention(Invention.ConvecteurTemporel) );
 		{
 			acheterConvecteur.setDisable(true);
 		}
-		if(m_jeu.getJoueur().getM_inventions().get(Invention.HoverBoard));
+		if(m_jeu.getJoueur().possedeInvention(Invention.HoverBoard));
 		{
 			acheterHoverboard.setDisable(true);
 		}
-		if(m_jeu.getJoueur().getM_inventions().get(Invention.Radio));
+		if(m_jeu.getJoueur().possedeInvention(Invention.Radio));
 		{
 			acheterRadio.setDisable(true);
 		}
-		if(m_jeu.getJoueur().getM_inventions().get(Invention.Train));
+		if(m_jeu.getJoueur().possedeInvention(Invention.Train));
 		{
 			acheterTrain.setDisable(true);
-		}*/
+		}
 	}
 
 	@Override

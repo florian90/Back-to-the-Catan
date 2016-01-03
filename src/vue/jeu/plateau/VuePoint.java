@@ -10,7 +10,6 @@ import javafx.scene.shape.Rectangle;
 import model.jeu.Jeu;
 import model.jeu.Point;
 import model.jeu.TypePoint;
-import model.joueur.Ressource;
 import vue.jeu.Constants;
 import vue.jeu.Fenetre;
 

@@ -5,13 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.jeu.Jeu;
 import vue.jeu.Fenetre;
-
-import java.io.File;
 
 
 public class Main extends Application {
@@ -51,16 +47,12 @@ public class Main extends Application {
 				{
 					
 					Jeu modelJeu = new Jeu(menuView.getListeJoueurs());
-					Fenetre fen = new Fenetre(modelJeu);
+					Fenetre fen = new Fenetre(modelJeu,primaryStage);
 					Scene EcranJeu = new Scene(fen, 1400, 850);
 					EcranJeu.getStylesheets().add(getClass().getResource("StyleEcranJeu.css").toExternalForm());
+
 					primaryStage.setScene(EcranJeu);
 					primaryStage.show();
-					/*final File file = new File("src/sons/nomdezeus.mp3"); // NOM DE ZEUS !!
-					final Media media = new Media(file.toURI().toString());
-					final MediaPlayer mediaPlayer = new MediaPlayer(media);
-					mediaPlayer.play();*/
-					System.out.println(menuView.getListeJoueurs());
 				}
 			});
 			
