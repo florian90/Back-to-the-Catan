@@ -172,6 +172,7 @@ public class Joueur {
 		if (tc == TypeCarte.DeplacerVoleur)
 		{
 			nbCartesDeplacerVoleur++;
+			m_jeu.getFenetre().setStatus("Vous venez de piocher une carte voleur. Vous gagnez 1 déplacement de voleur à utiliser quand vous voulez.");
 		}
 		else
 		{

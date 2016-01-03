@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import model.jeu.Epoque;
 import model.jeu.Jeu;
 import model.joueur.Joueur;
 import model.joueur.PackRess;
@@ -35,7 +36,7 @@ public class ContentTabCartes extends GridPane implements Desactivable{
 		setPadding(new Insets(20, 20, 20, 20));
 		setHgap(15);
 		setVgap(15);
-		add(new Label("Coût : 2 ressources d'époques différentes"), 0, 0,2,1);
+		add(new Label("Coût : \n - 1 x "+Ressource.toString(Epoque.getR1(p_jeu.getEpoqueActuelle()))+"\n - 1 x "+Ressource.toString(Epoque.getR2(p_jeu.getEpoqueActuelle()))), 0, 0,2,1);
 		add(cartes, 0, 2);
 		add(tirer,1,2);
 		

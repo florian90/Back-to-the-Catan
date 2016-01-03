@@ -92,7 +92,7 @@ public class Jeu {
 	{
 		int res = random.nextInt(3);
 		TypeCarte typeCarte;
-		if (res <= 2)
+		if (res < 2)
 		{
 			typeCarte = TypeCarte.Developpement;
 		} else
