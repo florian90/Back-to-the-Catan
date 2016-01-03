@@ -14,6 +14,7 @@ public class Joueur {
 	private Color m_couleur;
 	private String m_avatar;
 	private PackRess m_ressources;
+	private int m_accesEpoque;
 	private HashMap<Invention,Boolean> m_inventions;
 
 	private ArrayList<Point> m_villagesConstruits;
@@ -70,6 +71,7 @@ public class Joueur {
 		nbVillagesAConstruire = 2;
 		nbVillesAConstruire = 0;
 		nbCartesDeplacerVoleur =6;
+		m_accesEpoque = 1;
 	}
 
 	/*
@@ -360,5 +362,25 @@ public class Joueur {
 	public void utiliserCarteVoleur() {
 		nbCartesDeplacerVoleur--;
 	}
-	
+
+	public void accesNouvelleEpoque()
+	{
+		m_accesEpoque++;
+	}
+
+	public boolean aAcces(Epoque epoque)
+	{
+		switch (epoque)
+		{
+			case _1985:
+				return m_accesEpoque>=1;
+			case _2015:
+				return m_accesEpoque>=2;
+			case _1855:
+				return m_accesEpoque>=3;
+			case  _1955:
+				return m_accesEpoque>=4;
+		}
+		return false;
+	}
 }
