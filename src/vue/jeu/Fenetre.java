@@ -54,13 +54,10 @@ public class Fenetre extends AnchorPane {
 	private ContentTabConstructions cTC;
 	private ContentTabInventions cTI;
 	private ContentTabCartes CTCards;
-	public ContentTabCartes getCTCards() {
-		return CTCards;
-	}
-
+	
 	private ContentJoueur panneauJoueur;
 
-	private Jeu modelJeu;
+	private Jeu m_jeu;
 
 	private String messageClassique;
 	private VueEchange echange;
@@ -68,8 +65,8 @@ public class Fenetre extends AnchorPane {
 
 	public Fenetre(Jeu p_modelJeu, Stage p_primaryStage)
 	{
-		modelJeu = p_modelJeu;
-		modelJeu.setVue(this);
+		m_jeu = p_modelJeu;
+		m_jeu.setVue(this);
 
 		primaryStage = p_primaryStage;
 
@@ -93,46 +90,46 @@ public class Fenetre extends AnchorPane {
 		gridJoueurs.setVgap(10);
 		gridJoueurs.setAlignment(Pos.CENTER);
 		gridJoueurs.setPadding(new Insets(20, 10, 10, 10));
-		bt_echangerList = new Button[modelJeu.getNbJoueurs()];
+		bt_echangerList = new Button[m_jeu.getNbJoueurs()];
 
-		for (int i = 0; i < modelJeu.getNbJoueurs(); ++i)
+		for (int i = 0; i < m_jeu.getNbJoueurs(); ++i)
 		{ // Initialise les images des joueurs en bas et les boutons échanger
 			final int index = i; 
-			ImageView avatar = new ImageView(modelJeu.getJoueur(i).getAvatar());
+			ImageView avatar = new ImageView(m_jeu.getJoueur(i).getAvatar());
 			bt_echangerList[i] = new Button("Echanger");
 			bt_echangerList[i].setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent event) {
 					
-					echange.show(modelJeu.getJoueur(), modelJeu.getJoueur(index));
+					echange.show(m_jeu.getJoueur(), m_jeu.getJoueur(index));
 					
 				}
 			});
 			avatar.setFitWidth(50);
 			avatar.setPreserveRatio(true);
 			gridJoueurs.add(avatar, i, 0);
-			gridJoueurs.add(new Label(modelJeu.getJoueur(i).getNom()), i, 1);
+			gridJoueurs.add(new Label(m_jeu.getJoueur(i).getNom()), i, 1);
 			gridJoueurs.add(bt_echangerList[i], i, 2);
 		}
-		gridJoueurs.add(finTour, modelJeu.getNbJoueurs(), 1);
+		gridJoueurs.add(finTour, m_jeu.getNbJoueurs(), 1);
 
 		plateaux = new ArrayList<>();
 
 		for(Epoque epoque : Epoque.values())
 		{
-			plateaux.add(new VuePlateau(0, 0, modelJeu.getPlateau(epoque), modelJeu));
+			plateaux.add(new VuePlateau(0, 0, m_jeu.getPlateau(epoque), m_jeu));
 		}
 
 		numPlateau = new Label();
 		statusBar = new Label();
-		panneauJoueur = new ContentJoueur(modelJeu);
+		panneauJoueur = new ContentJoueur(m_jeu);
 		echange = new VueEchange(panneauJoueur);
 		stack = new StackPane();
 
-		cTC = new ContentTabConstructions(modelJeu,panneauJoueur);
-		CTCards = new ContentTabCartes(modelJeu,panneauJoueur);
-		cTI = new ContentTabInventions(modelJeu,panneauJoueur);
+		cTC = new ContentTabConstructions(m_jeu,panneauJoueur);
+		CTCards = new ContentTabCartes(m_jeu,panneauJoueur);
+		cTI = new ContentTabInventions(m_jeu,panneauJoueur);
 
 		TabConstructions.setContent(cTC);
 		TabInventions.setContent(cTI);
@@ -185,7 +182,7 @@ public class Fenetre extends AnchorPane {
 			@Override
 			public void handle(ActionEvent event)
 			{
-				modelJeu.epoqueSuivante();
+				m_jeu.epoqueSuivante();
 			}
 		});
 
@@ -195,7 +192,7 @@ public class Fenetre extends AnchorPane {
 			public void handle(ActionEvent event)
 			{
 
-				modelJeu.epoquePrecedente();
+				m_jeu.epoquePrecedente();
 			}
 		});
 
@@ -204,7 +201,7 @@ public class Fenetre extends AnchorPane {
 			@Override
 			public void handle(ActionEvent event)
 			{
-				modelJeu.lancerDes();
+				m_jeu.lancerDes();
 			}
 
 		});
@@ -214,12 +211,12 @@ public class Fenetre extends AnchorPane {
 			@Override
 			public void handle(ActionEvent event)
 			{
-				modelJeu.joueurSuivant();
+				m_jeu.joueurSuivant();
 			}
 		});
 
 		// Initialise la vue
-		modelJeu.initJeu();
+		m_jeu.initJeu();
 	}
 
 	public void initTourJoueur()
@@ -233,10 +230,10 @@ public class Fenetre extends AnchorPane {
 		panneauJoueur.desactiver();
 		des.activer();
 		finTour.setDisable(true);
-		messageClassique = modelJeu.getJoueur().getNom() + " - Lancez les dés pour commencer";
+		messageClassique = m_jeu.getJoueur().getNom() + " - Lancez les dés pour commencer";
 		resetStatus();
 		desactiveEchangeBouttonJoueurActuel();
-		cTC.setJoueur(modelJeu.getJoueur());
+		cTC.setJoueur(m_jeu.getJoueur());
 	}
 
 	public ContentTabConstructions getcTC() {
@@ -250,10 +247,10 @@ public class Fenetre extends AnchorPane {
 	public void desactiveEchangeBouttonJoueurActuel()
 	{
 		// Active tous les boutons pour les échanges
-		for(int i=0;i<modelJeu.getNbJoueurs();++i)
+		for(int i=0;i<m_jeu.getNbJoueurs();++i)
 			bt_echangerList[i].setDisable(false);
 		// Désactive le bouton pour le joueur actuel
-		bt_echangerList[modelJeu.getJoueur().getNumJoueur()-1].setDisable(true);
+		bt_echangerList[m_jeu.getJoueur().getNumJoueur()-1].setDisable(true);
 	}
 
 	public void lanceDes(int[] tab)
@@ -265,7 +262,7 @@ public class Fenetre extends AnchorPane {
 		cTC.activer();
 		cTI.activer();
 		CTCards.activer();
-		messageClassique = modelJeu.getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant";
+		messageClassique = m_jeu.getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant";
 		resetStatus();
 	}
 
@@ -306,17 +303,55 @@ public class Fenetre extends AnchorPane {
 	{
 		panneauJoueur.update();
 	}
+	
+	public ContentTabCartes getCTCards() {
+		return CTCards;
+	}
+
 
 	public void initTourInitiaux()
 	{
 		initTourJoueur();
 		des.desactiver();
-		setMessageClassique(modelJeu.getJoueur() + " - Construisez votre première colonie !");
-		modelJeu.changeConstructionActive();
+		setMessageClassique(m_jeu.getJoueur() + " - Construisez votre première colonie !");
+		m_jeu.changeConstructionActive();
+	}
+	
+	public void afficheVainqueur()
+	{
+		GridPane grid = new GridPane();
+		Button ok = new Button("OK");
+		grid.add(new Label(m_jeu.getJoueur().getNom()+", vous avez construit la dernière invention et donc vous \npossédez maintenant le TraniKiVol !!!\n\n Félicitations !"), 0, 0);
+		grid.add(ok, 0, 1);
+		TitledPane panneauVainqueur = new TitledPane("Félicitations !",grid);
+		panneauVainqueur.setTranslateX(450);
+		panneauVainqueur.setTranslateY(325);
+		panneauVainqueur.setPrefSize(500, 200);
+		panneauVainqueur.setId("divisions");
+		panneauVainqueur.setCollapsible(false);
+		getChildren().add(panneauVainqueur);
+		ok.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				
+				videoFin();
+			}
+		});
+		
+		
 	}
 	
 	public void videoFin()
 	{
+		
+		try {
+			
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    final File f = new File("src/sons/VideoFinLO.mp4");
 	    final Media m = new Media(f.toURI().toString());
 	    final MediaPlayer mp = new MediaPlayer(m);

@@ -72,6 +72,13 @@ public class Joueur {
 		nbVillesAConstruire = 0;
 		nbCartesDeplacerVoleur =0;
 		m_accesEpoque = 1;
+		
+		/**/
+		m_ressources.add(new PackRess(Invention.ConvecteurTemporel.cout(null)));
+		m_ressources.add(new PackRess(Invention.HoverBoard.cout(null)));
+		m_ressources.add(new PackRess(Invention.Radio.cout(null)));
+		m_ressources.add(new PackRess(Invention.Train.cout(null)));
+		m_ressources.add(new PackRess(Ressource.Metal, 25, Ressource.MorceauSchema, 25));
 	}
 
 	/*
@@ -181,7 +188,8 @@ public class Joueur {
 		
 		if(possedeTout)
 		{
-			m_jeu.getFenetre().videoFin();
+			m_jeu.getFenetre().afficheVainqueur();
+		//	m_jeu.getFenetre().videoFin();
 		}
 	}
 	
