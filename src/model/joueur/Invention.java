@@ -33,7 +33,7 @@ public enum Invention implements Achetable {
 				@Override
 				public PackRess cout(Epoque epoque)
 				{
-					return new PackRess(Ressource.Ventilateur, 4, Ressource.Aimant, 2, Ressource.Metal, 3);
+					return new PackRess(Ressource.Antenne, 4, Ressource.HautParleur, 2, Ressource.Metal, 3);
 				}
 			}
 }
