@@ -1,10 +1,14 @@
 package vue;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.jeu.Jeu;
 import vue.jeu.Fenetre;
@@ -52,6 +56,11 @@ public class Main extends Application {
 
 					primaryStage.setScene(EcranJeu);
 					primaryStage.show();
+					
+					final File file = new File("src/sons/nomdezeus.mp3");
+					final Media media = new Media(file.toURI().toString());
+					final MediaPlayer mediaPlayer = new MediaPlayer(media);
+					mediaPlayer.play();
 				}
 			});
 			
@@ -70,7 +79,6 @@ public class Main extends Application {
 				public void handle(ActionEvent event) {
 					primaryStage.setScene(regles);
 					primaryStage.show();
-					
 					
 				}
 			});
