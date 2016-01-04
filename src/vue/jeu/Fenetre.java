@@ -344,7 +344,6 @@ public class Fenetre extends AnchorPane {
 	
 	public void videoFin()
 	{
-		
 	    final File f = new File("src/sons/VideoFinLO.mp4");
 	    final Media m = new Media(f.toURI().toString());
 	    final MediaPlayer mp = new MediaPlayer(m);
