@@ -1,0 +1,14 @@
+0 0 0 0 0 0 0
+0 0 0 4 6 9 0
+0 0 2 5 12 4 0
+0 9 8 7 8 10 0
+0 3 5 10 11 0 0
+0 3 6 11 0 0 0
+0 0 0 0 0 0 0
+
+/*
+ * Chaque chiffre correspond à la 
+ * valeur affichée sur le plateau 
+ * le 7 correspond à "aucune ressource" 
+ *(case centrale)
+ */

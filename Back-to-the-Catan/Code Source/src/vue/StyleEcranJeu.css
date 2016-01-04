@@ -1,0 +1,21 @@
+#labelPseudo
+{
+	-fx-font-weight: bold;
+	-fx-font-size: 20px;
+}
+
+#divisions
+{
+	-fx-font-weight: bold;
+	-fx-font-size: 15px;
+}
+
+#popup
+{
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 20,0.2,5,5 );
+}
+
+#gras
+{
+	-fx-font-weight: bold;
+}
