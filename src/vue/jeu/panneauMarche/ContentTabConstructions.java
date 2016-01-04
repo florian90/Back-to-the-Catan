@@ -50,10 +50,14 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 		spinRoute.valueProperty().addListener(new ChangeListener<Integer>() {
 			@Override
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-
+				//TODO: Remove 
+				System.out.println("test");
 				if(!(m_jeu.testAchatConstructions(newValue, spinAutoroute.getValue(), spinVillage.getValue(), spinVille.getValue(),epoque,joueur)))
 				{
 					spinRoute.getValueFactory().setValue(oldValue);
+					//TODO: Remove 
+					System.out.println("oui !");
+					
 				}
 
 			}

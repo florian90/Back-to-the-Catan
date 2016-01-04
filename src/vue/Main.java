@@ -22,7 +22,7 @@ public class Main extends Application {
 			
 			VueRegles reglesView = new VueRegles(primaryStage);
 			Scene regles = new Scene(reglesView,1400,850);
-			//menu.getStylesheets().add(getClass().getResource("StyleMenu.css").toExternalForm());
+
 			
 			primaryStage.setScene(menu);
 			primaryStage.setResizable(false);

@@ -21,36 +21,36 @@ public class Joueur {
 	private ArrayList<Point> m_villesConstruites;
 	private ArrayList<Arete> m_routesConstruites;
 	private ArrayList<Arete> m_autoroutesConstruites;
-	
+
 	private int nbRoutesAConstruire;
 	private int nbAutoroutesAConstruire;
 	private int nbVillagesAConstruire;
 	private int nbVillesAConstruire;
-	
+
 	private int nbCartesDev;
 	private int nbCartesDeplacerVoleur;
 	private Jeu m_jeu;
-	
+
 	public Joueur(String nom, int num)
 	{
 		m_nom = nom;
 		m_numJoueur = num;
 		m_avatar = "textures/Avatar" + num + ".jpg";
-		
+
 		switch(m_numJoueur)
 		{
-			case 1:
-				m_couleur = Color.RED;
-				break;
-			case 2:
-				m_couleur = Color.BLUE;
-				break;
-			case 3:
-				m_couleur = Color.YELLOW;
-				break;
-			case 4:
-				m_couleur = Color.GREEN;
-				break;
+		case 1:
+			m_couleur = Color.RED;
+			break;
+		case 2:
+			m_couleur = Color.BLUE;
+			break;
+		case 3:
+			m_couleur = Color.YELLOW;
+			break;
+		case 4:
+			m_couleur = Color.GREEN;
+			break;
 		}
 		m_ressources = new PackRess();
 		m_inventions = new HashMap<>();
@@ -72,7 +72,7 @@ public class Joueur {
 		nbVillesAConstruire = 0;
 		nbCartesDeplacerVoleur =0;
 		m_accesEpoque = 1;
-		
+
 		/**/
 		m_ressources.add(new PackRess(Invention.ConvecteurTemporel.cout(null)));
 		m_ressources.add(new PackRess(Invention.HoverBoard.cout(null)));
@@ -112,9 +112,9 @@ public class Joueur {
 	{
 		if(type == TypePoint.Village)
 			return nbVillagesAConstruire >= 1;
-		else if(type == TypePoint.Ville)
-			return nbVillesAConstruire >= 1;
-		return false;
+			else if(type == TypePoint.Ville)
+				return nbVillesAConstruire >= 1;
+				return false;
 	}
 
 	/*
@@ -124,9 +124,9 @@ public class Joueur {
 	{
 		if(type == TypeArete.Autoroute)
 			return nbAutoroutesAConstruire >= 1;
-		else if(type == TypeArete.Route)
-			return nbRoutesAConstruire >= 1;
-		return false;
+			else if(type == TypeArete.Route)
+				return nbRoutesAConstruire >= 1;
+				return false;
 	}
 
 	/*
@@ -137,7 +137,7 @@ public class Joueur {
 	{
 		return m_ressources.count(res);
 	}
-	
+
 	/*
 	 * Retourne vrai si le joueur possède l'invention 
 	 * passée en paramètre
@@ -172,9 +172,12 @@ public class Joueur {
 		//int nbInv = m_inventions.get(inv);
 		m_inventions.put(inv, true);
 		testVictoire();
-		
+
 	}
-	
+	/*
+	 * Si le joueur achete la derniere invention 
+	 * cette fonction lance l'écran de victoire
+	 */
 	private void testVictoire()
 	{
 		boolean possedeTout = true;
@@ -185,14 +188,13 @@ public class Joueur {
 				possedeTout=false;
 			}
 		}
-		
+
 		if(possedeTout)
 		{
 			m_jeu.getFenetre().afficheVainqueur();
-		//	m_jeu.getFenetre().videoFin();
 		}
 	}
-	
+
 	public void acheterCarte(TypeCarte tc)
 	{
 		depenserRessources(tc.cout(m_jeu.getEpoqueActuelle()));
@@ -207,7 +209,7 @@ public class Joueur {
 			m_jeu.getFenetre().setStatus("Vous venez de piocher une carte developpement. Vous gagnez 2 routes constructibles.");
 		}
 	}
-	
+
 	public int getNbCartesDev() {
 		return nbCartesDev;
 	}
@@ -247,7 +249,7 @@ public class Joueur {
 			{
 				accesNouvelleEpoque();
 			}
-				
+
 			m_autoroutesConstruites.add(arete);
 			nbAutoroutesAConstruire--;
 		}
@@ -278,7 +280,7 @@ public class Joueur {
 		cout.mult(nbr);
 		depenserRessources(cout);
 
-		
+
 		if(obj == TypeArete.Route)
 		{
 			nbRoutesAConstruire+=nbr;
@@ -296,8 +298,8 @@ public class Joueur {
 			nbVillesAConstruire+=nbr;
 		}
 	}
-	
-	
+
+
 
 	/*
 	 * Retourne le nombre de points correspondant au type passé en paramètre
@@ -306,15 +308,15 @@ public class Joueur {
 	{
 		switch(tp)
 		{
-			case Village:
-				return m_villagesConstruits.size();
-			case Ville:
-				return m_villesConstruites.size();
-			default:
-				return 0;
+		case Village:
+			return m_villagesConstruits.size();
+		case Ville:
+			return m_villesConstruites.size();
+		default:
+			return 0;
 		}
 	}
-	
+
 	/*
 	 * Retourne le nombre d'arètes correspondant au type passé en paramètre
 	 */
@@ -322,12 +324,12 @@ public class Joueur {
 	{
 		switch(ta)
 		{
-			case Route:
-				return m_routesConstruites.size();
-			case Autoroute:
-				return m_autoroutesConstruites.size();
-			default:
-				return 0;
+		case Route:
+			return m_routesConstruites.size();
+		case Autoroute:
+			return m_autoroutesConstruites.size();
+		default:
+			return 0;
 		}
 	}
 
@@ -335,22 +337,22 @@ public class Joueur {
 	{
 		return m_nom;
 	}
-	
+
 	public String getNom()
 	{
 		return m_nom;
 	}
-	
+
 	public int getNumJoueur()
 	{
 		return m_numJoueur;
 	}
-	
+
 	public Color getCouleur()
 	{
 		return m_couleur;
 	}
-	
+
 	public void setM_jeu(Jeu m_jeu) {
 		this.m_jeu = m_jeu;
 	}
@@ -378,7 +380,7 @@ public class Joueur {
 	public String getAvatar(){
 		return m_avatar;
 	}
-	
+
 	public HashMap<Invention, Boolean> getM_inventions() {
 		return m_inventions;
 	}
@@ -397,7 +399,7 @@ public class Joueur {
 	}
 
 	public boolean peutDeplacerVoleur() {
-		
+
 		return(nbCartesDeplacerVoleur > 0);
 	}
 
@@ -414,14 +416,14 @@ public class Joueur {
 	{
 		switch (epoque)
 		{
-			case _1985:
-				return m_accesEpoque>=1;
-			case _2015:
-				return m_accesEpoque>=2;
-			case _1855:
-				return m_accesEpoque>=3;
-			case  _1955:
-				return m_accesEpoque>=4;
+		case _1985:
+			return m_accesEpoque>=1;
+		case _2015:
+			return m_accesEpoque>=2;
+		case _1855:
+			return m_accesEpoque>=3;
+		case  _1955:
+			return m_accesEpoque>=4;
 		}
 		return false;
 	}
