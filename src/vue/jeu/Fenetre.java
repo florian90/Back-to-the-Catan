@@ -321,7 +321,7 @@ public class Fenetre extends AnchorPane {
 	{
 		GridPane grid = new GridPane();
 		Button ok = new Button("OK");
-		grid.add(new Label(m_jeu.getJoueur().getNom()+", vous avez construit la dernière invention et donc vous \npossédez maintenant le TraniKiVol !!!\n\n Félicitations !"), 0, 0);
+		grid.add(new Label(m_jeu.getJoueur().getNom()+", vous avez construit la dernière invention et donc vous \npossédez maintenant le TrainKiVol !!!\n\n Félicitations !"), 0, 0);
 		grid.add(ok, 0, 1);
 		TitledPane panneauVainqueur = new TitledPane("Félicitations !",grid);
 		panneauVainqueur.setTranslateX(450);
