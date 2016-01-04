@@ -72,6 +72,14 @@ public class Joueur {
 		nbVillesAConstruire = 0;
 		nbCartesDeplacerVoleur =0;
 		m_accesEpoque = 1;
+		
+		/* Pour avoir toutes les ressources nécessaires pour tester toutes les fonctionnalités*/
+		/*m_ressources.add(new PackRess(Invention.Train.cout(null)));
+		m_ressources.add(new PackRess(Invention.ConvecteurTemporel.cout(null)));
+		m_ressources.add(new PackRess(Invention.HoverBoard.cout(null)));
+		m_ressources.add(new PackRess(Invention.Radio.cout(null)));
+		
+		m_ressources.add(new PackRess(Ressource.Metal, 50, Ressource.MorceauSchema, 50, Ressource.Plutonium, 50));*/
 	}
 
 	/*
