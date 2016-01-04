@@ -52,7 +52,7 @@ public class Joueur {
 			m_couleur = Color.GREEN;
 			break;
 		}
-		m_ressources = new PackRess(Ressource.Metal,12,Ressource.MorceauSchema,12);
+		m_ressources = new PackRess();
 		m_inventions = new HashMap<>();
 		m_villagesConstruits    = new ArrayList<>();
 		m_villesConstruites     = new ArrayList<>();
@@ -72,13 +72,6 @@ public class Joueur {
 		nbVillesAConstruire = 0;
 		nbCartesDeplacerVoleur =0;
 		m_accesEpoque = 1;
-
-		/**/
-		m_ressources.add(new PackRess(Invention.ConvecteurTemporel.cout(null)));
-		m_ressources.add(new PackRess(Invention.HoverBoard.cout(null)));
-		m_ressources.add(new PackRess(Invention.Radio.cout(null)));
-		m_ressources.add(new PackRess(Invention.Train.cout(null)));
-		m_ressources.add(new PackRess(Ressource.Metal, 25, Ressource.MorceauSchema, 25));
 	}
 
 	/*
