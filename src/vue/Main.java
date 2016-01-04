@@ -22,7 +22,6 @@ public class Main extends Application {
 			
 			VueRegles reglesView = new VueRegles(primaryStage);
 			Scene regles = new Scene(reglesView,1400,850);
-
 			
 			primaryStage.setScene(menu);
 			primaryStage.setResizable(false);

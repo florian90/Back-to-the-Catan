@@ -52,7 +52,7 @@ public class Joueur {
 			m_couleur = Color.GREEN;
 			break;
 		}
-		m_ressources = new PackRess();
+		m_ressources = new PackRess(Ressource.Metal,12,Ressource.MorceauSchema,12);
 		m_inventions = new HashMap<>();
 		m_villagesConstruits    = new ArrayList<>();
 		m_villesConstruites     = new ArrayList<>();
@@ -165,11 +165,9 @@ public class Joueur {
 		return peutConstruire(obj, 1, epoque);
 	}
 
-	//A vérifier (Val): Construit un nouvel élément au joueur( carte, route, ville, ...), dépenses les ressources et ajoute l'objet au joueur
 	public void construireInvention(PackRess pack, Invention inv)
 	{
 		depenserRessources(pack);
-		//int nbInv = m_inventions.get(inv);
 		m_inventions.put(inv, true);
 		testVictoire();
 
@@ -253,7 +251,7 @@ public class Joueur {
 			m_autoroutesConstruites.add(arete);
 			nbAutoroutesAConstruire--;
 		}
-		else // TypeArete.Route
+		else 
 		{
 			m_routesConstruites.add(arete);
 			nbRoutesAConstruire--;
@@ -273,7 +271,6 @@ public class Joueur {
 		autre.recevoirRessources(donne);
 	}
 
-	/*Bug au niveau de cette fonction : possibilité dans certains cas d'aller dans le négatif (après 1 achat, en réitérant ça peut foutre la merde*/
 	public void acheter(Achetable obj, int nbr)
 	{
 		PackRess cout = obj.cout(m_jeu.getEpoqueActuelle()); 
@@ -293,7 +290,7 @@ public class Joueur {
 		{
 			nbVillagesAConstruire+=nbr;
 		}
-		else if(obj == TypePoint.Village)
+		else if(obj == TypePoint.Ville)
 		{
 			nbVillesAConstruire+=nbr;
 		}

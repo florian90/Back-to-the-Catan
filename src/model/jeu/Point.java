@@ -80,7 +80,7 @@ public class Point {
 				return "Votre première colonie du plateau doit se trouver autour du point central";
 		}
 		else if(!isAttache(joueur))
-		{// Todo: doit être rataché à une route et être à plus de 2 case d'une autre construction
+		{
 			return "Le point que vous souhaitez construire doit rejoindre une de vos routes.";
 		}
 		// Sinon on peut construire

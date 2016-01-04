@@ -39,10 +39,4 @@ public class VueRegles extends GridPane{
 	public Button getRetour() {
 		return retour;
 	}
-
-
-
-
-
-
 }

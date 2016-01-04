@@ -50,14 +50,10 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 		spinRoute.valueProperty().addListener(new ChangeListener<Integer>() {
 			@Override
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-				//TODO: Remove 
-				System.out.println("test");
+
 				if(!(m_jeu.testAchatConstructions(newValue, spinAutoroute.getValue(), spinVillage.getValue(), spinVille.getValue(),epoque,joueur)))
 				{
-					spinRoute.getValueFactory().setValue(oldValue);
-					//TODO: Remove 
-					System.out.println("oui !");
-					
+					spinRoute.decrement();
 				}
 
 			}
@@ -70,7 +66,7 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 			{
 				if(!(m_jeu.testAchatConstructions(spinRoute.getValue(),newValue, spinVillage.getValue(),spinVille.getValue(),epoque,joueur)))
 				{
-					spinAutoroute.getValueFactory().setValue(oldValue);
+					spinAutoroute.decrement();
 				}
 			}
 		});
@@ -81,7 +77,7 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
 				if(!(m_jeu.testAchatConstructions(spinRoute.getValue(), spinAutoroute.getValue(), newValue,  spinVille.getValue(),epoque,joueur)))
 				{
-					spinVillage.getValueFactory().setValue(oldValue);
+					spinVillage.decrement();
 				}
 
 			}
@@ -93,7 +89,7 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 			public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
 				if(!(m_jeu.testAchatConstructions(spinRoute.getValue(), spinAutoroute.getValue(), spinVillage.getValue(), newValue,epoque,joueur)))
 				{
-					spinVille.getValueFactory().setValue(oldValue);
+					spinVille.decrement();
 				}
 			}
 		});

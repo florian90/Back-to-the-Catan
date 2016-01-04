@@ -20,7 +20,6 @@ public class Plateau {
 	private HashMap<CoordPoint, Point> points;
 	private int m_size;
 	
-	//private ArrayList<CoordPoint> listPointAutoroute;
 
 	public Plateau(Epoque ep, int size)
 	{
@@ -220,7 +219,7 @@ public class Plateau {
 	 */
 	private int[][] getRessourceTab()
 	{
-		//Warning: Le fichier doit contenir ne matrice 7x7 avec un nombre puis un espace, si on modifie la taille rien ne vas plus !
+		//Warning: Le fichier doit contenir une matrice 7x7 avec un nombre puis un espace, si on modifie la taille rien ne vas plus !
 		// Crée un tableau avec les ressources présentes dans chaque case
 		// Le tableau tab est initialisé à partir d'un fichier
 		int[][] list = new int[m_size][m_size];

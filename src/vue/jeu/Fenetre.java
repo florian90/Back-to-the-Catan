@@ -207,7 +207,7 @@ public class Fenetre extends AnchorPane {
 		});
 
 		finTour.setOnAction(new EventHandler<ActionEvent>() {
-			// finit le tour d'un joueur et passer au joueur suivant
+			// Finit le tour d'un joueur et passer au joueur suivant
 			@Override
 			public void handle(ActionEvent event)
 			{

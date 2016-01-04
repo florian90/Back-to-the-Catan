@@ -43,7 +43,6 @@ public class Jeu {
 			plateaux.put(epoque, new Plateau(epoque, 7));
 	}
 
-	//Todo: Initialise toutes les instances du jeu
 	public void initJeu()
 	{
 		joueurActuel = 0;
