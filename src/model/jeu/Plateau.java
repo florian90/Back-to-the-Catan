@@ -298,9 +298,9 @@ public class Plateau {
 					Case tuile = cases.get(coordCase);
 					if (tuile.getRessource() != Ressource.Autoroute && tuile.getValeur() == val && !(tuile.isVoleurPresent()))
 					{
-						pt.getProprietaire().recevoirRessource(tuile.getRessource());
+						pt.getProprietaire().recevoir(tuile.getRessource());
 						if (pt.getType() == TypePoint.Ville)
-							pt.getProprietaire().recevoirRessource(tuile.getRessource());
+							pt.getProprietaire().recevoir(tuile.getRessource());
 					}
 				}
 	}

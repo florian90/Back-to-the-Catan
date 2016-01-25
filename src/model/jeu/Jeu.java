@@ -2,7 +2,6 @@ package model.jeu;
 
 import model.joueur.Joueur;
 import model.joueur.PackRess;
-import model.joueur.TypeCarte;
 import vue.jeu.Fenetre;
 import vue.jeu.plateau.ViewCase;
 
@@ -39,7 +38,7 @@ public class Jeu {
 			joueurs.add(new Joueur(str, ++i));
 		nbJoueurs = joueurs.size();
 		for (Joueur j : joueurs)
-			j.setM_jeu(this);
+			j.setjeu(this);
 
 		plateaux = new HashMap<Epoque, Plateau>();
 		for (Epoque epoque : Epoque.values())
@@ -88,23 +87,6 @@ public class Jeu {
 		m_vue.lanceDes(tab);
 		recolterRessources(de1 + de2);
 		m_vue.updateJoueur();
-	}
-	
-	public void tirerCarte()
-	{
-		int res = random.nextInt(3);
-		TypeCarte typeCarte;
-		if (res < 2)
-		{
-			typeCarte = TypeCarte.Developpement;
-		} else
-		{
-			typeCarte = TypeCarte.DeplacerVoleur;
-		}
-		if (getJoueur().peutConstruire(typeCarte, epoqueActuelle))
-			getJoueur().acheterCarte(typeCarte);
-		else
-			m_vue.setStatus("Vous ne possédez pas assez de ressources pour acheter une carte");
 	}
 
 	public void joueurSuivant()
@@ -198,7 +180,7 @@ public class Jeu {
 	public void epoqueModifiee()
 	{
 		m_vue.chargerPlateau(epoqueActuelle);
-		m_vue.getCTCards().update();
+		m_vue.getcTCards().update();
 	}
 
 	public void clicPoint(Point point)

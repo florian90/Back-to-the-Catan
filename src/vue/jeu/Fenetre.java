@@ -53,7 +53,7 @@ public class Fenetre extends AnchorPane {
 	private ArrayList<VuePlateau> plateaux;
 	private ContentTabConstructions cTC;
 	private ContentTabInventions cTI;
-	private ContentTabCartes CTCards;
+	private ContentTabCartes cTCards;
 	
 	private ContentJoueur panneauJoueur;
 
@@ -127,13 +127,13 @@ public class Fenetre extends AnchorPane {
 		echange = new VueEchange(panneauJoueur);
 		stack = new StackPane();
 
-		cTC = new ContentTabConstructions(m_jeu,panneauJoueur);
-		CTCards = new ContentTabCartes(m_jeu,panneauJoueur);
-		cTI = new ContentTabInventions(m_jeu,panneauJoueur);
+		cTC = new ContentTabConstructions(m_jeu);
+		cTCards = new ContentTabCartes(m_jeu);
+		cTI = new ContentTabInventions(m_jeu);
 
 		TabConstructions.setContent(cTC);
 		TabInventions.setContent(cTI);
-		TabCartes.setContent(CTCards);
+		TabCartes.setContent(cTCards);
 
 		VGauche.getChildren().add(TabsMarche);
 		VGauche.getChildren().add(new Separator());
@@ -226,21 +226,13 @@ public class Fenetre extends AnchorPane {
 		cTC.desactiver();
 		cTI.desactiver();
 		cTC.desactiver();
-		CTCards.desactiver();
+		cTCards.desactiver();
 		panneauJoueur.desactiver();
 		des.activer();
 		finTour.setDisable(true);
 		messageClassique = m_jeu.getJoueur().getNom() + " - Lancez les dés pour commencer";
 		resetStatus();
 		desactiveEchangeBouttonJoueurActuel();
-	}
-
-	public ContentTabConstructions getcTC() {
-		return cTC;
-	}
-
-	public ContentJoueur getPanneauJoueur() {
-		return panneauJoueur;
 	}
 
 	public void desactiveEchangeBouttonJoueurActuel()
@@ -260,7 +252,7 @@ public class Fenetre extends AnchorPane {
 		finTour.setDisable(false);
 		cTC.activer();
 		cTI.activer();
-		CTCards.activer();
+		cTCards.activer();
 		messageClassique = m_jeu.getJoueur().getNom() + " échangez, achetez, construisez puis terminez votre tour pour passer au joueur suivant";
 		resetStatus();
 	}
@@ -300,10 +292,13 @@ public class Fenetre extends AnchorPane {
 	public void updateJoueur()
 	{
 		panneauJoueur.update();
+		cTC.update();
+		cTI.update();
+		cTCards.update();
 	}
 	
-	public ContentTabCartes getCTCards() {
-		return CTCards;
+	public ContentTabCartes getcTCards() {
+		return cTCards;
 	}
 
 

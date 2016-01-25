@@ -4,9 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Popup;
 import model.jeu.Epoque;
 import model.jeu.Jeu;
@@ -15,10 +13,14 @@ import model.joueur.PackRess;
 import model.joueur.Ressource;
 import vue.jeu.Desactivable;
 
+/**
+ * Crée un boutton permettant d'acheter un objet
+ * nécessite une fonction acheter et peutConstruire dans Joueur, prennant en paramètre un achetable
+ */
 public class BoutonAchat extends Button implements Desactivable {
 	private Achetable m_objet;
 	private Jeu m_jeu;
-	private PopupCout popupCout;
+	private PopupCout m_popup;
 
 	public BoutonAchat(Achetable p_achetable, Jeu p_jeu)
 	{
@@ -26,21 +28,22 @@ public class BoutonAchat extends Button implements Desactivable {
 		m_objet = p_achetable;
 		m_jeu = p_jeu;
 		setPrefWidth(75);
-		popupCout = new PopupCout();
+		m_popup = new PopupCout();
 		setOnAction((e) -> {
-			if (m_jeu.getJoueur().peutConstruire(m_objet, Epoque._2015))
+			if (m_jeu.getJoueur().peutAcheter(m_objet))
 				m_jeu.getJoueur().acheter(m_objet);
 		});
 
+		// Affichage du popup
 		setOnMouseEntered((e) -> {
-			popupCout.show(this, e.getScreenX(), e.getScreenY());
+			m_popup.show(this, e.getScreenX(), e.getScreenY());
 		});
 		setOnMouseMoved((e) -> {
-			popupCout.setX(e.getScreenX());
-			popupCout.setY(e.getScreenY());
+			m_popup.setX(e.getScreenX());
+			m_popup.setY(e.getScreenY());
 		});
 		setOnMouseExited((e) -> {
-			popupCout.hide();
+			m_popup.hide();
 		});
 	}
 
@@ -56,17 +59,40 @@ public class BoutonAchat extends Button implements Desactivable {
 		setDisable(false);
 	}
 
+	public void update()
+	{
+		m_popup.update();
+	}
+
+	/**
+	 * Popp qui s'affiche lorsque l'on est sur le bouton acheter
+	 * Affiche le cout de construction de l'objet
+	 */
 	private class PopupCout extends Popup {
+		private final GridPane m_grid = new GridPane();
 
 		public PopupCout()
 		{
-			GridPane grid = new GridPane();
-			grid.setLayoutX(5);
-			grid.setLayoutY(5);
-			grid.setPadding(new Insets(5));
-			grid.setHgap(10);
-			grid.setVgap(5);
-			grid.setStyle("-fx-background-color: azure;-fx-border-color: black");
+			m_grid.setLayoutX(5);
+			m_grid.setLayoutY(5);
+			m_grid.setPadding(new Insets(5));
+			m_grid.setHgap(10);
+			m_grid.setVgap(5);
+			getContent().add(m_grid);
+			update();
+		}
+
+		public void peutAcheter(boolean b)
+		{
+			if (b)
+				m_grid.setStyle("-fx-background-color: azure;-fx-border-color: green");
+			else
+				m_grid.setStyle("-fx-background-color: azure;-fx-border-color: red");
+		}
+
+		public void update()
+		{
+			m_grid.getChildren().clear();
 			PackRess packRess = m_objet.cout(m_jeu.getEpoqueActuelle());
 			int i = 0;
 			for (Ressource ressource : Ressource.values())
@@ -77,12 +103,12 @@ public class BoutonAchat extends Button implements Desactivable {
 					ImageView imageView = new ImageView("textures/hex" + ressource + ".png");
 					imageView.setFitWidth(40);
 					imageView.setFitHeight(40);
-					grid.add(imageView, 0, i);
-					grid.add(new Label("x" + nbr), 1, i);
+					m_grid.add(imageView, 0, i);
+					m_grid.add(new Label("x" + nbr), 1, i);
 					i++;
 				}
 			}
-			getContent().add(grid);
+			peutAcheter(m_jeu.getJoueur().peutAcheter(m_objet));
 		}
 	}
 }
