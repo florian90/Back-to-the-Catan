@@ -101,7 +101,7 @@ public class MenuPrincipalView extends AnchorPane {
 			nomsJoueurs.get(i).setVisible(i < spinNbJoueurs.getValue());
 			if (!(nomsJoueurs.get(i).isVisible()))
 			{
-				nomsJoueurs.get(i).setText("");
+				nomsJoueurs.get(i).setText("Joueur "+(i+1));
 			}
 
 		}
