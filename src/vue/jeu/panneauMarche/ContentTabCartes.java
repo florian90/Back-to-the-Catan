@@ -11,12 +11,13 @@ import javafx.scene.layout.GridPane;
 import model.jeu.Epoque;
 import model.jeu.Jeu;
 import model.joueur.Ressource;
+import model.joueur.TypeCarte;
 import vue.jeu.ContentJoueur;
 import vue.jeu.Desactivable;
 
 public class ContentTabCartes extends GridPane implements Desactivable{
 	
-	private Button tirer;
+	private BoutonAchat tirer;
 	private Jeu m_jeu;
 	private ContentJoueur ctj;
 	private Label cout;
@@ -28,7 +29,7 @@ public class ContentTabCartes extends GridPane implements Desactivable{
 		ctj = p_ctj;
 		
 		ImageView cartes = new ImageView(new Image("textures/cards.jpg"));
-		tirer = new Button("Tirer une carte");
+		tirer = new BoutonAchat(TypeCarte.DeplacerVoleur, m_jeu);
 		cartes.setPreserveRatio(true);
 		cartes.setFitWidth(100);
 		

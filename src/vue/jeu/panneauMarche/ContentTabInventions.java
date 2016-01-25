@@ -10,26 +10,28 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import model.jeu.Epoque;
 import model.jeu.Jeu;
+import model.jeu.TypePoint;
 import model.joueur.Invention;
 import vue.jeu.ContentJoueur;
 import vue.jeu.Desactivable;
 
 public class ContentTabInventions extends GridPane implements Desactivable{
 
-	private Button acheterTrain; 
-	private Button acheterRadio; 
-	private Button acheterConvecteur; 
-	private Button acheterHoverboard;
+	private BoutonAchat acheterTrain;
+	private BoutonAchat acheterRadio;
+	private BoutonAchat acheterConvecteur;
+	private BoutonAchat acheterHoverboard;
 	private Jeu m_jeu;
 
 	public ContentTabInventions(Jeu jeu, ContentJoueur ctj )
 	{
 		m_jeu = jeu;
 
-		acheterTrain = new Button("Acheter");
-		acheterRadio = new Button("Acheter");
-		acheterConvecteur = new Button("Acheter");
-		acheterHoverboard = new Button("Acheter");
+
+		acheterTrain = new BoutonAchat(Invention.Train, m_jeu);
+		acheterRadio = new BoutonAchat(Invention.Radio, m_jeu);
+		acheterConvecteur = new BoutonAchat(Invention.ConvecteurTemporel, m_jeu);
+		acheterHoverboard = new BoutonAchat(Invention.HoverBoard, m_jeu);
 
 
 		Label hoverboard = new Label("Convecteur Temporel");
@@ -53,10 +55,6 @@ public class ContentTabInventions extends GridPane implements Desactivable{
 		add(new Label("Hoverboard"), 0, 3);
 
 
-		acheterTrain.setPrefWidth(75);
-		acheterRadio.setPrefWidth(75);
-		acheterConvecteur.setPrefWidth(75);
-		acheterHoverboard.setPrefWidth(75);
 		add(acheterTrain, 2, 0);
 		add(acheterRadio, 2, 1);
 		add(acheterConvecteur, 2, 2);
