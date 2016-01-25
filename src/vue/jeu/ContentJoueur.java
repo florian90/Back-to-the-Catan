@@ -9,10 +9,15 @@ import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import model.jeu.Jeu;
+import model.jeu.TypeArete;
+import model.jeu.TypePoint;
 import model.joueur.Invention;
 import model.joueur.Joueur;
 import model.joueur.Ressource;
+import model.joueur.TypeCarte;
 
 public class ContentJoueur extends GridPane implements Desactivable {
 
@@ -32,7 +37,8 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		update();
 	}
 
-	public void init(){
+	public void init()
+	{
 		
 		imgAvatar = new ImageView();
 		labelPseudo = new Label();
@@ -45,10 +51,10 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		ressources = new Label("Ressources");
 		ressources.setId("divisions");
 
-		construire =new Button("Construire");
-		construire.setOnMouseClicked((e)->{
+		construire = new Button("Construire");
+		construire.setOnMouseClicked((e) -> {
 			m_jeu.changeConstructionActive();
-			if(m_jeu.isConstructionActive())
+			if (m_jeu.isConstructionActive())
 				construire.setEffect(new InnerShadow());
 			else
 				construire.setEffect(null);
@@ -61,7 +67,8 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		utiliserCarteVoleur.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
-			public void handle(ActionEvent event) {
+			public void handle(ActionEvent event)
+			{
 				
 				m_jeu.setM_deplacementVoleurActif(true);
 
@@ -78,7 +85,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	
 	public void update()
 	{
-		Joueur j= m_jeu.getJoueur();
+		Joueur j = m_jeu.getJoueur();
 		getChildren().removeAll(getChildren());
 
 		imgAvatar.setImage(new Image(j.getAvatar()));
@@ -89,39 +96,49 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		add(labelPseudo, 1, 0);
 		add(ressources, 0, 2);
 
-		add(new Label("Métal : " + j.nbRessource(Ressource.Metal)), 0, 3);
-		add(new Label("Bois : " + j.nbRessource(Ressource.Bois)), 0, 4);
-		add(new Label("Roue : " + j.nbRessource(Ressource.Roue)), 0, 5);
-		add(new Label("Haut-Parleurs : " + j.nbRessource(Ressource.HautParleur)), 0, 6);
-		add(new Label("Morceaux de Schéma : " + j.nbRessource(Ressource.MorceauSchema)), 0, 7);
-		add(new Label("Antennes : " + j.nbRessource(Ressource.Antenne)), 1, 3);
-		add(new Label("Plutonium : " + j.nbRessource(Ressource.Plutonium)), 1, 4);
-		add(new Label("Aimant : " + j.nbRessource(Ressource.Aimant)), 1, 5);
-		add(new Label("Ventilateur : " + j.nbRessource(Ressource.Ventilateur)), 1, 6);
-		
-		add(new Label("Routes : " + j.getNbRoutesAConstruire()), 0, 10);
-		add(new Label("Autoroutes : " + j.getNbAutoroutesAConstruire()), 0, 11);
-		add(new Label("Villages : " + j.getNbVillagesAConstruire()), 1, 10);
-		add(new Label("Villes : " + j.getNbVillesAConstruire()), 1, 11);
+		int i = 6;
+		for (Ressource ressource : Ressource.values())
+		{
+			if (ressource == Ressource.Autoroute)
+				continue;
+			int nbr = m_jeu.getJoueur().nbRessource(ressource);
+			ImageView imageView = new ImageView("textures/hex" + ressource + ".png");
+			imageView.setFitWidth(50);
+			imageView.setFitHeight(50);
 
-		if(m_jeu.isConstructionActive())
+			Label lb = new Label("x" + nbr);
+			lb.setTranslateY(10);
+			lb.setCenterShape(true);
+			lb.setFont(Font.font("Cambria", 20));
+
+			HBox box = new HBox(10);
+			box.getChildren().addAll(imageView, lb);
+			add(box, (i%2), i/2);
+			i++;
+		}
+
+		add(new Label("Routes : " + j.getNombre(TypeArete.Route)), 0, 10);
+		add(new Label("Autoroutes : " + j.getNombre(TypeArete.Autoroute)), 0, 11);
+		add(new Label("Villages : " + j.getNombre(TypePoint.Village)), 1, 10);
+		add(new Label("Villes : " + j.getNombre(TypePoint.Ville)), 1, 11);
+
+		if (m_jeu.isConstructionActive())
 		{
 			m_jeu.changeConstructionActive();
 			construire.setEffect(null);
 		}
 
 		add(aConstruire, 0, 9);
-		add(construire,1,9);
+		add(construire, 1, 9);
 		add(inventions, 0, 13);
-		
-		add(new Label("Train : " + (j.possedeInvention(Invention.Train)?" Acquis": " Non Acquis")), 0, 14,2,1);
-		add(new Label("Radio : " + (j.possedeInvention(Invention.Radio)?" Acquis": " Non Acquis")), 0, 15,2,1);
-		add(new Label("Conv. temp. : " +(j.possedeInvention(Invention.ConvecteurTemporel)?" Acquis": " Non Acquis")), 0, 16,2,1);
-		add(new Label("Hoverboard : " + (j.possedeInvention(Invention.HoverBoard)?" Acquis": " Non Acquis")), 0, 17,2,1);
+
+		i = 14;
+		for(Invention invention : Invention.values())
+			add(new Label(invention + " : " + (j.getNombre(invention)>1 ? " Acquis" : " Non Acquis")), 0, i++, 2, 1);
 
 		add(cartes, 0, 19);
-		add(new Label("Dépl. Voleur : " + j.getNbCartesDeplacerVoleur()), 0, 20);
-		add(utiliserCarteVoleur,1,20);
+		add(new Label("Dépl. Voleur : " + j.getNombre(TypeCarte.DeplacerVoleur)), 0, 20);
+		add(utiliserCarteVoleur, 1, 20);
 	}
 
 	@Override
