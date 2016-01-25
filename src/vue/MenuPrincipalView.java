@@ -66,7 +66,7 @@ public class MenuPrincipalView extends AnchorPane {
 		parametresGrid.add(spinNbJoueurs, 1, 0);
 		parametresGrid.add(valider, 1, 6);
 		parametres.setContent(parametresGrid);
-		
+
 		nouvellePartie = new Button("Nouvelle Partie");
 		nouvellePartie.setId("bouttonMenuPrincipal");
 		nouvellePartie.setPrefWidth(100);
@@ -107,20 +107,12 @@ public class MenuPrincipalView extends AnchorPane {
 		}
 	}
 	
-	public ArrayList<Joueur> getListeJoueurs()
+	public ArrayList<String> getNomJoueurs()
 	{
-		ArrayList<Joueur> joueurs = new ArrayList<>();
-		int i = 1;
+		ArrayList<String> joueurs = new ArrayList<>();
 		for (TextField tf : nomsJoueurs)
-		{
 			if (!(tf.getText().equals("")))
-			{
-				joueurs.add(new Joueur(tf.getText(), i));
-				++i;
-			}
-
-		}
-		
+				joueurs.add(tf.getText());
 		return joueurs;
 	}
 	

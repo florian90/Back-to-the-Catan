@@ -233,7 +233,6 @@ public class Fenetre extends AnchorPane {
 		messageClassique = m_jeu.getJoueur().getNom() + " - Lancez les dés pour commencer";
 		resetStatus();
 		desactiveEchangeBouttonJoueurActuel();
-		cTC.setJoueur(m_jeu.getJoueur());
 	}
 
 	public ContentTabConstructions getcTC() {
@@ -272,7 +271,6 @@ public class Fenetre extends AnchorPane {
 		stack.getChildren().removeAll(stack.getChildren());
 		stack.getChildren().add(newPlateau);
 		numPlateau.setText("Epoque : " + Epoque.toString(epoque));
-		cTC.setEpoque(epoque);
 	}
 
 	public void setStatus(String str)

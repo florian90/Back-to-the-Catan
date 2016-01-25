@@ -425,4 +425,9 @@ public class Joueur {
 		}
 		return false;
 	}
+
+	public void acheter(Achetable achetable)
+	{
+		;
+	}
 }

@@ -49,7 +49,7 @@ public class Main extends Application {
 				public void handle(ActionEvent event)
 				{
 					
-					Jeu modelJeu = new Jeu(menuView.getListeJoueurs());
+					Jeu modelJeu = new Jeu(menuView.getNomJoueurs());
 					Fenetre fen = new Fenetre(modelJeu,primaryStage);
 					Scene EcranJeu = new Scene(fen, 1400, 850);
 					EcranJeu.getStylesheets().add(getClass().getResource("StyleEcranJeu.css").toExternalForm());

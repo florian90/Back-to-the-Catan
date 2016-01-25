@@ -30,10 +30,13 @@ public class Jeu {
 	 * Construit le modele de jeu à partir de la liste des joueurs 
 	 * fournie par le menu principal, intialise les plateux de jeu
 	 */
-	public Jeu(ArrayList<Joueur> p_joueurs)
+	public Jeu(ArrayList<String> p_joueurs)
 	{
 		epoqueActuelle = Epoque._1985;
-		joueurs = p_joueurs;
+		joueurs = new ArrayList<>(p_joueurs.size());
+		int i = 0;
+		for(String str : p_joueurs)
+			joueurs.add(new Joueur(str, ++i));
 		nbJoueurs = joueurs.size();
 		for (Joueur j : joueurs)
 			j.setM_jeu(this);
@@ -196,7 +199,6 @@ public class Jeu {
 	{
 		m_vue.chargerPlateau(epoqueActuelle);
 		m_vue.getCTCards().update();
-		m_vue.getcTC().update();
 	}
 
 	public void clicPoint(Point point)
