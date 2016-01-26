@@ -12,6 +12,7 @@ import javafx.scene.text.TextAlignment;
 import model.jeu.Case;
 import model.jeu.Jeu;
 import model.joueur.Ressource;
+import vue.URL;
 import vue.jeu.Constants;
 
 public class ViewCase extends Group {
@@ -29,7 +30,7 @@ public class ViewCase extends Group {
 		setTranslateY(p_y + Constants.roadWidth/2);
 
 		/*Affichage de l'image correspondant à la ressource*/
-		imgRessource = new ImageView("textures/hex" + m_case.getRessource() + ".png");
+		imgRessource = new ImageView(URL.url(m_case.getRessource()));
 		imgRessource.setFitHeight(Constants.hexHeight - Constants.roadWidth);
 		imgRessource.setFitWidth(Constants.hexWidth - Constants.roadWidth);
 		setImageVoleur(m_case.isVoleurPresent());
@@ -70,8 +71,8 @@ public class ViewCase extends Group {
 	public void setImageVoleur(boolean voleurPresent)
 	{
 		if(voleurPresent)
-			imgRessource.setImage(new Image("textures/voleur.png"));
+			imgRessource.setImage(new Image(URL.voleur));
 		else
-			imgRessource.setImage(new Image("textures/hex" + m_case.getRessource() + ".png"));
+			imgRessource.setImage(new Image(URL.url(m_case.getRessource())));
 	}
 }

@@ -4,7 +4,7 @@ public class CoordArete {
 	/*
 	 * coordArete : Classe qui permet de caractériser une arrete
 	 * Attributs :
-	 *  - debut, fin : coordonées des points d�limitants l'arrete
+	 *  - debut, fin : coordonées des points délimitants l'arrete
 	 * Les deux attributs sont interchangeables.
 	 */
 	private CoordPoint debut, fin;

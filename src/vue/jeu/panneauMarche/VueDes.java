@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import vue.URL;
 import vue.jeu.Desactivable;
 
 public class VueDes extends GridPane implements Desactivable {
@@ -24,7 +25,7 @@ public class VueDes extends GridPane implements Desactivable {
 		somme = new Label("Somme :");
 		somme.setId("divisions");
 		lancer = new Button("Lancer les dés");
-		ImageView imgDes = new ImageView("textures/dice.jpg");
+		ImageView imgDes = new ImageView(URL.des2);
 		
 		imgDes.setFitWidth(50);
 		imgDes.setPreserveRatio(true);

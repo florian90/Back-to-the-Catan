@@ -10,6 +10,7 @@ import javafx.scene.shape.Rectangle;
 import model.jeu.Jeu;
 import model.jeu.Point;
 import model.jeu.TypePoint;
+import vue.URL;
 import vue.jeu.Constants;
 import vue.jeu.Fenetre;
 
@@ -65,14 +66,14 @@ public class VuePoint extends Group{
 		rectangle.setY(centreY-rectangle.getHeight()/2);
 
 		/** Initialisation de l'image Village **/
-		imageVillage = new ImageView("textures/village.png");
+		imageVillage = new ImageView(URL.village);
 		imageVillage.setFitHeight(35);
 		imageVillage.setFitWidth(35);
 		imageVillage.setX(centreX-imageVillage.getFitHeight()/2);
 		imageVillage.setY(centreY-imageVillage.getFitWidth()/2);
 
 		/** Initialisation de l'image Ville **/
-		imageVille = new ImageView("textures/ville.png");
+		imageVille = new ImageView(URL.ville);
 		imageVille.setFitHeight(35);
 		imageVille.setFitWidth(35);
 		imageVille.setX(centreX-imageVille.getFitHeight()/2);

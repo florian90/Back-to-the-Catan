@@ -35,7 +35,7 @@ public class Jeu {
 		joueurs = new ArrayList<>(p_joueurs.size());
 		int i = 0;
 		for(String str : p_joueurs)
-			joueurs.add(new Joueur(str, ++i));
+			joueurs.add(new Joueur(str, i++));
 		nbJoueurs = joueurs.size();
 		for (Joueur j : joueurs)
 			j.setjeu(this);
@@ -114,11 +114,7 @@ public class Jeu {
 		}
 	}
 
-	public boolean isM_deplacementVoleurActif() {
-		return m_deplacementVoleurActif;
-	}
-
-	public void setM_deplacementVoleurActif(boolean m_deplacementVoleurActif) {
+	public void setDeplacementVoleurActif(boolean m_deplacementVoleurActif) {
 		this.m_deplacementVoleurActif = m_deplacementVoleurActif;
 	}
 

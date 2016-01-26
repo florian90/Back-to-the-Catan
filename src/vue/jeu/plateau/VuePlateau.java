@@ -16,10 +16,6 @@ public class VuePlateau extends Group {
 
 	private Jeu m_jeu;
 
-	public Plateau getM_plateau() {
-		return m_plateau;
-	}
-
 	public VuePlateau(int x, int y, Plateau plateau, Jeu jeu)
 	{
 		super();

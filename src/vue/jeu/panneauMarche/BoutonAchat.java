@@ -11,6 +11,7 @@ import model.jeu.Jeu;
 import model.joueur.Achetable;
 import model.joueur.PackRess;
 import model.joueur.Ressource;
+import vue.URL;
 import vue.jeu.Desactivable;
 
 /**
@@ -100,7 +101,7 @@ public class BoutonAchat extends Button implements Desactivable {
 				int nbr = packRess.count(ressource);
 				if (nbr > 0)
 				{
-					ImageView imageView = new ImageView("textures/hex" + ressource + ".png");
+					ImageView imageView = new ImageView(URL.url(ressource));
 					imageView.setFitWidth(40);
 					imageView.setFitHeight(40);
 					m_grid.add(imageView, 0, i);

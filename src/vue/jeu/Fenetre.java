@@ -31,6 +31,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.jeu.Epoque;
 import model.jeu.Jeu;
+import vue.URL;
 import vue.jeu.panneauMarche.ContentTabCartes;
 import vue.jeu.panneauMarche.ContentTabConstructions;
 import vue.jeu.panneauMarche.ContentTabInventions;
@@ -241,7 +242,7 @@ public class Fenetre extends AnchorPane {
 		for(int i=0;i<m_jeu.getNbJoueurs();++i)
 			bt_echangerList[i].setDisable(false);
 		// Désactive le bouton pour le joueur actuel
-		bt_echangerList[m_jeu.getJoueur().getNumJoueur()-1].setDisable(true);
+		bt_echangerList[m_jeu.getJoueur().getNumJoueur()].setDisable(true);
 	}
 
 	public void lanceDes(int[] tab)
@@ -337,7 +338,7 @@ public class Fenetre extends AnchorPane {
 	
 	public void videoFin()
 	{
-	    final File f = new File("src/sons/VideoFinLO.mp4");
+	    final File f = new File(URL.video_fin);
 	    final Media m = new Media(f.toURI().toString());
 	    final MediaPlayer mp = new MediaPlayer(m);
 	    final MediaView mv = new MediaView(mp);

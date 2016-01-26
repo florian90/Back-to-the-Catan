@@ -25,7 +25,7 @@ public class MenuPrincipalView extends AnchorPane {
 
 	public MenuPrincipalView()
 	{
-		nomsJoueurs = new ArrayList<TextField>();
+		nomsJoueurs = new ArrayList<>();
 		valider = new Button("Valider");
 		
 		parametres = new TitledPane("Paramètres de la partie", null);
@@ -35,7 +35,7 @@ public class MenuPrincipalView extends AnchorPane {
 		parametres.setTranslateY(500);
 		parametres.setCollapsible(false);
 		parametres.setVisible(false);
-		spinNbJoueurs = new Spinner<Integer>(2, 4, 4);
+		spinNbJoueurs = new Spinner<>(2, 4, 4);
 		spinNbJoueurs.setPrefWidth(75);
 		spinNbJoueurs.setOnMouseClicked(new EventHandler<Event>() {
 
@@ -82,7 +82,7 @@ public class MenuPrincipalView extends AnchorPane {
 		buttonGrid.setVgap(5);
 		buttonGrid.setTranslateX(200);
 		buttonGrid.setTranslateY(400);
-		setBackground(new Background(new BackgroundImage(new Image("textures/fondMenu.jpg"), null, null, null, null)));
+		setBackground(new Background(new BackgroundImage(new Image(URL.bg_menu), null, null, null, null)));
 
 		buttonGrid.add(nouvellePartie, 0, 0);
 		buttonGrid.add(regles, 0, 1);

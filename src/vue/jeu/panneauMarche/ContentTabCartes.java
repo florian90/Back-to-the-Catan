@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import model.jeu.Jeu;
 import model.joueur.TypeCarte;
+import vue.URL;
 import vue.jeu.Desactivable;
 
 public class ContentTabCartes extends GridPane implements Desactivable{
@@ -20,7 +21,7 @@ public class ContentTabCartes extends GridPane implements Desactivable{
 		m_jeu = p_jeu;
 
 		btTirer = new BoutonAchat(TypeCarte.DeplacerVoleur, m_jeu);
-		ImageView imgCartes = new ImageView(new Image("textures/cards.jpg"));
+		ImageView imgCartes = new ImageView(new Image(URL.carte));
 		imgCartes.setPreserveRatio(true);
 		imgCartes.setFitWidth(100);
 		

@@ -29,20 +29,20 @@ public class Joueur {
 	{
 		m_nom = nom;
 		m_numJoueur = num;
-		m_avatar = "textures/Avatar" + num + ".jpg";
+		m_avatar = "textures/Avatar" + (num+1) + ".jpg";
 
 		switch (m_numJoueur)
 		{
-			case 1:
+			case 0:
 				m_couleur = Color.RED;
 				break;
-			case 2:
+			case 1:
 				m_couleur = Color.BLUE;
 				break;
-			case 3:
+			case 2:
 				m_couleur = Color.YELLOW;
 				break;
-			case 4:
+			case 3:
 				m_couleur = Color.GREEN;
 				break;
 		}

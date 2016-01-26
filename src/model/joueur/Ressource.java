@@ -38,7 +38,7 @@ public enum Ressource {
 		case Ventilateur:
 			return "Ventilateur";
 		}
-		
+
 		return "";
 	}
 }

@@ -4,6 +4,7 @@ import model.jeu.coordonnee.CoordArete;
 import model.jeu.coordonnee.CoordCase;
 import model.jeu.coordonnee.CoordPoint;
 import model.joueur.Ressource;
+import vue.URL;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -226,7 +227,7 @@ public class Plateau {
 		String[] tab = null;
 		try
 		{
-			BufferedReader reader = new BufferedReader(new FileReader("ressources/PlateauxInitiaux/plateau2.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader(URL.dispositionPlateau_ressources2));
 			for (int i = 0; i < m_size; i++)
 			{
 				tab = reader.readLine().split(" ");
@@ -256,7 +257,7 @@ public class Plateau {
 		String[] tab = null;
 		try
 		{
-			BufferedReader reader = new BufferedReader(new FileReader("ressources/PlateauxInitiaux/plateau1valeurs.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader(URL.dispositionPlateau_valeurs));
 			for (int i = 0; i < m_size; i++)
 			{
 				tab = reader.readLine().split(" ");

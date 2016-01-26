@@ -30,7 +30,7 @@ public class Main extends Application {
 			primaryStage.setScene(menu);
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Back To The Catane");
-			primaryStage.getIcons().add(new Image("textures/favicon.jpg"));
+			primaryStage.getIcons().add(new Image(URL.icon));
 			primaryStage.show();
 			
 			menuView.getNouvellePartie().setOnAction(new EventHandler<ActionEvent>() {
@@ -57,7 +57,7 @@ public class Main extends Application {
 					primaryStage.setScene(EcranJeu);
 					primaryStage.show();
 					
-					final File file = new File("src/sons/nomdezeus.mp3");
+					final File file = new File(URL.son_zeus);
 					final Media media = new Media(file.toURI().toString());
 					final MediaPlayer mediaPlayer = new MediaPlayer(media);
 					mediaPlayer.play();
