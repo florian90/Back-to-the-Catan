@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import model.jeu.Jeu;
@@ -41,8 +42,10 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	private Image avatars[];
 	private Label lb_ressources[];
 
+	private HBox hBoxRoute, hBoxAutoroute, hBoxVille, hBoxVillage;
 	private Label lbRoute, lbAutoroute, lbVille, lbVillage;
 	private Label lbCarteVoleur;
+	private Line ligneJoueurRoute, ligneJoueurAutoroute;
 
 	public ContentJoueur(Jeu jeu)
 	{
@@ -67,11 +70,11 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		add(imgAvatar, 0, 0);
 
 		// Initialisation du nom du joueur
-		labelPseudo = new Label();
+		labelPseudo = new MyLabelTitre();
 		add(labelPseudo, 1, 0);
 
 		// Ressources du joueur :
-		ressources = new Label("Ressources");
+		ressources = new MyLabelTitre("Ressources");
 		add(ressources, 0, 2);
 
 		lb_ressources = new Label[Ressource.values().length - 1];
@@ -81,17 +84,13 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		{
 			if (ressource == Ressource.Autoroute)
 				continue;
-			int nbr = m_jeu.getJoueur().nbRessource(ressource);
 			ImageView imageView = new ImageView("textures/hex" + ressource + ".png");
-			imageView.setFitWidth(50);
-			imageView.setFitHeight(50);
+			imageView.setFitWidth(40);
+			imageView.setFitHeight(40);
 
-			lb_ressources[i] = new Label();
-			lb_ressources[i].setTranslateY(10);
-			lb_ressources[i].setCenterShape(true);
-			lb_ressources[i].setFont(Font.font("Cambria", 20));
+			lb_ressources[i] = new MyLabelQt();
 
-			add(new HBox(imageView, lb_ressources[i]), ((i + 6)%2), (i + 6)/2);
+			add(new HBox(10, imageView, lb_ressources[i]), ((i + 6)%2), (i + 6)/2);
 			i++;
 		}
 
@@ -105,18 +104,42 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		});
 
 		// Initialisation des labels de nombre de trucs à construire :
-		aConstruire = new Label("A construire");
-		lbRoute = new Label();
-		lbAutoroute = new Label();
-		lbVillage = new Label();
-		lbVille = new Label();
-		add(lbRoute, 0, 10);
-		add(lbAutoroute, 0, 11);
-		add(lbVillage, 1, 10);
-		add(lbVille, 1, 11);
-		invention = new Label("Inventions : ");
-		invention.setId("divisions");
+		aConstruire = new MyLabelTitre("A construire");
 
+		Line line;
+		line = new Line(0, 25, Constants.hexWidth/2, 25);
+		line.setStrokeWidth(Constants.roadWidth - 4);
+		line.setStroke(Color.GRAY);
+		ligneJoueurRoute = new Line(0, 25, Constants.hexWidth/2, 25);
+		ligneJoueurRoute.setStrokeWidth(Constants.roadWidth);
+		lbRoute = new MyLabelQt();
+		Group group = new Group(ligneJoueurRoute, line);
+		group.setTranslateY(17);
+		add(new HBox(20, group, lbRoute), 0, 10);
+		line = new Line(0, 25, Constants.hexWidth/2, 25);
+		line.setStrokeWidth(Constants.roadWidth - 4);
+		line.setStroke(Color.BLACK);
+		ligneJoueurAutoroute = new Line(0, 25, Constants.hexWidth/2, 25);
+		ligneJoueurAutoroute.setStrokeWidth(Constants.roadWidth);
+		lbAutoroute = new MyLabelQt();
+		group = new Group(ligneJoueurAutoroute, line);
+		group.setTranslateY(17);
+		add(new HBox(20, group, lbAutoroute), 0, 11);
+
+		lbVillage = new MyLabelQt();
+		ImageView imgVillage = new ImageView(URL.village);
+		imgVillage.setPreserveRatio(true);
+		imgVillage.setFitHeight(40);
+		add(new HBox(20, imgVillage, lbVillage), 1, 10);
+
+		lbVille = new MyLabelQt();
+		ImageView imgVille = new ImageView(URL.ville);
+		imgVille.setPreserveRatio(true);
+		imgVille.setFitHeight(40);
+		add(new HBox(20, imgVille, lbVille), 1, 11);
+
+		// Inventions
+		invention = new MyLabelTitre("Inventions");
 		int l = 0;
 		for (Invention invention : Invention.values())
 		{
@@ -142,7 +165,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		add(construire, 1, 9);
 		add(invention, 0, 13);
 
-		cartes = new Label("Cartes : ");
+		cartes = new MyLabelTitre("Cartes");
 		add(cartes, 0, 19);
 
 		lbCarteVoleur = new Label();
@@ -176,10 +199,12 @@ public class ContentJoueur extends GridPane implements Desactivable {
 				lb_ressources[i++].setText("x" + m_jeu.getJoueur().nbRessource(ressource));
 
 		// Update des constructions dispo
-		lbAutoroute.setText("Routes : " + joueur.getNombre(TypeArete.Route));
-		lbRoute.setText("Autoroutes : " + joueur.getNombre(TypeArete.Autoroute));
-		lbVillage.setText("Villages : " + joueur.getNombre(TypePoint.Village));
-		lbVille.setText("Villes : " + joueur.getNombre(TypePoint.Ville));
+		ligneJoueurRoute.setStroke(joueur.getCouleur());
+		ligneJoueurAutoroute.setStroke(joueur.getCouleur());
+		lbAutoroute.setText(""+joueur.getNombre(TypeArete.Route));
+		lbRoute.setText(""+joueur.getNombre(TypeArete.Autoroute));
+		lbVillage.setText(""+joueur.getNombre(TypePoint.Village));
+		lbVille.setText(""+joueur.getNombre(TypePoint.Ville));
 
 		if (m_jeu.isConstructionActive())
 		{
@@ -208,5 +233,31 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	{
 		construire.setDisable(false);
 		utiliserCarteVoleur.setDisable(false);
+	}
+
+	private class MyLabelTitre extends Label {
+		public MyLabelTitre(){
+			super();
+			setStyle("-fx-font-weight: bold; -fx-font-size: 15px;");
+		}
+		public MyLabelTitre(String string){
+			super(string);
+			setStyle("-fx-font-weight: bold; -fx-font-size: 15px;");
+		}
+	}
+
+	private class MyLabelQt extends Label {
+		public MyLabelQt(){
+			super();
+			setCenterShape(true);
+			setFont(Font.font("Cambria", 20));
+			setTranslateY(10);
+		}
+		public MyLabelQt(String string){
+			super(string);
+			setCenterShape(true);
+			setFont(Font.font("Cambria", 20));
+			setTranslateY(10);
+		}
 	}
 }

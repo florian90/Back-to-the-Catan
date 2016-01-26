@@ -2,6 +2,7 @@ package model.jeu;
 
 import model.joueur.Joueur;
 import model.joueur.PackRess;
+import model.joueur.TypeCarte;
 import vue.jeu.Fenetre;
 import vue.jeu.plateau.ViewCase;
 
@@ -213,7 +214,7 @@ public class Jeu {
 		if(m_deplacementVoleurActif && getJoueur().peutDeplacerVoleur())
 		{
 			deplacerVoleur(c,vc);
-			getJoueur().utiliserCarteVoleur();
+			getJoueur().depenser(TypeCarte.DeplacerVoleur);
 			m_vue.updateJoueur();
 			m_deplacementVoleurActif=false;
 		}

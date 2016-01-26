@@ -78,7 +78,7 @@ public class Joueur {
 	{
 		m_ressources.remove(pack);
 	}
-	private void depenser(Achetable obj)
+	public void depenser(Achetable obj)
 	{
 		m_inventaire.put(obj, m_inventaire.get(obj) - 1);
 	}
@@ -157,7 +157,6 @@ public class Joueur {
 			return;
 		depenser(obj.cout(m_jeu.getEpoqueActuelle()));
 		m_inventaire.put(obj, (m_inventaire.get(obj) == null) ? 1 : m_inventaire.get(obj) + 1);
-		System.out.println("possede : " + m_inventaire.get(obj) + " " + obj);
 		if (obj instanceof Invention)
 			testVictoire();
 		else if(obj instanceof TypeCarte)
@@ -261,7 +260,6 @@ public class Joueur {
 
 	public boolean peutDeplacerVoleur()
 	{
-
 		return (nbCartesDeplacerVoleur > 0);
 	}
 
