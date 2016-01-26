@@ -27,7 +27,10 @@ public class VueArete extends Group {
 
 		m_ligne = new Line(debutX, debutY, finX, finY);
 		m_ligne.setStrokeWidth(Constants.roadWidth - 4);
-		m_ligne.setStroke(Color.GRAY);
+		if(m_arete.peutEtreAutoroute())
+			m_ligne.setStroke(Color.BLACK);
+		else
+			m_ligne.setStroke(Color.GRAY);
 
 		m_ligneJoueur = new Line(debutX, debutY, finX, finY);
 		m_ligneJoueur.setStrokeWidth(Constants.roadWidth);
@@ -64,16 +67,14 @@ public class VueArete extends Group {
 
 	public void update()
 	{
-		if (m_arete.getType() == TypeArete.Route)
-			m_ligne.setStroke(Color.GRAY);
-		else if (m_arete.getType() == TypeArete.Autoroute)
+		if(m_arete.peutEtreAutoroute())
 			m_ligne.setStroke(Color.BLACK);
 		else
 			m_ligne.setStroke(Color.GRAY);
 		if (m_arete.getProprietaire() != null)
 			m_ligneJoueur.setStroke(m_arete.getProprietaire().getCouleur());
 		else
-			m_ligneJoueur.setStroke(m_ligne.getStroke());
+			m_ligneJoueur.setStroke(Color.GRAY);
 	}
 
 }
