@@ -3,6 +3,7 @@ package vue.jeu;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.InnerShadow;
@@ -10,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import model.jeu.Jeu;
 import model.jeu.TypeArete;
@@ -18,6 +21,7 @@ import model.joueur.Invention;
 import model.joueur.Joueur;
 import model.joueur.Ressource;
 import model.joueur.TypeCarte;
+import vue.URL;
 
 public class ContentJoueur extends GridPane implements Desactivable {
 
@@ -27,8 +31,18 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	private Label labelPseudo;
 	private Label ressources;
 	private Label aConstruire;
-	private Label inventions;
+	private Label invention;
 	private Label cartes;
+
+	private Group groups[] = new Group[4];
+	private ImageView inventions[] = new ImageView[Invention.values().length];
+	private Rectangle rectangles[] = new Rectangle[4];
+
+	private Image avatars[];
+	private Label lb_ressources[];
+
+	private Label lbRoute, lbAutoroute, lbVille, lbVillage;
+	private Label lbCarteVoleur;
 
 	public ContentJoueur(Jeu jeu)
 	{
@@ -39,17 +53,47 @@ public class ContentJoueur extends GridPane implements Desactivable {
 
 	public void init()
 	{
-		
-		imgAvatar = new ImageView();
-		labelPseudo = new Label();
 		setPadding(new Insets(20, 20, 20, 20));
 		setHgap(15);
 		setVgap(15);
 
+		// Initialisation des avatars
+		imgAvatar = new ImageView();
+		avatars = new Image[m_jeu.getNbJoueurs()];
+		for (int i = 0; i < m_jeu.getNbJoueurs(); i++)
+			avatars[i] = new Image(m_jeu.getJoueur(i).getAvatar());
 		imgAvatar.setFitWidth(100);
 		imgAvatar.setFitHeight(100);
+		add(imgAvatar, 0, 0);
+
+		// Initialisation du nom du joueur
+		labelPseudo = new Label();
+		add(labelPseudo, 1, 0);
+
+		// Ressources du joueur :
 		ressources = new Label("Ressources");
-		ressources.setId("divisions");
+		add(ressources, 0, 2);
+
+		lb_ressources = new Label[Ressource.values().length - 1];
+
+		int i = 0;
+		for (Ressource ressource : Ressource.values())
+		{
+			if (ressource == Ressource.Autoroute)
+				continue;
+			int nbr = m_jeu.getJoueur().nbRessource(ressource);
+			ImageView imageView = new ImageView("textures/hex" + ressource + ".png");
+			imageView.setFitWidth(50);
+			imageView.setFitHeight(50);
+
+			lb_ressources[i] = new Label();
+			lb_ressources[i].setTranslateY(10);
+			lb_ressources[i].setCenterShape(true);
+			lb_ressources[i].setFont(Font.font("Cambria", 20));
+
+			add(new HBox(imageView, lb_ressources[i]), ((i + 6)%2), (i + 6)/2);
+			i++;
+		}
 
 		construire = new Button("Construire");
 		construire.setOnMouseClicked((e) -> {
@@ -60,67 +104,82 @@ public class ContentJoueur extends GridPane implements Desactivable {
 				construire.setEffect(null);
 		});
 
+		// Initialisation des labels de nombre de trucs à construire :
 		aConstruire = new Label("A construire");
-		aConstruire.setId("divisions");
-		
+		lbRoute = new Label();
+		lbAutoroute = new Label();
+		lbVillage = new Label();
+		lbVille = new Label();
+		add(lbRoute, 0, 10);
+		add(lbAutoroute, 0, 11);
+		add(lbVillage, 1, 10);
+		add(lbVille, 1, 11);
+		invention = new Label("Inventions : ");
+		invention.setId("divisions");
+
+		int l = 0;
+		for (Invention invention : Invention.values())
+		{
+			inventions[l] = new ImageView(URL.url(invention));
+			inventions[l].setPreserveRatio(true);
+			inventions[l].setFitHeight(40);
+
+			rectangles[l] = new Rectangle();
+			rectangles[l].setFill(Color.GRAY.deriveColor(1, 1, 1, 0.95));
+			rectangles[l].setX(inventions[l].getX());
+			rectangles[l].setY(inventions[l].getY());
+			rectangles[l].setWidth(inventions[l].getBoundsInLocal().getWidth());
+			rectangles[l].setHeight(inventions[l].getBoundsInLocal().getHeight());
+
+			groups[l] = new Group();
+			groups[l].getChildren().addAll(inventions[l], rectangles[l]);
+
+			add(groups[l], l%2, l/2 + 14);
+			l++;
+		}
+
+		add(aConstruire, 0, 9);
+		add(construire, 1, 9);
+		add(invention, 0, 13);
+
+		cartes = new Label("Cartes : ");
+		add(cartes, 0, 19);
+
+		lbCarteVoleur = new Label();
+		add(lbCarteVoleur, 0, 20);
+
 		utiliserCarteVoleur = new Button("Utiliser");
 		utiliserCarteVoleur.setOnAction(new EventHandler<ActionEvent>() {
-			
 			@Override
 			public void handle(ActionEvent event)
 			{
-				
-				m_jeu.setM_deplacementVoleurActif(true);
-
-				
+				m_jeu.setDeplacementVoleurActif(true);
 			}
 		});
-		inventions = new Label("Inventions : ");
-		inventions.setId("divisions");
-
-
-		cartes = new Label("Cartes : ");
-		cartes.setId("divisions");
+		add(utiliserCarteVoleur, 1, 20);
 	}
-	
+	/***************************************************************************************/
+	/***************************************************************************************/
+	/***************************************************************************************/
 	public void update()
 	{
-		Joueur j = m_jeu.getJoueur();
-		getChildren().removeAll(getChildren());
+		Joueur joueur = m_jeu.getJoueur();
 
-		imgAvatar.setImage(new Image(j.getAvatar()));
-		labelPseudo.setText(j.getNom());
-		labelPseudo.setId("labelPseudo");
+		// Update du nom et de l'avatar du joueur
+		imgAvatar.setImage(avatars[joueur.getNumJoueur()]);
+		labelPseudo.setText(joueur.getNom());
 
-		add(imgAvatar, 0, 0);
-		add(labelPseudo, 1, 0);
-		add(ressources, 0, 2);
-
-		int i = 6;
+		// update des nombre de ressources
+		int i = 0;
 		for (Ressource ressource : Ressource.values())
-		{
-			if (ressource == Ressource.Autoroute)
-				continue;
-			int nbr = m_jeu.getJoueur().nbRessource(ressource);
-			ImageView imageView = new ImageView("textures/hex" + ressource + ".png");
-			imageView.setFitWidth(50);
-			imageView.setFitHeight(50);
+			if (ressource != Ressource.Autoroute)
+				lb_ressources[i++].setText("x" + m_jeu.getJoueur().nbRessource(ressource));
 
-			Label lb = new Label("x" + nbr);
-			lb.setTranslateY(10);
-			lb.setCenterShape(true);
-			lb.setFont(Font.font("Cambria", 20));
-
-			HBox box = new HBox(10);
-			box.getChildren().addAll(imageView, lb);
-			add(box, (i%2), i/2);
-			i++;
-		}
-
-		add(new Label("Routes : " + j.getNombre(TypeArete.Route)), 0, 10);
-		add(new Label("Autoroutes : " + j.getNombre(TypeArete.Autoroute)), 0, 11);
-		add(new Label("Villages : " + j.getNombre(TypePoint.Village)), 1, 10);
-		add(new Label("Villes : " + j.getNombre(TypePoint.Ville)), 1, 11);
+		// Update des constructions dispo
+		lbAutoroute.setText("Routes : " + joueur.getNombre(TypeArete.Route));
+		lbRoute.setText("Autoroutes : " + joueur.getNombre(TypeArete.Autoroute));
+		lbVillage.setText("Villages : " + joueur.getNombre(TypePoint.Village));
+		lbVille.setText("Villes : " + joueur.getNombre(TypePoint.Ville));
 
 		if (m_jeu.isConstructionActive())
 		{
@@ -128,17 +187,13 @@ public class ContentJoueur extends GridPane implements Desactivable {
 			construire.setEffect(null);
 		}
 
-		add(aConstruire, 0, 9);
-		add(construire, 1, 9);
-		add(inventions, 0, 13);
+		// Update des constructions
+		int k = 0;
+		for (Invention invention : Invention.values())
+			rectangles[k++].setVisible(!joueur.possede(invention));
 
-		i = 14;
-		for(Invention invention : Invention.values())
-			add(new Label(invention + " : " + (j.getNombre(invention)>1 ? " Acquis" : " Non Acquis")), 0, i++, 2, 1);
-
-		add(cartes, 0, 19);
-		add(new Label("Dépl. Voleur : " + j.getNombre(TypeCarte.DeplacerVoleur)), 0, 20);
-		add(utiliserCarteVoleur, 1, 20);
+		// Update du nombre de cartes voleur
+		lbCarteVoleur.setText("Dépl. Voleur : " + joueur.getNombre(TypeCarte.DeplacerVoleur));
 	}
 
 	@Override
