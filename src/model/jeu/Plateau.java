@@ -196,7 +196,7 @@ public class Plateau {
 			case 4:
 				return r2;
 		}
-		throw new ExceptionOutOfBoard("Holy shit");
+		throw new ExceptionOutOfBoard();
 	}
 
 	/*
@@ -348,9 +348,9 @@ public class Plateau {
 	}
 
 	private class ExceptionOutOfBoard extends Exception{
-		public ExceptionOutOfBoard(String str)
+		public ExceptionOutOfBoard()
 		{
-			super(str);
+			super();
 		}
 	}
 }
