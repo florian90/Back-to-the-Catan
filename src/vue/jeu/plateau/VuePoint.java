@@ -94,4 +94,14 @@ public class VuePoint extends Group{
 		else
 			getChildren().add(m_cercle);
 	}
+
+	public double getCenterX()
+	{
+		return m_cercle.getCenterX();
+	}
+
+	public double getCenterY()
+	{
+		return m_cercle.getCenterY();
+	}
 }

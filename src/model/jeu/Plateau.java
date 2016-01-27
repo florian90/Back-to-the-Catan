@@ -20,7 +20,6 @@ public class Plateau {
 	private HashMap<CoordArete, Arete> aretes;
 	private HashMap<CoordPoint, Point> points;
 	private int m_size;
-	
 
 	public Plateau(Epoque ep, int size)
 	{
@@ -76,6 +75,7 @@ public class Plateau {
 		points = new HashMap<>();
 		CoordCase coo;
 		CoordPoint cooPoint;
+		// TODO: Utiliser la fonction Case.getCooPoint
 		for (Case tuile : cases.values())
 		{
 			coo = tuile.getCoo();
@@ -113,7 +113,7 @@ public class Plateau {
 		{
 			for (int i = 0; i < 6; i++)
 			{
-				cooArete = new CoordArete(getCooPoint(tuile, i), getCooPoint(tuile, (i + 1)%6));
+				cooArete = new CoordArete(tuile.getCooPoint(i), tuile.getCooPoint((i + 1)%6));
 				if (!aretes.containsKey(cooArete))
 				{
 					aretes.put(cooArete, new Arete(cooArete, this));
@@ -145,35 +145,6 @@ public class Plateau {
 	public Epoque getEpoque()
 	{
 		return epoque;
-	}
-
-	/*
-	 * Retourne la coordonnée du point selon une case et un index
-	 * L'index représente quel point est sélectionné pour une case donnée
-	 * Les points sont ordonnées de 0 à 5 pour une case.
-	 * L'index 0 correspond au point situé en haut de la case, les suivants tant sélectionés par ordre horaire.
-	 * Si l'index n'est pas compris entre 0 et 5, la fonction renvoie une Exception de type IndexOutOfBoundsException
-	 */
-	private CoordPoint getCooPoint(Case tuile, int index) throws IndexOutOfBoundsException
-	{
-		CoordCase coo = tuile.getCoo();
-		switch (index)
-		{
-			case 0:
-				return new CoordPoint(coo.northWest(), coo.northEast(), coo);
-			case 1:
-				return new CoordPoint(coo, coo.east(), coo.northEast());
-			case 2:
-				return new CoordPoint(coo, coo.east(), coo.southEast());
-			case 3:
-				return new CoordPoint(coo.southWest(), coo.southEast(), coo);
-			case 4:
-				return new CoordPoint(coo.west(), coo, coo.southWest());
-			case 5:
-				return new CoordPoint(coo.west(), coo, coo.northWest());
-			default:
-				throw new IndexOutOfBoundsException();
-		}
 	}
 
 	/*
@@ -287,6 +258,7 @@ public class Plateau {
 						pt.getProprietaire().recevoir(tuile.getRessource());
 						if (pt.getType() == TypePoint.Ville)
 							pt.getProprietaire().recevoir(tuile.getRessource());
+						tuile.getVue().animerCase(pt.getVue());
 					}
 				}
 	}
