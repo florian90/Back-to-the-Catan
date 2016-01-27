@@ -56,11 +56,12 @@ public class Plateau {
 			for (int i = 1; i <= m_size; i++)
 			{
 				coord = new CoordCase(j - 4, i - 4, epoque);
-				if ((res = getRessource(coord, listRessources)) != null)
-				{
+				try{
+					res = getRessource(coord, listRessources);
 					tuile = new Case(coord, res, listValeurs[j - 1][i - 1]);
 					cases.put(coord, tuile);
 				}
+				catch (ExceptionOutOfBoard e){}
 			}
 		}
 	}
@@ -179,39 +180,23 @@ public class Plateau {
 	 * Reourne la ressource possédée par la case dons les coordonées sont passés en paramètres.
 	 * La liste passée en paramètre correspond à la liste de toutes les ressources du plateau selon l'index.
 	 */
-	private Ressource getRessource(CoordCase coordCase, int[][] list)
+	private Ressource getRessource(CoordCase coordCase, int[][] list) throws ExceptionOutOfBoard
 	{
 		Ressource r1, r2;
-		if (epoque == Epoque._1855)
-		{
-			r1 = Ressource.Bois;
-			r2 = Ressource.Roue;
-		} else if (epoque == Epoque._1955)
-		{
-			r1 = Ressource.HautParleur;
-			r2 = Ressource.Antenne;
-		} else if (epoque == Epoque._1985)
-		{
-			r1 = Ressource.Plutonium;
-			r2 = Ressource.MorceauSchema;
-		} else
-		{
-			r1 = Ressource.Aimant;
-			r2 = Ressource.Ventilateur;
-		}
+		r1 = Epoque.getR1(epoque);
+		r2 = Epoque.getR2(epoque);
 		switch (list[coordCase.getLine() + m_size/2][coordCase.getColumn() + m_size/2])
 		{
-			case 0:
-				return null;
 			case 1:
-				return Ressource.Autoroute;
+				return null;//Autoroute
 			case 2:
 				return Ressource.Metal;
 			case 3:
 				return r1;
+			case 4:
+				return r2;
 		}
-		return r2;
-
+		throw new ExceptionOutOfBoard("Holy shit");
 	}
 
 	/*
@@ -284,7 +269,7 @@ public class Plateau {
 		Case c = cases.get(coo);
 		if(c == null)
 		{
-			c = new Case(coo,Ressource.Autoroute,0);
+			c = new Case(coo,null,0);
 		}
 		
 		return c;
@@ -297,7 +282,7 @@ public class Plateau {
 				for (CoordCase coordCase : new CoordCase[]{pt.getCoo().getGauche(), pt.getCoo().getDroite(), pt.getCoo().getVertical()})
 				{
 					Case tuile = cases.get(coordCase);
-					if (tuile.getRessource() != Ressource.Autoroute && tuile.getValeur() == val && !(tuile.isVoleurPresent()))
+					if (tuile.getRessource() != null && tuile.getValeur() == val && !(tuile.isVoleurPresent()))
 					{
 						pt.getProprietaire().recevoir(tuile.getRessource());
 						if (pt.getType() == TypePoint.Ville)
@@ -360,5 +345,12 @@ public class Plateau {
 			}
 		}
 		return listArete;
+	}
+
+	private class ExceptionOutOfBoard extends Exception{
+		public ExceptionOutOfBoard(String str)
+		{
+			super(str);
+		}
 	}
 }

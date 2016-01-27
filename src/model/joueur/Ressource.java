@@ -19,8 +19,6 @@ public enum Ressource {
 		{
 		case Aimant:
 			return "Aimant";
-		case Autoroute:
-			return "Autoroute";
 		case Antenne:
 			return "Antenne";
 		case Bois:
@@ -35,10 +33,8 @@ public enum Ressource {
 			return "Plutonium";
 		case Roue:
 			return "Roue";
-		case Ventilateur:
+		default:
 			return "Ventilateur";
 		}
-
-		return "";
 	}
 }

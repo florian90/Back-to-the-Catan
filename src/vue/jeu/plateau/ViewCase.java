@@ -37,7 +37,7 @@ public class ViewCase extends Group {
 
 		getChildren().add(imgRessource);
 
-		if (m_case.getRessource() != Ressource.Autoroute)//on ajoute un numéro que s'il ne s'agit pas d'une case autoroute
+		if (m_case.getRessource() != null)//on ajoute un numéro que s'il ne s'agit pas d'une case autoroute
 		{
 
 			/*Affichage du numéro*/

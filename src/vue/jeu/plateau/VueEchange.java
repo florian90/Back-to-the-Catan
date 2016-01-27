@@ -140,7 +140,7 @@ public class VueEchange extends TitledPane{
 			
 			for(Ressource r : Ressource.values())
 			{
-				if(!(r.equals(Ressource.Autoroute)))
+				if(!(r.equals(null)))
 				{
 					//Ajout des spinners
 					Spinner<Integer> spinTemp = new Spinner<Integer>(0,99,0);

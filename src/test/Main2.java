@@ -10,9 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
-import model.jeu.Jeu;
-import model.jeu.TypeArete;
-import model.jeu.TypePoint;
+import model.jeu.*;
 import model.joueur.Achetable;
 import model.joueur.Invention;
 import model.joueur.TypeCarte;
@@ -24,18 +22,7 @@ public class Main2 extends Application {
 	public static void main(String[] args) { launch(args); }
 
 	@Override public void start(final Stage primaryStage) {
-		primaryStage.setTitle("Popup Example");
+		Plateau plateau = new Plateau(Epoque._1855, 7);
 
-		ArrayList<String> noms = new ArrayList<>();
-		noms.add("Tung");
-		noms.add("Coupat");
-		BoutonAchat bt = new BoutonAchat(TypePoint.Ville, new Jeu(noms));
-		BoutonAchat bt2 = new BoutonAchat(Invention.HoverBoard, new Jeu(noms));
-		BoutonAchat bt3 = new BoutonAchat(TypeArete.Autoroute, new Jeu(noms));
-
-		HBox layout = new HBox(10);
-		layout.getChildren().addAll(bt, bt2, bt3);
-		primaryStage.setScene(new Scene(layout, 500, 700));
-		primaryStage.show();
 	}
 }

@@ -42,7 +42,6 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	private Image avatars[];
 	private Label lb_ressources[];
 
-	private HBox hBoxRoute, hBoxAutoroute, hBoxVille, hBoxVillage;
 	private Label lbRoute, lbAutoroute, lbVille, lbVillage;
 	private Label lbCarteVoleur;
 	private Line ligneJoueurRoute, ligneJoueurAutoroute;
@@ -77,13 +76,11 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		ressources = new MyLabelTitre("Ressources");
 		add(ressources, 0, 2);
 
-		lb_ressources = new Label[Ressource.values().length - 1];
+		lb_ressources = new Label[Ressource.values().length];
 
 		int i = 0;
 		for (Ressource ressource : Ressource.values())
 		{
-			if (ressource == Ressource.Autoroute)
-				continue;
 			ImageView imageView = new ImageView("textures/hex" + ressource + ".png");
 			imageView.setFitWidth(40);
 			imageView.setFitHeight(40);
@@ -195,7 +192,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		// update des nombre de ressources
 		int i = 0;
 		for (Ressource ressource : Ressource.values())
-			if (ressource != Ressource.Autoroute)
+			if (ressource != null)
 				lb_ressources[i++].setText("x" + m_jeu.getJoueur().nbRessource(ressource));
 
 		// Update des constructions dispo

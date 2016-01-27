@@ -101,7 +101,7 @@ public class Arete {
 		
 		if (dx.equals(dy) || gx.equals(gy))
 		{
-			if (m_plateau.getCasesVirtuelles(dx).getRessource() == Ressource.Autoroute || m_plateau.getCasesVirtuelles(gx).getRessource() == Ressource.Autoroute)
+			if (m_plateau.getCasesVirtuelles(dx).getRessource() == null || m_plateau.getCasesVirtuelles(gx).getRessource() == null)
 			{
 				return true;
 			} else
@@ -110,7 +110,7 @@ public class Arete {
 			}
 		} else if (gx.equals(vy) || dy.equals(vx))
 		{
-			if (m_plateau.getCasesVirtuelles(dy).getRessource() == Ressource.Autoroute || m_plateau.getCasesVirtuelles(gx).getRessource() == Ressource.Autoroute)
+			if (m_plateau.getCasesVirtuelles(dy).getRessource() == null || m_plateau.getCasesVirtuelles(gx).getRessource() == null)
 			{
 				return true;
 				
@@ -120,7 +120,7 @@ public class Arete {
 			}
 		} else if (vx.equals(gy) || vy.equals(dx))
 		{
-			if (m_plateau.getCasesVirtuelles(vx).getRessource() == Ressource.Autoroute || m_plateau.getCasesVirtuelles(dx).getRessource() == Ressource.Autoroute)
+			if (m_plateau.getCasesVirtuelles(vx).getRessource() == null || m_plateau.getCasesVirtuelles(dx).getRessource() == null)
 			{
 				return true;
 			} else

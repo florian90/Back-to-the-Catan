@@ -34,6 +34,8 @@ public class URL {
 
 	public static String url(Ressource r)
 	{
+		if(r==null)
+			return texturesPath+"hexAutoroute.png";
 		return texturesPath+"hex"+ r + ".png";
 	}
 

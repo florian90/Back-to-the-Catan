@@ -24,7 +24,7 @@ public class Case {
 
 	public Case(CoordCase coo)
 	{//Permet de créer des 'fausses' cases autour du plateau, elles n'apparaitront pas dans la vue
-		this(coo, Ressource.Autoroute, 0);
+		this(coo, null, 0);
 	}
 
 	public CoordCase getCoo()
