@@ -27,7 +27,7 @@ import vue.URL;
 public class ContentJoueur extends GridPane implements Desactivable {
 
 	private Jeu m_jeu;
-	private Button construire, utiliserCarteVoleur;
+	private defaultButton construire, utiliserCarteVoleur;
 	private ImageView imgAvatar;
 	private Label labelPseudo;
 	private Label ressources;
@@ -81,17 +81,21 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		int i = 0;
 		for (Ressource ressource : Ressource.values())
 		{
-			ImageView imageView = new ImageView("textures/hex" + ressource + ".png");
-			imageView.setFitWidth(40);
-			imageView.setFitHeight(40);
+			if(ressource!=Ressource.Autoroute)
+			{
+				ImageView imageView = new ImageView("textures/hex" + ressource + ".png");
+				imageView.setFitWidth(40);
+				imageView.setFitHeight(40);
 
-			lb_ressources[i] = new MyLabelQt();
+				lb_ressources[i] = new MyLabelQt();
 
-			add(new HBox(10, imageView, lb_ressources[i]), ((i + 6)%2), (i + 6)/2);
-			i++;
+				add(new HBox(10, imageView, lb_ressources[i]), ((i + 6)%2), (i + 6)/2);
+				i++;
+			}
+
 		}
 
-		construire = new Button("Construire");
+		construire = new defaultButton("Construire");
 		construire.setOnMouseClicked((e) -> {
 			m_jeu.changeConstructionActive();
 			if (m_jeu.isConstructionActive())
@@ -168,7 +172,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		lbCarteVoleur = new Label();
 		add(lbCarteVoleur, 0, 20);
 
-		utiliserCarteVoleur = new Button("Utiliser");
+		utiliserCarteVoleur = new defaultButton("Utiliser");
 		utiliserCarteVoleur.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event)
@@ -192,14 +196,14 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		// update des nombre de ressources
 		int i = 0;
 		for (Ressource ressource : Ressource.values())
-			if (ressource != null)
+			if (ressource != null && ressource!= Ressource.Autoroute)
 				lb_ressources[i++].setText("x" + m_jeu.getJoueur().nbRessource(ressource));
 
 		// Update des constructions dispo
 		ligneJoueurRoute.setStroke(joueur.getCouleur());
 		ligneJoueurAutoroute.setStroke(joueur.getCouleur());
-		lbAutoroute.setText(""+joueur.getNombre(TypeArete.Route));
-		lbRoute.setText(""+joueur.getNombre(TypeArete.Autoroute));
+		lbAutoroute.setText(""+joueur.getNombre(TypeArete.Autoroute));
+		lbRoute.setText(""+joueur.getNombre(TypeArete.Route));
 		lbVillage.setText(""+joueur.getNombre(TypePoint.Village));
 		lbVille.setText(""+joueur.getNombre(TypePoint.Ville));
 

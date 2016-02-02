@@ -14,6 +14,7 @@ public class Joueur {
 	private String m_avatar;
 	private PackRess m_ressources;
 	private int m_accesEpoque;
+	private boolean suivHasToBlink;
 
 	private HashMap<Achetable, Integer> m_inventaire;
 
@@ -29,6 +30,7 @@ public class Joueur {
 	{
 		m_nom = nom;
 		m_numJoueur = num;
+		suivHasToBlink = false;
 		m_avatar = "textures/Avatar" + (num+1) + ".jpg";
 
 		switch (m_numJoueur)
@@ -61,7 +63,7 @@ public class Joueur {
 		m_inventaire.put(TypeArete.Route, 2);
 		m_inventaire.put(TypePoint.Village, 2);
 		m_accesEpoque = 1;
-		
+				
 		/* Pour avoir toutes les ressources nécessaires pour tester toutes les fonctionnalités*/
 		m_ressources.add(new PackRess(Invention.Train.cout(null)));
 		m_ressources.add(new PackRess(Invention.ConvecteurTemporel.cout(null)));
@@ -70,6 +72,9 @@ public class Joueur {
 		
 		m_ressources.add(new PackRess(Ressource.Metal, 50, Ressource.MorceauSchema, 50, Ressource.Plutonium, 50));
 	}
+
+	
+
 
 	/*
 	 * Enleve les objets / ressources de l'inventaire du joueur
@@ -271,6 +276,8 @@ public class Joueur {
 	public void accesNouvelleEpoque()
 	{
 		m_accesEpoque++;
+		m_jeu.getFenetre().setSuivBlinking(true);
+		suivHasToBlink = true;
 	}
 
 	public boolean aAcces(Epoque epoque)
@@ -288,4 +295,15 @@ public class Joueur {
 		}
 		return false;
 	}
+	
+	public void setSuivHasToBlink(boolean suivHasToBlink) 
+	{
+		this.suivHasToBlink = suivHasToBlink;
+	}
+	
+	public boolean isSuivHasToBlink() 
+	{
+		return suivHasToBlink;
+	}
+
 }

@@ -111,6 +111,7 @@ public class Jeu {
 			m_desLances = false;
 			if (++joueurActuel >= nbJoueurs)
 				joueurActuel = 0;
+			getFenetre().setSuivBlinking(getJoueur(joueurActuel).isSuivHasToBlink());
 			m_vue.initTourJoueur();
 		}
 	}

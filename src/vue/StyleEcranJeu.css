@@ -19,3 +19,36 @@
 {
 	-fx-font-weight: bold;
 }
+
+#fond1955
+{
+	-fx-background-image: url("../textures/Fonds_Carte/1955.png");
+}
+
+#fond1985
+{
+	-fx-background-image: url("../textures/Fonds_Carte/1985.png");
+}
+
+#fond1855
+{
+	-fx-background-image: url("../textures/Fonds_Carte/1855.png");
+}
+
+#fond2015
+{
+	-fx-background-image: url("../textures/Fonds_Carte/2015.png");
+}
+
+#blinkingButton
+{
+	-fx-text-fill: white;
+}
+
+#defaultButton
+{
+    -fx-background-color: lightgray ;
+    -fx-background-radius: 3,2,1;
+    -fx-text-fill: black;
+   
+}

@@ -79,7 +79,7 @@ public class Arete {
 			return "Cette arète est déjà construite";
 		} else if (!isAttache(joueur))
 		{
-			return "Cette arète doit être ratachéz à une autre vous appartenant";
+			return "Cette arète doit être ratachée à une autre vous appartenant";
 		}
 		return null;
 	}

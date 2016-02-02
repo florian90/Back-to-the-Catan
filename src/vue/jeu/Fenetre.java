@@ -45,8 +45,9 @@ public class Fenetre extends AnchorPane {
 	private TitledPane PanneauMarche;
 	private TitledPane PanneauCarte;
 	private TitledPane PanneauJoueur;
-	private Button suiv, prec, finTour;
-	private Button[] bt_echangerList;
+	private defaultButton prec, finTour;
+	private AnimatedButton suiv;
+	private defaultButton[] bt_echangerList;
 	private Label numPlateau;
 	private Label statusBar;
 
@@ -56,6 +57,7 @@ public class Fenetre extends AnchorPane {
 	private ContentTabInventions cTI;
 	private ContentTabCartes cTCards;
 	
+	private VBox VMilieu;
 	private ContentJoueur panneauJoueur;
 
 	private Jeu m_jeu;
@@ -71,9 +73,9 @@ public class Fenetre extends AnchorPane {
 
 		primaryStage = p_primaryStage;
 
-		finTour = new Button("Fin du Tour");
-		suiv = new Button("> Suivant");
-		prec = new Button("Précédent <");
+		finTour = new defaultButton("Fin du Tour");
+		suiv = new AnimatedButton("> Suivant");
+		prec = new defaultButton("Précédent <");
 
 		Tab TabConstructions = new Tab("Constructions");
 		Tab TabCartes = new Tab("Cartes");
@@ -81,9 +83,9 @@ public class Fenetre extends AnchorPane {
 		TabPane TabsMarche = new TabPane(TabConstructions, TabInventions, TabCartes);
 		TabsMarche.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		TabsMarche.setPrefHeight(450);
-
+		
+		VMilieu = new VBox();
 		VBox VGauche = new VBox();
-		VBox VMilieu = new VBox();
 		VBox VDroite = new VBox();
 
 		GridPane gridJoueurs = new GridPane();
@@ -91,13 +93,13 @@ public class Fenetre extends AnchorPane {
 		gridJoueurs.setVgap(10);
 		gridJoueurs.setAlignment(Pos.CENTER);
 		gridJoueurs.setPadding(new Insets(20, 10, 10, 10));
-		bt_echangerList = new Button[m_jeu.getNbJoueurs()];
+		bt_echangerList = new defaultButton[m_jeu.getNbJoueurs()];
 
 		for (int i = 0; i < m_jeu.getNbJoueurs(); ++i)
 		{ // Initialise les images des joueurs en bas et les boutons échanger
 			final int index = i; 
 			ImageView avatar = new ImageView(m_jeu.getJoueur(i).getAvatar());
-			bt_echangerList[i] = new Button("Echanger");
+			bt_echangerList[i] = new defaultButton("Echanger");
 			bt_echangerList[i].setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -144,7 +146,9 @@ public class Fenetre extends AnchorPane {
 		VGauche.setMaxWidth(300);
 		VGauche.setId("VGauche");
 
+		VMilieu.setId("fond1985");
 		VMilieu.getChildren().add(numPlateau);
+		numPlateau.setText("Epoques : ");
 		VMilieu.getChildren().add(new HBox(10, prec, suiv));
 		VMilieu.getChildren().add(stack);
 		VMilieu.getChildren().add(gridJoueurs);
@@ -184,6 +188,10 @@ public class Fenetre extends AnchorPane {
 			public void handle(ActionEvent event)
 			{
 				m_jeu.epoqueSuivante();
+				VMilieu.setId("fond"+Epoque.toString(p_modelJeu.getEpoqueActuelle()));
+				if (suiv.isBlinking())
+				suiv.stopBlinking();
+				p_modelJeu.getJoueur().setSuivHasToBlink(false);
 			}
 		});
 
@@ -194,6 +202,8 @@ public class Fenetre extends AnchorPane {
 			{
 
 				m_jeu.epoquePrecedente();
+				VMilieu.setId("fond"+Epoque.toString(p_modelJeu.getEpoqueActuelle()));
+
 			}
 		});
 
@@ -263,7 +273,8 @@ public class Fenetre extends AnchorPane {
 		VuePlateau newPlateau = getVuePlateau(epoque);
 		stack.getChildren().removeAll(stack.getChildren());
 		stack.getChildren().add(newPlateau);
-		numPlateau.setText("Epoque : " + Epoque.toString(epoque));
+		
+		//numPlateau.setText("Epoque : " + Epoque.toString(epoque));
 	}
 
 	public void setStatus(String str)
@@ -314,7 +325,7 @@ public class Fenetre extends AnchorPane {
 	public void afficheVainqueur()
 	{
 		GridPane grid = new GridPane();
-		Button ok = new Button("OK");
+		Button ok = new defaultButton("OK");
 		grid.add(new Label(m_jeu.getJoueur().getNom()+", vous avez construit la dernière invention et donc vous \npossédez maintenant le TrainKiVol !!!\n\n Félicitations !"), 0, 0);
 		grid.add(ok, 0, 1);
 		TitledPane panneauVainqueur = new TitledPane("Félicitations !",grid);
@@ -359,5 +370,13 @@ public class Fenetre extends AnchorPane {
 	    primaryStage.show();
 		mp.play();
 
+	}
+
+	public void setSuivBlinking(boolean b)
+	{
+		if(b)
+			suiv.startBlinking();
+		else
+			suiv.stopBlinking();
 	}
 }
