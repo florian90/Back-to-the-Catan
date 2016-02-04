@@ -52,7 +52,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	{
 		m_jeu = jeu;
 		init();
-		update();
+		update(true);
 	}
 
 	public void init()
@@ -200,7 +200,12 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	/***************************************************************************************/
 	/***************************************************************************************/
 	/***************************************************************************************/
-	public void update()
+	/*
+	 * Met à jour la vue correspondant au panneau de droite
+	 * si le paramètre et à true, il s'agit d'un changement de joueur
+	 * sinon il s'agit d'une mise à jour du contenu du joueur courant
+	 */
+	public void update(boolean nouveauJoueur)
 	{
 		Joueur joueur = m_jeu.getJoueur();
 
@@ -222,7 +227,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		lbVillage.setText(""+joueur.getNombre(TypePoint.Village));
 		lbVille.setText(""+joueur.getNombre(TypePoint.Ville));
 
-		if (m_jeu.isConstructionActive())
+		if (m_jeu.isConstructionActive() && nouveauJoueur)
 		{
 			m_jeu.changeConstructionActive();
 			construire.setEffect(null);

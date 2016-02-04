@@ -193,8 +193,11 @@ public class Fenetre extends AnchorPane {
 			{
 				m_jeu.epoqueSuivante();
 				VMilieu.setId("fond"+Epoque.toString(p_modelJeu.getEpoqueActuelle()));
-				if (suiv.isBlinking())
-				suiv.stopBlinking();
+				if (suiv.isBlinking() && Epoque.index(p_modelJeu.getEpoqueActuelle())==p_modelJeu.getJoueur().getMAccesEpoque())
+				{
+					suiv.stopBlinking();
+				}
+					
 				p_modelJeu.getJoueur().setSuivHasToBlink(false);
 			}
 		});
@@ -207,6 +210,10 @@ public class Fenetre extends AnchorPane {
 
 				m_jeu.epoquePrecedente();
 				VMilieu.setId("fond"+Epoque.toString(p_modelJeu.getEpoqueActuelle()));
+				if (suiv.isBlinking() && Epoque.index(p_modelJeu.getEpoqueActuelle())==p_modelJeu.getJoueur().getMAccesEpoque())
+				{
+					suiv.stopBlinking();
+				}
 
 			}
 		});
@@ -237,7 +244,7 @@ public class Fenetre extends AnchorPane {
 	public void initTourJoueur()
 	{
 		cTI.update();
-		panneauJoueur.update();
+		panneauJoueur.update(true);
 		cTC.desactiver();
 		cTI.desactiver();
 		cTC.desactiver();
@@ -307,7 +314,7 @@ public class Fenetre extends AnchorPane {
 
 	public void updateJoueur()
 	{
-		panneauJoueur.update();
+		panneauJoueur.update(false);/**/
 		cTC.update();
 		cTI.update();
 		cTCards.update();

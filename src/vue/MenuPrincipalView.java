@@ -112,8 +112,12 @@ public class MenuPrincipalView extends AnchorPane {
 	{
 		ArrayList<String> joueurs = new ArrayList<>();
 		for (TextField tf : nomsJoueurs)
-			if (!(tf.getText().equals("")))
+		{
+			System.out.println(tf.getText());
+			if (!(tf.getText().equals(""))&& tf.isVisible())
 				joueurs.add(tf.getText());
+		}
+			
 		return joueurs;
 	}
 	

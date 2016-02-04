@@ -55,4 +55,20 @@ public enum Epoque {
 		}
 		return null;
 	}
+
+	public static int index(Epoque epoque)
+	{
+		switch(epoque)
+		{
+			case _1855:
+				return 3;
+			case _1955:
+				return 4;
+			case _1985:
+				return 1;
+			case _2015:
+				return 2;
+		}
+		return 0;
+	}
 }

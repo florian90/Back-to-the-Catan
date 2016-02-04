@@ -296,6 +296,11 @@ public class Joueur {
 		return false;
 	}
 	
+	public int getMAccesEpoque()
+	{
+		return m_accesEpoque;
+	}
+	
 	public void setSuivHasToBlink(boolean suivHasToBlink) 
 	{
 		this.suivHasToBlink = suivHasToBlink;

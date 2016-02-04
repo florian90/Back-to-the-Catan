@@ -28,8 +28,8 @@ public class URL {
 	public static final String chiffresDes[] = {texturesPath + "/Des/"+"de0.png",texturesPath + "/Des/"+"de1.png",texturesPath + "/Des/"+"de2.png",texturesPath + "/Des/"+"de3.png",
 			texturesPath + "/Des/"+"de4.png",texturesPath + "/Des/"+"de5.png",texturesPath + "/Des/"+"de6.png"};
 	
-	public static final String son_zeus = "sons/nomdezeus.mp3";
-	public static final String video_fin = "sons/VideoFinLO.mp4";
+	public static final String son_zeus = "bin/sons/nomdezeus.mp3";
+	public static final String video_fin = "bin/sons/VideoFinLO.mp4";
 
 	public static final String dispositionPlateau_ressources1 = "ressources/PlateauxInitiaux/plateau1.txt";
 	public static final String dispositionPlateau_ressources2 = "ressources/PlateauxInitiaux/plateau2.txt";
