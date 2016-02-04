@@ -70,6 +70,7 @@ public class Fenetre extends AnchorPane {
 	{
 		m_jeu = p_modelJeu;
 		m_jeu.setVue(this);
+		setId("fenetre");
 
 		primaryStage = p_primaryStage;
 
@@ -126,6 +127,7 @@ public class Fenetre extends AnchorPane {
 
 		numPlateau = new Label();
 		statusBar = new Label();
+		statusBar.setId("statusBar");
 		panneauJoueur = new ContentJoueur(m_jeu);
 		echange = new VueEchange(panneauJoueur);
 		stack = new StackPane();
@@ -163,17 +165,19 @@ public class Fenetre extends AnchorPane {
 		VDroite.setMaxWidth(300);
 		VDroite.setId("VDroite");
 
-		PanneauMarche = new TitledPane("Marché", VGauche);
-		PanneauMarche.setCollapsible(false);
-		PanneauMarche.setPrefHeight(800);
+		
 
 		PanneauCarte = new TitledPane("Carte", VMilieu);
 		PanneauCarte.setCollapsible(false);
 		PanneauCarte.setPrefHeight(800);
+		
+		PanneauMarche = new TitledPane("Marché", VGauche);
+		PanneauMarche.setCollapsible(false);
+		PanneauMarche.setPrefHeight(824);
 
 		PanneauJoueur = new TitledPane("Joueur", VDroite);
 		PanneauJoueur.setCollapsible(false);
-		PanneauJoueur.setPrefHeight(800);
+		PanneauJoueur.setPrefHeight(824);
 
 		statusBar.setPadding(new Insets(10));
 

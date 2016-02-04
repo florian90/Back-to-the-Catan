@@ -28,7 +28,7 @@ public class MainJeu extends Application {
 
 			Jeu modelJeu = new Jeu(noms);
 			Fenetre fen = new Fenetre(modelJeu, primaryStage);
-			Scene EcranJeu = new Scene(fen, 1400, 1000);
+			Scene EcranJeu = new Scene(fen, 1400, 850);
 			EcranJeu.getStylesheets().add(getClass().getResource("../vue/StyleEcranJeu.css").toExternalForm());
 
 			primaryStage.setScene(EcranJeu);

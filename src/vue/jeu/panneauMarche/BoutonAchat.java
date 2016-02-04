@@ -26,6 +26,7 @@ public class BoutonAchat extends Button implements Desactivable {
 	public BoutonAchat(Achetable p_achetable, Jeu p_jeu)
 	{
 		super("Acheter");
+		setId("defaultButton");
 		m_objet = p_achetable;
 		m_jeu = p_jeu;
 		setPrefWidth(75);

@@ -21,7 +21,7 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 	private Spinner <Integer> spinAutoroute;
 	private Spinner <Integer> spinVillage;
 	private Spinner <Integer> spinVille;
-	private Button  acheter;
+	private defaultButton  acheter;
 	private Jeu m_jeu;
 	private	Epoque epoque;
 	private	Joueur joueur;
@@ -44,7 +44,7 @@ public class ContentTabConstructions extends GridPane implements Desactivable {
 		coutVillage = new Label("- 2 x Métal\n- 2 x "+Ressource.toString(Epoque.getR2(m_jeu.getEpoqueActuelle())));
 		coutVille = new Label("- 4 x Métal\n- 3 x "+Ressource.toString(Epoque.getR2(m_jeu.getEpoqueActuelle())));
 		
-		acheter = new Button("Acheter");
+		acheter = new defaultButton("Acheter");
 
 
 		spinRoute.valueProperty().addListener(new ChangeListener<Integer>() {

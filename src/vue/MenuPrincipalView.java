@@ -10,6 +10,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.GridPane;
 import model.joueur.Joueur;
+import vue.jeu.defaultButton;
 
 import java.util.ArrayList;
 
@@ -17,16 +18,16 @@ public class MenuPrincipalView extends AnchorPane {
 
 	private GridPane buttonGrid, parametresGrid;
 	private Spinner<Integer> spinNbJoueurs;
-	private Button nouvellePartie, regles, quitter;
+	private defaultButton nouvellePartie, regles, quitter;
 	private TitledPane parametres;
-	private Button valider;
+	private defaultButton valider;
 	private ArrayList<TextField> nomsJoueurs;
 
 
 	public MenuPrincipalView()
 	{
 		nomsJoueurs = new ArrayList<>();
-		valider = new Button("Valider");
+		valider = new defaultButton("Valider");
 		
 		parametres = new TitledPane("Paramètres de la partie", null);
 		parametres.setPrefWidth(350);
@@ -67,13 +68,13 @@ public class MenuPrincipalView extends AnchorPane {
 		parametresGrid.add(valider, 1, 6);
 		parametres.setContent(parametresGrid);
 
-		nouvellePartie = new Button("Nouvelle Partie");
+		nouvellePartie = new defaultButton("Nouvelle Partie");
 		nouvellePartie.setId("bouttonMenuPrincipal");
 		nouvellePartie.setPrefWidth(100);
-		regles = new Button("Règles");
+		regles = new defaultButton("Règles");
 		regles.setId("bouttonMenuPrincipal");
 		regles.setPrefWidth(100);
-		quitter = new Button("Quitter");
+		quitter = new defaultButton("Quitter");
 		quitter.setId("boutonMenuPrincipal");
 		quitter.setPrefWidth(100);
 
@@ -121,22 +122,22 @@ public class MenuPrincipalView extends AnchorPane {
 		parametres.setVisible(true);
 	}
 	
-	public Button getNouvellePartie()
+	public defaultButton getNouvellePartie()
 	{
 		return nouvellePartie;
 	}
 
-	public Button getRegles()
+	public defaultButton getRegles()
 	{
 		return regles;
 	}
 
-	public Button getQuitter()
+	public defaultButton getQuitter()
 	{
 		return quitter;
 	}
 	
-	public Button getValider()
+	public defaultButton getValider()
 	{
 		return valider;
 	}

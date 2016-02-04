@@ -44,8 +44,8 @@ public class Fenetre extends AnchorPane {
 	private TitledPane PanneauMarche;
 	private TitledPane PanneauCarte;
 	private TitledPane PanneauJoueur;
-	private Button suiv, prec, finTour;
-	private Button[] bt_echangerList;
+	private defaultButton suiv, prec, finTour;
+	private defaultButton[] bt_echangerList;
 	private Label numPlateau;
 	private Label statusBar;
 
@@ -70,9 +70,9 @@ public class Fenetre extends AnchorPane {
 
 		primaryStage = p_primaryStage;
 
-		finTour = new Button("Fin du Tour");
-		suiv = new Button("> Suivant");
-		prec = new Button("Précédent <");
+		finTour = new defaultButton("Fin du Tour");
+		suiv = new defaultButton("> Suivant");
+		prec = new defaultButton("Précédent <");
 
 		Tab TabConstructions = new Tab("Constructions");
 		Tab TabCartes = new Tab("Cartes");
@@ -90,13 +90,13 @@ public class Fenetre extends AnchorPane {
 		gridJoueurs.setVgap(10);
 		gridJoueurs.setAlignment(Pos.CENTER);
 		gridJoueurs.setPadding(new Insets(20, 10, 10, 10));
-		bt_echangerList = new Button[m_jeu.getNbJoueurs()];
+		bt_echangerList = new defaultButton[m_jeu.getNbJoueurs()];
 
 		for (int i = 0; i < m_jeu.getNbJoueurs(); ++i)
 		{ // Initialise les images des joueurs en bas et les boutons échanger
 			final int index = i; 
 			ImageView avatar = new ImageView(m_jeu.getJoueur(i).getAvatar());
-			bt_echangerList[i] = new Button("Echanger");
+			bt_echangerList[i] = new defaultButton("Echanger");
 			bt_echangerList[i].setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
@@ -320,7 +320,7 @@ public class Fenetre extends AnchorPane {
 	public void afficheVainqueur()
 	{
 		GridPane grid = new GridPane();
-		Button ok = new Button("OK");
+		defaultButton ok = new defaultButton("OK");
 		grid.add(new Label(m_jeu.getJoueur().getNom()+", vous avez construit la dernière invention et donc vous \npossédez maintenant le TrainKiVol !!!\n\n Félicitations !"), 0, 0);
 		grid.add(ok, 0, 1);
 		TitledPane panneauVainqueur = new TitledPane("Félicitations !",grid);

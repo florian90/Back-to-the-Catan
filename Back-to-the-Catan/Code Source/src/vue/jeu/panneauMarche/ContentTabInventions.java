@@ -16,20 +16,20 @@ import vue.jeu.Desactivable;
 
 public class ContentTabInventions extends GridPane implements Desactivable{
 
-	private Button acheterTrain; 
-	private Button acheterRadio; 
-	private Button acheterConvecteur; 
-	private Button acheterHoverboard;
+	private defaultButton acheterTrain; 
+	private defaultButton acheterRadio; 
+	private defaultButton acheterConvecteur; 
+	private defaultButton acheterHoverboard;
 	private Jeu m_jeu;
 
 	public ContentTabInventions(Jeu jeu, ContentJoueur ctj )
 	{
 		m_jeu = jeu;
 
-		acheterTrain = new Button("Acheter");
-		acheterRadio = new Button("Acheter");
-		acheterConvecteur = new Button("Acheter");
-		acheterHoverboard = new Button("Acheter");
+		acheterTrain = new defaultButton("Acheter");
+		acheterRadio = new defaultButton("Acheter");
+		acheterConvecteur = new defaultButton("Acheter");
+		acheterHoverboard = new defaultButton("Acheter");
 
 
 		Label hoverboard = new Label("Convecteur Temporel");

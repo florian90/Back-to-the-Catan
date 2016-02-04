@@ -17,7 +17,7 @@ import model.joueur.Ressource;
 public class ContentJoueur extends GridPane implements Desactivable {
 
 	private Jeu m_jeu;
-	private Button construire, utiliserCarteVoleur;
+	private defaultButton construire, utiliserCarteVoleur;
 	private ImageView imgAvatar;
 	private Label labelPseudo;
 	private Label ressources;
@@ -45,7 +45,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		ressources = new Label("Ressources");
 		ressources.setId("divisions");
 
-		construire =new Button("Construire");
+		construire =new defaultButton("Construire");
 		construire.setOnMouseClicked((e)->{
 			m_jeu.changeConstructionActive();
 			if(m_jeu.isConstructionActive())
@@ -57,7 +57,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		aConstruire = new Label("A construire");
 		aConstruire.setId("divisions");
 		
-		utiliserCarteVoleur = new Button("Utiliser");
+		utiliserCarteVoleur = new defaultButton("Utiliser");
 		utiliserCarteVoleur.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override

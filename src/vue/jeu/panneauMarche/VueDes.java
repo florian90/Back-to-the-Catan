@@ -7,9 +7,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import vue.URL;
 import vue.jeu.Desactivable;
+import vue.jeu.defaultButton;
 
 public class VueDes extends GridPane implements Desactivable {
-	private Button lancer;
+	private defaultButton lancer;
 	//private Label de1;
 	//private Label de2;
 	private ImageView de1;
@@ -37,7 +38,7 @@ public class VueDes extends GridPane implements Desactivable {
 		de2.setPreserveRatio(true);
 		somme = new Label("Somme :");
 		somme.setId("divisions");
-		lancer = new Button("Lancer les dés");
+		lancer = new defaultButton("Lancer les dés");
 		ImageView imgDes = new ImageView(URL.des2);
 		
 		imgDes.setFitWidth(50);
@@ -49,7 +50,7 @@ public class VueDes extends GridPane implements Desactivable {
 		add(somme, 0, 5);
 	}
 	
-	public Button getLancer()
+	public defaultButton getLancer()
 	{
 		return lancer;
 	}

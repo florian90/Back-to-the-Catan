@@ -6,6 +6,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -55,10 +57,22 @@ public class ContentJoueur extends GridPane implements Desactivable {
 
 	public void init()
 	{
-		setPadding(new Insets(20, 20, 20, 20));
+		setPadding(new Insets(10, 10, 10, 10));
 		setHgap(15);
 		setVgap(15);
-
+		GridPane resConstrContent = new GridPane();
+		resConstrContent.setHgap(15);
+		resConstrContent.setVgap(15);
+		GridPane invCartesContent = new GridPane();
+		invCartesContent.setHgap(15);
+		invCartesContent.setVgap(15);
+		Tab invCartes = new Tab("Inv. / Cartes",invCartesContent);
+		Tab resConstr = new Tab("Res. / Constr.",resConstrContent);
+		resConstr.setClosable(false);
+		invCartes.setClosable(false);
+		TabPane tabs = new TabPane(resConstr, invCartes);
+		
+		
 		// Initialisation des avatars
 		imgAvatar = new ImageView();
 		avatars = new Image[m_jeu.getNbJoueurs()];
@@ -74,7 +88,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 
 		// Ressources du joueur :
 		ressources = new MyLabelTitre("Ressources");
-		add(ressources, 0, 2);
+		resConstrContent.add(ressources, 0, 2);
 
 		lb_ressources = new Label[Ressource.values().length];
 
@@ -89,7 +103,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 
 				lb_ressources[i] = new MyLabelQt();
 
-				add(new HBox(10, imageView, lb_ressources[i]), ((i + 6)%2), (i + 6)/2);
+				resConstrContent.add(new HBox(10, imageView, lb_ressources[i]), ((i + 6)%2), (i + 6)/2);
 				i++;
 			}
 
@@ -116,7 +130,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		lbRoute = new MyLabelQt();
 		Group group = new Group(ligneJoueurRoute, line);
 		group.setTranslateY(17);
-		add(new HBox(20, group, lbRoute), 0, 10);
+		resConstrContent.add(new HBox(20, group, lbRoute), 0, 10);
 		line = new Line(0, 25, Constants.hexWidth/2, 25);
 		line.setStrokeWidth(Constants.roadWidth - 4);
 		line.setStroke(Color.BLACK);
@@ -125,19 +139,19 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		lbAutoroute = new MyLabelQt();
 		group = new Group(ligneJoueurAutoroute, line);
 		group.setTranslateY(17);
-		add(new HBox(20, group, lbAutoroute), 0, 11);
+		resConstrContent.add(new HBox(20, group, lbAutoroute), 0, 11);
 
 		lbVillage = new MyLabelQt();
 		ImageView imgVillage = new ImageView(URL.village);
 		imgVillage.setPreserveRatio(true);
 		imgVillage.setFitHeight(40);
-		add(new HBox(20, imgVillage, lbVillage), 1, 10);
+		resConstrContent.add(new HBox(20, imgVillage, lbVillage), 1, 10);
 
 		lbVille = new MyLabelQt();
 		ImageView imgVille = new ImageView(URL.ville);
 		imgVille.setPreserveRatio(true);
 		imgVille.setFitHeight(40);
-		add(new HBox(20, imgVille, lbVille), 1, 11);
+		resConstrContent.add(new HBox(20, imgVille, lbVille), 1, 11);
 
 		// Inventions
 		invention = new MyLabelTitre("Inventions");
@@ -158,19 +172,19 @@ public class ContentJoueur extends GridPane implements Desactivable {
 			groups[l] = new Group();
 			groups[l].getChildren().addAll(inventions[l], rectangles[l]);
 
-			add(groups[l], l%2, l/2 + 14);
+			invCartesContent.add(groups[l], l%2, l/2 + 4);
 			l++;
 		}
 
-		add(aConstruire, 0, 9);
-		add(construire, 1, 9);
-		add(invention, 0, 13);
+		resConstrContent.add(aConstruire, 0, 9);
+		resConstrContent.add(construire, 1, 9);
+		invCartesContent.add(invention, 0, 2);
 
-		cartes = new MyLabelTitre("Cartes");
-		add(cartes, 0, 19);
+		MyLabelTitre cartes = new MyLabelTitre("Cartes");
+		invCartesContent.add(cartes, 0, 8);
 
 		lbCarteVoleur = new Label();
-		add(lbCarteVoleur, 0, 20);
+		invCartesContent.add(lbCarteVoleur, 0, 9);
 
 		utiliserCarteVoleur = new defaultButton("Utiliser");
 		utiliserCarteVoleur.setOnAction(new EventHandler<ActionEvent>() {
@@ -180,7 +194,8 @@ public class ContentJoueur extends GridPane implements Desactivable {
 				m_jeu.setDeplacementVoleurActif(true);
 			}
 		});
-		add(utiliserCarteVoleur, 1, 20);
+		invCartesContent.add(utiliserCarteVoleur, 1, 9);
+		add(tabs,0,2,2,30);
 	}
 	/***************************************************************************************/
 	/***************************************************************************************/

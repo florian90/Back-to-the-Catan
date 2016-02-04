@@ -16,7 +16,7 @@ import vue.jeu.Desactivable;
 
 public class ContentTabCartes extends GridPane implements Desactivable{
 	
-	private Button tirer;
+	private defaultButton tirer;
 	private Jeu m_jeu;
 	private ContentJoueur ctj;
 	private Label cout;
@@ -28,7 +28,7 @@ public class ContentTabCartes extends GridPane implements Desactivable{
 		ctj = p_ctj;
 		
 		ImageView cartes = new ImageView(new Image("textures/cards.jpg"));
-		tirer = new Button("Tirer une carte");
+		tirer = new defaultButton("Tirer une carte");
 		cartes.setPreserveRatio(true);
 		cartes.setFitWidth(100);
 		
