@@ -167,7 +167,7 @@ public class Fenetre extends AnchorPane {
 
 		
 
-		PanneauCarte = new TitledPane("Carte", VMilieu);
+		PanneauCarte = new TitledPane("Plateau de Jeu", VMilieu);
 		PanneauCarte.setCollapsible(false);
 		PanneauCarte.setPrefHeight(800);
 		

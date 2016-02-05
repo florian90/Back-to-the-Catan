@@ -204,6 +204,7 @@ public class Joueur {
 			for (Arete a : m_autoroutesConstruites)
 				if (m_jeu.getEpoqueActuelle() == a.getEpoque())
 					accesEpoque = false;
+			
 			if (accesEpoque)
 				accesNouvelleEpoque();
 			m_autoroutesConstruites.add(arete);
@@ -276,7 +277,8 @@ public class Joueur {
 	public void accesNouvelleEpoque()
 	{
 		m_accesEpoque++;
-		m_jeu.getFenetre().setSuivBlinking(true);
+		if(m_accesEpoque<5)
+			m_jeu.getFenetre().setSuivBlinking(true);
 		suivHasToBlink = true;
 	}
 

@@ -23,13 +23,13 @@ public class ContentTabCartes extends GridPane implements Desactivable{
 		btTirer = new BoutonAchat(TypeCarte.DeplacerVoleur, m_jeu);
 		ImageView imgCartes = new ImageView(new Image(URL.carte));
 		imgCartes.setPreserveRatio(true);
-		imgCartes.setFitWidth(100);
+		imgCartes.setFitWidth(200);
 		
 		setPadding(new Insets(20, 20, 20, 20));
 		setHgap(15);
 		setVgap(15);
-		add(imgCartes, 0, 2);
-		add(btTirer,1,2);
+		add(imgCartes, 0, 1);
+		add(btTirer,0,2);
 	}
 	
 	public void update()

@@ -7,12 +7,15 @@ import model.joueur.Ressource;
 public class URL {
 	private static final String texturesPath = "textures/";
 	public static final String avatars[] = {texturesPath +"Avatar1.jpg", texturesPath +"Avatar2.jpg", texturesPath +"Avatar3.jpg", texturesPath +"Avatar4.jpg"};
-	public static final String carte = texturesPath +"cards.jpg";
+	public static final String carte = texturesPath +"carteBiff.png";
 	public static final String convecteur = texturesPath +"convecteur.gif";
 	public static final String des = texturesPath +"des.png";
 	public static final String des2 = texturesPath +"dice.jpg";
 	public static final String icon = texturesPath +"favicon.jpg";
 	public static final String bg_menu = texturesPath +"fondMenu.jpg";
+	public static final String voyantVert = texturesPath +"voyantVert.png";
+	public static final String voyantRouge = texturesPath +"voyantRouge.png";
+	
 	// hexagon
 	public static final String hexAimant = texturesPath +"hexAimant.png";
 	//...

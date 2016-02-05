@@ -36,6 +36,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 	private Label aConstruire;
 	private Label invention;
 	private Label cartes;
+	ImageView voyants [];
 
 	private Group groups[] = new Group[4];
 	private ImageView inventions[] = new ImageView[Invention.values().length];
@@ -71,8 +72,8 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		resConstr.setClosable(false);
 		invCartes.setClosable(false);
 		TabPane tabs = new TabPane(resConstr, invCartes);
-		
-		
+
+
 		// Initialisation des avatars
 		imgAvatar = new ImageView();
 		avatars = new Image[m_jeu.getNbJoueurs()];
@@ -195,6 +196,24 @@ public class ContentJoueur extends GridPane implements Desactivable {
 			}
 		});
 		invCartesContent.add(utiliserCarteVoleur, 1, 9);
+		invCartesContent.add(new MyLabelTitre("Epoques débloquées"), 0, 11);
+		
+		voyants = new ImageView[3];
+		for(int k = 0;k<3;k++)
+		{
+			voyants[k] =  new ImageView(URL.voyantRouge);
+		}
+		
+		Label tabLabelEpoques[] = {
+				new Label("1985",new ImageView(URL.voyantVert)),
+				new Label("2015",voyants[0]),
+				new Label("1855",voyants[1]),
+				new Label("1955",voyants[2])};
+
+		for(int j =0;j<4;j++)
+		{
+			invCartesContent.add(tabLabelEpoques[j], 0, 13+j);
+		}
 		add(tabs,0,2,2,30);
 	}
 	/***************************************************************************************/
@@ -240,6 +259,20 @@ public class ContentJoueur extends GridPane implements Desactivable {
 
 		// Update du nombre de cartes voleur
 		lbCarteVoleur.setText("Dépl. Voleur : " + joueur.getNombre(TypeCarte.DeplacerVoleur));
+
+		//Update des voyants des époques
+		for(int l =0;l<3;l++)
+		{	
+			if(joueur.getMAccesEpoque()-1 > l)
+			{
+				voyants[l].setImage(new Image(URL.voyantVert));
+			}
+			else
+			{
+				voyants[l].setImage(new Image(URL.voyantRouge));
+			}
+		}
+		
 	}
 
 	@Override
