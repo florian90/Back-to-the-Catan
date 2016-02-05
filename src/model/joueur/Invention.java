@@ -36,4 +36,7 @@ public enum Invention implements Achetable {
 					return new PackRess(Ressource.Antenne, 4, Ressource.HautParleur, 2, Ressource.Metal, 3);
 				}
 			}
+			
 }
+
+

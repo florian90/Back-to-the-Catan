@@ -10,7 +10,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.GridPane;
 import model.joueur.Joueur;
-import vue.jeu.defaultButton;
+import vue.jeu.DefaultButton;
 
 import java.util.ArrayList;
 
@@ -18,16 +18,16 @@ public class MenuPrincipalView extends AnchorPane {
 
 	private GridPane buttonGrid, parametresGrid;
 	private Spinner<Integer> spinNbJoueurs;
-	private defaultButton nouvellePartie, regles, quitter;
+	private DefaultButton nouvellePartie, regles, quitter;
 	private TitledPane parametres;
-	private defaultButton valider;
+	private DefaultButton valider;
 	private ArrayList<TextField> nomsJoueurs;
 
 
 	public MenuPrincipalView()
 	{
 		nomsJoueurs = new ArrayList<>();
-		valider = new defaultButton("Valider");
+		valider = new DefaultButton("Valider");
 		
 		parametres = new TitledPane("Paramètres de la partie", null);
 		parametres.setPrefWidth(350);
@@ -68,13 +68,13 @@ public class MenuPrincipalView extends AnchorPane {
 		parametresGrid.add(valider, 1, 6);
 		parametres.setContent(parametresGrid);
 
-		nouvellePartie = new defaultButton("Nouvelle Partie");
+		nouvellePartie = new DefaultButton("Nouvelle Partie");
 		nouvellePartie.setId("bouttonMenuPrincipal");
 		nouvellePartie.setPrefWidth(100);
-		regles = new defaultButton("Règles");
+		regles = new DefaultButton("Règles");
 		regles.setId("bouttonMenuPrincipal");
 		regles.setPrefWidth(100);
-		quitter = new defaultButton("Quitter");
+		quitter = new DefaultButton("Quitter");
 		quitter.setId("boutonMenuPrincipal");
 		quitter.setPrefWidth(100);
 
@@ -113,7 +113,6 @@ public class MenuPrincipalView extends AnchorPane {
 		ArrayList<String> joueurs = new ArrayList<>();
 		for (TextField tf : nomsJoueurs)
 		{
-			System.out.println(tf.getText());
 			if (!(tf.getText().equals(""))&& tf.isVisible())
 				joueurs.add(tf.getText());
 		}
@@ -126,22 +125,22 @@ public class MenuPrincipalView extends AnchorPane {
 		parametres.setVisible(true);
 	}
 	
-	public defaultButton getNouvellePartie()
+	public DefaultButton getNouvellePartie()
 	{
 		return nouvellePartie;
 	}
 
-	public defaultButton getRegles()
+	public DefaultButton getRegles()
 	{
 		return regles;
 	}
 
-	public defaultButton getQuitter()
+	public DefaultButton getQuitter()
 	{
 		return quitter;
 	}
 	
-	public defaultButton getValider()
+	public DefaultButton getValider()
 	{
 		return valider;
 	}

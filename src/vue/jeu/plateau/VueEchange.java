@@ -22,11 +22,12 @@ import model.joueur.Joueur;
 import model.joueur.PackRess;
 import model.joueur.Ressource;
 import vue.jeu.ContentJoueur;
+import vue.jeu.DefaultButton;
 
 public class VueEchange extends TitledPane{
 	
 	private Joueur jGauche, jDroite;
-	private Button fermer, echanger;
+	private DefaultButton fermer, echanger;
 	private AfficheJoueur aj1, aj2;
 	private ContentJoueur ctj;
 	
@@ -44,8 +45,8 @@ public class VueEchange extends TitledPane{
 		setMaxWidth(1000);
 		setId("popup");
 		
-		fermer = new Button("Fermer");
-		echanger = new Button("Echanger");
+		fermer = new DefaultButton("Fermer");
+		echanger = new DefaultButton("Echanger");
 		
 		HBox contenu = new HBox(aj1,new Separator(Orientation.VERTICAL),aj2);
 		contenu.setSpacing(100);

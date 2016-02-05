@@ -3,11 +3,13 @@ package vue.jeu;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,7 +31,7 @@ import vue.URL;
 public class ContentJoueur extends GridPane implements Desactivable {
 
 	private Jeu m_jeu;
-	private defaultButton construire, utiliserCarteVoleur;
+	private DefaultButton construire, utiliserCarteVoleur;
 	private ImageView imgAvatar;
 	private Label labelPseudo;
 	private Label ressources;
@@ -101,16 +103,16 @@ public class ContentJoueur extends GridPane implements Desactivable {
 				ImageView imageView = new ImageView("textures/hex" + ressource + ".png");
 				imageView.setFitWidth(40);
 				imageView.setFitHeight(40);
-
 				lb_ressources[i] = new MyLabelQt();
-
 				resConstrContent.add(new HBox(10, imageView, lb_ressources[i]), ((i + 6)%2), (i + 6)/2);
+				setToolTip(Ressource.toString(ressource), imageView);			
+			
 				i++;
 			}
 
 		}
 
-		construire = new defaultButton("Construire");
+		construire = new DefaultButton("Construire");
 		construire.setOnMouseClicked((e) -> {
 			m_jeu.changeConstructionActive();
 			if (m_jeu.isConstructionActive())
@@ -131,7 +133,9 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		lbRoute = new MyLabelQt();
 		Group group = new Group(ligneJoueurRoute, line);
 		group.setTranslateY(17);
+		setToolTip("Route", group);
 		resConstrContent.add(new HBox(20, group, lbRoute), 0, 10);
+		
 		line = new Line(0, 25, Constants.hexWidth/2, 25);
 		line.setStrokeWidth(Constants.roadWidth - 4);
 		line.setStroke(Color.BLACK);
@@ -140,18 +144,21 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		lbAutoroute = new MyLabelQt();
 		group = new Group(ligneJoueurAutoroute, line);
 		group.setTranslateY(17);
+		setToolTip("Autoroute", group);
 		resConstrContent.add(new HBox(20, group, lbAutoroute), 0, 11);
 
 		lbVillage = new MyLabelQt();
 		ImageView imgVillage = new ImageView(URL.village);
 		imgVillage.setPreserveRatio(true);
 		imgVillage.setFitHeight(40);
+		setToolTip("Village", imgVillage);
 		resConstrContent.add(new HBox(20, imgVillage, lbVillage), 1, 10);
 
 		lbVille = new MyLabelQt();
 		ImageView imgVille = new ImageView(URL.ville);
 		imgVille.setPreserveRatio(true);
 		imgVille.setFitHeight(40);
+		setToolTip("Ville", imgVille);
 		resConstrContent.add(new HBox(20, imgVille, lbVille), 1, 11);
 
 		// Inventions
@@ -172,7 +179,8 @@ public class ContentJoueur extends GridPane implements Desactivable {
 
 			groups[l] = new Group();
 			groups[l].getChildren().addAll(inventions[l], rectangles[l]);
-
+			setToolTip(invention.toString(), groups[l]);
+			
 			invCartesContent.add(groups[l], l%2, l/2 + 4);
 			l++;
 		}
@@ -187,7 +195,7 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		lbCarteVoleur = new Label();
 		invCartesContent.add(lbCarteVoleur, 0, 9);
 
-		utiliserCarteVoleur = new defaultButton("Utiliser");
+		utiliserCarteVoleur = new DefaultButton("Utiliser");
 		utiliserCarteVoleur.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event)
@@ -274,6 +282,21 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		}
 		
 	}
+	
+	private void setToolTip(String text, Node node)
+	{
+		
+		Tooltip toolTip = new Tooltip(text);
+		node.setOnMouseEntered(e->{
+			Point2D p = node.localToScreen(node.getLayoutBounds().getMaxX(), node.getLayoutBounds().getMaxY()); //I position the tooltip at bottom right of the node (see below for explanation)
+	        toolTip.show(node, p.getX(), p.getY());
+		});
+		
+		node.setOnMouseExited(e->{
+			toolTip.hide();
+		}
+		);
+	}
 
 	@Override
 	public void desactiver()
@@ -288,6 +311,8 @@ public class ContentJoueur extends GridPane implements Desactivable {
 		construire.setDisable(false);
 		utiliserCarteVoleur.setDisable(false);
 	}
+	
+	
 
 	private class MyLabelTitre extends Label {
 		public MyLabelTitre(){

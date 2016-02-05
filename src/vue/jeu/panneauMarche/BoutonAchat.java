@@ -38,11 +38,12 @@ public class BoutonAchat extends Button implements Desactivable {
 
 		// Affichage du popup
 		setOnMouseEntered((e) -> {
-			m_popup.show(this, e.getScreenX(), e.getScreenY());
+			m_popup.update();
+			m_popup.show(this, e.getScreenX()+1, e.getScreenY()+1);
 		});
 		setOnMouseMoved((e) -> {
-			m_popup.setX(e.getScreenX());
-			m_popup.setY(e.getScreenY());
+			m_popup.setX(e.getScreenX()+1);
+			m_popup.setY(e.getScreenY()+1);
 		});
 		setOnMouseExited((e) -> {
 			m_popup.hide();
@@ -67,7 +68,7 @@ public class BoutonAchat extends Button implements Desactivable {
 	}
 
 	/**
-	 * Popp qui s'affiche lorsque l'on est sur le bouton acheter
+	 * Popup qui s'affiche lorsque l'on est sur le bouton acheter
 	 * Affiche le cout de construction de l'objet
 	 */
 	private class PopupCout extends Popup {

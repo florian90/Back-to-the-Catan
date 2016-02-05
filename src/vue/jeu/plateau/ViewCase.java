@@ -28,6 +28,7 @@ public class ViewCase extends Group {
 
 	private Case m_case;
 	private ImageView imgRessource;
+	private Group rondNum;
 	private Jeu m_jeu;
 
 	public ViewCase(float p_x, float p_y, Case p_case, Jeu jeu)
@@ -35,6 +36,7 @@ public class ViewCase extends Group {
 		super();
 		m_jeu = jeu;
 		m_case = p_case;
+		rondNum = new Group();
 		setTranslateX(p_x + Constants.roadWidth/2);
 		setTranslateY(p_y + Constants.roadWidth/2);
 
@@ -56,24 +58,41 @@ public class ViewCase extends Group {
 				Circle cercleNoir = new Circle(milieuX, milieuY + 15, 10, Color.BLACK);
 				Circle cercleBlanc = new Circle(milieuX, milieuY + 15, 9, Color.WHITE);
 				Label numero = new Label("" + m_case.getValeur());
-				numero.setTranslateX(milieuX - 7);
-				numero.setTranslateY(milieuY + 7);
+				numero.setTranslateX(milieuX - numero.getWidth()/2);
+				numero.setTranslateY(milieuY + numero.getHeight()/2);
 				numero.setTextAlignment(TextAlignment.CENTER);
-				numero.setId("gras");
+				numero.setId("labelNum");
 
-				getChildren().add(cercleNoir);
-				getChildren().add(cercleBlanc);
-				getChildren().add(numero);
+				//rondNum.getChildren().add(cercleNoir);
+				//rondNum.getChildren().add(cercleBlanc);
+				rondNum.getChildren().add(numero);// modifier le fichier .css pour changer l'aspect des chiffres (bloc #labelNum)
+				
+				getChildren().add(rondNum);
 			
 		}
-		setOnMouseClicked(new EventHandler<MouseEvent>() {
+		
+		 /****************************/
+		/***Gestion des evenements***/
+	   /****************************/
+		setOnMouseClicked(e->{m_jeu.clicCase(m_case, (ViewCase)e.getSource());});
 
-			@Override
-			public void handle(MouseEvent event)
+		setOnMouseEntered(e->{
+			
+			if(m_case.isVoleurPresent())
 			{
-				m_jeu.clicCase(m_case, (ViewCase)event.getSource());
-				
+				setImageVoleur(false);
 			}
+			rondNum.setVisible(false);
+		});
+		
+		setOnMouseExited(e->{
+			
+			if(m_case.isVoleurPresent())
+			{
+				setImageVoleur(true);
+			}
+			rondNum.setVisible(true);
+			
 		});
 	}
 	

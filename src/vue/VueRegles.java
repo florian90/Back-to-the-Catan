@@ -7,11 +7,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import vue.jeu.defaultButton;
+import vue.jeu.DefaultButton;
 
 public class VueRegles extends GridPane{
 
-	private defaultButton retour;
+	private DefaultButton retour;
 	private WebView browser = new WebView();
 	private WebEngine webEngine = browser.getEngine();
 
@@ -20,7 +20,7 @@ public class VueRegles extends GridPane{
 		setHgap(10);
 		setVgap(10);
 
-		retour = new defaultButton("Retour");	
+		retour = new DefaultButton("Retour");	
 		URL urlRegles = getClass().getResource("Règles.html");
 
 		webEngine.load(urlRegles.toExternalForm());
@@ -36,7 +36,7 @@ public class VueRegles extends GridPane{
 
 	}
 
-	public defaultButton getRetour() {
+	public DefaultButton getRetour() {
 		return retour;
 	}
 }

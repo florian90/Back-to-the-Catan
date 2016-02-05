@@ -25,8 +25,6 @@ public class AnimatedButton extends Button
 		super(text);
 		blinking = false;
 		this.setId("defaultButton");
-
-		System.out.println(styleProperty().toString());
 	}
 	
 	public void startBlinking()

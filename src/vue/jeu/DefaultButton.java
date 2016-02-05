@@ -1,9 +1,9 @@
 package vue.jeu;
 import javafx.scene.control.Button;
 
-public class defaultButton extends Button{
+public class DefaultButton extends Button{
 
-	public defaultButton(String text)
+	public DefaultButton(String text)
 	{
 		super(text);
 		setId("defaultButton");

@@ -15,9 +15,22 @@
 	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 20,0.2,5,5 );
 }
 
-#gras
+#labelNum
 {
+	
+	
+	-fx-font-size: 14px;
 	-fx-font-weight: bold;
+	-fx-text-alignment: center ;
+	-fx-text-fill : white;
+	
+	-fx-border-color: yellow;
+	-fx-border-radius: 50%;
+	-fx-border-insets: -10px;
+	
+	-fx-background-color: gray;
+	-fx-background-insets: -10px;
+	-fx-background-radius: 50%;
 }
 
 #fond1955
@@ -59,6 +72,11 @@
     -fx-background-radius: 3,2,1;
     -fx-text-fill: black;
    
+}
+
+#defaultButton:pressed
+{
+	-fx-background-color: derive(darkgray,-50%) ;
 }
 
 #fenetre
@@ -141,4 +159,14 @@
 .titled-pane > *.content 
 {
 	-fx-background-color:white;
- }
+}
+
+/****************************/
+/*ToolTip */
+.tooltip
+{
+	-fx-text-fill: black;
+	-fx-background-color: azure;
+	-fx-border-color: green;
+	
+}
